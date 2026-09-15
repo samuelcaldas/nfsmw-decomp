@@ -112,6 +112,56 @@ block_relocations:
   end: .data:0x8044C320
 
 add_relocations:
+- source: .text:0x80019604
+  type: ha
+  target: $LC2151455892
+  addend: 0
+
+- source: .text:0x80019608
+  type: ha
+  target: $LC2151455896
+  addend: 0
+
+- source: .text:0x8001a7f0
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x8001a870
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x8001a9b0
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x8001ab8c
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x8001aba4
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x8001adf8
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x8001ae50
+  type: ha
+  target: $LC2151456064
+  addend: 0
+
+- source: .text:0x80018568
+  type: ha
+  target: _IHandle__10IVehicleAI
+  addend: 0
+
 - source: .text:0x800adeb8
   type: ha
   target: gAudioMemoryManager

@@ -54,3 +54,13 @@ undefined_syms_auto.txt
 
 # NGCCC temp files
 *.TMP
+
+# Worktrees
+.worktrees
+.worktrees/
+worktrees
+worktrees/
+
+# Playwright
+.playwright-mcp
+.playwright-mcp/

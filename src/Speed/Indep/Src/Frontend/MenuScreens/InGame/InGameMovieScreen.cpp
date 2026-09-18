@@ -55,7 +55,7 @@ void InGameAnyMovieScreen::NotificationMessage(u32 msg, FEObject *obj, u32 param
         case __PAD_START__:
         case __PAD_ACCEPT__: {
             extern int SkipMovies;
-            if (FEDatabase->IsDDay() || SkipMovies || MoviePlayer_Bypass()) {
+            if (!FEDatabase->IsDDay() || SkipMovies || MoviePlayer_Bypass()) {
                 mSubtitler.Update(FEMSG_MOVIE_FINISHED);
                 DismissMovie();
             }

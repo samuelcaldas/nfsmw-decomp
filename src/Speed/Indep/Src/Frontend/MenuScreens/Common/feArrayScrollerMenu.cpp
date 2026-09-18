@@ -278,8 +278,8 @@ void ArrayScroller::UpdateMouse() {}
 
 void ArrayScroller::ClearData() {
     data.DeleteAllElements();
-    startDatum = 0;
     currentDatum = nullptr;
+    startDatum = 0;
 }
 
 void ArrayScroller::NotificationMessage(u32 msg, FEObject *pObj, u32 param1, u32 param2) {

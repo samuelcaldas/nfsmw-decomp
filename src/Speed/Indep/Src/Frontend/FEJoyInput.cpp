@@ -131,11 +131,10 @@ void cFEngJoyInput::SetRequiredJoy(JoystickPort port, bool required) {
     mActionQ[port]->SetRequired(required);
 }
 
-// UNSOLVED
 bool cFEngJoyInput::CheckUnplugged() {
     bool unplugged = false;
     if (!TheGameFlowManager.IsInGame() && !FEManager::Get()->IsAllowingControllerError()) {
-        SetRequiredJoy(JOYSTICK_PORT_NONE, false);
+        SetRequiredJoy(JOYSTICK_PORT_ALL, false);
     } else {
         bool is_splitscreen = FEDatabase->IsSplitScreenMode();
 

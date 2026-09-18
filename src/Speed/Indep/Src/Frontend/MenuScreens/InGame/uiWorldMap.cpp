@@ -1067,7 +1067,7 @@ void WorldMap::SetupEvent() {
     AddIcons(GIcon::kType_RaceSpeedtrap);
     AddIcons(GIcon::kType_RaceRival);
     AddIcons(GIcon::kType_SpeedTrap);
-    AddIcons(GIcon::kType_Checkpoint);
+    AddIcons(GIcon::kType_SpeedTrapInRace);
 }
 
 void WorldMap::SetupPursuit() {

@@ -69,8 +69,41 @@ ninja diff
 ninja apply
 ```
 
-### Diffing with objdiff
-Run the `objdiff` GUI pointing to the repository root; it reads `objdiff.json` and updates live on file changes.
+### Diffing
+- **CLI Diffing (`objdiff-cli`)**: Run terminal diffs directly without the GUI:
+  ```sh
+  # Diff a specific unit's symbols and matching percentages
+  build/tools/objdiff-cli diff -p . -u <unit_name>
+  # Example:
+  build/tools/objdiff-cli diff -p . -u "main/Speed/Indep/Libs/snd/9/source/library/cmn/saems"
+  # Generate project-wide progress report JSON
+  build/tools/objdiff-cli report generate -p .
+  ```
+- **GUI Diffing (`objdiff`)**: Run the `objdiff` GUI pointing to the repository root; it reads `objdiff.json` and updates live on file changes.
+
+### decomp.me Context Generation
+Generate preprocessed C/C++ context for creating scratches on [decomp.me](https://decomp.me) (Preset ID: 176 for GOWE69):
+```sh
+python tools/decompctx.py <path/to/source.cpp> -o ctx.c
+```
+
+### Reverse Engineering & Symbol Lookup Tools
+- **Address to Line Mapping**: Look up exact original source file and line numbers for GameCube addresses:
+  ```sh
+  python tools/line_lookup.py symbols/debug_lines.txt <address>
+  # Example: python tools/line_lookup.py symbols/debug_lines.txt 0x801AE820
+  ```
+- **DWARF Symbol Lookup**: Query types, structs, enums, functions, and globals from DWARF debug info:
+  ```sh
+  python tools/lookup.py symbols/Dwarf struct <StructName>
+  python tools/lookup.py symbols/Dwarf enum <EnumName>
+  python tools/lookup.py symbols/Dwarf function <AddressOrDemangledName>
+  ```
+- **Dump & Split DWARF Info**:
+  ```sh
+  ./build/tools/dtk dwarf dump ./orig/GOWE69/NFSMWRELEASE.ELF -o ./symbols/mw_dwarfdump.nothpp
+  python tools/split_dwarf_info.py ./symbols/mw_dwarfdump.nothpp ./symbols/Dwarf
+  ```
 
 ### Formatting & Linting
 - **C++ Formatting**: `clang-format -i <file>`  
@@ -80,9 +113,11 @@ Run the `objdiff` GUI pointing to the repository root; it reads `objdiff.json` a
 - **Python Linting**: `flake8`  
   Configured in `.flake8` (ignores E203, E501).
 
-### Dependencies
-- Linux/macOS requires `ninja`. On Linux x86_64, `wibo` is automatically downloaded to run 32-bit Windows toolchains.
-- PS2 tooling dependencies: `pip install -r requirements.txt` (splat64, spimdisasm, rabbitizer).
+### Dependencies & Initial Setup
+- **Toolchain Bootstrap**: Running `python configure.py && ninja` automatically downloads necessary tools (`dtk`, `objdiff-cli`, `wibo`, compilers) to `build/tools/`, splits the original binary, and generates the full build graph.
+- **Game Binaries**: Original binaries must be placed in `orig/<version>/` before splitting. See `docs/game_files.md` for full directory layouts, expected SHA-1 hashes, and verification commands.
+- **Host Tools**: Linux/macOS requires `ninja` and `python3`. On Linux x86_64, `wibo` runs 32-bit Windows toolchains natively.
+- **PS2 Tooling**: Requires `pip install -r requirements.txt` (splat64, spimdisasm, rabbitizer).
 
 ## Architecture & Code Organization
 

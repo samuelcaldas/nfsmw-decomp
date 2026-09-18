@@ -375,7 +375,7 @@ void HudResourceManager::LoadedCustomHudTexturePackCallback() {
 }
 
 void HudResourceManager::LoadedCustomHudTexturesCallback() {
-    for (int mPhaseCust = 0; mPhaseCust <= (uint32)5; mPhaseCust++) {
+    for (int mPhaseCust = 0; mPhaseCust <= (uint32)4; mPhaseCust++) {
         int fengObjHash = 0;
         CAR_SLOT_ID carSlotIdForColour = CARSLOTID_BASE;
         switch (mPhaseCust) {

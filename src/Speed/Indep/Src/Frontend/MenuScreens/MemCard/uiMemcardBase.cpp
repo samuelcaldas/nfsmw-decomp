@@ -978,7 +978,7 @@ void UIMemcardList::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 
             break;
         }
         case FEMSG_SCREEN_TICK:
-            if (m_Initialized != 0) {
+            if (m_Initialized == 0) {
                 m_Initialized = 1;
                 UIMemcardBase *pParent = MemoryCard::GetInstance()->GetScreen();
                 for (UIMemcardBase::Item *pNode = pParent->m_Items.GetHead(); pNode != pParent->m_Items.EndOfList(); pNode = pNode->GetNext()) {

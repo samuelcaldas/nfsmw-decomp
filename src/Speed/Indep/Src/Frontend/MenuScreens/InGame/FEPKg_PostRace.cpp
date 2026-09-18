@@ -1137,7 +1137,7 @@ void PostRacePursuitScreen::SetupMilestones() {
             float currVal = GManager::Get().GetBestValue(raceParams->GetChallengeType());
             float goalVal = raceParams->GetChallengeGoal();
             if (raceParams->GetChallengeType() == 0x5392e4fd) {
-                resultType = PursuitResultsDatum::PursuitResultsDatumType_Time;
+                resultType = PursuitResultsDatum::PursuitResultsDatumType_Milestone_Time_PursuitRemaining;
             }
             PursuitResultsDatum::PursuitResultsDatumCheckType checkType =
                 static_cast<PursuitResultsDatum::PursuitResultsDatumCheckType>(static_cast<int>(currVal >= goalVal));
@@ -1152,7 +1152,7 @@ void PostRacePursuitScreen::SetupMilestones() {
                     resultType = PursuitResultsDatum::PursuitResultsDatumType_Milestone_Time;
                 }
                 if (currMilestone->GetTypeKey() == 0x5392e4fd) {
-                    resultType = PursuitResultsDatum::PursuitResultsDatumType_Time;
+                    resultType = PursuitResultsDatum::PursuitResultsDatumType_Milestone_Time_PursuitRemaining;
                 }
                 PursuitResultsDatum::PursuitResultsDatumCheckType checkType;
                 if (currMilestone->GetIsDonePendingEscape()) {

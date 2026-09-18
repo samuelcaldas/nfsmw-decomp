@@ -218,7 +218,7 @@ void PostRaceResultsScreen::SetupResults() {
                 int rank = 0;
 
                 GRacerInfo *info = &GRaceStatus::Get().GetRacerInfo(rank);
-                while (info->GetRanking() != rank) {
+                while (info->GetRanking() != i + 1) {
                     info = &GRaceStatus::Get().GetRacerInfo(rank++);
                 }
                 ResultStat *stat = new ("RaceResultStat", 0)
@@ -232,7 +232,7 @@ void PostRaceResultsScreen::SetupResults() {
                 int rank = 0;
 
                 GRacerInfo *info = &GRaceStatus::Get().GetRacerInfo(rank);
-                while (info->GetRanking() != rank) {
+                while (info->GetRanking() != i + 1) {
                     info = &GRaceStatus::Get().GetRacerInfo(rank++);
                 }
 

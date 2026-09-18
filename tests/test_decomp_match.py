@@ -134,6 +134,13 @@ class TestDecompMatch(unittest.TestCase):
             "NotificationMessage__16CustomizeSpoilerUlP8FEObjectUlUl",
         )
 
+    def test_SetupResults(self) -> None:
+        """Verify PostRaceResultsScreen::SetupResults is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe2",
+            "SetupResults__21PostRaceResultsScreen",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

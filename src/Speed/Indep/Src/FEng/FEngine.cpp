@@ -832,7 +832,7 @@ void FEngine::RenderGroup(FEGroup *pGroup, FEMatrix4 &stParent, FEMatrix4 &stVie
     if (pData->Col.a == 0) {
         return;
     }
-    if (!bExecuting && pGroup->Flags == 0) {
+    if (!bExecuting && (pGroup->Flags & FF_HideInEdit)) {
         return;
     }
 

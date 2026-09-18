@@ -127,6 +127,13 @@ class TestDecompMatch(unittest.TestCase):
             "RenderGroup__7FEngineP7FEGroupR9FEMatrix4T2Us",
         )
 
+    def test_CustomizeSpoiler_NotificationMessage(self) -> None:
+        """Verify CustomizeSpoiler::NotificationMessage is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFeOverlay",
+            "NotificationMessage__16CustomizeSpoilerUlP8FEObjectUlUl",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

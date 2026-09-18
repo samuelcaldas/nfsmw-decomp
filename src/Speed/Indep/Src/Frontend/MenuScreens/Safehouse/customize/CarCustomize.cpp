@@ -2925,7 +2925,7 @@ void CustomizeSpoiler::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, 
             break;
         case FEMSG_BACK_OUT: {
             SelectablePart *part = FindInCartPart();
-            if ((part != nullptr) && (gCarCustomizeManager.IsPartInCart(part) != nullptr)) {
+            if ((part != nullptr) && (gCarCustomizeManager.IsPartInCart(part) == nullptr)) {
                 part->UnSetInCart();
                 RefreshHeader();
             }

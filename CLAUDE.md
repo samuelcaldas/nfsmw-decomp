@@ -105,6 +105,23 @@ python tools/decompctx.py <path/to/source.cpp> -o ctx.c
   python tools/split_dwarf_info.py ./symbols/mw_dwarfdump.nothpp ./symbols/Dwarf
   ```
 
+### Ralph Loop Automated Decompilation
+- **Candidate Selection**: Pick non-matching functions ordered by highest match or smallest size:
+  ```sh
+  python scripts/next-decomp-candidate.py
+  python scripts/next-decomp-candidate.py --strategy smallest
+  python scripts/next-decomp-candidate.py --unit zFe
+  ```
+- **Autonomous Headless Runner**: Run iterative decompilation loop in background:
+  ```sh
+  ./scripts/ralph-decomp.sh --max-iterations 50
+  ```
+- **Interactive Session Runner**: Run Ralph loop within Claude Code using `/ralph-loop`:
+  ```sh
+  /ralph-loop "$(cat prompts/decomp-loop.md)" --completion-promise "FULL DECOMPILATION COMPLETE" --max-iterations 50
+  ```
+- See `docs/ralph_loop.md` for full state machine, safety controls, and configuration options.
+
 ### Formatting & Linting
 - **C++ Formatting**: `clang-format -i <file>`  
   Configured in `.clang-format` (C++03, column limit 150, indent 4, `SortIncludes: Never`). Include sorting is disabled because include order in unity builds is semantic.

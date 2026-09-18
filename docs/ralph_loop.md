@@ -1,0 +1,109 @@
+# Ralph Loop Decompilation Automation
+
+This document describes the Ralph loop automated decompilation workflow for Need for Speed: Most Wanted (target: `GOWE69`).
+
+## Overview
+
+The Ralph Wiggum technique runs a persistent, iterative state machine loop that guides Claude Code through matching decompilation tasks one function at a time. Each iteration inspects git and build artifacts, refines C++ source, checks for compiler warnings and regressions, and commits cleanly.
+
+```
+       ┌─────────────────────────────┐
+       │   python3 configure.py      │
+       │         progress            │
+       └──────────────┬──────────────┘
+                      │ (If 100% matched -> STOP)
+                      ▼
+       ┌─────────────────────────────┐
+       │  scripts/next-decomp-       │
+       │       candidate.py          │
+       └──────────────┬──────────────┘
+                      │
+                      ▼
+       ┌─────────────────────────────┐
+       │  tools/decomp-context.py    │
+       │    & tools/decomp-diff.py   │
+       └──────────────┬──────────────┘
+                      │
+                      ▼
+       ┌─────────────────────────────┐
+       │     Refine C++ Source       │
+       │       under src/...         │
+       └──────────────┬──────────────┘
+                      │
+                      ▼
+       ┌─────────────────────────────┐
+       │    ninja && ninja changes   │
+       │     (Zero regressions)      │
+       └──────────────┬──────────────┘
+                      │
+                      ▼
+       ┌─────────────────────────────┐
+       │  git commit (Atomic match)  │
+       │   & update configure.py     │
+       └─────────────────────────────┘
+```
+
+---
+
+## 1. Candidate Selector: `scripts/next-decomp-candidate.py`
+
+Identifies and ranks candidate functions from `build/GOWE69/report.json`:
+
+```bash
+# Display top 5 functions closest to 100% match
+python3 scripts/next-decomp-candidate.py
+
+# Sort by smallest function size (fewest bytes)
+python3 scripts/next-decomp-candidate.py --strategy smallest
+
+# Scope to a specific compilation unit (e.g. zFe)
+python3 scripts/next-decomp-candidate.py --unit zFe
+
+# Scope to a specific library or category (e.g. libs, game, sdk)
+python3 scripts/next-decomp-candidate.py --category libs
+
+# Output machine-readable JSON
+python3 scripts/next-decomp-candidate.py --json --limit 10
+
+# Print only the context & diff shell commands for the top candidate
+python3 scripts/next-decomp-candidate.py --commands-only
+```
+
+---
+
+## 2. Running in an Interactive Claude Code Session (`/ralph-loop`)
+
+If working inside an interactive Claude Code CLI session with the `/ralph-loop` plugin loaded:
+
+```bash
+/ralph-loop "$(cat prompts/decomp-loop.md)" --completion-promise "FULL DECOMPILATION COMPLETE" --max-iterations 50
+```
+
+To scope to a specific compilation unit:
+
+```bash
+/ralph-loop "Target Unit: zFe. Follow prompts/decomp-loop.md and run scripts/next-decomp-candidate.py --unit zFe" --completion-promise "FULL DECOMPILATION COMPLETE" --max-iterations 25
+```
+
+---
+
+## 3. Running in Headless / Terminal Mode: `scripts/ralph-decomp.sh`
+
+For long-running headless or background runs outside of an interactive prompt:
+
+```bash
+# Run up to 50 iterations with default prompt
+./scripts/ralph-decomp.sh --max-iterations 50
+
+# Target a specific unit with 20 iterations and 5s delay between turns
+./scripts/ralph-decomp.sh --target-unit zFe --max-iterations 20 --delay 5
+
+# Display all available options
+./scripts/ralph-decomp.sh --help
+```
+
+### Safety & Guardrails
+- **Zero Regressions:** Every iteration runs `ninja changes` to ensure matched code does not regress other symbols.
+- **Atomic Commits:** Exactly one function is committed per iteration.
+- **Fail-Fast Restore:** If a function cannot be matched without regressions, `git restore .` resets the working tree so the next iteration starts clean.
+- **Completion Detection:** When `All` or `Game Code` reaches 100.00%, the runner detects `<promise>FULL DECOMPILATION COMPLETE</promise>` and terminates immediately.

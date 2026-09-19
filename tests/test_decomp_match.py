@@ -204,6 +204,13 @@ class TestDecompMatch(unittest.TestCase):
             "TexturesLoadedCallback__23uiRepSheetRivalStreamer",
         )
 
+    def test_CARSFX_Turbo_PlaySpl(self) -> None:
+        """Verify CARSFX_Turbo::PlaySpl is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zEAXSound2",
+            "PlaySpl__12CARSFX_Turboiiiii",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

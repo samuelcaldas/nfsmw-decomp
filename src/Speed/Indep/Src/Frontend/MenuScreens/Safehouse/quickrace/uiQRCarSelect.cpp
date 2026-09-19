@@ -1026,7 +1026,7 @@ int UIQRCarSelect::GetBonusUnlockBinNumber(FECarRecord *fe_car) {
 void UIQRCarSelect::RefreshHeader() {
     UpdateSliders();
 
-    uint32 list = filter;
+    uint32 list = filter & FE_CAR_FILTER_LIST_MASK;
     uint32 langhash;
     uint32 texhash;
 

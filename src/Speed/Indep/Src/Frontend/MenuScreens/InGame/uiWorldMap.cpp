@@ -815,12 +815,11 @@ void WorldMap::PanToCursor(float to_zoom) {
     offset.x = offset.x / MapSize.x;
     offset.y = offset.y / MapSize.y;
 
-    // UNSOLVED
     bVector2 pan_to = pan + (offset * (1.0f / zoom));
     float max_pan = 1.0f / to_zoom * 0.5f;
 
-    CursorMoveFrom.y = pan_to.y * MapSize.y + MapTopLeft.y;
     CursorMoveFrom.x = pan_to.x * MapSize.x + MapTopLeft.x;
+    CursorMoveFrom.y = pan_to.y * MapSize.y + MapTopLeft.y;
 
     pan_to.x = bClamp(pan_to.x, max_pan, 1.0f - max_pan);
     pan_to.y = bClamp(pan_to.y, max_pan, 1.0f - max_pan);

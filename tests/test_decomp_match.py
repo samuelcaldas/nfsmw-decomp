@@ -162,6 +162,13 @@ class TestDecompMatch(unittest.TestCase):
             "SetNos__12NitrousGaugef",
         )
 
+    def test_PanToCursor(self) -> None:
+        """Verify WorldMap::PanToCursor is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe",
+            "PanToCursor__8WorldMapf",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

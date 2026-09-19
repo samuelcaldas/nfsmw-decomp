@@ -246,6 +246,13 @@ class TestDecompMatch(unittest.TestCase):
             "IsSunInFrustrum__FP5eView",
         )
 
+    def test_SFXObj_Collision_InitSFX(self) -> None:
+        """Verify SFXObj_Collision::InitSFX is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zEAXSound2",
+            "InitSFX__16SFXObj_Collision",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -48,9 +48,10 @@ void SFXObj_Collision::InitSFX() {
     this->m_p3DScrapePos->AssignPositionVector(&this->vScrapePos);
     this->m_p3DScrapePos->AssignVelocityVector(&this->vVelocity);
 
-    this->ReverbSlot = eVRB_COLLISION_RVRB_COL;
-    this->PitchSlot = ePCH_COLLISION_COL_PITCH;
+    register eVOL_COLLISION reverb asm("r10") = eVRB_COLLISION_RVRB_COL;
     this->AzimSlot = eAZI_COLLISION_COLLISION_AZI;
+    this->PitchSlot = ePCH_COLLISION_COL_PITCH;
+    this->ReverbSlot = reverb;
 
     // TODO magic, macro or anynomous enum?
     if (this->m_pCollisionEvent->IsDescribed(0x412)) {

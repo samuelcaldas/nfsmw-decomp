@@ -398,29 +398,26 @@ void FEKeyboard::AppendLetter(int nButton) {
     AppendChar(GetLetterMap(nButton));
 }
 
-// UNSOLVED
 char FEKeyboard::GetLetterMap(int nButton) {
     char returnChar = mLetterMap[mnLetterMapIndex][GetCase()][nButton];
     if (mnMode == MODE_ALL_KEYS && mbOnSpecialCharacters) {
         returnChar = mLetterMap[7][GetCase()][nButton];
-    } else {
-        if (mnMode - 1U > 2) {
-            if (mnMode == MODE_EMAIL) {
-                if (IsEmailSymbol(returnChar) || IsNumericSymbol(returnChar)) {
-                    returnChar = mLetterMap[mnLetterMapIndex][0][nButton];
-                }
-                if (IsNotOkForEmail(returnChar)) {
-                    return 0;
-                }
-            } else if (mnMode == MODE_PROFILE_ENTRY) {
-                if (!IsNumericSymbol(returnChar)) {
-                    if (IsSymbol(returnChar)) {
-                        return 0;
-                    }
-                } else {
-                    returnChar = mLetterMap[mnLetterMapIndex][0][nButton];
-                }
-            }
+    } else if (mnMode >= MODE_ALPHANUMERIC && mnMode <= MODE_FILENAME) {
+        if (IsSymbol(returnChar)) {
+            return 0;
+        }
+    } else if (mnMode == MODE_EMAIL) {
+        if (IsEmailSymbol(returnChar) || IsNumericSymbol(returnChar)) {
+            returnChar = mLetterMap[mnLetterMapIndex][0][nButton];
+        }
+        if (IsNotOkForEmail(returnChar)) {
+            return 0;
+        }
+    } else if (mnMode == MODE_PROFILE_ENTRY) {
+        if (IsNumericSymbol(returnChar)) {
+            returnChar = mLetterMap[mnLetterMapIndex][0][nButton];
+        } else if (IsSymbol(returnChar)) {
+            return 0;
         }
     }
 

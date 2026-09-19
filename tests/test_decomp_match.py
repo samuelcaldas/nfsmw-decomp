@@ -148,6 +148,13 @@ class TestDecompMatch(unittest.TestCase):
             "GetUnlockHash__19CarCustomizeManager18eCustomizeCategoryi",
         )
 
+    def test_GetLetterMap(self) -> None:
+        """Verify FEKeyboard::GetLetterMap is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe2",
+            "GetLetterMap__10FEKeyboardi",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -352,7 +352,9 @@ void NFSMixMapState::CreateEvtMixCtls() {
             int numscale;
 
             if (this->m_ObjectIndex != 0) {
-                pEVS = this->m_pFirstInstance->m_MixStateParams.pEvtMixCtlProc[n].pData_S;
+                pEVS = reinterpret_cast<stEvtMixCtlProc *>(
+                           reinterpret_cast<unsigned int>(this->m_pFirstInstance->m_MixStateParams.pEvtMixCtlProc) + (n << 3))
+                           ->pData_S;
             } else {
                 pEVS = this->m_pNFSMixMap->GetNextEvtMixCtlShared(true);
                 pEVS->pMapParms = pEvtMixParams;

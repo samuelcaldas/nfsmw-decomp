@@ -211,6 +211,13 @@ class TestDecompMatch(unittest.TestCase):
             "PlaySpl__12CARSFX_Turboiiiii",
         )
 
+    def test_NFSMixMapState_CreateEvtMixCtls(self) -> None:
+        """Verify NFSMixMapState::CreateEvtMixCtls is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zEAXSound2",
+            "CreateEvtMixCtls__14NFSMixMapState",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

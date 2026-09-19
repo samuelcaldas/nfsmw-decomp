@@ -232,6 +232,13 @@ class TestDecompMatch(unittest.TestCase):
             "UpdateRPM__13SFXCTL_Enginef",
         )
 
+    def test_TrackStreamer_HibernateStreamingSections(self) -> None:
+        """Verify TrackStreamer::HibernateStreamingSections is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zTrack",
+            "HibernateStreamingSections__13TrackStreamer",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

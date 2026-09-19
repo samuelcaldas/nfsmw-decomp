@@ -739,9 +739,8 @@ void TrackStreamer::InitRegion(const char *region_stream_filename, bool split_sc
     this->EmptyCaffeineLayers();
 }
 
-// UNSOLVED because it's empty and the stack is too small
 void TrackStreamer::HibernateStreamingSections() {
-    int sections_to_hibernate[5];
+    int sections_to_hibernate[12];
     // I made these up
     GetScenerySectionNumber('A', 0);
     GetScenerySectionNumber('B', 1);

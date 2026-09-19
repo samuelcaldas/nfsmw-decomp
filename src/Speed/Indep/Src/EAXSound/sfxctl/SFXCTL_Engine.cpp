@@ -326,10 +326,10 @@ void SFXCTL_Engine::UpdateRPM(float t) {
     }
 
     float VisualRPM = Cur_RPM;
-    float NormalRPM = VisualRPM + this->m_RPM_LFO;
-    NormalRPM = NormalRPM + this->m_ComppressionRPM.GetValue();
+    Cur_RPM += this->m_RPM_LFO;
+    Cur_RPM += this->m_ComppressionRPM.GetValue();
 
-    this->SetEngRPM(NormalRPM + this->m_RPM_LFO);
+    this->SetEngRPM(Cur_RPM + this->m_RPM_LFO);
 
     if (this->m_pShiftCtl->eShiftState == SHFT_UP_DISENGAGE || this->m_pShiftCtl->eShiftState == SHFT_UP_ENGAGING) {
         VisualRPM = this->m_pShiftCtl->m_VisualRPM.GetValue();

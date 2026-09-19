@@ -225,6 +225,13 @@ class TestDecompMatch(unittest.TestCase):
             "Default__17cFrontendDatabase",
         )
 
+    def test_SFXCTL_Engine_UpdateRPM(self) -> None:
+        """Verify SFXCTL_Engine::UpdateRPM is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zEAXSound",
+            "UpdateRPM__13SFXCTL_Enginef",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

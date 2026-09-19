@@ -176,6 +176,13 @@ class TestDecompMatch(unittest.TestCase):
             "UpdateElementArt__7MinimapP8bVector2T1P8FEObjectb",
         )
 
+    def test_DrawPartName(self) -> None:
+        """Verify FEShoppingCartItem::DrawPartName is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFeOverlay",
+            "DrawPartName__18FEShoppingCartItem",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

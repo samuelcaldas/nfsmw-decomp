@@ -595,17 +595,16 @@ void FEShoppingCartItem::DrawPartName() {
             case CARSLOTID_SPOILER:
             case CARSLOTID_ROOF:
             case CARSLOTID_HOOD:
-                if (part->GetPart()->HasAppliedAttribute(bStringHash("CARBONFIBRE"))) {
-                    if (part->GetPart()->GetAppliedAttributeIParam(bStringHash("CARBONFIBRE"), 0)) {
-                        if (GetCurrentLanguage() == eLANGUAGE_FRENCH) {
-                            FEPrintf(GetTitleObject(), "%s : %s %s", GetLocalizedString(GetCarPartCatHash(part->GetSlotID())),
-                                     GetLocalizedString(0x5415b874),
-                                     GetLocalizedString(part->GetPart()->GetAppliedAttributeUParam(bStringHash("LANGUAGEHASH"), 0)));
-                        } else {
-                            FEPrintf(GetTitleObject(), "%s: %s %s", GetLocalizedString(GetCarPartCatHash(part->GetSlotID())),
-                                     GetLocalizedString(0x5415b874),
-                                     GetLocalizedString(part->GetPart()->GetAppliedAttributeUParam(bStringHash("LANGUAGEHASH"), 0)));
-                        }
+                if (part->GetPart()->HasAppliedAttribute(bStringHash("CARBONFIBRE")) &&
+                    part->GetPart()->GetAppliedAttributeIParam(bStringHash("CARBONFIBRE"), 0)) {
+                    if (GetCurrentLanguage() == eLANGUAGE_FRENCH) {
+                        FEPrintf(GetTitleObject(), "%s : %s %s", GetLocalizedString(GetCarPartCatHash(part->GetSlotID())),
+                                 GetLocalizedString(0x5415b874),
+                                 GetLocalizedString(part->GetPart()->GetAppliedAttributeUParam(bStringHash("LANGUAGEHASH"), 0)));
+                    } else {
+                        FEPrintf(GetTitleObject(), "%s: %s %s", GetLocalizedString(GetCarPartCatHash(part->GetSlotID())),
+                                 GetLocalizedString(0x5415b874),
+                                 GetLocalizedString(part->GetPart()->GetAppliedAttributeUParam(bStringHash("LANGUAGEHASH"), 0)));
                     }
                 } else if (part->GetPart()->HasAppliedAttribute(bStringHash("LANGUAGEHASH"))) {
                     if (GetCurrentLanguage() == eLANGUAGE_FRENCH) {

@@ -239,6 +239,13 @@ class TestDecompMatch(unittest.TestCase):
             "HibernateStreamingSections__13TrackStreamer",
         )
 
+    def test_IsSunInFrustrum(self) -> None:
+        """Verify IsSunInFrustrum is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zEcstasy",
+            "IsSunInFrustrum__FP5eView",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

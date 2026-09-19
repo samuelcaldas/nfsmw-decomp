@@ -423,12 +423,12 @@ bool IsSunInFrustrum(eView *player_view) {
     const bVector2 sunpos_xy(sun_info->PositionX, sun_info->PositionY);                                         // sp8
     bVector2 campos_xy(player_view->GetCamera()->GetPosition()->x, player_view->GetCamera()->GetPosition()->y); // sp10
 
-    const bVector2 to_pt_xy_un = sunpos_xy - campos_xy;                                                                     // sp18
-    const bVector2 cam_dir_xy_un(player_view->GetCamera()->GetDirection()->x, player_view->GetCamera()->GetDirection()->y); // sp20
-    bVector2 to_pt_xy = bNormalize(to_pt_xy_un);                                                                            // sp38
-    bVector2 cam_dir_xy = bNormalize(cam_dir_xy_un);                                                                        // sp40;
+    const bVector2 to_pt_xy_un = sunpos_xy - campos_xy;
+    const bVector2 cam_dir_xy_un(player_view->GetCamera()->GetDirection()->x, player_view->GetCamera()->GetDirection()->y);
+    bVector2 cam_dir_xy = bNormalize(cam_dir_xy_un);
+    bVector2 to_pt_xy = bNormalize(to_pt_xy_un);
 
-    float dotp = bDot(&to_pt_xy, &cam_dir_xy);
+    float dotp = bDot(&cam_dir_xy, &to_pt_xy);
 
     return dotp > 0.5f;
 }

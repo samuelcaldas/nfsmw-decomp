@@ -23,10 +23,10 @@ ICEManager::ICEManager() {
     this->pGenericCameras = nullptr;
     this->pShakeGroup = nullptr;
 
-    this->fParameterLengthBackup = 0.0f;
     this->fAnimElevation = 0.0f;
     this->fParameterStart = 0.0f;
     this->fParameterLength = 0.0f;
+    this->fParameterLengthBackup = 0.0f;
 
     this->nContext = 3;
     this->nPlayGenericGroupHash = bStringHash("");
@@ -34,9 +34,9 @@ ICEManager::ICEManager() {
     this->pPlaybackTrack = nullptr;
 
     ICEReplay::ClearRecentlyUsed();
+    this->bSmoothExit = false;
     this->bUseRealTime = false;
     this->nMarkerIndex = -1;
-    this->bSmoothExit = false;
 }
 
 // TODO move this?

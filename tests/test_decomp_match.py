@@ -183,6 +183,13 @@ class TestDecompMatch(unittest.TestCase):
             "DrawPartName__18FEShoppingCartItem",
         )
 
+    def test_ICEManager(self) -> None:
+        """Verify ICEManager::ICEManager is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zCamera",
+            "__10ICEManager",
+        )
+
     def test_TrackStreamer_CheckLoadingBar(self) -> None:
         """Verify TrackStreamer::CheckLoadingBar is 100% matched."""
         self.assert_function_matches(

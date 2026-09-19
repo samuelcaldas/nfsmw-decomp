@@ -151,6 +151,9 @@ parse_args() {
                 ;;
             -m|--model)
                 MODEL="$2"
+                if [[ "$MODEL" == "gemini-3.8-flash" ]]; then
+                    MODEL="gemini-3.8-flash-high"
+                fi
                 shift 2
                 ;;
             -d|--delay)
@@ -344,6 +347,9 @@ execute_claude_turn() {
         # Do not consume iteration count for API cooldowns
         ITERATION=$((ITERATION - 1))
         sleep 60
+    elif grep -Eq "unknown provider for model" "$iter_log"; then
+        log_error "❌ Model error: Provider rejected model '$MODEL'. Halting loop."
+        exit 1
     else
         log_warn "⚠️  No commit created this iteration. Reverting partial working tree changes."
         git restore . 2>/dev/null || true

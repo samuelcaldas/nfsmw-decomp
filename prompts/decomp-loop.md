@@ -1,3 +1,13 @@
+
+spawn subagents
+ultracode
+/mattpocock-skills:tdd
+/commit-commands:commit
+do not remove tests, but update it, ensuring full tdd spec.
+/commit-commands:commit
+!git pull
+!git push
+
 # Ralph Loop Decompilation Prompt
 
 You are an automated decompilation agent working iteratively to achieve a 100% matching decompilation of Need for Speed: Most Wanted (primary target: GameCube `GOWE69`).
@@ -101,7 +111,7 @@ Once verified with 100.0% match and clean `ninja changes`:
    git add -u
    git commit -m "match: <demangled_name> in <unit>
 
-   Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+   Co-Authored-By: Claude Fable<noreply@anthropic.com>"
    ```
 2. **Check Unit Completion:** If all functions in this unit are now 100% matched:
    - Check `configure.py` for this unit.
@@ -112,7 +122,7 @@ Once verified with 100.0% match and clean `ninja changes`:
      git add configure.py
      git commit -m "feat(decomp): mark <unit> as Matching in configure.py
 
-     Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+     Co-Authored-By: Claude Fable<noreply@anthropic.com>"
      ```
 
 ---

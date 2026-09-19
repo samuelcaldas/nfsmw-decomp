@@ -2414,11 +2414,10 @@ bool TrackStreamer::CheckLoadingBar() {
                 }
 
                 if (may_contain_road && section->Status != TrackStreamingSection::ACTIVATED) {
-                    // TODO make const somehow
-                    float small_test_time = 0.2f;
                     bVector2 test_pos = position_entry->Position + position_entry->Velocity * 0.01f;
                     float distance1 = boundary->GetDistanceOutside(&position_entry->Position, 999.0f);
                     float distance2 = boundary->GetDistanceOutside(&test_pos, 999.0f);
+                    float small_test_time = 0.2f;
                     float approach_speed = small_test_time * (distance1 - distance2) * 100.0f;
                     float distance = distance1 - approach_speed;
                     if (distance < closest_distance) {

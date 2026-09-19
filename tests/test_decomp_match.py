@@ -183,6 +183,13 @@ class TestDecompMatch(unittest.TestCase):
             "DrawPartName__18FEShoppingCartItem",
         )
 
+    def test_TrackStreamer_CheckLoadingBar(self) -> None:
+        """Verify TrackStreamer::CheckLoadingBar is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zTrack",
+            "CheckLoadingBar__13TrackStreamer",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

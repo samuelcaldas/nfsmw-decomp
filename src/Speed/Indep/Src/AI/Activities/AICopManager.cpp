@@ -1854,7 +1854,7 @@ void AICopManager::UpdatePursuits() {
             }
 
             if (IsDestroyed && vehicleRemoved && bAllowStatsToAccumulate) {
-                GManager::Get().TrackValue("cops_destroyed", ++this->mTotalCopsDestroyed);
+                GManager::Get().TrackValue("cops_destroyed", (float)++this->mTotalCopsDestroyed);
             }
         } else {
             if (ivehicle->GetVehicleClass() == VehicleClass::CHOPPER) {

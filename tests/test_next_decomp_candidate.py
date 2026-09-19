@@ -162,9 +162,10 @@ class TestNextDecompCandidate(unittest.TestCase):
     def test_build_argument_parser(self) -> None:
         """Verify parser configurations."""
         parser = build_argument_parser()
-        args = parser.parse_args(["--strategy", "smallest", "--limit", "10"])
+        args = parser.parse_args(["--strategy", "smallest", "--limit", "10", "--offset", "2"])
         self.assertEqual(args.strategy, "smallest")
         self.assertEqual(args.limit, 10)
+        self.assertEqual(args.offset, 2)
 
 
 if __name__ == "__main__":

@@ -92,15 +92,31 @@ To scope to a specific compilation unit:
 For long-running headless or background runs outside of an interactive prompt:
 
 ```bash
-# Run up to 50 iterations with default prompt
-./scripts/ralph-decomp.sh --max-iterations 50
+# Run infinitely with clean/concise logging and 3s delay
+./scripts/ralph-decomp.sh --infinite --delay 3
 
-# Target a specific unit with 20 iterations and 5s delay between turns
-./scripts/ralph-decomp.sh --target-unit zFe --max-iterations 20 --delay 5
+# Multi-agent parallel decompilation across 4 workers
+./scripts/ralph-decomp.sh --workers 4 --infinite
+
+# Multi-agent parallel decompilation distributed across specific units
+./scripts/ralph-decomp.sh --workers 3 --units zEcstasy,zAI,zFe --infinite
+
+# Run 50 iterations targeting a specific unit
+./scripts/ralph-decomp.sh --target-unit zFe --max-iterations 50
+
+# Enable full verbose output
+./scripts/ralph-decomp.sh --infinite --verbose
 
 # Display all available options
 ./scripts/ralph-decomp.sh --help
 ```
+
+### Multi-Agent Worktree Architecture
+When `--workers <N>` (with `N > 1`) is specified:
+- **Isolated Git Worktrees:** Each worker executes in an isolated worktree under `.worktrees/ralph-worker-<ID>` on branch `ralph-worker-<ID>`, preventing file modification races.
+- **Candidate Partitioning:** Candidates are distributed across workers either by `--units` list or deterministic offset indexing (`--offset <worker_id>`).
+- **Thread-Safe Synchronization:** When a worker achieves a 100% match commit, it acquires a mutual exclusion lock (`.git/ralph-merge.lock`) via `flock` to integrate the commit safely into the main branch and rebase the worker.
+- **Dedicated Sessions:** Each iteration generates a unique session UUID (`uuidgen`), preventing session collisions across concurrent Claude processes.
 
 ### Safety & Guardrails
 - **Zero Regressions:** Every iteration runs `ninja changes` to ensure matched code does not regress other symbols.

@@ -232,6 +232,12 @@ def add_output_arguments(parser: argparse.ArgumentParser) -> None:
         help="Maximum candidates to display (default: 5)",
     )
     parser.add_argument(
+        "--offset",
+        type=int,
+        default=0,
+        help="Candidate list offset to skip (default: 0)",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="Output candidates in JSON format",
@@ -292,14 +298,15 @@ def main() -> None:
     candidates = filter_by_category(candidates, args.category)
     candidates = filter_by_match_range(candidates, args.min_match, args.max_match)
     sorted_candidates = sort_candidates(candidates, args.strategy)
+    offset_candidates = sorted_candidates[args.offset :]
 
     if args.json:
-        output_json(sorted_candidates, args.limit)
+        output_json(offset_candidates, args.limit)
         return
-    if args.commands_only and sorted_candidates:
-        output_commands_only(sorted_candidates[0])
+    if args.commands_only and offset_candidates:
+        output_commands_only(offset_candidates[0])
         return
-    output_text(sorted_candidates, args.limit)
+    output_text(offset_candidates, args.limit)
 
 
 if __name__ == "__main__":

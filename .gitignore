@@ -71,4 +71,4 @@ worktrees/
 *.zip
 
 # Ralph-loop instructions
-.gitignore
+.claude/ralph-loop.local.md

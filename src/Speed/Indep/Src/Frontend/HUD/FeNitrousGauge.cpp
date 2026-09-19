@@ -38,12 +38,12 @@ void NitrousGauge::SetNos(float nos) {
             FEngSetScript(mpDataNosMeterIcon, FEHASH_INIT, true);
         }
     } else if (nos < mNos) {
-        if (!FEngIsScriptSet(mpDataNosMeterIcon, 0x77031C70)) {
-            FEngSetScript(mpDataNosMeterIcon, 0x77031C70, true);
-        }
-    } else {
         if (!FEngIsScriptSet(mpDataNosMeterIcon, 0x03826A28)) {
             FEngSetScript(mpDataNosMeterIcon, 0x03826A28, true);
+        }
+    } else {
+        if (!FEngIsScriptSet(mpDataNosMeterIcon, 0x77031C70)) {
+            FEngSetScript(mpDataNosMeterIcon, 0x77031C70, true);
         }
     }
     mNos = nos;

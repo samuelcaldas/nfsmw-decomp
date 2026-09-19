@@ -155,6 +155,13 @@ class TestDecompMatch(unittest.TestCase):
             "GetLetterMap__10FEKeyboardi",
         )
 
+    def test_SetNos(self) -> None:
+        """Verify NitrousGauge::SetNos is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe2",
+            "SetNos__12NitrousGaugef",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

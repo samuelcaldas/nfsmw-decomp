@@ -758,16 +758,15 @@ cFrontendDatabase::cFrontendDatabase()
     CurrentUserProfiles[0] = new ("Player 1 UserProfile", 0) UserProfile();
 }
 
-// UNSOLVED (regswap)
 void cFrontendDatabase::Default() {
     int track_number;
+    iNumPlayers = 1;
+    bComingFromBoot = true;
     bProfileLoaded = false;
     bIsOptionsDirty = false;
 #ifndef EA_BUILD_A124
     bAutoSaveOverwriteConfirmed = false;
 #endif
-    iNumPlayers = 1;
-    bComingFromBoot = true;
     CurrentUserProfiles[0]->Default(0, true);
     iCurPauseSubOptionType = 0;
     iCurPauseOptionType = 0;

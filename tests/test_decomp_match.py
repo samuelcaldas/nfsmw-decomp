@@ -218,6 +218,13 @@ class TestDecompMatch(unittest.TestCase):
             "CreateEvtMixCtls__14NFSMixMapState",
         )
 
+    def test_cFrontendDatabase_Default(self) -> None:
+        """Verify cFrontendDatabase::Default is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe2",
+            "Default__17cFrontendDatabase",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

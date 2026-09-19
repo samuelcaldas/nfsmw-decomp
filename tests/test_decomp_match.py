@@ -253,6 +253,13 @@ class TestDecompMatch(unittest.TestCase):
             "InitSFX__16SFXObj_Collision",
         )
 
+    def test_CARSFX_Skids_ProcessUpdate(self) -> None:
+        """Verify CARSFX_Skids::ProcessUpdate is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zEAXSound2",
+            "ProcessUpdate__12CARSFX_Skids",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

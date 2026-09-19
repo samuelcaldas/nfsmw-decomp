@@ -596,7 +596,7 @@ void FEShoppingCartItem::DrawPartName() {
             case CARSLOTID_ROOF:
             case CARSLOTID_HOOD:
                 if (part->GetPart()->HasAppliedAttribute(bStringHash("CARBONFIBRE"))) {
-                    if (part->GetPart()->GetAppliedAttributeIParam(bStringHash("CARBONFIBRE"), 0) != 0) {
+                    if (part->GetPart()->GetAppliedAttributeIParam(bStringHash("CARBONFIBRE"), 0)) {
                         if (GetCurrentLanguage() == eLANGUAGE_FRENCH) {
                             FEPrintf(GetTitleObject(), "%s : %s %s", GetLocalizedString(GetCarPartCatHash(part->GetSlotID())),
                                      GetLocalizedString(0x5415b874),

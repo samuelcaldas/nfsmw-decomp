@@ -64,3 +64,11 @@ worktrees/
 # Playwright
 .playwright-mcp
 .playwright-mcp/
+
+# Game ISOs
+*.iso
+*.rar
+*.zip
+
+# Ralph-loop instructions
+.gitignore

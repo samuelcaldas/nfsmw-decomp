@@ -665,7 +665,7 @@ uint32 CarCustomizeManager::GetUnlockHash(eCustomizeCategory cat, int upgrade_lv
         char label[100];
         FEngSNPrintf(label, 100, "CUSTOMIZATION_%s_%d", funk, upgrade_lvl);
         uint32 returnHash = FEngHashString(label);
-        if (DoesStringExist(returnHash) != 0) {
+        if (DoesStringExist(returnHash) == true) {
             return returnHash;
         }
     }

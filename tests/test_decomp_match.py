@@ -141,6 +141,13 @@ class TestDecompMatch(unittest.TestCase):
             "SetupResults__21PostRaceResultsScreen",
         )
 
+    def test_GetUnlockHash(self) -> None:
+        """Verify CarCustomizeManager::GetUnlockHash is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFeOverlay",
+            "GetUnlockHash__19CarCustomizeManager18eCustomizeCategoryi",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

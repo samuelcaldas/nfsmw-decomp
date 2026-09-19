@@ -324,6 +324,11 @@ execute_claude_turn() {
         if [[ "$WORKTREE_MODE" == "true" ]]; then
             sync_worktree_commit_to_main "$new_head"
         fi
+    elif grep -Eq "status: 429|RESOURCE_EXHAUSTED|cooling down|Individual quota reached" "$iter_log"; then
+        log_warn "⚠️  API quota/cooldown (429) detected. Backing off 60s..."
+        # Do not consume iteration count for API cooldowns
+        ITERATION=$((ITERATION - 1))
+        sleep 60
     else
         log_warn "⚠️  No commit created this iteration. Reverting partial working tree changes."
         git restore . 2>/dev/null || true

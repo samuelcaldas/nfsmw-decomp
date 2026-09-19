@@ -11,6 +11,7 @@ MAX_ITERATIONS=50
 INFINITE=false
 TARGET_UNIT=""
 TARGET_UNITS=""
+MODEL=""
 DELAY_SECONDS=2
 PROMPT_FILE="prompts/decomp-loop.md"
 WORKERS=1
@@ -91,6 +92,7 @@ Options:
   --units <LIST>            Comma-separated units to distribute across workers (e.g. zEcstasy,zAI,zFe)
   --worktree                Run worker inside an isolated git worktree
   --worker-id <ID>          Worker identifier (internal / advanced use)
+  -m, --model <NAME>        Underlying Claude/LLM model (e.g. gemini-3.5-flash-lite)
   -d, --delay <SECONDS>     Delay in seconds between iterations (default: 2)
   -p, --prompt <FILE>       Path to prompt markdown file (default: prompts/decomp-loop.md)
   -v, --verbose             Print raw Claude & build output to console (default: clean/concise)
@@ -145,6 +147,10 @@ parse_args() {
                 ;;
             --units)
                 TARGET_UNITS="$2"
+                shift 2
+                ;;
+            -m|--model)
+                MODEL="$2"
                 shift 2
                 ;;
             -d|--delay)
@@ -305,12 +311,21 @@ execute_claude_turn() {
     mkdir -p "$LOG_DIR"
     local worker_log="$LOG_DIR/worker_${WORKER_ID}.log"
 
-    log_info "⚙️  Executing Claude (session: ${session_id:0:8})..."
+    local model_info=""
+    if [[ -n "$MODEL" ]]; then
+        model_info=" | model: $MODEL"
+    fi
+    log_info "⚙️  Executing Claude (session: ${session_id:0:8}${model_info})..."
+
+    local claude_cmd=(claude -p --session-id "$session_id" --permission-mode bypassPermissions)
+    if [[ -n "$MODEL" ]]; then
+        claude_cmd+=(--model "$MODEL")
+    fi
 
     if [[ "$VERBOSE" == "true" ]]; then
-        claude -p --session-id "$session_id" --permission-mode bypassPermissions < "$prompt_file" 2>&1 | tee -a "$worker_log" > "$iter_log"
+        "${claude_cmd[@]}" < "$prompt_file" 2>&1 | tee -a "$worker_log" > "$iter_log"
     else
-        claude -p --session-id "$session_id" --permission-mode bypassPermissions < "$prompt_file" > "$iter_log" 2>&1 || true
+        "${claude_cmd[@]}" < "$prompt_file" > "$iter_log" 2>&1 || true
         cat "$iter_log" >> "$worker_log"
     fi
 
@@ -453,6 +468,9 @@ spawn_parallel_workers() {
         )
         if [[ "$INFINITE" == "true" ]]; then
             worker_args+=(--infinite)
+        fi
+        if [[ -n "$MODEL" ]]; then
+            worker_args+=(--model "$MODEL")
         fi
         if [[ -n "$worker_unit" ]]; then
             worker_args+=(--target-unit "$worker_unit")

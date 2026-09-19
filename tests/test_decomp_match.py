@@ -169,6 +169,13 @@ class TestDecompMatch(unittest.TestCase):
             "PanToCursor__8WorldMapf",
         )
 
+    def test_UpdateElementArt(self) -> None:
+        """Verify Minimap::UpdateElementArt is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe2",
+            "UpdateElementArt__7MinimapP8bVector2T1P8FEObjectb",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

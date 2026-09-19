@@ -326,8 +326,8 @@ void Minimap::UpdateElementArt(bVector2 *elementPos, bVector2 *elementDir, FEObj
         if (distance > 0.06f) {
             float scaleDist = 0.06f / distance;
 
-            rot_epoly_y *= scaleDist;
             rot_epoly_x *= scaleDist;
+            rot_epoly_y *= scaleDist;
 
             if (distance > 0.125f) {
                 alpha = 1.0f - (distance - 0.125f) * 9.523809f;

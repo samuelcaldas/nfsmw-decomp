@@ -40,13 +40,13 @@ CameraMover::CameraMover(int view_id, CameraMoverTypes type)
     fAccumulatedClearance = 0;
     fAccumulatedAdjust = 0;
     fSavedAdjust = 0;
-    vSavedForward.x = 0;
-    vSavedForward.y = 0;
     vSavedForward.z = 0;
+    vSavedForward.y = 0;
+    vSavedForward.x = 0;
     if (view_id == -1) {
-        this->RenderDash = 0;
         this->pView = nullptr;
         this->pCamera = nullptr;
+        this->RenderDash = 0;
     } else {
         this->pView = eGetView(view_id, false);
         this->pCamera = pView->GetCamera();

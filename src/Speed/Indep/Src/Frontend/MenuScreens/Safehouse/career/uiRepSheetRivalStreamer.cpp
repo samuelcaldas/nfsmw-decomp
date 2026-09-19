@@ -118,10 +118,10 @@ void uiRepSheetRivalStreamer::TexturesLoadedCallback() {
         if (Rival != nullptr) {
             const u32 FEObj_RIVALLOADED = 0xC0942E85;
             cFEng::Get()->QueuePackageMessage(FEObj_RIVALLOADED, pkg_name, nullptr);
-            TextureInfo *ti = GetTextureInfo(LoadedTextures[0], 0, 0);
+            GetTextureInfo(LoadedTextures[0], 0, 0);
+            index = 1;
             FEngSetTextureHash(Rival, LoadedTextures[0]);
             FEngSetVisible(Rival);
-            index = 1;
         }
         if (Tag != nullptr) {
             const u32 FEObj_GRAFLOADED = 0x8C9D4547;

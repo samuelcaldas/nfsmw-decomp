@@ -197,6 +197,13 @@ class TestDecompMatch(unittest.TestCase):
             "CheckLoadingBar__13TrackStreamer",
         )
 
+    def test_TexturesLoadedCallback(self) -> None:
+        """Verify uiRepSheetRivalStreamer::TexturesLoadedCallback is 100% matched."""
+        self.assert_function_matches(
+            "main/Speed/Indep/SourceLists/zFe",
+            "TexturesLoadedCallback__23uiRepSheetRivalStreamer",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

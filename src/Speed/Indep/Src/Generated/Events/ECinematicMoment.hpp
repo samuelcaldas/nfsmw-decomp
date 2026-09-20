@@ -23,14 +23,12 @@ class ECinematicMoment : public Event {
 
     ~ECinematicMoment() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     const char *fGenericGroupName; // offset: 0x8, size 0x4
     const char *fGenericTrackName; // offset: 0xc, size 0x4
     float fEventRadius;            // offset: 0x10, size 0x4
 };
-
-void ECinematicMoment_MakeEvent_Callback(const void *staticData);
 
 #endif

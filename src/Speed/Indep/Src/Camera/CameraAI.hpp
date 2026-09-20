@@ -16,6 +16,7 @@ void MaybeDoTotaledCam(IPlayer *iplayer);
 void MaybeDoPursuitCam(IVehicle *ivehicle);
 
 void StartCinematicSlowdown(EVIEW_ID viewID, float seconds);
+void SetAction(EVIEW_ID viewID, const char *action);
 }; // namespace CameraAI
 
 #endif

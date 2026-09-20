@@ -39,6 +39,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EChangeState.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/ECinematicMoment.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

@@ -74,3 +74,5 @@
 #include "Speed/Indep/Src/AI/Common/AIMath.cpp"
 
 #include "Speed/Indep/Src/AI/Gps.cpp"
+
+void Behavior::OnPause() {}

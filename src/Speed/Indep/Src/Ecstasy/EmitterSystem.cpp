@@ -755,7 +755,6 @@ void EmitterLibraryHeader::EndianSwap() {
     this->EndianSwapped = 1;
 }
 
-// UNSOLVED (EmitterParticle ctor)
 EmitterParticle *EmitterSystem::GetNewParticle(Emitter *spawning_emitter) {
     if (this->mTotalNumParticles == 1024) {
         bool high_priority = (spawning_emitter->GetEmitterGroup()->GetFlags() & 0x40000) != 0;

@@ -26,10 +26,7 @@ class smVector3 {
     float magnitude;   // offset 0x4, size 0x4
 
     smVector3() {
-        this->x = 0;
-        this->y = 0;
-        this->z = 0;
-        this->pad = 0;
+        this->x = this->y = this->z = this->pad = 0;
         this->magnitude = 0.0f;
     }
 };
@@ -101,9 +98,8 @@ class EmitterParticle : public bTNode<EmitterParticle> {
         this->Prev = nullptr;
         this->mColour = 0;
         this->mSize = 0.0f;
+        this->mPosY = this->mPosZ = 0.0f;
         this->mPosX = 0.0f;
-        this->mPosY = 0.0f;
-        this->mPosZ = 0.0f;
         this->mFlags = 0;
         this->mUVStart = 0;
         this->mUVEnd = 0;

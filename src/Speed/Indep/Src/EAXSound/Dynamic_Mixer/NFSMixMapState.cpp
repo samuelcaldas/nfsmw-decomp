@@ -542,7 +542,6 @@ void NFSMixMapState::InitializeMasterChannels() {
         int *pinputs = &pmstmxchproc->pMixChData_S->pMapParams[1].MIXCHID;
         int nummapinputs = (static_cast<unsigned int>(pmstmxchproc->pMixChData_S->pMapParams->MIXCHID) >> 16) & 0xFF;
         int sfxid;
-        int index = numfixedinputs;
 
         pmstmxchproc->pMixChData_S->pPRESETS = pPresetTable;
 
@@ -550,6 +549,8 @@ void NFSMixMapState::InitializeMasterChannels() {
         int nPresetType;
         int nTotalPresets = presettableID & 0x1F;
         int nUnused;
+        int index = 0;
+        index += numfixedinputs;
 
         for (; index < nummapinputs; index++) {
             int chid = *pinputs++;

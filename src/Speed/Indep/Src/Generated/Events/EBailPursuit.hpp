@@ -22,13 +22,11 @@ class EBailPursuit : public Event {
 
     ~EBailPursuit() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     int fPlayAudio;    // offset: 0x8, size 0x4
     int fDisperseCops; // offset: 0xc, size 0x4
 };
-
-void EBailPursuit_MakeEvent_Callback(const void *staticData);
 
 #endif

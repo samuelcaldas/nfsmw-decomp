@@ -21,6 +21,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EAwardUpgrade.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EBailPursuit.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

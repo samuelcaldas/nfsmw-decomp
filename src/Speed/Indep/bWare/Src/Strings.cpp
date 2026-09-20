@@ -131,7 +131,9 @@ int bStrNCmp(const char *s1, const char *s2, int n) {
     if (n >= 0) {
         if (*s1 == '\0') {
             if (*s2 == '\0') {
-                return s1[-1] - s2[-1];
+                register char c1 asm("r9") = s1[-1];
+                register char c2 asm("r0") = s2[-1];
+                return c1 - c2;
             } else {
                 return -1;
             }

@@ -71,6 +71,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EEnableCollisionElement.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EEnableModeling.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

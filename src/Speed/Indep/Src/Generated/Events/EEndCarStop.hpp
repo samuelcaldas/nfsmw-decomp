@@ -21,14 +21,11 @@ class EEndCarStop : public Event {
 
     ~EEndCarStop() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
-    int fDontRetestInput; // offset: 0x8, size 0x4
-
-    unsigned int fhSimable; // offset: 0x10, size 0x4
+    int fDontRetestInput;   // offset: 0x8, size 0x4
+    unsigned int fhSimable; // offset: 0xc, size 0x4
 };
-
-void EEndCarStop_MakeEvent_Callback(const void *staticData);
 
 #endif

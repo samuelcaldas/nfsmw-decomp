@@ -51,6 +51,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EDDaySpeech.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EDebugPrint.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

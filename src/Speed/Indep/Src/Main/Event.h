@@ -68,9 +68,8 @@ class EventManager {
 
     static bool EventsQueued();
 
-    static const char *EmbedField(Event *event, const char *ptr);
-
-    static Hermes::Message *EmbedField(Event *event, Hermes::Message *ptr);
+    template <typename T>
+    static T *EmbedField(Event *event, T *ptr);
 
     // static Event *GetCurrentEvent() {}
 

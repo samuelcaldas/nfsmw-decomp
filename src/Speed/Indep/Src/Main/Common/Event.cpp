@@ -100,6 +100,23 @@ unsigned int GetEmbeddedObjectSize<Hermes::Message>(Hermes::Message *ptr) {
     return ptr->GetSize();
 }
 
+template <typename T>
+T *EventManager::EmbedField(Event *event, T *ptr) {
+    if (ptr == nullptr) {
+        return nullptr;
+    }
+
+    T *dest = reinterpret_cast<T *>(gCreationPoint);
+    unsigned int size = GetEmbeddedObjectSize(ptr);
+    bMemCpy((void *)dest, ptr, size);
+    unsigned int event_size = *(unsigned int *)event;
+    char *creation_point = gCreationPoint;
+    size = (size + 0xF) & ~0xF;
+    *(unsigned int *)event = event_size + size;
+    gCreationPoint = creation_point + size;
+    return dest;
+}
+
 void *Event::operator new(size_t size) {
     void *result = gCreationPoint;
 

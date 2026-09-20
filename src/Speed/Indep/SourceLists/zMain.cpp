@@ -29,6 +29,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EBecomePursuitCar.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EBreakerStopCops.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

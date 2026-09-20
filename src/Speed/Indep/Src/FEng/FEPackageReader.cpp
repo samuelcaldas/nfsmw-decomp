@@ -674,8 +674,8 @@ void FEPackageReader::ProcessCodeListBoxTag(FETag *pTag) {
             pList->AllocateStrings(pTag->Getu32(0), pTag->Getu32(1));
             break;
         case Tag_FEObjCodeListFlags:
-            pList->SetFlags(FECODELISTBOX_PUBLICFLAGS_MASK, false);
-            pList->SetFlags(pTag->Getu32(0) & FECODELISTBOX_PUBLICFLAGS_MASK, true);
+            *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(pList) + 0x68) &= ~FECODELISTBOX_PUBLICFLAGS_MASK;
+            *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(pList) + 0x68) |= pTag->Getu32(0) & FECODELISTBOX_PUBLICFLAGS_MASK;
             break;
         case Tag_FEObjCodeListJustifyFlags:
             pList->SetCellJustification(0, 0, pTag->Getu32(0), pList->GetNumVisColumns(), pList->GetNumVisRows());

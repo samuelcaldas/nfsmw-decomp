@@ -22,13 +22,11 @@ class EChangeState : public Event {
 
     ~EChangeState() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     unsigned int fActivityKey; // offset: 0x8, size 0x4
     unsigned int fStateKey;    // offset: 0xc, size 0x4
 };
-
-void EChangeState_MakeEvent_Callback(const void *staticData);
 
 #endif

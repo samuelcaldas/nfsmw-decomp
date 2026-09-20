@@ -26,6 +26,8 @@ class GActivity : public GRuntimeInstance {
 
     GActivity(const Attrib::Key &activityKey);
 
+    void EnterState(GState *state);
+
   private:
     GState *mCurrentState;            // offset 0x28, size 0x4
     GState *mRegisteredHandlersState; // offset 0x2C, size 0x4

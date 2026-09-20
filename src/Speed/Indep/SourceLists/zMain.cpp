@@ -37,6 +37,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/ECellCall.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EChangeState.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

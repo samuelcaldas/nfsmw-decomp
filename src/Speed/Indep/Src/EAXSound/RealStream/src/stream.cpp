@@ -566,11 +566,14 @@ static void restartstream(STREAMHEADER *strm, int priority) {
             EA::Endian::little_put(&chunk->type, -1, 4);
             EA::Endian::little_put(&chunk->size, 8, 4);
 
-            reqend = strm->bufferstart + tailsize;
-            strm->datatail = strm->bufferstart;
+            char *data_start = strm->datastart;
+            char *bufferstart = strm->bufferstart;
+            reqend = bufferstart + tailsize;
+            strm->datatail = bufferstart;
             strm->dataend = reqend;
+            asm("");
 
-            chunk = reinterpret_cast<STREAMCHUNKHDR *>(strm->datastart);
+            chunk = reinterpret_cast<STREAMCHUNKHDR *>(data_start);
 
             if (EA::Endian::little_get(&chunk->type, 4) == -1) {
                 strm->datastart = strm->bufferstart;

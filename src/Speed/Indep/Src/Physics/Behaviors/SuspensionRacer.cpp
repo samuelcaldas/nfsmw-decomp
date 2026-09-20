@@ -1840,13 +1840,13 @@ void SuspensionRacer::DoWheelForces(Chassis::State &state) {
 
     float time = Sim::GetTime();
     float shock_specs[2];
+    float shock_ext_specs[2];
+    float shock_valving[2];
+    float shock_digression[2];
     float spring_specs[2];
     float sway_specs[2];
     float travel_specs[2];
     float rideheight_specs[2];
-    float shock_ext_specs[2];
-    float shock_valving[2];
-    float shock_digression[2];
     float progression[2];
 
     for (unsigned int i = 0; i < 2; ++i) {

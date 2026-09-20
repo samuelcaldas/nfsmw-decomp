@@ -187,7 +187,7 @@ ePositionMarker *eSolid::GetPostionMarker(ePositionMarker *prev_marker /* r11 */
 // UNSOLVED
 ePositionMarker *eSolid::GetPostionMarker(uint32 namehash /* r31 */) {
     ePositionMarker *position_marker = nullptr;
-    for (position_marker = this->GetPostionMarker(position_marker); position_marker; position_marker = this->GetPostionMarker(position_marker)) {
+    while ((position_marker = this->GetPostionMarker(position_marker)) != nullptr) {
         if (position_marker->NameHash == namehash) {
             return position_marker;
         }

@@ -35,6 +35,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/ECameraShake.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/ECellCall.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

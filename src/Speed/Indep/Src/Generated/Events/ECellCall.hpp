@@ -21,12 +21,10 @@ class ECellCall : public Event {
 
     ~ECellCall() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     int fID; // offset: 0x8, size 0x4
 };
-
-void ECellCall_MakeEvent_Callback(const void *staticData);
 
 #endif

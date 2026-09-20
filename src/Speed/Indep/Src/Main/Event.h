@@ -36,7 +36,9 @@ class Event {
 
     virtual ~Event() {}
 
-    virtual const char *GetEventName();
+    virtual const char *GetEventName() const {
+        return "";
+    }
 
     Event(std::size_t size) : fEventSize(size) {}
 

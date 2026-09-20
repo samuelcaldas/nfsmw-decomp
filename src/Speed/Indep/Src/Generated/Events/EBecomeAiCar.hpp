@@ -19,9 +19,7 @@ class EBecomeAiCar : public Event {
 
     ~EBecomeAiCar() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 };
-
-void EBecomeAiCar_MakeEvent_Callback(const void *staticData);
 
 #endif

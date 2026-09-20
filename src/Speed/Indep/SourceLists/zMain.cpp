@@ -61,6 +61,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EDisablePursuitVehicle.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EDisableTrigger.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

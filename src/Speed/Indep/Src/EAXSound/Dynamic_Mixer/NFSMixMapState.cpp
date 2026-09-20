@@ -485,7 +485,8 @@ void NFSMixMapState::InitializeSubChannels() {
         int *pinputs = &psbmxchproc->pMixChData_S->pMapParams[1].MIXCHID;
         int numinputs = (static_cast<unsigned int>(psbmxchproc->pMixChData_S->pMapParams->MIXCHID) >> 16) & 0xFF;
         int numfixedinputs = 0;
-        int j = numfixedinputs;
+        int j = 0;
+        j += numfixedinputs;
 
         for (; j < numinputs; j++) {
             int chid = *pinputs++;

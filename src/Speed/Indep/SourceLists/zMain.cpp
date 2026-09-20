@@ -9,6 +9,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EAddSMS.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EAIEngineRev.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

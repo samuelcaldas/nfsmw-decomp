@@ -18,19 +18,16 @@ class EAIEngineRev : public Event {
 
     // enum { kEventID = 0 };
 
-    EAIEngineRev(unsigned int pCarID, unsigned int pPatterPlay, unsigned int phSimable);
+    EAIEngineRev(unsigned int phSimable, unsigned int pCarID, unsigned int pPatterPlay);
 
     ~EAIEngineRev() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
-    unsigned int fCarID;      // offset: 0x8, size 0x4
-    unsigned int fPatterPlay; // offset: 0xc, size 0x4
-
-    unsigned int fhSimable; // offset: 0xc, size 0x4
+    unsigned int fhSimable;   // offset: 0x8, size 0x4
+    unsigned int fCarID;      // offset: 0xc, size 0x4
+    unsigned int fPatterPlay; // offset: 0x10, size 0x4
 };
-
-void EAIEngineRev_MakeEvent_Callback(const void *staticData);
 
 #endif

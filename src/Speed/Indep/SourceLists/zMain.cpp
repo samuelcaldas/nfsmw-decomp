@@ -11,6 +11,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EAIEngineRev.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EAudioRigidBodyTest.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

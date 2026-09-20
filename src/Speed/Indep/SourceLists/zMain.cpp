@@ -79,6 +79,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EEngineBlown.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EEnterBin.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

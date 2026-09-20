@@ -164,6 +164,7 @@ extern UnlockDatum TheUnlockData[57];
 
 bool DoesCategoryHaveNewUnlock(eUnlockableEntity entity);
 void DefaultUnlockData();
+void ClearAllNewStatus();
 void MarkUnlockableThingSeen(eUnlockableEntity entity, uint32 filter);
 
 eUnlockableEntity MapPerfPkgToUnlockable(Physics::Upgrades::Type pkg_type);

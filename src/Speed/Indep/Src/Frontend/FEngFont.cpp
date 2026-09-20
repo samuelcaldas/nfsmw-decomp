@@ -190,7 +190,7 @@ const TextureInfo *FEngFont::GetJoyEventTextureInfo(const i16 *pInputString) {
         unsigned int bytes_copied = 0;
         if (ptr[0] != '$' && ptr[0] != 0) {
             while (true) {
-                i16 c = *ptr;
+                u16 c = *ptr;
                 bytes_copied += 2;
                 ptr++;
                 i16 next = *ptr;

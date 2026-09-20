@@ -513,7 +513,7 @@ char *CareerSettings::LoadRaceData(void *load_from_here, void *maxptr) {
     char *buf = static_cast<char *>(load_from_here);
     unsigned int nEntries = 0;
     buf = LoadSomeData(&nEntries, buf, sizeof(nEntries), maxptr);
-    nEntries = bMin(300, nEntries);
+    nEntries = bMin(nEntries, 300);
     GRaceSaveInfo saveInfoEntries[300];
     GRaceSaveInfo *current = saveInfoEntries;
     for (unsigned int index = 0; index < nEntries; index++) {

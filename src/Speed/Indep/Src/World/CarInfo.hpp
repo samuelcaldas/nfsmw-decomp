@@ -776,7 +776,7 @@ char *GetCarTypeName(CarType car_type);
 extern CarPartDatabase CarPartDB;
 extern int32 CarTypeInfoArrayUpdated; // TODO declared in FEPkg_GarageMain.cpp before it's used?
 
-inline CarTypeInfo *GetCarTypeInfo(CarType car_type) {
+CarTypeInfo *GetCarTypeInfo(CarType car_type) {
     return &CarTypeInfoArray[car_type];
 }
 

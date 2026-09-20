@@ -349,10 +349,12 @@ void GarageMainScreen::HandleTick(u32 msg) {
             pCameraMover->SetDesiredOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt, camera.cam_anim_speed(),
                                                 camera.cam_damping(), camera.cam_periods());
 
-        } else if (HaveAttributesChanged(camera)) {
-            bVector3 orbit(camera.cam_orbit_vertical(), camera.cam_orbit_horizontal(), camera.cam_orbit_radius());
-            bVector3 lookAt(camera.cam_lookat_x(), camera.cam_lookat_y(), camera.cam_lookat_z());
-            pCameraMover->SetCurrentOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt);
+        } else {
+            if (HaveAttributesChanged(*reinterpret_cast<Attrib::Gen::frontend *>(reinterpret_cast<char *>(__builtin_frame_address(0)) + 8))) {
+                bVector3 orbit(camera.cam_orbit_vertical(), camera.cam_orbit_horizontal(), camera.cam_orbit_radius());
+                bVector3 lookAt(camera.cam_lookat_x(), camera.cam_lookat_y(), camera.cam_lookat_z());
+                pCameraMover->SetCurrentOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt);
+            }
         }
     }
 

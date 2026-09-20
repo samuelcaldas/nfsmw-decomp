@@ -19,9 +19,7 @@ class ECameraShake : public Event {
 
     ~ECameraShake() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 };
-
-void ECameraShake_MakeEvent_Callback(const void *staticData);
 
 #endif

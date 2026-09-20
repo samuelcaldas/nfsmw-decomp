@@ -23,13 +23,11 @@ class EDeliverMessage : public Event {
 
     ~EDeliverMessage() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     Hermes::Message *fMessage; // offset: 0x8, size 0x4
     UCrc32 fPort;              // offset: 0xc, size 0x4
 };
-
-void EDeliverMessage_MakeEvent_Callback(const void *staticData);
 
 #endif

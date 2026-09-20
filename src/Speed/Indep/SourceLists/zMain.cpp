@@ -55,6 +55,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EDebugScreenMessage.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EDeliverMessage.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

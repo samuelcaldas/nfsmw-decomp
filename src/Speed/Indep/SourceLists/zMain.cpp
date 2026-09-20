@@ -67,6 +67,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EDynamicRegion.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EEnableAIPhysics.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

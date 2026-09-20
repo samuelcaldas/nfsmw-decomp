@@ -14,6 +14,7 @@ class MiscSpeech {
   public:
     static void SMSCellCall(int SMS_ID);
     static void D_Day();
+    static void DispIntroRace();
 };
 #endif
 

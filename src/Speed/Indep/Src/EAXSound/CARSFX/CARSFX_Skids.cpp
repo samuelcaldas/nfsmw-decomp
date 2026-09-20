@@ -117,11 +117,9 @@ void CARSFX_Skids::ProcessUpdate() {
     this->m_pSkidControl->SetPITCH_OFFSET(this->GetDMixOutput(8, DMX_PITCH));
     this->m_pSkidControl->SetAzimuth(this->GetDMixOutput(1, DMX_AZIM));
 
-    const unsigned int *left_ptr = &this->m_pWheelCtl->LeftSideTerrain.Aud_Skid_Type();
-    const unsigned int *right_ptr = &this->m_pWheelCtl->RightSideTerrain.Aud_Skid_Type();
-    unsigned int l = *left_ptr;
-    unsigned int r = *right_ptr;
-    int skid_type = r < l ? l : r;
+    const unsigned int *left_skid_type = &this->m_pWheelCtl->LeftSideTerrain.Aud_Skid_Type();
+    const unsigned int *right_skid_type = &this->m_pWheelCtl->RightSideTerrain.Aud_Skid_Type();
+    int skid_type = UMath::Max(*right_skid_type, *left_skid_type);
     this->m_pSkidControl->SetSurface(skid_type);
 
     float RadYaw = bAbs(this->GetPhysCar()->GetState()->GetYaw());

@@ -46,7 +46,8 @@ bool WWorldMath::IntersectCircle(float x1, float y1, float x2, float y2, float c
 
     y1 -= cy;
     y2 -= cy;
-    y2 -= y1;
+    const float yDelta = y2 - y1;
+    y2 = yDelta;
 
     x1 -= cx;
     x2 -= cx;

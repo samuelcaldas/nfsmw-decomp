@@ -4263,6 +4263,7 @@ void CustomizeNumbers::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, 
         case __PAD_RIGHT__:
             bLeft = !bLeft;
             FEngSetCurrentButton(GetPackageName(), bLeft ? 0x2a08ba92 : 0x1a88dc05);
+            asm("");
             break;
         case __PAD_UP__:
             ScrollNumbers(eSD_NEXT);

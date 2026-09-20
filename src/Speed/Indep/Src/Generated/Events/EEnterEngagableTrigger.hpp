@@ -21,7 +21,7 @@ class EEnterEngagableTrigger : public Event {
 
     ~EEnterEngagableTrigger() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     GRuntimeInstance *fRaceActivity; // offset: 0x8, size 0x4

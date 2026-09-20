@@ -2582,7 +2582,7 @@ void CustomizeParts::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u3
 void CustomizeParts::Setup() {
     uint32 icon_hash = 0;
     int car_slot_id = 0;
-    uint32 vinyl_group_number = 0;
+    register uint32 vinyl_group_number asm("r21") = 0;
     bool is_vinyl = false;
     CarPart *installed_part = nullptr;
     bool part_found = false;
@@ -2711,7 +2711,7 @@ void CustomizeParts::Setup() {
         gCarCustomizeManager.GetCarPartList(car_slot_id, part_list, 0);
     }
 
-    int installed_index = 0;
+    register int installed_index asm("r22") = 0;
     int current_part_index = 1;
     uint32 original_icon_hash = icon_hash;
     SelectablePart *part = part_list.GetHead();

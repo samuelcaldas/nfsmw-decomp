@@ -25,6 +25,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EBecomeAiCar.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EBecomePlayerCar.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

@@ -19,9 +19,7 @@ class EBecomePlayerCar : public Event {
 
     ~EBecomePlayerCar() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 };
-
-void EBecomePlayerCar_MakeEvent_Callback(const void *staticData);
 
 #endif

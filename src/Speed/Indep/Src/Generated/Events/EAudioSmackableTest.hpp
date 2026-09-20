@@ -21,12 +21,10 @@ class EAudioSmackableTest : public Event {
 
     ~EAudioSmackableTest() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     float fTestRadius; // offset: 0x8, size 0x4
 };
-
-void EAudioSmackableTest_MakeEvent_Callback(const void *staticData);
 
 #endif

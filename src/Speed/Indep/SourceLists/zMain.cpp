@@ -13,6 +13,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EAudioRigidBodyTest.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EAudioSmackableTest.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

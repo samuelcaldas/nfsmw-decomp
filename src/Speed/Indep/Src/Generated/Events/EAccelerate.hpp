@@ -7,6 +7,8 @@
 
 #include "Speed/Indep/Src/Main/Event.h"
 
+class WTrigger;
+
 // total size: 0x28
 class EAccelerate : public Event {
   public:
@@ -27,7 +29,7 @@ class EAccelerate : public Event {
 
     ~EAccelerate() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     float fAccelerationX; // offset: 0x8, size 0x4
@@ -37,10 +39,8 @@ class EAccelerate : public Event {
     int fLocalToTrigger;  // offset: 0x18, size 0x4
     int fPALOnly;         // offset: 0x1c, size 0x4
 
-    unsigned int fhSimable; // offset: 0x24, size 0x4
-    WTrigger *fTrigger;     // offset: 0x28, size 0x4
+    unsigned int fhSimable; // offset: 0x20, size 0x4
+    WTrigger *fTrigger;     // offset: 0x24, size 0x4
 };
-
-void EAccelerate_MakeEvent_Callback(const void *staticData);
 
 #endif

@@ -65,6 +65,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EDispIntroRace.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EDynamicRegion.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

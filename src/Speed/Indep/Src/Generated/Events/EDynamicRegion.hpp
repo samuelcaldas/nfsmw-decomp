@@ -22,17 +22,14 @@ class EDynamicRegion : public Event {
 
     ~EDynamicRegion() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
-    int fOn; // offset: 0x8, size 0x4
-
-    UMath::Vector4 fPosition; // offset: 0x10, size 0x10
-    UMath::Vector4 fVector;   // offset: 0x20, size 0x10
-    UMath::Vector4 fVelocity; // offset: 0x30, size 0x10
-    unsigned int fhSimable;   // offset: 0x40, size 0x4
+    int fOn;                  // offset: 0x8, size 0x4
+    UMath::Vector4 fPosition; // offset: 0xc, size 0x10
+    UMath::Vector4 fVector;   // offset: 0x1c, size 0x10
+    UMath::Vector4 fVelocity; // offset: 0x2c, size 0x10
+    unsigned int fhSimable;   // offset: 0x3c, size 0x4
 };
-
-void EDynamicRegion_MakeEvent_Callback(const void *staticData);
 
 #endif

@@ -15,6 +15,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EAudioSmackableTest.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EAudioWorldTest.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

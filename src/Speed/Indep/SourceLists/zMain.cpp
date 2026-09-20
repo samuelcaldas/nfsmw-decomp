@@ -7,6 +7,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EAccelerate.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EAddSMS.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

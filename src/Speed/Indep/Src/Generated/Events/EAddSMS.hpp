@@ -21,12 +21,10 @@ class EAddSMS : public Event {
 
     ~EAddSMS() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 
   private:
     int fNumber; // offset: 0x8, size 0x4
 };
-
-void EAddSMS_MakeEvent_Callback(const void *staticData);
 
 #endif

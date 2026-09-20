@@ -653,7 +653,6 @@ void FEPackageReader::ProcessListBoxTag(FETag *pTag) {
 #endif
 }
 
-// UNSOLVED (switch)
 void FEPackageReader::ProcessCodeListBoxTag(FETag *pTag) {
 #ifdef EA_BUILD_A124
     (void)pTag;
@@ -674,7 +673,7 @@ void FEPackageReader::ProcessCodeListBoxTag(FETag *pTag) {
         case Tag_FEObjCodeListStringInfo:
             pList->AllocateStrings(pTag->Getu32(0), pTag->Getu32(1));
             break;
-        case Tag_FEObjCodeListAutoWrap:
+        case Tag_FEObjCodeListFlags:
             pList->SetFlags(FECODELISTBOX_PUBLICFLAGS_MASK, false);
             pList->SetFlags(pTag->Getu32(0) & FECODELISTBOX_PUBLICFLAGS_MASK, true);
             break;

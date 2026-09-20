@@ -186,14 +186,14 @@ class FECodeListBox : public FEObject {
 
     void SetFlags(u32 ulFlag, bool bSet) {
         if (bSet) {
-            Flags |= ulFlag;
+            mulFlags |= ulFlag;
         } else {
-            Flags &= ~ulFlag;
+            mulFlags &= ~ulFlag;
         }
     }
 
     u32 GetFlags() const {
-        return Flags;
+        return mulFlags;
     }
 
     void SetSelectionColor(const FEColor &stColor) {

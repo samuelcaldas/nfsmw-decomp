@@ -85,6 +85,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EExitEngagableTrigger.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EFadeScreenNoLoadingBarOff.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

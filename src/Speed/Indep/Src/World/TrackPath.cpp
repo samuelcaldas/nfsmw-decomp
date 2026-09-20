@@ -184,7 +184,7 @@ TrackPathZone *TrackPathManager::FindZone(const bVector2 *position, eTrackPathZo
         this->MostCachedZones = bMax(this->MostCachedZones, zone_info->NumCachedZones);
     }
 
-    TrackPathZone *found_zone = nullptr;
+    register TrackPathZone *found_zone asm("r26") = nullptr;
     if (!cache_valid) {
         TrackPathZone *first_zone;
         TrackPathZone *last_zone = zone_info->pLastZone;

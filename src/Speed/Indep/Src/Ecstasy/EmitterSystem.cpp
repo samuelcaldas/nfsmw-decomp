@@ -1771,8 +1771,10 @@ void Emitter::SpawnParticles(float dt, float intensity) {
     speed -= speed_variance;
 
     if (has_off_cycle ? !has_on_cycle : !has_on_cycle) {
-    } else if (!effectively_one_shot && !has_off_cycle) {
-        has_on_cycle = false;
+    } else if (!effectively_one_shot) {
+        if (!has_off_cycle) {
+            has_on_cycle = false;
+        }
     }
     if (effectively_one_shot && !has_on_cycle) {
         time_delta_to_use = life;

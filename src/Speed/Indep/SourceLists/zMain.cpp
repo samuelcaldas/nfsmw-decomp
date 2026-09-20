@@ -43,6 +43,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/ECollision.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/ECommitAudioAssets.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

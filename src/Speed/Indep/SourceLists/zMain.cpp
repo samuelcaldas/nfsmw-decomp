@@ -73,6 +73,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/EEnableModeling.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EEnableTrigger.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

@@ -105,7 +105,8 @@ FEObject::FEObject(const FEObject &Object, bool bReference)
 
     for (pSrcScript = static_cast<FEScript *>(Object.Scripts.GetHead()); pSrcScript != nullptr;
          pSrcScript = static_cast<FEScript *>(pSrcScript->GetNext())) {
-        Scripts.AddTail(new FEScript(*pSrcScript, bReference));
+        pScript = new FEScript(*pSrcScript, bReference);
+        Scripts.AddTail(pScript);
     }
 
     SetCurrentScript(FindScript(Object.pCurrentScript->ID));

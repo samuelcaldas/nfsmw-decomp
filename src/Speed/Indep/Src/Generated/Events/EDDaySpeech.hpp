@@ -19,9 +19,7 @@ class EDDaySpeech : public Event {
 
     ~EDDaySpeech() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 };
-
-void EDDaySpeech_MakeEvent_Callback(const void *staticData);
 
 #endif

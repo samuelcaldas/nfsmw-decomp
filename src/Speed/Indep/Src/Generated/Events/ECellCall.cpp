@@ -8,10 +8,14 @@
 #include "Speed/Indep/Src/Generated/Events/ESndGameState.hpp"
 #include "Speed/Indep/Src/Lua/source/lua.h"
 #include "Speed/Indep/Src/Main/EventSequencer.h"
+#ifndef MISC_SPEECH_DECLARED
+#define MISC_SPEECH_DECLARED
 class MiscSpeech {
   public:
     static void SMSCellCall(int SMS_ID);
+    static void D_Day();
 };
+#endif
 
 struct UGroup;
 

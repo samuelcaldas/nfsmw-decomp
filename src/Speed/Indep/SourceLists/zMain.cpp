@@ -41,6 +41,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/ECinematicMoment.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/ECollision.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

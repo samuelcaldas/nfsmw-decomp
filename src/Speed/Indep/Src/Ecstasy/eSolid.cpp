@@ -456,8 +456,9 @@ eSolid *eFindSolid(uint32 name_hash /* r31 */, eSolidListHeader *solid_list_head
             if (!index_entry) {
                 continue;
             }
-            solid = index_entry->Solid;
-            if (solid) {
+            eSolid *found_solid = index_entry->Solid;
+            if (found_solid) {
+                solid = found_solid;
                 SolidListHeaderList.Remove(list_header);
                 SolidListHeaderList.AddHead(list_header);
                 break;

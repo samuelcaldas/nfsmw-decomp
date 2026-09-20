@@ -19,9 +19,7 @@ class ECameraPhotoFinish : public Event {
 
     ~ECameraPhotoFinish() override;
 
-    const char *GetEventName() override;
+    const char *GetEventName() const override;
 };
-
-void ECameraPhotoFinish_MakeEvent_Callback(const void *staticData);
 
 #endif

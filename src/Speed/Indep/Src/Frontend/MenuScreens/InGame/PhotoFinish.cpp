@@ -39,8 +39,10 @@
 SillyTextureStreamerManager::SillyTextureStreamerManager(const char *stream_pack) {
     bStrNCpy(BundleFileName, stream_pack, sizeof(BundleFileName));
     bMemSet(LoadInfos, 0, sizeof(LoadInfos));
-    mCurrentLoadingIndex = -1;
-    mMakeSpaceInPoolComplete = false;
+    int make_space_complete = false;
+    int current_loading_index = -1;
+    mCurrentLoadingIndex = current_loading_index;
+    mMakeSpaceInPoolComplete = make_space_complete;
     mCurrentlyLoading = true;
     TheTrackStreamer.DisableZoneSwitching();
     int mem_needed = 0x60000;

@@ -168,5 +168,6 @@ void MarkUnlockableThingSeen(eUnlockableEntity entity, uint32 filter);
 
 eUnlockableEntity MapPerfPkgToUnlockable(Physics::Upgrades::Type pkg_type);
 eUnlockableEntity MapCarPartToUnlockable(int carslot, CarPart *part);
+void AwardUnlockUpgrade(Attrib::Gen::gameplay &inst);
 
 #endif

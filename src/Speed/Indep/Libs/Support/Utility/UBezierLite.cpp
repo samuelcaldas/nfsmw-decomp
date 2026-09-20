@@ -6,10 +6,10 @@
 void UBezierLite::Evaluate(const UMath::Matrix4 &fSplineMat, const float t, UMath::Vector4 &position) {
     UMath::Vector4 tvec;
 
-    tvec.x = t * t * t;
-    tvec.y = t * t;
-    tvec.z = t;
     tvec.w = 1.0f;
+    tvec.x = t * t * t;
+    tvec.z = t;
+    tvec.y = t * t;
 
     UMath::Matrix4 matrix;
 

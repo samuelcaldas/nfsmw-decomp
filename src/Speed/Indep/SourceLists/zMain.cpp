@@ -47,6 +47,8 @@
 
 #include "Speed/Indep/Src/Generated/Events/ECommitRenderAssets.cpp"
 
+#include "Speed/Indep/Src/Generated/Events/EDamageLights.cpp"
+
 #include "Speed/Indep/Src/Input/Common/action.cpp"
 
 #include "Speed/Indep/Src/Input/Common/actionqueue.cpp"

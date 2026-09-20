@@ -3,6 +3,8 @@
 
 #include "Speed/Indep/Src/Misc/attribuserinclude.h"
 
+class UCrc32;
+
 namespace VehicleFX {
 
 enum ID {
@@ -39,6 +41,7 @@ struct Maps {
 };
 
 const Maps *GetMaps();
+ID LookupID(UCrc32 name);
 
 }; // namespace VehicleFX
 

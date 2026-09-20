@@ -4,7 +4,7 @@
 #include "Speed/Indep/Src/Sim/Collision.h"
 
 ECollision::ECollision(COLLISION_INFO pInfo)
-    : Event(0x88),
+    : Event(0x90),
       fInfo(pInfo) {
 }
 

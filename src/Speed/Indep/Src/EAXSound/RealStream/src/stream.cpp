@@ -498,8 +498,7 @@ static void startnextrequest(STREAMHEADER *strm, int priority) {
 unsigned int utickreadcallback = 0;
 unsigned int uTicksSinceLastAudioReadBailed = 0;
 
-// Restart streaming by discarding consumed chunks and scheduling the next read.
-// Parameters: stream state and file-system priority. Returns: no value.
+// UNSOLVED, around little_put inline
 static void restartstream(STREAMHEADER *strm, int priority) {
     REQUESTSTRUCT *req;
     STREAMCHUNKHDR *chunk;
@@ -564,26 +563,17 @@ static void restartstream(STREAMHEADER *strm, int priority) {
             MEM_copy(strm->bufferstart, strm->datatail, tailsize);
 
             chunk = reinterpret_cast<STREAMCHUNKHDR *>(strm->datatail);
-            register unsigned int endChunkType asm("r0") = 0xFFFFFFFF;
-            register unsigned int endChunkSize asm("r11") = 8;
-            register unsigned int endChunkZero asm("r9") = 0;
-            register volatile unsigned char *endChunkBytes = reinterpret_cast<volatile unsigned char *>(chunk);
-            endChunkBytes[7] = static_cast<unsigned char>(endChunkZero);
-            endChunkBytes[3] = static_cast<unsigned char>(endChunkType);
-            endChunkBytes[4] = static_cast<unsigned char>(endChunkSize);
-            endChunkBytes[0] = static_cast<unsigned char>(endChunkType);
-            endChunkBytes[1] = static_cast<unsigned char>(endChunkType);
-            endChunkBytes[2] = static_cast<unsigned char>(endChunkType);
-            endChunkBytes[5] = static_cast<unsigned char>(endChunkZero);
-            endChunkBytes[6] = static_cast<unsigned char>(endChunkZero);
+            EA::Endian::little_put(&chunk->type, -1, 4);
+            EA::Endian::little_put(&chunk->size, 8, 4);
 
-            char *bufferStart = strm->bufferstart;
-            char *dataStart = strm->datastart;
-            reqend = bufferStart + tailsize;
-            strm->datatail = bufferStart;
+            char *data_start = strm->datastart;
+            char *bufferstart = strm->bufferstart;
+            reqend = bufferstart + tailsize;
+            strm->datatail = bufferstart;
             strm->dataend = reqend;
+            asm("");
 
-            chunk = reinterpret_cast<STREAMCHUNKHDR *>(dataStart);
+            chunk = reinterpret_cast<STREAMCHUNKHDR *>(data_start);
 
             if (EA::Endian::little_get(&chunk->type, 4) == -1) {
                 strm->datastart = strm->bufferstart;

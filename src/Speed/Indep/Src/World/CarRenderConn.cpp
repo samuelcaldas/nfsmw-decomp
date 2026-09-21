@@ -566,24 +566,19 @@ void CarRenderConn::UpdateSteering(float dT, const RenderConn::Pkt_Car_Service &
     }
 }
 
-// UNSOLVED, the BitArray inlines are weird
 void CarRenderConn::UpdateParts(float dT, const RenderConn::Pkt_Car_Service &data) {
     if (this->mPartState != data.mPartState) {
-        // TODO magic
         for (unsigned int i = 0; i < 0x4c; i++) {
-            bool hide = data.mPartState.Test(i);
-
-            if (hide != this->mPartState.Test(i)) {
-                if (hide) {
+            if (data.mPartState.Test(i) != this->mPartState.Test(i)) {
+                if (data.mPartState.Test(i)) {
                     this->HidePart(static_cast<CAR_PART_ID>(i));
                 } else {
                     this->ShowPart(static_cast<CAR_PART_ID>(i));
                 }
             }
         }
+        this->mPartState = data.mPartState;
     }
-
-    this->mPartState = data.mPartState;
 }
 
 void CarRenderConn::AddRoadNoise(float speed, unsigned int tires, const RoadNoiseRecord &noise) {

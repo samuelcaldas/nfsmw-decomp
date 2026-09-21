@@ -4870,7 +4870,6 @@ uint32 CustomizePerformance::GetPerfPkgBrand(Physics::Upgrades::Type type, int l
     return hash;
 }
 
-// UNSOLVED
 void CustomizePerformance::RefreshHeader() {
     gCarCustomizeManager.PreviewPerfPkg(GetSelectedPart()->GetPhysicsType(), GetSelectedPart()->GetUpgradeLevel());
 
@@ -4882,8 +4881,8 @@ void CustomizePerformance::RefreshHeader() {
     HandlingSlider.Draw();
     TopSpeedSlider.Draw();
 
-    Physics::Upgrades::Type phys_type = GetSelectedPart()->GetPhysicsType();
-    int level = GetSelectedPart()->GetUpgradeLevel();
+    register Physics::Upgrades::Type phys_type asm("r27") = GetSelectedPart()->GetPhysicsType();
+    register int level asm("r21") = GetSelectedPart()->GetUpgradeLevel();
     int loop = 3;
 
     int desc_level = (gCarCustomizeManager.GetMaxPackages(phys_type) - gCarCustomizeManager.GetNumPackages(phys_type)) + level;
@@ -4934,7 +4933,10 @@ void CustomizePerformance::RefreshHeader() {
     if (GetSelectedPart()->GetUpgradeLevel() == PPL_LEVEL_JUNKMAN) {
         pkg_hash = 0xedd14807;
     } else {
-        pkg_hash = FEngHashString("PN_LEVEL_%d", (PPL_LEVEL_6 - gCarCustomizeManager.GetNumPackages(phys_type)) + level);
+        int num = gCarCustomizeManager.GetNumPackages(phys_type);
+        register int temp asm("r0") = level + 6;
+        level = temp - num;
+        pkg_hash = FEngHashString("PN_LEVEL_%d", level);
     }
     FEngSetLanguageHash(pOptionName, pkg_hash);
 }

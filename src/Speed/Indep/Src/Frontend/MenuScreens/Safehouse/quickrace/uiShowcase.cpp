@@ -19,7 +19,6 @@ int32 Showcase::FromFilter;
 void *Showcase::FromColor[3];
 #endif
 
-// UNSOLVED
 Showcase::Showcase(ScreenConstructorData *sd) : MenuScreen(sd), RivalStreamer(sd->PackageFilename, false) {
     if (eIsWidescreen()) {
         cFEng::Get()->QueuePackageMessage(bStringHash("CURRENT_GEN_WIDESCREEN"), GetPackageName(), nullptr);
@@ -59,7 +58,7 @@ Showcase::Showcase(ScreenConstructorData *sd) : MenuScreen(sd), RivalStreamer(sd
                 UTL::COM::IUnknown *pUnk = device->GetSecondaryDevice();
                 SteeringWheelDevice *wheelDevice = nullptr;
                 if (pUnk != nullptr && pUnk->QueryInterface(&wheelDevice)) {
-                    if ((wheelDevice != nullptr) && wheelDevice->IsConnected()) {
+                    if (wheelDevice->IsConnected()) {
                         isDeviceWheel = true;
                     }
                 }

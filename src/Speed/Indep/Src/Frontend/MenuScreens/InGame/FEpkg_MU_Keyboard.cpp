@@ -268,8 +268,8 @@ void FEKeyboard::UpdateStringVisual() {
     } else {
         mnWindowStartIdx = 0;
         uint16 widestring[156];
-        PackedStringToWideString(widestring, sizeof(widestring), mString);
-        FEngFont *font = FindFont(mpInputString->Format);
+        PackedStringToWideString(widestring, sizeof(widestring) / 2, mString);
+        FEngFont *font = FindFont(*reinterpret_cast<u32 *>(reinterpret_cast<char *>(mpInputString) + 0x24));
         int width = mpInputString->MaxWidth;
         int flags = mpInputString->Flags;
         short *fitstring = reinterpret_cast<short *>(widestring);
@@ -283,8 +283,8 @@ void FEKeyboard::UpdateStringVisual() {
 
         while (mnCursorIndex < mnWindowStartIdx) {
             if (mnWindowStartIdx - 4 < 0) {
-                mnWindowStartIdx = 0;
                 fitstring = reinterpret_cast<short *>(widestring);
+                mnWindowStartIdx = 0;
             } else {
                 mnWindowStartIdx = mnWindowStartIdx - 4;
                 fitstring = fitstring - 4;

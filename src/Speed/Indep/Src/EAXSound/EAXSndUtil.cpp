@@ -263,7 +263,6 @@ Slope::Slope(float _Min, float _Max, float _Start, float _Finish) {
 
 Slope::~Slope() {}
 
-// UNSOLVED
 void Slope::Initialize(float _Min, float _Max, float _Start, float _Finish) {
     this->Min = _Min;
     this->Max = _Max;
@@ -272,8 +271,10 @@ void Slope::Initialize(float _Min, float _Max, float _Start, float _Finish) {
     if (bAbs(_Finish - _Start) < UMath::Epsilon) {
         this->Finish = _Finish + UMath::Epsilon;
     }
-    this->LastOutput = this->Min;
-    this->LastInput = 0.0f;
+    register float min asm("fr13") = this->Min;
+    register float zero asm("fr0") = 0.0f;
+    this->LastOutput = min;
+    this->LastInput = zero;
 }
 
 // STRIPPED

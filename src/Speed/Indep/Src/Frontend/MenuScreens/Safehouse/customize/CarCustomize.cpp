@@ -254,8 +254,8 @@ void CustomizeMeter::Draw() {
     float multiplier = stage_size;
     float stage_bottom = Min;
     while (Preview - stage_bottom >= stage_size) {
-        multiplier += stage_size;
         stage_bottom += stage_size;
+        multiplier += 1.0f;
     }
     multiplier = bMin(multiplier, 5.0f);
     // TODO: no need to double hash

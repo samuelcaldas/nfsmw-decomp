@@ -82,9 +82,7 @@ void InternalUnloadTexturePackHeaderChunks(bChunk *chunk) {
 
         current_chunk = current_chunk->GetNext();
     }
-    if (texture_pack_header) { // fake
-        texture_pack_header->pTexturePack->UnAssignTextureData(0, texture_pack_header->pTexturePack->GetTextureDataSize());
-    }
+    texture_pack_header->pTexturePack->UnAssignTextureData(0, *reinterpret_cast<int *>(reinterpret_cast<char *>(texture_pack_header->pTexturePack) + 0x1c));
     if (texture_info_table) {
         texture_pack_header->pTexturePack->UnattachTextureTable(texture_info_table, plat_info_table, num_texture_info);
     }

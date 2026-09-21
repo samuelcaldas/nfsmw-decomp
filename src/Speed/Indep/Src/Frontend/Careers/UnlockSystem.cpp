@@ -328,10 +328,11 @@ bool OnlineUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgra
 
 // UNSOLVED
 bool OnlineUnlocker::IsTrackUnlocked(eUnlockFilters filter, int event_hash) {
-    bool answer = true;
+    bool unlocked = true;
     if (UnlockAllThings == 0) {
-        answer = false;
+        unlocked = false;
     }
+    bool answer = unlocked;
     answer = answer | GRaceDatabase::Get().CheckRaceScoreFlags(event_hash, GRaceDatabase::kUnlocked_QuickRace);
     answer = answer | GRaceDatabase::Get().CheckRaceScoreFlags(event_hash, GRaceDatabase::kUnlocked_Online);
     return answer;

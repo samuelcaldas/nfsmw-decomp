@@ -777,7 +777,7 @@ void eSetScissor(int xOrig, int yOrig, int wd, int ht) {
 }
 
 void eSetCopyFilter(FILTER_ID filter_index, int enable) {
-    GXSetCopyFilter(_rmode->aa, _rmode->sample_pattern, GX_TRUE, CopyFilter[filter_index]);
+    GXSetCopyFilter(_rmode->aa, _rmode->sample_pattern, enable, CopyFilter[filter_index]);
 }
 
 void eUpdateCopyFilter2(Bool enable) {

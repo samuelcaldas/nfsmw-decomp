@@ -68,7 +68,12 @@ FEObject::FEObject()
     GUID = FEngine::GetNextGUID();
 }
 
-// UNSOLVED
+/**
+ * @brief Constructs a copy of an FEObject, duplicating message responses and scripts.
+ *
+ * @param Object Source FEObject to copy from.
+ * @param bReference Whether scripts are copied by reference.
+ */
 FEObject::FEObject(const FEObject &Object, bool bReference)
     : NameHash(0),    //
       pName(nullptr), //

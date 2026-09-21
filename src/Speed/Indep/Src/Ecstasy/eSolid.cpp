@@ -164,19 +164,19 @@ void eSolid::ReplaceLightMaterial(uint32 old_name_hash, eLightMaterial *new_ligh
     }
 }
 
-// UNSOLVED regswap between r4 and r11
-ePositionMarker *eSolid::GetPostionMarker(ePositionMarker *prev_marker /* r11 */) {
-    ePositionMarker *position_marker_table = this->PositionMarkerTable;
+ePositionMarker *eSolid::GetPostionMarker(ePositionMarker *prev_marker) {
+    register ePositionMarker *marker asm("r11") = prev_marker;
     int numposition_markers = this->NumPositionMarkerTableEntries;
-    ePositionMarker *next_marker;
+    register ePositionMarker *position_marker_table asm("r4") = this->PositionMarkerTable;
 
     if (!position_marker_table || (numposition_markers == 0)) {
         return nullptr;
     }
-    if (prev_marker) {
-        if (prev_marker >= position_marker_table) {
-            if (prev_marker < &position_marker_table[numposition_markers - 1]) {
-                return prev_marker + 1;
+    if (marker) {
+        if (marker >= position_marker_table) {
+            register ePositionMarker *last asm("r9") = &position_marker_table[numposition_markers - 1];
+            if (marker < last) {
+                return marker + 1;
             }
         }
         return nullptr;

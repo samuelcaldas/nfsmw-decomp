@@ -80,7 +80,6 @@ void FEMarkerSelection::SetUnlockIcon(eUnlockableEntity ent, uint32 message) {
     }
 }
 
-// UNSOLVED
 void FEMarkerSelection::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     switch (msg) {
         case FEHASH_EXITCOMPLETE:
@@ -124,8 +123,10 @@ void FEMarkerSelection::NotificationMessage(u32 msg, FEObject *pobj, u32 param1,
             }
             break;
 
-        case 0xbb3e313d:
         case 0xf0966d46:
+            Redraw();
+            break;
+        case 0xbb3e313d:
             Redraw();
             break;
 

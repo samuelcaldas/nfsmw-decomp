@@ -112,6 +112,8 @@ int LoaderAnimSceneData(bChunk *chunk) {
 
         while (sub != last) {
             switch (sub->GetID()) {
+                case BCHUNK_NULL:
+                    break;
                 case BCHUNK_ANIM_SCENE_DATA:
                     anim_scene_data = CreateAnimSceneData(chunk, sub);
                     break;

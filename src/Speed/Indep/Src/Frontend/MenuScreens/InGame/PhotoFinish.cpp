@@ -35,15 +35,18 @@
 #include "Speed/Indep/Src/Camera/CameraAI.hpp"
 #include "Speed/Indep/Src/Frontend/HUD/FEPkg_Hud.hpp"
 
-// UNSOLVED
+/**
+ * @brief Constructs a new SillyTextureStreamerManager and initiates pool space allocation.
+ *
+ * @param stream_pack Name of the texture streaming pack file.
+ */
 SillyTextureStreamerManager::SillyTextureStreamerManager(const char *stream_pack) {
     bStrNCpy(BundleFileName, stream_pack, sizeof(BundleFileName));
     bMemSet(LoadInfos, 0, sizeof(LoadInfos));
-    int make_space_complete = false;
-    int current_loading_index = -1;
-    mCurrentLoadingIndex = current_loading_index;
-    mMakeSpaceInPoolComplete = make_space_complete;
+    bool make_space = false;
+    mCurrentLoadingIndex = -1;
     mCurrentlyLoading = true;
+    mMakeSpaceInPoolComplete = make_space;
     TheTrackStreamer.DisableZoneSwitching();
     int mem_needed = 0x60000;
     TheTrackStreamer.MakeSpaceInPool(mem_needed, MakeSpaceInPoolCallbackBridge, reinterpret_cast<int>(this));

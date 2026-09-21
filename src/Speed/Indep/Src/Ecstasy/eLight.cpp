@@ -20,6 +20,15 @@ int32 DrawLightFlares;
 int LoaderLights(bChunk *bchunk /* r30 */) {}
 
 // UNSOLVED but identical
+/**
+ * @brief Unloads light resources from a chunk.
+ *
+ * Handles light materials, light flares pack, and light sources pack chunks,
+ * cleaning up allocated resources and resetting section user info.
+ *
+ * @param bchunk Pointer to the chunk to unload.
+ * @return 1 if the chunk was handled, 0 otherwise.
+ */
 int UnloaderLights(bChunk *bchunk) {
     if (bchunk->GetID() == BCHUNK_LIGHT_MATERIALS) {
         eLightMaterial *light_material = reinterpret_cast<eLightMaterial *>(bchunk->GetData());
@@ -29,7 +38,9 @@ int UnloaderLights(bChunk *bchunk) {
                 DefaultLightMaterial = &DefaultLightMaterialData;
             }
         }
-    } else if (bchunk->GetID() == BCHUNK_LIGHT_FLARES_PACK) {
+        return 1;
+    }
+    if (bchunk->GetID() == BCHUNK_LIGHT_FLARES_PACK) {
         bChunk *chunk = bchunk->GetFirstChunk();
         bChunk *last_chunk = bchunk->GetLastChunk();
         eLightFlarePackHeader *pack_header;
@@ -44,11 +55,13 @@ int UnloaderLights(bChunk *bchunk) {
                 VisibleSectionUserInfo *user_info = TheVisibleSectionManager.GetUserInfo(pack_header->ScenerySectionNumber);
                 user_info->pLightFlarePack = nullptr;
                 TheVisibleSectionManager.UnallocateUserInfo(pack_header->ScenerySectionNumber);
-                return 1;
+                break;
             }
             chunk = chunk->GetNext();
         }
-    } else if (bchunk->GetID() == BCHUNK_LIGHT_SOURCES_PACK) {
+        return 1;
+    }
+    if (bchunk->GetID() == BCHUNK_LIGHT_SOURCES_PACK) {
         bChunk *chunk = bchunk->GetFirstChunk();
         bChunk *last_chunk = bchunk->GetLastChunk();
         while (chunk != last_chunk) {
@@ -62,13 +75,12 @@ int UnloaderLights(bChunk *bchunk) {
                 VisibleSectionUserInfo *user_info = TheVisibleSectionManager.GetUserInfo(light_pack->ScenerySectionNumber);
                 user_info->pLightPack = nullptr;
                 TheVisibleSectionManager.UnallocateUserInfo(light_pack->ScenerySectionNumber);
-                return 1;
+                break;
             }
         }
-    } else {
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 void SetSelectCarLighting(int, float, int) {}

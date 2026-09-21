@@ -38,14 +38,15 @@ void bList::AddHead(bList *list) {}
 // STRIPPED
 bNode *bList::AddSorted(SortFunc check_flip, bNode *node) {}
 
-// UNSOLVED, it matches in ProStreet..
 void bList::Sort(SortFunc check_flip) {
+    register SortFunc fn asm("r27") = check_flip;
+    register int did_swap asm("r28") = 0;
+    asm("");
     bNode *node = this->GetHead();
     bNode *next_node = node->GetNext();
-    int did_swap = 0;
 
     while (node != this->EndOfList() && next_node != this->EndOfList()) {
-        if (check_flip(node, next_node) == 0) {
+        if (fn(node, next_node) == 0) {
             did_swap++;
             next_node->Remove();
             next_node->AddBefore(node);
@@ -56,7 +57,7 @@ void bList::Sort(SortFunc check_flip) {
         next_node = next_node->GetNext();
     }
     if (did_swap != 0) {
-        this->MergeSort(check_flip);
+        this->MergeSort(fn);
     }
 }
 

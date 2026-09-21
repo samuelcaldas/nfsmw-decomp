@@ -292,7 +292,11 @@ bool GarageMainScreen::IsCarRendering() {
     return false;
 }
 
-// UNSOLVED
+/**
+ * @brief Updates garage state, car loading, camera movement, and screen effects per frame tick.
+ *
+ * @param msg Message or event tick identifier.
+ */
 void GarageMainScreen::HandleTick(u32 msg) {
     bool have_new_car = false;
     if (CarState == 0 && TheGarageCarLoader->HasSwitched()) {
@@ -336,12 +340,11 @@ void GarageMainScreen::HandleTick(u32 msg) {
             sNumTicksSinceUserMovedCamera = static_cast<int>(camera.cam_anim_speed() * 60.0f);
             bPass1 = false;
             bAutoMovement = false;
-            goto SetOrientation;
-        }
-        if (bTimeToRotate) {
+            goto update_cam;
+        } else if (bTimeToRotate) {
             sNumTicksSinceUserMovedCamera = static_cast<int>(camera.cam_anim_speed() * 60.0f);
             bPass1 = true;
-SetOrientation:
+        update_cam:
             mScreenKeyCamIsSetTo = screenKey;
             bUserRotate = screen.cam_user_rotate();
             if (!CameraPushRequested) {

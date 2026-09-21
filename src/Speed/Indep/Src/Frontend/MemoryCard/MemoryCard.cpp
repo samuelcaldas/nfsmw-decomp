@@ -198,7 +198,6 @@ bool MemoryCard::IsCardBusy() {
     return false;
 }
 
-// UNSOLVED
 void MemoryCard::Init() {
     static Realmc::SystemInterface iSystem;
     static Realmc::SystemInterface *pSystem;
@@ -222,12 +221,13 @@ void MemoryCard::Init() {
                                                              "Most"
                                                              "\xA0"
                                                              "Wanted");
+    void *localeHandler = nullptr;
     RealmcIface::GameInfo *pGameInfo = new ("GameInfo", 0) RealmcIface::GameInfo(reinterpret_cast<wchar_t *>(m_GameTitle), 0, false, false);
     m_pGameInfo = pGameInfo;
     m_pIMemcard = RealmcIface::MemcardInterface::CreateInstance(&iSystem, &gMemcardCallbacks, pGameInfo);
     m_pIMemcard->SetMessage(RealmcIface::MESSAGE_SHOW, RealmcIface::ID_CHECKINGFORCARD);
-    m_TimeOffsetSec = 0;
-    m_pLocaleFileHandler = nullptr;
+    m_TimeOffsetSec = reinterpret_cast<int32>(localeHandler);
+    m_pLocaleFileHandler = localeHandler;
 }
 
 void MemoryCard::StartBootSequence() {

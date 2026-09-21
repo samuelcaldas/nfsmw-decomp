@@ -4248,7 +4248,14 @@ CustomizeNumbers::CustomizeNumbers(ScreenConstructorData *sd)
     Setup();
 }
 
-// UNSOLVED: FEngSetCurrentButton
+/**
+ * @brief Handles UI notification messages and controller inputs for number decals.
+ *
+ * @param msg Notification message or button identifier.
+ * @param pobj Frontend object associated with the message.
+ * @param param1 First message parameter.
+ * @param param2 Second message parameter.
+ */
 void CustomizeNumbers::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     switch (msg) {
         case FEHASH_INITCOMPLETE:

@@ -42,7 +42,6 @@ void OBB::Reset(const UMath::Matrix4 &orient, const UMath::Vector3 &position, co
     penetration_depth = -100000.0f;
 }
 
-// UNSOLVED but sould be functionally equivalent
 bool OBB::CheckOBBOverlap(OBB *other) {
     if (this->shape != BOX || other->shape != BOX) {
         return CheckOBBOverlapAndFindIntersection(other);
@@ -62,15 +61,17 @@ bool OBB::CheckOBBOverlap(OBB *other) {
             b = this;
         }
         for (int a_lp = 0; a_lp < 3; a_lp++) {
-            int a_normal_index = 2;
-            if (a_lp != 1) {
-                a_normal_index = (a_lp ^ 2) == 0; // really written this way?
+            int a_normal_index;
+            if (a_lp == 1) {
+                a_normal_index = 2;
+            } else {
+                a_normal_index = (a_lp == 2);
             }
             a_normal = a->normal[a_normal_index];
             UMath::Subxyz(a->position, b->position, rel_position);
+            b_extent = b->extent;
             projected_interval = fabsf(UMath::Dotxyz(rel_position, a_normal));
             projected_interval -= a->dimension[a_normal_index];
-            b_extent = b->extent;
             for (int b_normal_index = 0; b_normal_index < 3; b_normal_index++) {
                 b_projected_interval = UMath::Dotxyz(a_normal, *b_extent);
                 projected_interval -= fabsf(b_projected_interval);

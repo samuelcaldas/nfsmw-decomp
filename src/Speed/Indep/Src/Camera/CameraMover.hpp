@@ -138,7 +138,9 @@ class CameraMover : public bTNode<CameraMover>, public WCollisionMgr::ICollision
         return this->Type == CM_DRIVE_CUBIC;
     }
 
-    virtual CameraAnchor *GetAnchor() {}
+    virtual CameraAnchor *GetAnchor() {
+        return nullptr;
+    }
 
     virtual void SetLookBack(bool b) {}
 
@@ -148,17 +150,25 @@ class CameraMover : public bTNode<CameraMover>, public WCollisionMgr::ICollision
 
     virtual void SetPovType(int pov_type) {}
 
-    virtual bool OutsidePOV() {}
+    virtual bool OutsidePOV() {
+        return true;
+    }
 
-    virtual bool RenderCarPOV() {}
+    virtual bool RenderCarPOV() {
+        return true;
+    }
 
     virtual float MinDistToWall();
 
-    virtual unsigned short GetLookbackAngle() {}
+    virtual unsigned short GetLookbackAngle() {
+        return 0;
+    }
 
     virtual void ResetState() {}
 
-    virtual bool IsHoodCamera() {}
+    virtual bool IsHoodCamera() {
+        return false;
+    }
 
     // ICollisionHandler
     bool OnWCollide(const WCollisionMgr::WorldCollisionInfo &cInfo, const UMath::Vector3 &cPoint, void *userdata) override;

@@ -322,7 +322,7 @@ bool OnlineUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPa
 // UNSOLVED
 bool OnlineUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, bool backroom) {
     bool answer;
-    answer = QuickRaceUnlocker::IsPerfPackageUnlocked(filter, pkg_type, level, 0, backroom) != false;
+    answer = QuickRaceUnlocker::IsPerfPackageUnlocked(filter, pkg_type, level, backroom, 0) != false;
     return answer;
 }
 

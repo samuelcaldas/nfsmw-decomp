@@ -714,7 +714,6 @@ WorldFXTrigger *EmitterLibraryHeader::GetLibraryTriggers(int32 i) {
     return nullptr;
 }
 
-// UNSOLVED
 EmitterLibrary *EmitterLibraryHeader::GetLibrary(int32 i) {
     EmitterLibrary *lib = reinterpret_cast<EmitterLibrary *>(&this[1]);
     if (i == 0) {
@@ -724,9 +723,11 @@ EmitterLibrary *EmitterLibraryHeader::GetLibrary(int32 i) {
     while (ix < i) {
         uint16 num_trigs = lib->mNumTriggers;
         WorldFXTrigger *trigs = reinterpret_cast<WorldFXTrigger *>(lib + 1);
-        lib = reinterpret_cast<EmitterLibrary *>(trigs + num_trigs);
-        if (++ix == i) {
-            return lib;
+        trigs += num_trigs;
+        ix++;
+        lib = reinterpret_cast<EmitterLibrary *>(trigs);
+        if (ix == i) {
+            return reinterpret_cast<EmitterLibrary *>(trigs);
         }
     }
     return nullptr;

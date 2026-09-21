@@ -11,6 +11,8 @@
 
 #include <cstddef>
 
+void EAIEngineRev_ResolveEvent_Callback(void *, const UGroup *) {}
+
 EventDynamicData gEventDynamicData;
 
 inline void *operator new(std::size_t, void *place, unsigned int) {

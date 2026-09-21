@@ -103,10 +103,16 @@ float bRandom(float range) {
     return bRandom(range, &bDefaultSeed);
 }
 
-// UNSOLVED
+/**
+ * Computes the floating-point remainder of dividing a by b.
+ *
+ * @param a Dividend floating-point value.
+ * @param b Divisor floating-point value.
+ * @return Floating-point remainder in the range [0, |b|).
+ */
 float bFMod(float a, float b) {
-    float d = bAbs(b);
-    float c = a / d;
+    register float d asm("fr11") = bAbs(b);
+    register float c asm("fr1") = a / d;
     return (c - bFloor(c)) * d;
 }
 

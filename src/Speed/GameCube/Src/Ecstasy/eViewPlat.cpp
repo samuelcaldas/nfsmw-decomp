@@ -58,10 +58,10 @@ struct eTextureBucket : public bTNode<eTextureBucket> {
         data->View = view;
         data->Flags = flags;
         data->LightContext = light_context;
-        data->LocalWorld = local_world;
         data->LightMaterial = light_mat;
-        data->Entries = entries;
+        data->LocalWorld = local_world;
         data->BlendingMatrices = blending_matrices;
+        data->Entries = entries;
         data->DRD.colourtable0 = drd->colourtable0;
         data->DRD.colourtable1 = drd->colourtable1;
         data->DRD.trm = drd->trm;
@@ -101,7 +101,7 @@ void eSubmitMesh(eStripEntry *mesh, unsigned short entries, eView *view, eSolid 
                  eDataRenderDynamic *drd) {
     TextureInfoPlatInfo *plat_info = texture_info->GetPlatInfo();
 
-    if (plat_info->GetActiveBucket() == nullptr) {
+    if (plat_info->pActiveBucket == nullptr) {
         eTextureBucket *bucket = new eTextureBucket(texture_info);
 
         plat_info->pActiveBucket = bucket;
@@ -113,8 +113,8 @@ void eSubmitMesh(eStripEntry *mesh, unsigned short entries, eView *view, eSolid 
         g_NumTextureBuckets++;
     }
 
-    plat_info->GetActiveBucket()->AddMeshRender(mesh, entries, view, solid, flags, local_world, light_context, light_material,
-                                                blending_matrices, drd);
+    plat_info->pActiveBucket->AddMeshRender(mesh, entries, view, solid, flags, local_world, light_context, light_material,
+                                           blending_matrices, drd);
 }
 
 void eTextureBucket::Flush() {

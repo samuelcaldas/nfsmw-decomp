@@ -310,15 +310,14 @@ int bBoundingBoxOverlapping(const bVector3 *bbox_min, const bVector3 *bbox_max, 
 // STRIPPED
 float bBoundingBoxDistOutside(const bVector3 *bbox_min, const bVector3 *bbox_max, const bVector3 *point) {}
 
-// UNSOLVED, ProStreet scratch: https://decomp.me/scratch/VE8bd
 float bDistToLine(const bVector2 *point, const bVector2 *line_p1, const bVector2 *line_p2) {
     bVector2 p = *point - *line_p1;
     bVector2 tangent(line_p2->x - line_p1->x, line_p2->y - line_p1->y);
     float length = bLength(&tangent);
     bNormalize(&tangent, &tangent);
-    bVector2 normal(-tangent.y, tangent.x);
-    float d = bDot(&p, &normal);
-    float l = bDot(&p, &tangent);
+    bVector2 normal(tangent.y, -tangent.x);
+    float l = bDot(&tangent, &p);
+    float d = bDot(&normal, &p);
     float distance;
 
     if (l < 0.0f) {

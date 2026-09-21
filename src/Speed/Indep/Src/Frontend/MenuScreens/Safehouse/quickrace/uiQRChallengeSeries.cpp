@@ -264,9 +264,9 @@ void UIQRChallengeSeries::Setup() {
             if (UnlockSystem::IsEventAvailable(race->GetEventHash())) {
                 bool unlocked = UnlockSystem::IsTrackUnlocked(UNLOCK_QUICK_RACE, race->GetEventHash(), 0);
                 AddRace(race);
-                GetDatumAt(GetNumDatum())->SetLocked(!unlocked);
+                GetDatumAt(GetNumDatum() - 1)->SetLocked(!unlocked);
                 if (GRaceDatabase::Get().IsQuickRaceComplete(raceHash)) {
-                    GetDatumAt(GetNumDatum())->SetChecked(true);
+                    GetDatumAt(GetNumDatum() - 1)->SetChecked(true);
                 }
             }
         }

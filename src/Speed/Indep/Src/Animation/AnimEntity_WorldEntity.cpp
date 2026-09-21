@@ -116,6 +116,13 @@ uint32 GetAnimChannelHash(uint32 anim_hash, uint32 dof) {
     }
 }
 
+/**
+ * @brief Initializes a world animation entity from configuration data and attaches it to the scene graph.
+ *
+ * @param init_data Pointer to WorldAnimEntityInfo initialization structure.
+ * @param parent_space_node Parent space node to attach the animation entity's space node to.
+ * @return true if initialization succeeded, false otherwise.
+ */
 bool CWorldAnimEntity::Init(void *init_data, SpaceNode *parent_space_node) {
     uint32 play_flags = 0;
 
@@ -153,6 +160,7 @@ bool CWorldAnimEntity::Init(void *init_data, SpaceNode *parent_space_node) {
     mAnimCtrl->SetMasterDelayTime(info->instance_data->master_delay);
     mAnimCtrl->SetLocalDelayTime(info->instance_data->loop_delay);
 
+    asm volatile("");
     CAnimPart *anim_part = mAnimCtrl->GetAnimPart();
     CAnimSkeleton *skel = GetSkeletonFromList(bStringHash("ROOT"));
     uint32 TransAnimNameHash;

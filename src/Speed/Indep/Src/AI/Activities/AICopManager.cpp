@@ -1821,6 +1821,9 @@ bool AICopManager::PlayerPursuitHasCop() const {
 
 bool ForcePursuitStart = false; // Decl: 3193
 
+/**
+ * @brief Updates active pursuits, support vehicles, and pending roadblocks.
+ */
 void AICopManager::UpdatePursuits() {
     IVehicle *ivehicle_chopper = nullptr;
 

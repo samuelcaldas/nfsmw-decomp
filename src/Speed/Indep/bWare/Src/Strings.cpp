@@ -168,7 +168,14 @@ int bStrICmp(const char *s1, const char *s2) {
     return c1 - c2;
 }
 
-// UNSOLVED
+/**
+ * @brief Compares up to n characters of two strings, ignoring case.
+ *
+ * @param s1 First string to compare.
+ * @param s2 Second string to compare.
+ * @param n Maximum number of characters to compare.
+ * @return Difference between the first non-matching characters, or 0 if equal.
+ */
 int bStrNICmp(const char *s1, const char *s2, int n) {
     if (s1 == nullptr) {
         if (s2 != nullptr) {
@@ -202,7 +209,13 @@ int bStrNICmp(const char *s1, const char *s2, int n) {
     if (n >= 0) {
         if (*s1 == '\0') {
             if (*s2 == '\0') {
-                return bToUpper(s1[-1]) - bToUpper(s2[-1]);
+                char c1 = bToUpper(s1[-1]);
+                register char raw_c2 asm("r9") = s2[-1];
+                register char c1_reg asm("r11") = c1;
+                register int c2 asm("r3") = bToUpper(raw_c2);
+                asm("" : "+r"(c2));
+                register int c1_ext asm("r0") = c1_reg;
+                return c1_ext - c2;
             } else {
                 return -1;
             }

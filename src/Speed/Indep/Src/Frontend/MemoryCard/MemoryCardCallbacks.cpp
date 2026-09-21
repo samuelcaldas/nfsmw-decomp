@@ -299,7 +299,6 @@ void MemcardCallbacks::Retry(RealmcIface::CardStatus status) {
     }
 }
 
-// UNSOLVED
 void MemcardCallbacks::Failed(RealmcIface::TaskResult result, RealmcIface::CardStatus status) {
     JLog(MJ_Failed);
     JLog(status);
@@ -324,7 +323,7 @@ void MemcardCallbacks::Failed(RealmcIface::TaskResult result, RealmcIface::CardS
     if (GetMemcard()->IsAutoSaving() || GetMemcard()->IsCheckingCardForAutoSave()) {
         GetMemcard()->m_MemOp = MemoryCard::MO_NONE;
         GetMemcard()->EndAutoSave();
-        if (gMemcardSetup.GetMethod() == MCO_AutoSave) {
+        if (gMemcardSetup.GetCommand() == MCO_AutoSave) {
             cFEng::Get()->QueueGameMessage(0x8867412d, nullptr, 0xff);
         }
         FEDatabase->GetGameplaySettings()->AutoSaveOn = false;
@@ -342,7 +341,7 @@ void MemcardCallbacks::Failed(RealmcIface::TaskResult result, RealmcIface::CardS
             msg = 0xfe202e3b;
         }
     }
-    if (gMemcardSetup.GetMethod() == MCO_CreateNew && GetMemcard()->GetOp() == MemoryCard::MO_List) {
+    if (gMemcardSetup.GetCommand() == MCO_CreateNew && GetMemcard()->GetOp() == MemoryCard::MO_List) {
         GetMemcard()->SetListingForCreate(false);
         GetMemcard()->m_MemOp = MemoryCard::MO_NONE;
         cFEng::Get()->QueueGameMessage(0x5a051729, GetScreen()->GetPackageName(), 0xff);
@@ -354,20 +353,15 @@ void MemcardCallbacks::Failed(RealmcIface::TaskResult result, RealmcIface::CardS
             break;
 
         case MemoryCard::MO_Save:
-            if (status == RealmcIface::STATUS_NO_CARD)
-                goto failed_check_autosave;
-            if (static_cast<unsigned int>(status) >= static_cast<unsigned int>(RealmcIface::STATUS_NO_CARD)) {
-                if (static_cast<unsigned int>(status) <= static_cast<unsigned int>(RealmcIface::STATUS_CARD_FULL)) {
-                    if (static_cast<unsigned int>(status) >= static_cast<unsigned int>(RealmcIface::STATUS_WRONG_DEVICE))
-                        goto failed_check_autosave;
-                }
+            switch (static_cast<unsigned int>(status)) {
+                case RealmcIface::STATUS_NO_CARD:
+                case RealmcIface::STATUS_WRONG_DEVICE:
+                case RealmcIface::STATUS_CARD_FULL:
+                    if (gMemcardSetup.GetCommand() == MCO_CreateNew) {
+                        FEDatabase->GetGameplaySettings()->AutoSaveOn = false;
+                    }
+                    break;
             }
-            goto failed_skip_autosave;
-        failed_check_autosave:
-            if (gMemcardSetup.GetMethod() == MCO_CreateNew) {
-                FEDatabase->GetGameplaySettings()->AutoSaveOn = false;
-            }
-        failed_skip_autosave:
             msg = 0xdc12af2e;
             FEDatabase->GetGameplaySettings()->AutoSaveOn = false;
 

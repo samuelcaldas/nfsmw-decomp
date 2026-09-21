@@ -95,6 +95,13 @@ void CameraMover::Disable() {
     return;
 }
 
+/**
+ * @brief Applies camera shake noise caused by nearby police helicopters.
+ *
+ * @param world_to_camera View transformation matrix to receive the noise offset.
+ * @param f_scale Intensity scaling factor for the chopper camera noise.
+ * @param useWorldTimer True to sample WorldTimer, false to sample RealTimer.
+ */
 void CameraMover::ChopperNoise(bMatrix4 *world_to_camera, float f_scale, bool useWorldTimer) {
 
     if (f_scale > 0.0f) {
@@ -138,6 +145,13 @@ void CameraMover::ChopperNoise(bMatrix4 *world_to_camera, float f_scale, bool us
     }
 }
 
+/**
+ * @brief Applies handheld camera wobble/noise effects to the camera matrix.
+ *
+ * @param world_to_camera View transformation matrix to receive the noise offset.
+ * @param f_scale Intensity scaling factor for the handheld camera noise.
+ * @param useWorldTimer True to sample WorldTimer, false to sample RealTimer.
+ */
 void CameraMover::HandheldNoise(bMatrix4 *world_to_camera, float f_scale, bool useWorldTimer) {
 
     if (f_scale > 0.0f) {

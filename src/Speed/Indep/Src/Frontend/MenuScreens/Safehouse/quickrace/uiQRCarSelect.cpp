@@ -903,7 +903,7 @@ void UIQRCarSelect::UpdateSliders() {
 
 // UNSOLVED
 int UIQRCarSelect::GetFilterType() {
-    switch (static_cast<unsigned short>(filter)) {
+    switch (static_cast<unsigned int>(static_cast<unsigned short>(filter))) {
         case FE_CAR_FILTER_LIST_STOCK:
             return LIST_STOCK;
         case FE_CAR_FILTER_LIST_CAREER:

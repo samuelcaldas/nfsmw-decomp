@@ -1708,6 +1708,15 @@ bool Emitter::Update(float dt, float &rollover_time) {
     return this->mControl.Update(dt, this, rollover_time);
 }
 
+/**
+ * @brief Spawns new particles from this emitter based on elapsed time and emitter intensity.
+ *
+ * Calculates particle attributes, lifetimes, velocities, and initial states using
+ * the emitter's configured variance parameters, cycles, and volume shape.
+ *
+ * @param dt Delta time for particle spawning simulation step.
+ * @param intensity Current emission intensity multiplier.
+ */
 void Emitter::SpawnParticles(float dt, float intensity) {
     bool ThisIsNISCondition = IsInNIS;
 
@@ -1728,11 +1737,11 @@ void Emitter::SpawnParticles(float dt, float intensity) {
     float num_particles = intensity * this->mDynamicData->GetAttributes().NumParticles();
     float num_particles_variance = this->mDynamicData->GetAttributes().NumParticlesVariance();
     float motion_inherit = this->mDynamicData->GetAttributes().MotionInherit();
-    float motion_inherit_variance = this->mDynamicData->GetAttributes().MotionInheritVariance();
+    register float motion_inherit_variance asm("fr21") = this->mDynamicData->GetAttributes().MotionInheritVariance();
     float life = this->mDynamicData->GetAttributes().Life();
-    float life_variance = this->mDynamicData->GetAttributes().LifeVariance();
+    register float life_variance asm("fr23") = this->mDynamicData->GetAttributes().LifeVariance();
     float speed = this->mDynamicData->GetAttributes().Speed();
-    float speed_variance = this->mDynamicData->GetAttributes().SpeedVariance();
+    register float speed_variance asm("fr22") = this->mDynamicData->GetAttributes().SpeedVariance();
     int random_rotation_dir = this->mDynamicData->GetAttributes().RandomRotationDirection();
     int spread_as_disc = this->mDynamicData->GetAttributes().SpreadAsDisc();
     const float on_cycle = this->mDynamicData->GetAttributes().OnCycle();
@@ -1778,6 +1787,7 @@ void Emitter::SpawnParticles(float dt, float intensity) {
             has_on_cycle = false;
         }
     }
+    asm volatile("");
     if (effectively_one_shot && !has_on_cycle) {
         time_delta_to_use = life;
     }

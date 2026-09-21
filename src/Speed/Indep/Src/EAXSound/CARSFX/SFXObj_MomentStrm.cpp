@@ -130,6 +130,14 @@ void SFXObj_MomentStrm::AttachController(SFXCTL *psfxctl) {
 
 void SFXObj_MomentStrm::Destroy() {}
 
+/**
+ * @brief Determines if an audio moment stream should be allowed to play.
+ *
+ * @param key Attribute key identifying the moment audio stream.
+ * @param IsQueueing Whether the request is being queued rather than immediately played.
+ * @param dist_sqrd Squared distance threshold for positional sound priority.
+ * @return True if the audio moment stream is eligible to play, false otherwise.
+ */
 bool SFXObj_MomentStrm::ShouldStreamPlay(Attrib::Key key, bool IsQueueing, float dist_sqrd) {
     if (m_CurMoment == key && m_TimeBeforeRetrigger > 0.0f && key != Attrib::Hash::aud_moment_strm::key_tollbooth &&
         key != Attrib::Hash::aud_moment_strm::key_window) {
@@ -147,7 +155,7 @@ bool SFXObj_MomentStrm::ShouldStreamPlay(Attrib::Key key, bool IsQueueing, float
         }
     }
 
-    if (!GRaceStatus::Exists() || (GRaceStatus::Get().GetRaceParameters() != nullptr && !GRaceStatus::Get().GetActivelyRacing())) {
+    if (!GRaceStatus::Exists() || (GRaceStatus::Get().GetRaceParameters() && !GRaceStatus::Get().GetActivelyRacing())) {
         return false;
     }
 

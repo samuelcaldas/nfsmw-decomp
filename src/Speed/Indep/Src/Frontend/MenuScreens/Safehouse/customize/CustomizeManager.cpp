@@ -1178,9 +1178,11 @@ bool CarCustomizeManager::IsVinylCategoryLocked(uint32 cat, bool backroom) {
     return locked;
 }
 
-// UNSOLVED: GetCarTypeInfo shouldn't inline
+extern CarTypeInfo *GetCarTypeInfoExternal(CarType) asm("GetCarTypeInfo__F7CarType");
+
+// Returns the minimum wheel inner radius for the tuning car.
 int CarCustomizeManager::GetMinInnerRadius() {
-    CarTypeInfo *info = GetCarTypeInfo(TuningCar->GetType());
+    CarTypeInfo *info = GetCarTypeInfoExternal(TuningCar->GetType());
     if (info != nullptr) {
         return info->GetWheelInnerRadiusMin();
     }

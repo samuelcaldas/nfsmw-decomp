@@ -3,12 +3,12 @@
 
 bTList<eSolid> SolidList; // size: 0x8, address: 0x8045ED18, Decl: 23
 
-// UNSOLVED
 int eLoadSolidListPlatChunks(bChunk *chunk) {
-    bChunk *current_chunk;
-    bChunk *last_chunk = chunk;
+    bChunk *last_chunk = chunk->GetLastChunk();
+    bChunk *current_chunk = chunk->GetFirstChunk();
 
-    for (current_chunk = last_chunk->GetFirstChunk(); current_chunk < last_chunk->GetLastChunk(); current_chunk = current_chunk->GetNext()) {
+    while (current_chunk < last_chunk) {
+        current_chunk = current_chunk->GetNext();
     }
     return 1;
 }

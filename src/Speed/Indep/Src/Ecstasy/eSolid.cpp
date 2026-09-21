@@ -184,10 +184,15 @@ ePositionMarker *eSolid::GetPostionMarker(ePositionMarker *prev_marker /* r11 */
     return position_marker_table;
 }
 
-// UNSOLVED
-ePositionMarker *eSolid::GetPostionMarker(uint32 namehash /* r31 */) {
+/**
+ * @brief Finds a position marker by its name hash.
+ *
+ * @param namehash Hash of the position marker name to find.
+ * @return Pointer to the matching ePositionMarker, or nullptr if not found.
+ */
+ePositionMarker *eSolid::GetPostionMarker(uint32 namehash) {
     ePositionMarker *position_marker = nullptr;
-    while ((position_marker = this->GetPostionMarker(position_marker)) != nullptr) {
+    while ((position_marker = GetPostionMarker(position_marker)) != nullptr) {
         if (position_marker->NameHash == namehash) {
             return position_marker;
         }

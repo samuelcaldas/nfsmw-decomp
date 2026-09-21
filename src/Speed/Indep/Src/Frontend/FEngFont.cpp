@@ -44,22 +44,22 @@ uint32 FontReplacementTable[2] = {0x9583AA1A, 0x5B9D88B9};
 
 // UNSOLVED
 FEngFont *FindFont(uint32 font_hash) {
-    while (true) {
-        for (FEngFont *f = FEngFonts.GetHead(); f != FEngFonts.EndOfList(); f = f->GetNext()) {
-            if (f->GetHashID() == font_hash) {
-                return f;
-            }
+restart:
+    for (FEngFont *f = FEngFonts.GetHead(); f != FEngFonts.EndOfList(); f = f->GetNext()) {
+        if (f->GetHashID() == font_hash) {
+            return f;
         }
-
-        for (int i = 0; i < NUM_ENTRIES(FontReplacementTable); i += 2) {
-            uint32 match_font = FontReplacementTable[i];
-            uint32 replace_font = FontReplacementTable[i + 1];
-            if (font_hash == match_font) {
-                font_hash = replace_font;
-            }
-        }
-        return nullptr;
     }
+
+    for (int i = 0; i < NUM_ENTRIES(FontReplacementTable); i += 2) {
+        uint32 match_font = FontReplacementTable[i];
+        uint32 replace_font = FontReplacementTable[i + 1];
+        if (font_hash == match_font) {
+            font_hash = replace_font;
+            goto restart;
+        }
+    }
+    return nullptr;
 }
 
 int LoaderFEngFont(bChunk *chunk) {

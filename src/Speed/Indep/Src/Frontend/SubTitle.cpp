@@ -78,35 +78,15 @@ void SubTitler::Unload() {
     }
 }
 
-// NONMATCHING: regalloc - fmadds targets f1 directly instead of f0 + fmr
 float SubTitler::GetElapsedTime() {
-#ifdef EA_PLATFORM_WIN32
-    unsigned int timenow;
-    float thetime_ms;
     if (mSubtitlePaused) {
         lastTime = bGetTicker();
-        thetime_ms = timeElapsed;
-    } else {
-        timenow = bGetTicker();
-        thetime_ms = bGetTickerDifference(lastTime, timenow) * 0.001f + timeElapsed;
-        lastTime = timenow;
-        timeElapsed = thetime_ms;
+        return timeElapsed;
     }
-    return thetime_ms;
-#else
-    unsigned int timenow;
-    float thetime_ms;
-    if (!mSubtitlePaused) {
-        timenow = bGetTicker();
-        thetime_ms = bGetTickerDifference(lastTime, timenow) * 0.001f + timeElapsed;
-        lastTime = timenow;
-        timeElapsed = thetime_ms;
-    } else {
-        lastTime = bGetTicker();
-        thetime_ms = timeElapsed;
-    }
-    return thetime_ms;
-#endif
+    unsigned int timenow = bGetTicker();
+    timeElapsed += bGetTickerDifference(lastTime, timenow) * 0.001f;
+    lastTime = timenow;
+    return timeElapsed;
 }
 
 void SubTitler::Update(uint32 msg) {

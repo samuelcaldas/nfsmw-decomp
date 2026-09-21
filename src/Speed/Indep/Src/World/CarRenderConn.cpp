@@ -609,7 +609,9 @@ void CarRenderConn::AddRoadNoise(float speed, unsigned int tires, const RoadNois
 
     float noise_pitch = 0.0f;
     if (do_roll) {
-        noise_pitch = amplitude * (UMath::Sinr(this->mAnimTime * (frequency * UMath::TWOPI)) * 0.5f);
+        float freq = frequency * UMath::TWOPI;
+        float s = UMath::Sinr(this->mAnimTime * freq) * 0.5f;
+        noise_pitch = amplitude * s;
         if (!do_front) {
             noise_pitch = UMath::Abs(noise_pitch);
         }
@@ -620,7 +622,9 @@ void CarRenderConn::AddRoadNoise(float speed, unsigned int tires, const RoadNois
 
     float noise_roll = 0.0f;
     if (do_roll) {
-        noise_roll = amplitude * UMath::Sinr((this->mAnimTime + 0.33f) * (frequency * UMath::TWOPI));
+        float anim = this->mAnimTime + 0.33f;
+        float freq = frequency * UMath::TWOPI;
+        noise_roll = amplitude * UMath::Sinr(anim * freq);
         if (!do_right) {
             noise_roll = UMath::Abs(noise_roll);
         }

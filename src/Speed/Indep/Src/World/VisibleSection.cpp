@@ -571,7 +571,12 @@ int VisibleSectionManager::Loader(bChunk *chunk) {
     return 0;
 }
 
-// UNSOLVED
+/**
+ * Unloads visible section chunks and resets section manager state or overlays.
+ *
+ * @param chunk Pointer to the bChunk being unloaded.
+ * @return 1 if the chunk was handled, 0 otherwise.
+ */
 int VisibleSectionManager::Unloader(bChunk *chunk) {
     if (chunk->GetID() == BCHUNK_VISIBLE_SECTION_MANAGER) {
         this->DrivableBoundaryList.InitList();

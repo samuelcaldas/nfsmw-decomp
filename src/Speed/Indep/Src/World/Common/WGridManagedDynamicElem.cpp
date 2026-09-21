@@ -35,11 +35,7 @@ void WGridManagedDynamicElem::Update() {
             {
                 // is this a bug?
                 UMath::Matrix4 m;
-#ifdef EA_BUILD_A124
                 UMath::OrthoInverse(m);
-#else
-                OrthoInverse(m);
-#endif
 
                 // TODO scheduling issue
                 reinterpret_cast<UMath::Vector3 &>(this->fDstCInst->fInvMatRow0Width) = reinterpret_cast<UMath::Vector3 &>(m[0]);

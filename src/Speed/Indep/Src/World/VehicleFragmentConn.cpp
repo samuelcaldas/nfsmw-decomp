@@ -12,8 +12,6 @@
 #include "CarRender.cpp"
 #endif
 
-void OrthoInverse(UMath::Matrix4 &m);
-
 BIND_SIM_CONN(VehicleFragmentConn);
 typedef struct bTList<VehicleFragmentConn> VehcileFrags;
 VehcileFrags TheVehcileFrags;
@@ -79,11 +77,7 @@ void VehicleFragmentConn::UpdateModel() {
                     root->GetPivot(root_pivot);
                     UMath::QuaternionToMatrix4(root_orientation, tmp);
                     tmp.v3 = UMath::Vector4Make(root_pivot, 1.0f);
-#ifdef EA_BUILD_A124
                     UMath::OrthoInverse(tmp);
-#else
-                    OrthoInverse(tmp);
-#endif
                     eSwizzleWorldMatrix(reinterpret_cast<const bMatrix4 &>(tmp), this->mModelOffset);
                 }
             }

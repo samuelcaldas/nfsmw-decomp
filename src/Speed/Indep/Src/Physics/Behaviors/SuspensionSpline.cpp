@@ -617,7 +617,14 @@ void SuspensionSpline::NISCarTweaks(float dT) {
     }
 }
 
-// UNSOLVED, looks like just regswaps + using a precalculated stack offset?
+/**
+ * @brief Sets the vehicle's position and orientation during non-interactive sequences (NIS).
+ *
+ * @param position Target transformation matrix defining position and orientation.
+ * @param initial True if this is the first frame initializing the vehicle position.
+ * @param dT Delta time since the last update.
+ * @return True if vehicle was successfully placed on the ground, false otherwise.
+ */
 bool SuspensionSpline::SetNISPosition(const UMath::Matrix4 &position, bool initial, float dT) {
     bool success = true;
 
@@ -689,7 +696,7 @@ bool SuspensionSpline::SetNISPosition(const UMath::Matrix4 &position, bool initi
         UMath::Matrix4 invorient;
         UMath::Matrix4 localmatrix;
         invorient = matrix;
-        OrthoInverse(invorient);
+        UMath::OrthoInverse(invorient);
         UMath::Mult(invorient, this->mNISPosition, localmatrix);
 
         float newdelta = UMath::Atan2a(localmatrix.v2.x, localmatrix.v2.z);

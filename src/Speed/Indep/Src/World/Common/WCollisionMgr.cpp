@@ -181,11 +181,7 @@ bool WCollisionMgr::FindFaceInTriStrip(const UMath::Matrix4 &vectorMat, const UM
 
 inline void MakeWorldSpaceFace(WCollisionTri &worldFace, const WCollisionTri &localFace, const UMath::Matrix4 &invMat) {
     UTransform t(invMat);
-#ifdef EA_BUILD_A124
     UMath::OrthoInverse(t.fTransform);
-#else
-    OrthoInverse(t.fTransform); // TODO why is this not inlined?
-#endif
     worldFace.fSurface = localFace.fSurface;
     worldFace.fFlags = localFace.fFlags;
     UMath::RotateTranslate(localFace.fPt0, t.fTransform, worldFace.fPt0);
@@ -266,20 +262,12 @@ bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath
     cInst.MakeMatrix(invMat, true);
 
     UTransform mat(invMat);
-#ifdef EA_BUILD_A124
     UMath::OrthoInverse(mat.fTransform);
-#else
-    OrthoInverse(mat.fTransform);
-#endif
 
     const UMath::Vector3 &startPt = *reinterpret_cast<const UMath::Vector3 *>(&vectorMat[3]);
 
     UTransform vecMatInv(vectorMat);
-#ifdef EA_BUILD_A124
     UMath::OrthoInverse(vecMatInv.fTransform);
-#else
-    OrthoInverse(vecMatInv.fTransform);
-#endif
 
     UMath::Matrix4 combinedMat;
     UMath::Mult(mat.fTransform, vecMatInv.fTransform, combinedMat);
@@ -640,11 +628,7 @@ void WCollisionMgr::GetInstanceListGuts(const NodeIndexList &nodeInds, WCollisio
 
                     cInst->MakeMatrix(invMat, true);
 
-#ifdef EA_BUILD_A124
                     UMath::OrthoInverse(invMat);
-#else
-                    OrthoInverse(invMat);
-#endif
 
                     const UMath::Vector3 &instPos = reinterpret_cast<const UMath::Vector3 &>(invMat[3]);
 
@@ -969,11 +953,7 @@ bool WCollisionMgr::GetBarrierNormal(const WCollisionInstanceCacheList &instList
 
         UMath::Matrix4 invMat;
         closestBarrierInst->MakeMatrix(invMat, true);
-#ifdef EA_BUILD_A124
         UMath::OrthoInverse(invMat);
-#else
-        OrthoInverse(invMat);
-#endif
 
         {
             WCollisionBarrier b;
@@ -1041,11 +1021,7 @@ void WCollisionMgr::GetBarrierList(WCollisionBarrierList &barrierList, const WCo
                         t.fTransform[1][3] = 0.0f;
                         t.fTransform[2][3] = 0.0f;
                         t.fTransform[3][3] = 1.0f;
-#ifdef EA_BUILD_A124
                         UMath::OrthoInverse(t.fTransform);
-#else
-                        OrthoInverse(t.fTransform);
-#endif
                         tValid = true;
                     }
 

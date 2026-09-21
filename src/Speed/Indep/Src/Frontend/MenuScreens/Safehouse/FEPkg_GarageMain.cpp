@@ -336,25 +336,24 @@ void GarageMainScreen::HandleTick(u32 msg) {
             sNumTicksSinceUserMovedCamera = static_cast<int>(camera.cam_anim_speed() * 60.0f);
             bPass1 = false;
             bAutoMovement = false;
-        } else if (bTimeToRotate) {
+            goto SetOrientation;
+        }
+        if (bTimeToRotate) {
             sNumTicksSinceUserMovedCamera = static_cast<int>(camera.cam_anim_speed() * 60.0f);
             bPass1 = true;
-        }
-
-        mScreenKeyCamIsSetTo = screenKey;
-        bUserRotate = screen.cam_user_rotate();
-        if (!CameraPushRequested) {
-            bVector3 orbit(camera.cam_orbit_vertical(), camera.cam_orbit_horizontal(), camera.cam_orbit_radius());
-            bVector3 lookAt(camera.cam_lookat_x(), camera.cam_lookat_y(), camera.cam_lookat_z());
-            pCameraMover->SetDesiredOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt, camera.cam_anim_speed(),
-                                                camera.cam_damping(), camera.cam_periods());
-
-        } else {
-            if (HaveAttributesChanged(*reinterpret_cast<Attrib::Gen::frontend *>(reinterpret_cast<char *>(__builtin_frame_address(0)) + 8))) {
+SetOrientation:
+            mScreenKeyCamIsSetTo = screenKey;
+            bUserRotate = screen.cam_user_rotate();
+            if (!CameraPushRequested) {
                 bVector3 orbit(camera.cam_orbit_vertical(), camera.cam_orbit_horizontal(), camera.cam_orbit_radius());
                 bVector3 lookAt(camera.cam_lookat_x(), camera.cam_lookat_y(), camera.cam_lookat_z());
-                pCameraMover->SetCurrentOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt);
+                pCameraMover->SetDesiredOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt, camera.cam_anim_speed(),
+                                                    camera.cam_damping(), camera.cam_periods());
             }
+        } else if (HaveAttributesChanged(camera)) {
+            bVector3 orbit(camera.cam_orbit_vertical(), camera.cam_orbit_horizontal(), camera.cam_orbit_radius());
+            bVector3 lookAt(camera.cam_lookat_x(), camera.cam_lookat_y(), camera.cam_lookat_z());
+            pCameraMover->SetCurrentOrientation(orbit, camera.cam_roll_angle(), camera.cam_fov(), lookAt);
         }
     }
 

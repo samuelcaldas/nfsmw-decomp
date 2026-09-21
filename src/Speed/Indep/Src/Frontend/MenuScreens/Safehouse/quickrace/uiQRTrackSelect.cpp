@@ -336,7 +336,6 @@ void UIQRTrackSelect::RefreshHeader() {
     FEngSetTextureHash(GetPackageName(), 0x8007b4c, FEDatabase->GetRaceIconHash(pCurrentTrack->GetRaceType()));
 }
 
-// UNSOLVED
 void UIQRTrackSelect::ScrollTracks(eScrollDir dir) {
     if (Tracks.CountElements() < 1) {
         return;
@@ -344,10 +343,18 @@ void UIQRTrackSelect::ScrollTracks(eScrollDir dir) {
     GRaceParameters *oldTrack = pCurrentTrack;
 
     if (dir == eSD_PREV) {
-        pCurrentNode = Tracks.GetPrevCircular(pCurrentNode);
+        SelectableTrack *node = static_cast<SelectableTrack *>(pCurrentNode->GetPrev());
+        if (node == Tracks.EndOfList()) {
+            node = Tracks.GetTail();
+        }
+        pCurrentNode = node;
         pCurrentTrack = pCurrentNode->pRaceParams;
     } else if (dir == eSD_NEXT) {
-        pCurrentNode = Tracks.GetNextCircular(pCurrentNode);
+        SelectableTrack *node = static_cast<SelectableTrack *>(pCurrentNode->GetNext());
+        if (node == Tracks.EndOfList()) {
+            node = Tracks.GetHead();
+        }
+        pCurrentNode = node;
         pCurrentTrack = pCurrentNode->pRaceParams;
     }
 

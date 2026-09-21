@@ -109,11 +109,22 @@ def extract_candidates(report_data: Dict[str, Any]) -> List[DecompCandidate]:
 def filter_by_unit(
     candidates: List[DecompCandidate], unit_query: Optional[str]
 ) -> List[DecompCandidate]:
-    """Filter candidates matching unit name substring."""
+    """Filter candidates matching unit name substring (supports comma-separated queries and $ for end-anchored matching)."""
     if not unit_query:
         return candidates
-    query_lower = unit_query.lower()
-    return [c for c in candidates if query_lower in c.unit_name.lower()]
+    queries = [q.strip().lower() for q in unit_query.split(",") if q.strip()]
+    matched = []
+    for c in candidates:
+        u_lower = c.unit_name.lower()
+        for q in queries:
+            if q.endswith("$"):
+                if u_lower.endswith(q[:-1]):
+                    matched.append(c)
+                    break
+            elif q in u_lower:
+                matched.append(c)
+                break
+    return matched
 
 
 def filter_by_category(

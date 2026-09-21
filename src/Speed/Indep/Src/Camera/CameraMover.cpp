@@ -131,7 +131,7 @@ void CameraMover::ChopperNoise(bMatrix4 *world_to_camera, float f_scale, bool us
                 pCamera->SetNoiseFrequency1(&v_frequency);
                 pCamera->SetNoiseAmplitude1(&v_magnitude);
 
-                float time = 0.00025f * (useWorldTimer ? WorldTimer.GetSeconds() : RealTimer.GetSeconds()); // GetSeconds() generate fmuls...
+                float time = useWorldTimer ? WorldTimer.GetSeconds() : RealTimer.GetSeconds();
                 pCamera->ApplyNoise(world_to_camera, time, 1.0f);
             }
         }

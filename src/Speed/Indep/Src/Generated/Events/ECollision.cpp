@@ -9,13 +9,14 @@ ECollision::ECollision(COLLISION_INFO pInfo)
 }
 
 ECollision::~ECollision() {
-    ISimable *simableB;
     ISimable *simableA = ISimable::FindInstance(this->fInfo.objA);
+    ISimable *simableB;
 
     if (simableA != NULL) {
-        simableB = NULL;
         if (this->fInfo.type == COLLISION_INFO::OBJECT) {
             simableB = ISimable::FindInstance(this->fInfo.objB);
+        } else {
+            simableB = NULL;
         }
 
         COLLISION_INFO cinfo = this->fInfo;

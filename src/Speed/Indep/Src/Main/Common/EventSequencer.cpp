@@ -547,28 +547,27 @@ unsigned int System::ExecuteFilter(const CARP::EventSeqState *state, unsigned in
         CARP::ExprValType queryValues[64];
 
         for (unsigned int q = 0; q < state->mFilter->mNumQueries; q++) {
-            const QueryDesc *qDesc = state->mFilter->GetQueries();
+            const QueryDesc *qDesc = &state->mFilter->GetQueries()[q];
 
-            if (qDesc != NULL) {
-                const void *staticdata = state->mFilter->GetStaticData();
+            if (qDesc->mQueryName != 0) {
+                const void *staticdata = reinterpret_cast<const char *>(state->mFilter->GetExpression()) + state->mFilter->mExpressionSize + qDesc->mDataOffset;
                 Query::Invoke(
-                    reinterpret_cast<unsigned int>(qDesc),
+                    qDesc->mQueryName,
                     this->GetContext(),
                     ifiringcontext,
                     staticdata,
-                    this->mAction->mName,
-                    &queryValues[q]
+                    qDesc->mCount,
+                    &queryValues[qDesc->mIndex]
                 );
             } else {
                 queryValues[q].u = stimulus;
             }
         }
 
-        return CARP::ExpressionEvaluator(state->mFilter->GetExpression(), &StimulusFilterLookup, state->mFilter, queryValues).u;
-    } else {
-        return stimulus;
+        stimulus = CARP::ExpressionEvaluator(state->mFilter->GetExpression(), &StimulusFilterLookup, state->mFilter, queryValues).u;
     }
 
+    return stimulus;
 }
 
 } // namespace EventSequencer

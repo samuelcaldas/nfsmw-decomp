@@ -781,7 +781,11 @@ int CompositeSkin(RideInfo *ride_info) {
             continue;
         }
         unsigned int mask_hash;
-        if (UsePrecompositeVinyls != 0 || ride_info->SkinType == 2) {
+        if (UsePrecompositeVinyls != 0) {
+            DumpPreComp(info, dest_texture);
+            return 1;
+        }
+        if (ride_info->SkinType == 2) {
             DumpPreComp(info, dest_texture);
             return 1;
         }

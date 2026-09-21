@@ -994,18 +994,18 @@ void CustomizeShoppingCart::SetMarkerAmounts() {
         SetMarkerData(2, item, num);
 
         item = gCarCustomizeManager.IsPartTypeInCart(CARSLOTID_BASE_PAINT);
-        num = TheFEMarkerManager.GetNumMarkers(FEMarkerManager::MARKER_PAINT, 0);
+        int paint_markers = TheFEMarkerManager.GetNumMarkers(FEMarkerManager::MARKER_PAINT, 0);
         if (item != nullptr && item->IsActive()) {
-            num--;
+            paint_markers--;
         }
-        SetMarkerData(3, item, num);
+        SetMarkerData(3, item, paint_markers);
 
         item = gCarCustomizeManager.IsPartTypeInCart(CARSLOTID_CUSTOM_HUD);
-        num = TheFEMarkerManager.GetNumMarkers(FEMarkerManager::MARKER_CUSTOM_HUD, 0);
+        int hud_markers = TheFEMarkerManager.GetNumMarkers(FEMarkerManager::MARKER_CUSTOM_HUD, 0);
         if (item != nullptr && item->IsActive()) {
-            num--;
+            hud_markers--;
         }
-        SetMarkerData(4, item, num);
+        SetMarkerData(4, item, hud_markers);
 
         FEngSetInvisible(GetPackageName(), 0x47df0e21);
         FEngSetInvisible(GetPackageName(), 0x47df0e22);

@@ -2057,7 +2057,11 @@ void TrackStreamer::SwitchZones(short *current_zones) {
     this->CalculateLoadingBacklog();
 }
 
-// UNSOLVED regswaps
+/**
+ * @brief Advances track streaming through its loading and allocation phases.
+ *
+ * @return No value.
+ */
 void TrackStreamer::HandleLoading() {
     if (this->SkipNextHandleLoad) {
         this->SkipNextHandleLoad = false;
@@ -2085,15 +2089,20 @@ void TrackStreamer::HandleLoading() {
     if ((this->LoadingPhase == ALLOCATING_TEXTURE_SECTIONS || this->LoadingPhase == ALLOCATING_GEOMETRY_SECTIONS ||
          this->LoadingPhase == ALLOCATING_REGULAR_SECTIONS) &&
         this->NumSectionsLoading < 1) {
-        int num_sections_unactivated = 0;
-        for (int n = 0; n < this->NumTrackStreamingSections; n++) {
-            TrackStreamingSection *section = &this->pTrackStreamingSections[n];
-            if (section->Status == TrackStreamingSection::ACTIVATED && !section->CurrentlyVisible) {
-                // TODO writing this as two different branches switches byteswaps, but messes with the instructions
-                if ((this->LoadingPhase == ALLOCATING_GEOMETRY_SECTIONS && IsTextureSection(section->SectionNumber)) ||
-                    (this->LoadingPhase == ALLOCATING_REGULAR_SECTIONS && IsLibrarySection(section->SectionNumber))) {
-                    this->UnactivateSection(section);
-                    num_sections_unactivated++;
+        register int num_sections_unactivated asm("r30");
+        register int n asm("r28");
+        num_sections_unactivated = 0;
+        n = 0;
+        if (num_sections_unactivated < this->NumTrackStreamingSections) {
+            for (; n < this->NumTrackStreamingSections; n++) {
+                TrackStreamingSection *section = &this->pTrackStreamingSections[n];
+                if (section->Status == TrackStreamingSection::ACTIVATED && !section->CurrentlyVisible) {
+                    // TODO writing this as two different branches switches byteswaps, but messes with the instructions
+                    if ((this->LoadingPhase == ALLOCATING_GEOMETRY_SECTIONS && IsTextureSection(section->SectionNumber)) ||
+                        (this->LoadingPhase == ALLOCATING_REGULAR_SECTIONS && IsLibrarySection(section->SectionNumber))) {
+                        this->UnactivateSection(section);
+                        num_sections_unactivated = num_sections_unactivated + 1;
+                    }
                 }
             }
         }

@@ -653,6 +653,25 @@ void FEPackageReader::ProcessListBoxTag(FETag *pTag) {
 #endif
 }
 
+// Helper to access FECodeListBox::mulFlags (offset 0x68) without modifying shared header
+struct FECodeListBoxFlagsAccessor {
+    char pad[0x68];
+    u32 mulFlags;
+
+    void SetFlags(u32 ulFlag, bool bSet) {
+        if (bSet) {
+            mulFlags |= ulFlag;
+        } else {
+            mulFlags &= ~ulFlag;
+        }
+    }
+};
+
+/**
+ * @brief Processes an FE tag specifically targeted for an FECodeListBox object.
+ *
+ * @param pTag Pointer to the FETag to process.
+ */
 void FEPackageReader::ProcessCodeListBoxTag(FETag *pTag) {
 #ifdef EA_BUILD_A124
     (void)pTag;
@@ -674,8 +693,8 @@ void FEPackageReader::ProcessCodeListBoxTag(FETag *pTag) {
             pList->AllocateStrings(pTag->Getu32(0), pTag->Getu32(1));
             break;
         case Tag_FEObjCodeListFlags:
-            *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(pList) + 0x68) &= ~FECODELISTBOX_PUBLICFLAGS_MASK;
-            *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(pList) + 0x68) |= pTag->Getu32(0) & FECODELISTBOX_PUBLICFLAGS_MASK;
+            reinterpret_cast<FECodeListBoxFlagsAccessor *>(pList)->SetFlags(FECODELISTBOX_PUBLICFLAGS_MASK, false);
+            reinterpret_cast<FECodeListBoxFlagsAccessor *>(pList)->SetFlags(pTag->Getu32(0) & FECODELISTBOX_PUBLICFLAGS_MASK, true);
             break;
         case Tag_FEObjCodeListJustifyFlags:
             pList->SetCellJustification(0, 0, pTag->Getu32(0), pList->GetNumVisColumns(), pList->GetNumVisRows());

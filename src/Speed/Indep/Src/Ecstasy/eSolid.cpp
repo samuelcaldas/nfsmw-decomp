@@ -442,8 +442,7 @@ eSolid *eFindSolid(uint32 name_hash) {
     return eFindSolid(name_hash, nullptr);
 }
 
-// UNSOLVED
-eSolid *eFindSolid(uint32 name_hash /* r31 */, eSolidListHeader *solid_list_header /* r30 */) {
+eSolid *eFindSolid(uint32 name_hash, eSolidListHeader *solid_list_header) {
     if (SolidLoadedTable.IsLoaded(name_hash)) {
         return nullptr;
     }

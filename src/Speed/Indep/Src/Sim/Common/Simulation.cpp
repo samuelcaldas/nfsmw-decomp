@@ -341,7 +341,6 @@ SimTask::~SimTask() {
     UnLink();
 }
 
-// UNSOLVED, should be functionally matching
 void SimTask::Run(float dT_sim, float dT_render) {
     if (IsDirty() || mRate <= 0.0f) {
         return;
@@ -367,7 +366,7 @@ void SimTask::Run(float dT_sim, float dT_render) {
             return;
         }
         Sim::Profile::Scope profile(mProfile);
-        bool handled = mHandler->OnTask(GetInstanceHandle(), mUpdate);
+        bool handled = mHandler->OnTask(GetInstanceHandle(), mTimeBank);
         mTimeBank = 0.0f;
         mUpdate -= 1.0f;
     }

@@ -1816,6 +1816,11 @@ static const float Tweak_DragYawSpeed = 1.6f;
 
 // Credits: Brawltendo
 // TODO stack frame is wrong
+/**
+ * @brief Computes and applies suspension, tire, and chassis forces for all wheels.
+ * @param state Current chassis state used for vehicle dynamics calculations.
+ * @return Nothing.
+ */
 void SuspensionRacer::DoWheelForces(Chassis::State &state) {
     const float dT = state.time;
 

@@ -11,11 +11,14 @@ EBecomePursuitCar::EBecomePursuitCar(unsigned int phSimable)
 }
 
 EBecomePursuitCar::~EBecomePursuitCar() {
-    ISimable *simable = ISimable::FindInstance(reinterpret_cast<HSIMABLE>(this->fhSimable));
+    ISimable *simable = NULL;
+    if (this->fhSimable != 0) {
+        simable = ISimable::FindInstance(reinterpret_cast<HSIMABLE>(this->fhSimable));
+    }
+
+    IPursuitAI *pursuitAI = NULL;
 
     if (simable != NULL) {
-        IPursuitAI *pursuitAI;
-
         if (simable->QueryInterface(&pursuitAI)) {
             pursuitAI->EndPursuit();
             ISimable *target = IPlayer::First(PLAYER_LOCAL)->GetSimable();

@@ -4424,9 +4424,10 @@ void CustomizeNumbers::UnsetShoppingCart() {
     }
 }
 
-// UNSOLVED
 void CustomizeNumbers::ScrollNumbers(eScrollDir dir) {
-    if (LeftDisplayValue == -1 || RightDisplayValue == -1) {
+    register int r_val asm("r7");
+    register int temp asm("r0");
+    if (LeftDisplayValue == -1 || ((temp = static_cast<uint16>(RightDisplayValue)), (r_val = temp), static_cast<short>(temp) == -1)) {
         LeftDisplayValue = 0;
         RightDisplayValue = 0;
         TheLeftNumber = LeftNumberList.GetHead();
@@ -4439,35 +4440,52 @@ void CustomizeNumbers::ScrollNumbers(eScrollDir dir) {
 
     if (dir == eSD_PREV) {
         if (bLeft) {
-            new_part = LeftNumberList.GetPrevCircular(new_part);
+            new_part = new_part->GetPrev();
+            if (new_part == LeftNumberList.EndOfList()) {
+                new_part = LeftNumberList.GetTail();
+            }
             LeftDisplayValue--;
             if (LeftDisplayValue < 0) {
                 LeftDisplayValue = 9;
             }
         } else {
-            new_part = RightNumberList.GetPrevCircular(new_part);
-            RightDisplayValue--;
-            if (RightDisplayValue < 0) {
+            SelectablePart *part = new_part->GetPrev();
+            if (part == RightNumberList.EndOfList()) {
+                part = RightNumberList.GetTail();
+            }
+            register int val asm("r0") = r_val - 1;
+            new_part = part;
+            RightDisplayValue = val;
+            if (val & 0x8000) {
                 RightDisplayValue = 9;
             }
         }
     } else if (dir == eSD_NEXT) {
-        if (bLeft) {
-            new_part = LeftNumberList.GetNextCircular(new_part);
+        register int bleft asm("r8");
+        if ((bleft = bLeft)) {
+            new_part = new_part->GetNext();
+            if (new_part == LeftNumberList.EndOfList()) {
+                new_part = LeftNumberList.GetHead();
+            }
             LeftDisplayValue++;
             if (LeftDisplayValue > 9) {
                 LeftDisplayValue = 0;
             }
         } else {
-            new_part = RightNumberList.GetNextCircular(new_part);
-            RightDisplayValue++;
-            if (RightDisplayValue > 9) {
-                RightDisplayValue = 0;
+            SelectablePart *part = new_part->GetNext();
+            if (part == RightNumberList.EndOfList()) {
+                part = RightNumberList.GetHead();
+            }
+            register int val asm("r0") = r_val + 1;
+            new_part = part;
+            RightDisplayValue = val;
+            if (static_cast<short>(val) > 9) {
+                RightDisplayValue = bleft;
             }
         }
     }
 
-    if (new_part != (bLeft ? TheLeftNumber : TheRightNumber)) {
+    if (bLeft ? (new_part != TheLeftNumber) : (new_part != TheRightNumber)) {
         if (bLeft) {
             TheLeftNumber = new_part;
         } else {

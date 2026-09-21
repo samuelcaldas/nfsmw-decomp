@@ -149,9 +149,12 @@ bool QuickRaceUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Up
     return answer;
 }
 
-// UNSOLVED
 bool QuickRaceUnlocker::IsTrackUnlocked(eUnlockFilters filter, int event_hash, int player) {
-    bool answer = UnlockAllThings != 0;
+    bool unlockAll = true;
+    if (UnlockAllThings == 0) {
+        unlockAll = false;
+    }
+    bool answer = unlockAll;
     answer = answer | GRaceDatabase::Get().IsQuickRaceUnlocked(event_hash);
     if (event_hash == Attrib::StringHash32("19.8.31")) {
         return true;
@@ -1073,7 +1076,6 @@ FEMarkerManager::ePossibleMarker FEMarkerManager::ConvertBigBangMarkerAward(cons
     return MARKER_NONE;
 }
 
-// UNSOLVED
 void FEMarkerManager::AwardMarker(Attrib::Gen::gameplay &inst, bool immediate_reward) {
     ePossibleMarker marker = ConvertBigBangMarkerAward(inst.RewardMarkerType(), inst.UpgradePartID());
     if (marker != MARKER_NONE) {
@@ -1104,7 +1106,7 @@ void FEMarkerManager::AwardMarker(Attrib::Gen::gameplay &inst, bool immediate_re
                     param = static_cast<int>(inst.CashReward());
                 }
             } else {
-                param = FEngHashString("BL%d", FEDatabase->GetCareerSettings()->GetCurrentBin(), 0);
+                param = FEngHashString("BL%d", FEDatabase->GetCareerSettings()->GetCurrentBin());
             }
             AddMarkerForLaterSelection(marker, param);
         }

@@ -182,6 +182,8 @@ bool IsRainDisabled() {
     return rain_disabled;
 }
 
+void PrintParticleSystemStats() {}
+
 void cb_PreRetrace(unsigned long param) {}
 
 void cb_PostRetrace(unsigned long param) {

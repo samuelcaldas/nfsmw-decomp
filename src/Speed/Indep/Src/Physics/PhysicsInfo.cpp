@@ -218,6 +218,13 @@ bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, c
     return true;
 }
 
+class PVehicle {
+  public:
+    void DoDebug(float);
+};
+
+void PVehicle::DoDebug(float) {}
+
 // Credits: Brawltendo
 Mps Physics::Info::Speedometer(const Attrib::Gen::transmission &transmission, const Attrib::Gen::engine &engine, const Attrib::Gen::tires &tires,
                                Rpm rpm, GearID gear, const Tunings *tunings) {

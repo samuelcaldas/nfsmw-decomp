@@ -976,6 +976,28 @@ void eSetFogConstantColour() {
     }
 }
 
+void eSetFogEnable(int enable);
+
+void eSetFogState(TextureInfo *texture_info, _GXBlendMode mode) {
+    if (FogEnableState == 0 || texture_info->NameHash == 0x57A4740E || texture_info->NameHash == 0x67688AB0) {
+        eSetFogEnable(0);
+    } else if (mode == GX_BM_BLEND) {
+        eSetFogEnable(1);
+        eSetFogConstantZero();
+    } else {
+        eSetFogEnable(1);
+        eSetFogConstantColour();
+    }
+}
+
+void eSetFogEnableState(int state) {
+    FogEnableState = state;
+}
+
+void eSetFogBrightnessConstant(float brightness) {
+    FogCurrentBrightness = brightness;
+}
+
 // end
 void epCalculateLocalDirectionalPOS16(unsigned int *colour_table0 /* r29 */, unsigned int *colour_table1 /* r22 */, int num_colour_entries /* r5 */,
                                       unsigned short *position_table_16 /* r30 */, int *normal_table /* r23 */, unsigned char *index_buffer /* r31 */,

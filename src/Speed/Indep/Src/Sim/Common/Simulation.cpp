@@ -287,11 +287,9 @@ class SimTask : public UTL::Collections::Countable<SimTask> {
     HSIMPROFILE mProfile;     // offset 0x28, size 0x4
 };
 
-// UNSOLVED
 SimTask::SimTask(unsigned int priority, float rate, Sim::ITaskable *handler, float start_offset, Sim::TaskMode mode)
-    : mRate(UMath::Min(rate, 1.0f)), mHandle((HSIMTASK)SimTask::mNextHandle), mHandler(handler), mUpdate(-start_offset), mPriority(priority),
-      mFlags(mode & ModeFlags), mTimeBank(0.0f), mHead(nullptr), mTail(nullptr), mProfile(nullptr) {
-    SimTask::mNextHandle++;
+    : mRate(UMath::Min(rate, 1.0f)), mHandler(handler), mUpdate(-start_offset), mPriority(priority),
+      mHead(nullptr), mTail(nullptr), mFlags(mode & ModeFlags), mTimeBank(0.0f), mHandle((HSIMTASK)SimTask::mNextHandle++), mProfile(nullptr) {
     Link();
 }
 

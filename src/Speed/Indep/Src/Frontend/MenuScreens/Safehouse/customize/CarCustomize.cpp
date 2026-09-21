@@ -1108,9 +1108,9 @@ void CustomizeShoppingCart::ClearUncheckedItems() {
                         case CARSLOTID_VINYL_COLOUR0_1:
                         case CARSLOTID_VINYL_COLOUR0_2:
                         case CARSLOTID_VINYL_COLOUR0_3: {
-                            ShoppingCartItem *color_temp = color_item->GetNext();
-                            gCarCustomizeManager.RemoveFromCart(color_item);
-                            color_item = color_temp;
+                            ShoppingCartItem *to_remove = color_item;
+                            color_item = color_item->GetNext();
+                            gCarCustomizeManager.RemoveFromCart(to_remove);
                             break;
                         }
 
@@ -1120,9 +1120,9 @@ void CustomizeShoppingCart::ClearUncheckedItems() {
                     }
                 }
             }
-            ShoppingCartItem *temp = item->GetNext();
-            gCarCustomizeManager.RemoveFromCart(item);
-            item = temp;
+            ShoppingCartItem *to_remove = item;
+            item = item->GetNext();
+            gCarCustomizeManager.RemoveFromCart(to_remove);
         } else {
             item = item->GetNext();
         }

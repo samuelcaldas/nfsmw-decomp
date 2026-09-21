@@ -42,7 +42,6 @@ ExtraFontData *FindExtraFontData(uint32 font_hash) {
 // Decl: 177
 uint32 FontReplacementTable[2] = {0x9583AA1A, 0x5B9D88B9};
 
-// UNSOLVED
 FEngFont *FindFont(uint32 font_hash) {
 restart:
     for (FEngFont *f = FEngFonts.GetHead(); f != FEngFonts.EndOfList(); f = f->GetNext()) {

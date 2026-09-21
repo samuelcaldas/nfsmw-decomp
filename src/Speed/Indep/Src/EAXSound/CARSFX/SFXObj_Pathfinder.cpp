@@ -592,6 +592,18 @@ void SFXObj_PFEATrax::UpdateParams(float t) {
     }
 }
 
+eEATRAXSTATES SFXObj_PFEATrax::GenEATraxState() {
+    if (FEDatabase->CurrentUserProfiles[0]->GetOptions()->TheAudioSettings.MasterVol <= 0.0f) {
+        return EATRAX_OFF;
+    }
+
+    if (g_pEAXSound->GetSndGameMode() == SND_FRONTEND) {
+        return EATRAX_FE;
+    }
+
+    return EATRAX_IG;
+}
+
 void SFXObj_PFEATrax::SetupSFX(CSTATE_Base *_StateBase) {
     SndBase::SetupSFX(_StateBase);
     this->m_PFParms[0].bAttached = false;

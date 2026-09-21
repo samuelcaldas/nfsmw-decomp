@@ -57,11 +57,11 @@ eMenuSoundTriggers uiSMSMessage::NotifySoundMessage(u32 msg, eMenuSoundTriggers 
     return maybe;
 }
 
-// UNSOLVED
 void uiSMSMessage::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     m_TextScroller.HandleNotificationMessage(msg);
     switch (msg) {
         case dialog_message_no:
+        case dialog_message_cancel:
             break;
         case FEHASH_INITCOMPLETE: {
             if (the_msg->IsVoice() && the_msg->IsUnRead()) {

@@ -144,24 +144,29 @@ void LocalPlayer::SetGameBreaker(bool on) {
     }
 }
 
-// UNSOLVED
 bool LocalPlayer::CanDoGameBreaker() {
     if (Sim::GetUserMode() != Sim::USER_SINGLE) {
         return false;
     }
     ISimable *isimable = static_cast<IEntity *>(this)->GetSimable();
+    if (!isimable) {
+        return false;
+    }
+    if (INIS::Exists()) {
+        return false;
+    }
     IVehicle *ivehicle;
-    if (!isimable || !INIS::Exists() || !isimable->QueryInterface(&ivehicle)) {
+    if (!isimable->QueryInterface(&ivehicle)) {
         return false;
     }
     float speed_mph = MPS2MPH(ivehicle->GetSpeedometer());
     if (speed_mph < 30.0f) {
         return false;
     }
-    if (!ivehicle->IsAnimating() && !ivehicle->IsStaging() && !ivehicle->IsLoading()) {
-        return true;
+    if (ivehicle->IsAnimating() || ivehicle->IsStaging() || ivehicle->IsLoading()) {
+        return false;
     }
-    return false;
+    return true;
 }
 
 bool LocalPlayer::ToggleGameBreaker() {

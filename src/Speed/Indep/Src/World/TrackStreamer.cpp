@@ -1450,24 +1450,30 @@ void TrackStreamer::PredictStreamingPosition(int position_number, const bVector3
     }
 }
 
-// UNSOLVED regswap, branching and it uses a different MPH2MPS function...
+/**
+ * @brief Predicts the upcoming track streaming zone for a moving vehicle/camera.
+ *
+ * Evaluates prediction zones along the position entry's velocity vector, verifying
+ * elevation constraints and checking for intervening track streaming barriers.
+ *
+ * @param position_entry Current position, velocity, and elevation of the streaming object.
+ * @return Section number of the predicted drivable scenery section, or 0 if none found.
+ */
 short TrackStreamer::GetPredictedZone(StreamingPositionEntry *position_entry) {
-    int predict_zone_number = 0;
+    short predict_zone_number = 0;
     bVector2 predict_position;
     bool predict_position_used = false;
     float speed = bLength(&position_entry->Velocity);
     TrackPathZone *zone = nullptr;
-    char predict_debug_name[64];
+    char predict_debug_name[120];
 
     while ((zone = TheTrackPathManager.FindZone(&position_entry->Position, TRACK_PATH_ZONE_STREAMER_PREDICTION, zone))) {
         float elevation = zone->GetElevation();
-        // TODO branch targets
-        if (((elevation <= 0.0f) || (position_entry->Elevation >= elevation)) &&
-            (elevation >= 0.0f || (position_entry->Elevation > bAbs(elevation)))) {
+        if ((elevation > 0.0f && position_entry->Elevation < elevation) ||
+            (elevation < 0.0f && position_entry->Elevation > bAbs(elevation))) {
             continue;
         }
 
-        // TODO this MPH2MPS inline is in CarBasics.hpp
         float max_speed = MPH2MPS(400.0f);
         float distance = speed * 1.5f;
         DrivableScenerySection *scenery_section;
@@ -1486,8 +1492,8 @@ short TrackStreamer::GetPredictedZone(StreamingPositionEntry *position_entry) {
                     break;
                 }
                 if (scenery_section->SectionNumber == zone->Data[n]) {
-                    predict_position_used = true;
                     predict_zone_number = scenery_section->SectionNumber;
+                    predict_position_used = true;
                     break;
                 }
             }
@@ -1504,36 +1510,13 @@ short TrackStreamer::GetPredictedZone(StreamingPositionEntry *position_entry) {
                 }
             }
         }
-
-        if (predict_position_used) {
-            return predict_zone_number;
-        }
     }
 
-    {
+    if (!predict_position_used) {
         DrivableScenerySection *scenery_section = TheVisibleSectionManager.FindDrivableSection(&position_entry->Position);
         if (scenery_section) {
             predict_zone_number = scenery_section->SectionNumber;
         }
-    }
-
-    {
-        unsigned int obj = 0;
-        espCreateObjectAsync("TrackStreamingTrail", "TrackStreamingTrailPoint", nullptr);
-        FloatVector pos;
-        espSetObjectPosition(1, &pos);
-        char text[40];
-        MPS2MPH(speed);
-        espSetAttributeString(1, "PredictZones", text);
-        espLinkObject(obj, 1);
-    }
-
-    {
-        FloatVector pos1;
-        FloatVector pos2;
-        espCreateObjectAsync("TrackStreamingPredict", "TrackStreamingPredictPoint", &pos1);
-        espCreateObjectAsync("TrackStreamingPredict", "TrackStreamingPredictPoint", &pos2);
-        espLinkObject(0, 1);
     }
 
     return predict_zone_number;

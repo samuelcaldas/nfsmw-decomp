@@ -184,7 +184,10 @@ void DoTinting(eView *view) {
     }
 }
 
-// UNSOLVED, functionally matching, just regswaps: https://decomp.me/scratch/Ar2tQ
+/**
+ * @brief Computes and applies tunnel bloom screen effects for the specified view.
+ * @param view Pointer to the view instance to apply the effect to.
+ */
 void DoTunnelBloom(eView *view) {
     int vIndex = 1;
     float BaseGlare; // TODO
@@ -299,8 +302,17 @@ void DoTunnelBloom(eView *view) {
 
                 zoneB[vIndex] = zone;
                 {
-                    bVector2 r = p0 - twoDpos;
-                    bVector2 v(p1.y - p0.y, p0.x - p1.x);
+                    register float twoDpos_x asm("fr12") = twoDpos.x;
+                    register float p0_x asm("fr13") = p0.x;
+                    register float twoDpos_y asm("fr11") = twoDpos.y;
+                    register float p0_y asm("fr0") = p0.y;
+                    register float r_x asm("fr13") = p0_x - twoDpos_x;
+                    register float r_y asm("fr0") = p0_y - twoDpos_y;
+                    bVector2 r(r_x, r_y);
+
+                    register float p1_y asm("fr13") = p1.y;
+                    bVector2 v(p1_y - p0.y, p0.x - p1.x);
+
                     bNormalize(&v, &v);
                     len = bDot(&v, &r);
                     len = bAbs(len);

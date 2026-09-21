@@ -230,11 +230,10 @@ void LocalPlayer::DoGameBreaker(float dT, float dT_real) {
     }
 }
 
-// UNSOLVED
 void LocalPlayer::UpdateNeighbourhood() {
     bVector3 v;
-    bConvertFromBond(v, static_cast<IEntity *>(this)->GetPosition());
-    TrackPathZone *zone = TheTrackPathManager.FindZone(reinterpret_cast<bVector2 *>(&v), TRACK_PATH_ZONE_NEIGHBOURHOOD, nullptr);
+    TrackPathZone *zone = TheTrackPathManager.FindZone(reinterpret_cast<bVector2 *>(&bConvertFromBond(v, static_cast<IEntity *>(this)->GetPosition())),
+                                                      TRACK_PATH_ZONE_NEIGHBOURHOOD, nullptr);
     unsigned int neighbourhood_hash = 0;
     if (zone) {
         neighbourhood_hash = zone->GetData(0);

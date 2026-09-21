@@ -32,6 +32,10 @@ SlotPool *EmitterSlotPool;
 SlotPool *EmitterGroupSlotPool;
 EmitterSystem gEmitterSystem;
 
+int GetNumParticleTextures() {
+    return 46;
+}
+
 uint32 CrappyStuffThatCantShip[3];
 
 bool IsAShittyEffect(uint32 group_key) {
@@ -179,9 +183,6 @@ void EmitterSystem::KillParticlesFromThisEmitter(Emitter *em) {
         particle = next;
     }
 }
-
-// TODO move
-int GetNumParticleTextures();
 
 void EmitterSystem::KillEverything() {
     for (EmitterGroup *grp = this->mEmitterGroups.GetHead(); grp != this->mEmitterGroups.EndOfList();) {

@@ -657,29 +657,33 @@ void WorldMap::UpdateAnalogInput() {
     }
 }
 
+/**
+ * @brief Updates the cursor position and state on the world map.
+ *
+ * @param zoom_thing Flag indicating whether to skip zoom-related cursor positioning.
+ */
 void WorldMap::UpdateCursor(bool zoom_thing) {
     UpdateAnalogInput();
     if (MapStreamer->IsZooming()) {
         float zoom = MapStreamer->GetZoomFactor();
         bVector2 map_center;
-        bVector2 map_br;
         bVector2 pan(0.0f, 0.0f);
         MapStreamer->GetPan(pan);
         FEngGetCenter(TrackMap, map_center.x, map_center.y);
         FEngGetTopLeft(TrackMap, MapTopLeft.x, MapTopLeft.y);
 
-        // UNSOLVED
         bVector2 pos = CursorMoveFrom;
         bVector2 delta = pos - map_center;
         delta *= zoom;
         pos = map_center + delta;
 
         bVector2 dpan = pan;
-        dpan.x = dpan.x * MapSize.x;
-        dpan.y = dpan.y * MapSize.y;
+        bVector2 *pPan = &dpan;
+        pPan->x *= MapSize.x;
+        pPan->y *= MapSize.y;
 
-        dpan = dpan * zoom;
-        pos = pos - dpan;
+        delta = dpan * zoom;
+        pos = pos - delta;
 
         ClampToMapBounds(pos.x, pos.y);
         FEngSetCenter(Cursor, pos.x, pos.y);

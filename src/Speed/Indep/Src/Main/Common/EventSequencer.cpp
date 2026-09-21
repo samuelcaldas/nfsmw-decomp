@@ -12,7 +12,6 @@
 #include <cstddef>
 
 void EAIEngineRev_ResolveEvent_Callback(void *, const UGroup *) {}
-void EAccelerate_ResolveEvent_Callback(void *, const UGroup *) {}
 
 EventDynamicData gEventDynamicData;
 

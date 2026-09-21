@@ -3115,13 +3115,20 @@ void CustomizeHUDColor::NotificationMessage(u32 msg, FEObject *pobj, u32 param1,
     }
 }
 
-// UNSOLVED
 void CustomizeHUDColor::ScrollColors(eScrollDir dir) {
     HUDColorOption *prev = SelectedColor;
     if (dir == eSD_PREV) {
-        SelectedColor = ColorOptions.GetPrevCircular(prev);
+        HUDColorOption *node = static_cast<HUDColorOption *>(prev->GetPrev());
+        if (node == ColorOptions.EndOfList()) {
+            node = ColorOptions.GetTail();
+        }
+        SelectedColor = node;
     } else if (dir == eSD_NEXT) {
-        SelectedColor = ColorOptions.GetNextCircular(prev);
+        HUDColorOption *node = static_cast<HUDColorOption *>(prev->GetNext());
+        if (node == ColorOptions.EndOfList()) {
+            node = ColorOptions.GetHead();
+        }
+        SelectedColor = node;
     }
     if (SelectedColor != prev) {
         HUDLayerOption *opt = static_cast<HUDLayerOption *>(Options.GetCurrentOption());

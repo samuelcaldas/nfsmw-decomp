@@ -19,12 +19,35 @@ bool PackageInitStateCB::Callback(FEObject *pObj) {
     return true;
 }
 
-// UNSOLVED
-FEPackage::FEPackage()
-    : bExecuting(false), bUseIdleList(false), bIsLibrary(false), bStartEqualsAccept(false), bErrorScreen(false), Priority(0), Controllers(0xff),
-      OldControllers(0xff), bInputEnabled(false), pFilename(nullptr), pParentPackage(nullptr), UserParam(0), NumRequests(0), pRequests(nullptr),
-      NumMsgTargets(0), pMsgTargets(nullptr), NumLibRefs(0), pLibRefs(nullptr), pCurrentButton(nullptr), pResourceNames(nullptr),
-      MouseObjectStates(nullptr), NumMouseObjects(0) {}
+FEPackage::FEPackage() {
+    Controllers = 0xFF;
+    OldControllers = 0xFF;
+    bInputEnabled = false;
+    bExecuting = false;
+    bUseIdleList = false;
+    bIsLibrary = false;
+    bStartEqualsAccept = false;
+    Priority = 0;
+
+    bErrorScreen = false;
+
+    pFilename = nullptr;
+    pParentPackage = nullptr;
+    UserParam = 0;
+
+    NumRequests = 0;
+    pRequests = nullptr;
+    NumMsgTargets = 0;
+    pMsgTargets = nullptr;
+    pCurrentButton = nullptr;
+    pResourceNames = nullptr;
+
+    MouseObjectStates = nullptr;
+    NumMouseObjects = 0;
+
+    NumLibRefs = 0;
+    pLibRefs = nullptr;
+}
 
 FEPackage::~FEPackage() {
     if (pFilename != nullptr) {

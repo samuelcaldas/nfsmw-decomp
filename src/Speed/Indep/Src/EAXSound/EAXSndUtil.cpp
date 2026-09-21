@@ -153,7 +153,6 @@ cInterpLine::cInterpLine() {
 
 cInterpLine::~cInterpLine() {}
 
-// UNSOLVED
 void cInterpLine::Initialize(float _Start, float _Finish, int _Length, eCURVETYPE _Curve) {
     this->Length = static_cast<float>(_Length) / 1000.0f;
     if (this->Length <= 0.0f) {

@@ -869,7 +869,11 @@ void SuspensionSimple::DoDriveForces(State &state) {
     }
 }
 
-// UNSOLVED, float math
+/**
+ * @brief Computes and applies suspension and tire forces for all wheels.
+ * @param state Current chassis state used for vehicle dynamics calculations.
+ * @return Nothing.
+ */
 void SuspensionSimple::DoWheelForces(State &state) {
     const float dT = state.time;
 
@@ -1005,6 +1009,7 @@ void SuspensionSimple::DoWheelForces(State &state) {
             const UMath::Vector3 &pointVelocity = wheel.GetVelocity();
             float xspeed = UMath::Dot(pointVelocity, lateralNormal);
             float zspeed = UMath::Dot(pointVelocity, forwardNormal);
+            zspeed = state.local_vel.z;
             float traction_force = wheel.UpdateLoaded(xspeed, zspeed, state.local_vel.z, load, state.time, steerdrag_reduction);
 
             float max_traction = UMath::Abs(xspeed / dT * (0.25f * mass));

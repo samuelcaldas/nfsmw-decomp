@@ -168,19 +168,18 @@ void NFSMixMapState::CreateMixCtls() {
     }
 }
 
-// UNSOLVED
 void NFSMixMapState::CreateSubMixChannels() {
-    int offset;
-
-    offset = this->m_pMMStateHdr->OffsetSubMixData;
-    this->m_SubMixChannelsAdded = 0;
+    register int zero asm("r10") = 0;
+    register int offset asm("r0") = this->m_pMMStateHdr->OffsetSubMixData;
+    this->m_SubMixChannelsAdded = zero;
 
     if (offset < 0) {
         return;
     }
     this->m_pSubChHdr = reinterpret_cast<stMixChHdr *>(reinterpret_cast<char *>(&this->m_pMMStateHdr->StateIndex) + offset);
 
-    if (this->m_pSubChHdr->NumMixChannels > 0) {
+    register int count asm("r0");
+    if ((count = this->m_pSubChHdr->NumMixChannels) > 0) {
         stSubMixChParams *pSubMixParms;
 
         this->m_MixStateParams.pSubMixChProcs = this->m_pNFSMixMap->GetNextSubMixProc(false);
@@ -193,7 +192,9 @@ void NFSMixMapState::CreateSubMixChannels() {
             int numin;
 
             if (this->m_ObjectIndex != 0) {
-                pSMSD = (this->m_pFirstInstance->m_MixStateParams.pSubMixChProcs + n)->pMixChData_S;
+                pSMSD = reinterpret_cast<stSubMixChProc *>(
+                            reinterpret_cast<unsigned int>(this->m_pFirstInstance->m_MixStateParams.pSubMixChProcs) + (n << 3))
+                            ->pMixChData_S;
                 pSMCP = this->m_pNFSMixMap->GetNextSubMixProc(true);
                 pSMUD = this->m_pNFSMixMap->GetNextSubMixUnique(true);
             } else {
@@ -220,10 +221,10 @@ void NFSMixMapState::CreateSubMixChannels() {
             pSMUD->pInputs = nullptr;
             pSMCP->pMixChData_U = pSMUD;
 
-            numin = (pSubMixParms->MIXCHID & 0x00FF0000) >> 16;
-
-            this->m_SubMixChannelsAdded++;
-            pSubMixParms = reinterpret_cast<stSubMixChParams *>(reinterpret_cast<char *>(reinterpret_cast<int *>(pSubMixParms) + numin) +
+            register int added asm("r9") = this->m_SubMixChannelsAdded;
+            register int nin asm("r11") = (pSubMixParms->MIXCHID & 0x00FF0000) >> 16;
+            this->m_SubMixChannelsAdded = added + 1;
+            pSubMixParms = reinterpret_cast<stSubMixChParams *>(reinterpret_cast<char *>(reinterpret_cast<int *>(pSubMixParms) + nin) +
                                                                 sizeof(stSubMixChParams));
         }
     }

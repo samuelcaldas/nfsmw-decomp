@@ -1189,9 +1189,9 @@ int CarCustomizeManager::GetMinInnerRadius() {
     return 0;
 }
 
-// UNSOLVED: GetCarTypeInfo shouldn't inline
+// Returns the maximum wheel inner radius for the tuning car.
 int CarCustomizeManager::GetMaxInnerRadius() {
-    CarTypeInfo *info = GetCarTypeInfo(TuningCar->GetType());
+    CarTypeInfo *info = GetCarTypeInfoExternal(TuningCar->GetType());
     if (info != nullptr) {
         return info->GetWheelInnerRadiusMax();
     }

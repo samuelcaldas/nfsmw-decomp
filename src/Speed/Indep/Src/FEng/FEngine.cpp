@@ -170,21 +170,27 @@ bool FEngine::UnloadPackage(FEPackage *pPackage) {
     return false;
 }
 
-// UNSOLVED (regswap)
+/**
+ * @brief Unloads a library package when it is no longer referenced.
+ * @param pLibPack Library package to unload.
+ * @return void
+ */
 void FEngine::UnloadLibraryPackage(FEPackage *pLibPack) {
-    if (!pInterface->UnloadUnreferencedLibrary()) {
+    register FEngine *self asm("r29") = this;
+    register FEPackage *pLibPackReg asm("r31") = pLibPack;
+    register bool bDelete asm("r30");
+    if (!self->pInterface->UnloadUnreferencedLibrary()) {
         return;
     }
-    RemoveFromLibraryList(pLibPack);
-    bool bDelete;
-    if (pInterface != nullptr) {
-        bDelete = pInterface->PackageWillUnload(pLibPack);
+    self->RemoveFromLibraryList(pLibPackReg);
+    if (self->pInterface != nullptr) {
+        bDelete = self->pInterface->PackageWillUnload(pLibPackReg);
     } else {
         bDelete = true;
     }
-    pLibPack->Shutdown(pInterface);
-    if (bDelete && (pLibPack != nullptr)) {
-        delete pLibPack;
+    pLibPackReg->Shutdown(self->pInterface);
+    if (bDelete && (pLibPackReg != nullptr)) {
+        delete pLibPackReg;
     }
 }
 

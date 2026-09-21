@@ -160,7 +160,13 @@ void TwoStageSlider::ToggleVisible(bool bOn) {
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Updates and draws the two-stage slider visual elements.
+ *
+ * Computes the fill and preview bar geometries and repositions the
+ * fill bar, handle, text display, and optional preview bar based on the
+ * current and preview values.
+ */
 void TwoStageSlider::Draw() {
     float d = fMaxValue - fMinValue;
     if (d == 0.0f) {
@@ -169,7 +175,7 @@ void TwoStageSlider::Draw() {
         d = 1.0f;
     }
     float cur_pcnt = (fCurValue - fMinValue) / d;
-    float fill_size = cur_pcnt * fRange;
+    float fill_size = fRange * cur_pcnt;
 
     FEngSetSizeX(pFillBar, fill_size);
 
@@ -189,9 +195,9 @@ void TwoStageSlider::Draw() {
     }
 
     if (pPreviewBar != nullptr) {
-        preview_pcnt *= fRange;
-        FEngSetSizeX(pPreviewBar, preview_pcnt);
-        FEngSetBottomRightU(pPreviewBar, preview_pcnt);
+        fill_size = fRange * preview_pcnt;
+        FEngSetSizeX(pPreviewBar, fill_size);
+        FEngSetBottomRightU(pPreviewBar, fill_size);
         FEngSetTopLeft(pPreviewBar, base_x, base_y);
     }
 }

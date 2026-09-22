@@ -76,3 +76,8 @@
 #include "Speed/Indep/Src/AI/Gps.cpp"
 
 void Behavior::OnPause() {}
+
+/**
+ * @brief Handles resuming a paused behavior.
+ */
+void Behavior::OnUnPause() {}

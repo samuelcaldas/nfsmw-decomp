@@ -140,11 +140,19 @@ bool QuickRaceUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, Ca
     return answer;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether a performance package is unlocked in quick race mode.
+ * @param filter Unlock filter category.
+ * @param pkg_type Performance package upgrade type.
+ * @param level Upgrade level.
+ * @param player Player index.
+ * @param backroom Flag indicating backroom availability.
+ * @return True if the package is unlocked, false otherwise.
+ */
 bool QuickRaceUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, int player, bool backroom) {
     bool answer = UnlockAllThings != 0;
 
-    answer |= QuickRaceUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, player, false);
+    answer |= QuickRaceUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, backroom, false);
 
     return answer;
 }
@@ -377,11 +385,20 @@ bool CareerUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPa
     return (part->GetUpgradeLevel() == 0 || answer) || unlocked != 0;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether a performance package is unlocked in career mode.
+ * @param filter Unlock filter category.
+ * @param pkg_type Performance package upgrade type.
+ * @param level Upgrade level.
+ * @param backroom Flag indicating backroom availability.
+ * @return True if the package is unlocked, false otherwise.
+ */
 bool CareerUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, bool backroom) {
     bool answer = UnlockAllThings != 0;
-    eUnlockableEntity unlockable = MapPerfPkgToUnlockable(pkg_type);
-    return static_cast<bool>(answer | CareerUnlocker::IsUnlockableUnlocked(filter, unlockable, level, backroom));
+
+    answer |= CareerUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, backroom);
+
+    return answer;
 }
 
 // UNSOLVED

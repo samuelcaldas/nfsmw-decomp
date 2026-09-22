@@ -9,10 +9,18 @@
 
 unsigned short WCollisionMgr::fIterCount = 0;
 
+/**
+ * @brief Computes the nearest point on a line segment to a test point.
+ * @param pt The test point in 3D space.
+ * @param p0 The starting point of the segment.
+ * @param den Inverse squared length of the direction vector.
+ * @param diffVec Direction vector from segment start to end.
+ * @param nearPt Output vector receiving the computed nearest point coordinates.
+ */
 inline void NearPtLine(const UMath::Vector3 &pt, const UMath::Vector3 &p0, float den, const UMath::Vector3 &diffVec, UMath::Vector3 &nearPt) {
-    float u = ((pt.x - p0.x) * diffVec.x + (pt.y - p0.y) * diffVec.y + (pt.z - p0.z) * diffVec.z) * den;
-    u = UMath::Min(u, 1.0f);
-    u = UMath::Max(u, 0.0f);
+    float u = (pt.x - p0.x) * diffVec.x + (pt.y - p0.y) * diffVec.y + (pt.z - p0.z) * diffVec.z;
+    u *= den;
+    u = UMath::Max(UMath::Min(u, 1.0f), 0.0f);
     nearPt.x = u * diffVec.x + p0.x;
     nearPt.y = u * diffVec.y + p0.y;
     nearPt.z = u * diffVec.z + p0.z;

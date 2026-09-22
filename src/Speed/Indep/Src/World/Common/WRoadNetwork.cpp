@@ -2422,7 +2422,13 @@ void WRoadNav::InitLaneOffset(const UMath::Vector3 &vehicle_pos) {
     this->EvaluateSplines(segment);
 }
 
-// UNSOLVED, stack problems
+/**
+ * @brief Initializes navigation state from a road segment, lane, and segment time.
+ * @param segInd Index of the road segment to follow.
+ * @param laneInd Traffic lane index to use for the navigation path.
+ * @param timeStep Normalized position along the selected segment.
+ * @return None.
+ */
 void WRoadNav::InitAtSegment(short segInd, char laneInd, float timeStep) {
     WRoadNetwork &roadNetwork = WRoadNetwork::Get();
 
@@ -3246,7 +3252,12 @@ bool WRoadNav::CanTrafficSpawn() {
     return this->IsValid();
 }
 
-// UNSOLVED
+/**
+ * @brief Computes the maximum curvature between the cookie trail and the occlusion apex.
+ * @param car_position Current vehicle position.
+ * @param car_velocity Current vehicle velocity.
+ * @return Absolute road curvature used to guide navigation.
+ */
 float WRoadNav::CookieTrailCurvature(const UMath::Vector3 &car_position, const UMath::Vector3 &car_velocity) {
     if (this->pCookieTrail != nullptr) {
         float road_curvature = 0.0f;

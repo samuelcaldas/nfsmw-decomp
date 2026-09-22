@@ -263,7 +263,15 @@ bool WCollisionMgr::FindFaceInCInst(const UMath::Vector3 &pt, const WCollisionIn
     return false;
 }
 
-// UNSOLVED stack issue
+/**
+ * @brief Finds the nearest collision face intersected by a transformed segment.
+ * @param vectorMat Matrix describing the segment origin and orientation.
+ * @param endPt Segment endpoint in world space.
+ * @param cInst Collision instance to query.
+ * @param retFace Output triangle receiving the nearest intersected face.
+ * @param retDist Output distance from the segment origin to the face.
+ * @return True when a collision face is found; otherwise, false.
+ */
 bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst,
                                     WCollisionTri &retFace, float &retDist) {
     UMath::Matrix4 invMat;

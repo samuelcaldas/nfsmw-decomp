@@ -141,7 +141,7 @@ void UIQRChallengeSeries::RefreshHeader() {
     FEPrintf(GetPackageName(), __NUMBER_GROUP__, "%d", GetCurrentDatumNum() + 1);
     FEPrintf(GetPackageName(), __NUMBER_OF_GROUP__, "%d", GetNumDatum());
 
-    GRaceParameters *race = static_cast<ChallengeDatum *>(GetCurrentDatum())->race;
+    register GRaceParameters *race __asm("r27") = static_cast<ChallengeDatum *>(GetCurrentDatum())->race;
     if ((race != nullptr) && prev_race_hash == race->GetEventHash()) {
         return;
     }
@@ -166,7 +166,7 @@ void UIQRChallengeSeries::RefreshHeader() {
         hash = 0x65818ee8;
         cFEng::Get()->QueuePackageMessage(0xb295482e, GetPackageName(), nullptr);
     } else {
-        hash = FEDatabase->GetMilestoneIconHash(hash, true);
+        hash = FEDatabase->GetMilestoneIconHash(type, true);
         cFEng::Get()->QueuePackageMessage(0xf7b54c7, GetPackageName(), nullptr);
     }
     FEngSetTextureHash(GetPackageName(), __EVENT_ICON__, hash);
@@ -181,10 +181,10 @@ void UIQRChallengeSeries::RefreshHeader() {
 
     if (static_cast<ChallengeDatum *>(GetCurrentDatum())->IsLocked()) {
         cFEng::Get()->QueuePackageMessage(0xc5dd9d68, GetPackageName(), nullptr);
-        int index = GetCurrentDatumNum();
-        int mod = (index + 1) % 5;
-        if (index < 61) {
-            int page = (index + 1) / 5;
+        int num = GetCurrentDatumNum() + 1;
+        int mod = num % 5;
+        if (num <= 60) {
+            int page = num / 5;
             if (mod == 1 || mod == 2) {
                 FEPrintf(GetPackageName(), 0x68215623, GetLocalizedString(LANGUAGE_CHALLENGE_SERIES_UNLOCK_MSG_02), page * 5);
             } else if (mod == 3 || mod == 4) {
@@ -194,7 +194,7 @@ void UIQRChallengeSeries::RefreshHeader() {
                          (page - 1) * 5 + 4);
             }
         } else {
-            FEPrintf(GetPackageName(), 0x68215623, GetLocalizedString(LANGUAGE_CHALLENGE_SERIES_UNLOCK_MSG_02), index);
+            FEPrintf(GetPackageName(), 0x68215623, GetLocalizedString(LANGUAGE_CHALLENGE_SERIES_UNLOCK_MSG_02), num - 1);
         }
     } else {
         cFEng::Get()->QueuePackageMessage(0x38091fa1, GetPackageName(), nullptr);

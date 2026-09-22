@@ -20,6 +20,7 @@ void GinsuSynthesis::PacketReleaseCallback(void *samples, void *clientdata) {
  * continuous playback without transient clicks.
  *
  * @param samples Destination buffer receiving PCM audio samples.
+ * @return void
  */
 void GinsuSynthesis::HandlePacketRelease(short *samples) {
     if (this->mSynthData != nullptr) {

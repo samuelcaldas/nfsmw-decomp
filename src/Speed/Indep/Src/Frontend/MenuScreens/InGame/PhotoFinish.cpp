@@ -310,7 +310,10 @@ void PhotoFinishScreen::NotificationMessage(u32 msg, FEObject *pObj, u32 param1,
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Populates the photo-finish frontend with race results.
+ * @return void
+ */
 void PhotoFinishScreen::Setup() {
     FEManager::Get()->AllowControllerError(true);
 
@@ -350,19 +353,22 @@ void PhotoFinishScreen::Setup() {
         Timer bt(GRaceStatus::Get().GetRaceTimeRemaining());
         bt.PrintToString(bonusTime, 0);
 
-        char time[32];
         Timer t(racerInfo.GetRaceTime());
-        t.PrintToString(time, 0);
+        char time[32];
+        register char *timeOutput asm("r26") = time;
+        t.PrintToString(timeOutput, 0);
 
         char timeAndSpeed[64];
+        register char *timeAndSpeedOutput asm("r24") = timeAndSpeed;
         // "time @ speed units"
-        bSNPrintf(timeAndSpeed, sizeof(timeAndSpeed), "%s %s %$0.0f %s", time, GetTranslatedString(0x474), speed, GetTranslatedString(speedUnits));
+        bSNPrintf(timeAndSpeedOutput, sizeof(timeAndSpeed), "%s %s %$0.0f %s", timeOutput, GetTranslatedString(0x474), speed,
+                  GetTranslatedString(speedUnits));
 
         int cashHash;
 
         if (FEngIsScriptSet(GetPackageName(), bStringHash("TOLL_BOOTH_GROUP"), FEHASH_APPEAR)) {
             FEPrintf(GetPackageName(), 0x8BB39726, "%$0.0f %s", speed, GetTranslatedString(speedUnits));
-            FEPrintf(GetPackageName(), 0x424BB244, "%s", timeAndSpeed);
+            FEPrintf(GetPackageName(), 0x424BB244, "%s", timeOutput);
             FEPrintf(GetPackageName(), 0x8A7F929C, "+%s", bonusTime);
             cashHash = 0x42423E94;
         } else if (FEngIsScriptSet(GetPackageName(), bStringHash("RIVAL_GROUP"), FEHASH_APPEAR)) {
@@ -370,7 +376,7 @@ void PhotoFinishScreen::Setup() {
                 FEPrintf(GetPackageName(), 0x37BEA03B, "%s: %$0.0f %s", GetTranslatedString(0x7F54569D), pointsEarned,
                          GetTranslatedString(speedUnits));
             } else {
-                FEPrintf(GetPackageName(), 0x37BEA03B, "%s", timeAndSpeed);
+                FEPrintf(GetPackageName(), 0x37BEA03B, "%s", timeAndSpeedOutput);
             }
             cashHash = 0x9F4DF5BB;
         } else {
@@ -378,7 +384,7 @@ void PhotoFinishScreen::Setup() {
                 FEPrintf(GetPackageName(), 0xAB6AAFDD, "%s: %$0.0f %s", GetTranslatedString(0x7F54569D), pointsEarned,
                          GetTranslatedString(speedUnits));
             } else {
-                FEPrintf(GetPackageName(), 0xAB6AAFDD, "%s", timeAndSpeed);
+                FEPrintf(GetPackageName(), 0xAB6AAFDD, "%s", timeAndSpeedOutput);
             }
             cashHash = 0x3D1773DD;
         }

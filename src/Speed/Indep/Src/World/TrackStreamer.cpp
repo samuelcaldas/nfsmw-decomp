@@ -20,6 +20,8 @@
 
 #include <algorithm>
 
+extern "C" void ClearTable__9bBitTable(bBitTable *table);
+
 // TODO move
 extern BOOL bMemoryTracing;
 extern int SeeulatorToolActive;
@@ -441,7 +443,9 @@ void RefreshTrackStreamer() {
     TheTrackStreamer.RefreshLoading();
 }
 
-// UNSOLVED, ClearTable shouldn't inline
+/**
+ * @brief Initializes track streaming state and visible-section tables.
+ */
 TrackStreamer::TrackStreamer() {
     this->pTrackStreamingSections = nullptr;
     this->NumTrackStreamingSections = 0;
@@ -477,8 +481,7 @@ TrackStreamer::TrackStreamer() {
     this->pMemoryPool = nullptr;
 
     this->CurrentVisibleSectionTable.Init(CurrentVisibleSectionTableMem, 0xAF0);
-    // TODO why doesn't this inline?
-    this->CurrentVisibleSectionTable.ClearTable();
+    ClearTable__9bBitTable(&this->CurrentVisibleSectionTable);
     bMemSet(this->KeepSectionTable, 0, sizeof(this->KeepSectionTable));
     this->pCallback = nullptr;
     this->CallbackParam = 0;

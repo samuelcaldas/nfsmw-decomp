@@ -61,94 +61,175 @@ UIOptionsScreen::~UIOptionsScreen() {
     delete OriginalPlayerSettings;
 }
 
+/**
+ * @brief Handles input and package notifications for the options screen.
+ * @param msg Notification message hash to process.
+ * @param pobj Front-end object associated with the notification.
+ * @param param1 First notification parameter.
+ * @param param2 Second notification parameter.
+ */
 void UIOptionsScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     UIWidgetMenu::NotificationMessage(msg, pobj, param1, param2);
 
-    // UNSOLVED: switch jumps
-    switch (msg) {
-        case __PAD_BACK__:
-            if (OptionsDidNotChange()) {
-                cFEng::Get()->QueuePackageMessage(0x587C018B, GetPackageName(), nullptr);
-            } else {
-                DialogInterface::ShowTwoButtons(GetPackageName(), mCalledFromPauseMenu ? "InGameDialog.fng" : "Dialog.fng", dialog_alert,
-                                                LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, 0x775DBA97, dialog_message_no, dialog_message_no,
-                                                first_dialog_button2, GetLocalizedString(0xE9CB802F));
-            }
-            break;
-        case 0x775DBA97:
-            RestoreOriginals();
-            MemoryCard::GetInstance()->SetCardRemovedWithAutoSaveEnabled(false);
-            cFEng::Get()->QueuePackageMessage(0x587C018B, GetPackageName(), nullptr);
-            break;
-        case __PAD_BUTTON5__: {
-            DialogInterface::ShowTwoButtons(GetPackageName(), mCalledFromPauseMenu ? "InGameDialog.fng" : "Dialog.fng", dialog_alert,
-                                            LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, dialog_message_yes, dialog_message_no, dialog_message_no,
-                                            first_dialog_button2, GetLocalizedString(0x8AEF5AE8));
-            break;
-        }
-        case __PAD_RTRIGGER__:
-        case __PAD_LTRIGGER__:
-            if (FEDatabase->GetOptionsSettings()->CurrentCategory == OC_PLAYER) {
-                cFEng::Get()->QueueSoundMessage(msg == __PAD_LTRIGGER__ ? 0x6B283007 : 0xF4B32D4D, GetPackageName());
-                if (!OptionsDidNotChange()) {
-                    char buf[128];
-                    FEngSNPrintf(buf, 128, GetLocalizedString(0xBA463431), GetPlayerToEditForOptions() + 1);
-                    DialogInterface::ShowTwoButtons(GetPackageName(), mCalledFromPauseMenu ? "InGameDialog.fng" : "Dialog.fng", dialog_alert,
-                                                    LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, 0x9A5AD46D, 0xA2A07AC4, dialog_message_no,
-                                                    first_dialog_button2, buf);
-                } else {
-                    cFEng::Get()->QueueGameMessage(0x9A5AD46D, nullptr, 0xFF);
-                }
-            }
-            break;
-        case 0xA2A07AC4:
-            TogglePlayer(true);
-            break;
-        case 0x9A5AD46D:
-            TogglePlayer(false);
-            break;
-        case dialog_message_yes:
-            if (!FEDatabase->GetOptionsSettings()->TheGameplaySettings.AutoSaveOn &&
-                FEDatabase->GetOptionsSettings()->CurrentCategory == OC_GAMEPLAY) {
-                MemcardEnter(GetPackageName(), GetPackageName(), 0xA1, nullptr, nullptr, 0, 0);
-            }
-
-            RestoreDefaults();
-            break;
-        case FEHASH_EXITCOMPLETE: {
-            FEDatabase->SetOptionsDirty(FEDatabase->IsOptionsDirty() || !OptionsDidNotChange());
-
-            if (mCalledFromPauseMenu) {
-                cFEng::Get()->QueuePackageSwitch("Pause_Main.fng", 1, 0, false);
-            } else if (FEDatabase->IsOnlineMode()) {
-                cFEng::Get()->QueuePackageSwitch("OL_MAIN.fng", 0, 0, false);
-            } else {
-                cFEng::Get()->QueuePackageSwitch("MainMenu_Sub.fng", 0, 0, false);
-            }
-
-            if (FEDatabase->GetOptionsSettings()->CurrentCategory == OC_AUDIO) {
-                g_pEAXSound->UpdateVolumes(&FEDatabase->GetOptionsSettings()->TheAudioSettings, -1.0f);
-            }
-            break;
-        }
-        case __PAD_START__:
-            new EUnPause();
-            break;
-        case 0x7E998E5E:
-            if (FEDatabase->GetOptionsSettings()->CurrentCategory == OC_GAMEPLAY) {
-                ClearWidgets();
-                SetupGameplay();
-                SetInitialOption(0);
-            } else {
-                for (int i = 0; i < Options.CountElements(); i++) {
-                    Options.GetNode(i)->Draw();
-                }
-            }
-            break;
-        case __PAD_UP__:
-        case __PAD_ACCEPT__:
-            break;
+    if (msg == 0x9A5AD46D) {
+        goto toggle_player_false;
     }
+    if (msg <= 0x9A5AD46D) {
+        if (msg == __PAD_UP__) {
+            goto notification_end;
+        }
+        if (msg <= __PAD_UP__) {
+            if (msg == __PAD_ACCEPT__) {
+                goto notification_end;
+            }
+            if (msg <= __PAD_ACCEPT__) {
+                goto notification_end;
+            }
+            if (msg == __PAD_LTRIGGER__) {
+                goto player_trigger;
+            }
+            goto notification_end;
+        }
+        if (msg == 0x7E998E5E) {
+            goto redraw_options;
+        }
+        if (msg <= 0x7E998E5E) {
+            if (msg == 0x775DBA97) {
+                goto restore_originals;
+            }
+            goto notification_end;
+        }
+        if (msg == __PAD_BACK__) {
+            goto back_pressed;
+        }
+        goto notification_end;
+    }
+    if (msg == __PAD_BUTTON5__) {
+        goto button5_pressed;
+    }
+    if (msg <= __PAD_BUTTON5__) {
+        if (msg == __PAD_START__) {
+            goto start_pressed;
+        }
+        if (msg <= __PAD_START__) {
+            if (msg == 0xA2A07AC4) {
+                goto toggle_player_true;
+            }
+            goto notification_end;
+        }
+        goto notification_end;
+    }
+    if (msg == dialog_message_yes) {
+        goto restore_defaults;
+    }
+    if (msg <= dialog_message_yes) {
+        goto notification_end;
+    }
+    if (msg == __PAD_RTRIGGER__) {
+        goto player_trigger;
+    }
+    if (msg == FEHASH_EXITCOMPLETE) {
+        goto exit_complete;
+    }
+    goto notification_end;
+
+back_pressed: {
+    if (OptionsDidNotChange()) {
+        cFEng::Get()->QueuePackageMessage(0x587C018B, GetPackageName(), nullptr);
+    } else {
+        DialogInterface::ShowTwoButtons(GetPackageName(), mCalledFromPauseMenu ? "InGameDialog.fng" : "Dialog.fng", dialog_alert,
+                                        LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, 0x775DBA97, dialog_message_no, dialog_message_no,
+                                        first_dialog_button2, GetLocalizedString(0xE9CB802F));
+    }
+    goto notification_end;
+}
+
+restore_originals: {
+    RestoreOriginals();
+    MemoryCard::GetInstance()->SetCardRemovedWithAutoSaveEnabled(false);
+    cFEng::Get()->QueuePackageMessage(0x587C018B, GetPackageName(), nullptr);
+    goto notification_end;
+}
+
+button5_pressed: {
+    DialogInterface::ShowTwoButtons(GetPackageName(), mCalledFromPauseMenu ? "InGameDialog.fng" : "Dialog.fng", dialog_alert,
+                                    LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, dialog_message_yes, dialog_message_no, dialog_message_no,
+                                    first_dialog_button2, GetLocalizedString(0x8AEF5AE8));
+    goto notification_end;
+}
+
+player_trigger: {
+    if (FEDatabase->GetOptionsSettings()->CurrentCategory == OC_PLAYER) {
+        cFEng::Get()->QueueSoundMessage(msg == __PAD_LTRIGGER__ ? 0x6B283007 : 0xF4B32D4D, GetPackageName());
+        if (!OptionsDidNotChange()) {
+            char buf[128];
+            FEngSNPrintf(buf, 128, GetLocalizedString(0xBA463431), GetPlayerToEditForOptions() + 1);
+            DialogInterface::ShowTwoButtons(GetPackageName(), mCalledFromPauseMenu ? "InGameDialog.fng" : "Dialog.fng", dialog_alert,
+                                            LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, 0x9A5AD46D, 0xA2A07AC4, dialog_message_no,
+                                            first_dialog_button2, buf);
+        } else {
+            cFEng::Get()->QueueGameMessage(0x9A5AD46D, nullptr, 0xFF);
+        }
+    }
+    goto notification_end;
+}
+
+toggle_player_true: {
+    TogglePlayer(true);
+    goto notification_end;
+}
+
+toggle_player_false: {
+    TogglePlayer(false);
+    goto notification_end;
+}
+
+restore_defaults: {
+    if (!FEDatabase->GetOptionsSettings()->TheGameplaySettings.AutoSaveOn &&
+        FEDatabase->GetOptionsSettings()->CurrentCategory == OC_GAMEPLAY) {
+        MemcardEnter(GetPackageName(), GetPackageName(), 0xA1, nullptr, nullptr, 0, 0);
+    }
+    RestoreDefaults();
+    goto notification_end;
+}
+
+exit_complete: {
+    FEDatabase->SetOptionsDirty(FEDatabase->IsOptionsDirty() || !OptionsDidNotChange());
+
+    if (mCalledFromPauseMenu) {
+        cFEng::Get()->QueuePackageSwitch("Pause_Main.fng", 1, 0, false);
+    } else if (FEDatabase->IsOnlineMode()) {
+        cFEng::Get()->QueuePackageSwitch("OL_MAIN.fng", 0, 0, false);
+    } else {
+        cFEng::Get()->QueuePackageSwitch("MainMenu_Sub.fng", 0, 0, false);
+    }
+
+    if (FEDatabase->GetOptionsSettings()->CurrentCategory == OC_AUDIO) {
+        g_pEAXSound->UpdateVolumes(&FEDatabase->GetOptionsSettings()->TheAudioSettings, -1.0f);
+    }
+    goto notification_end;
+}
+
+start_pressed: {
+    new EUnPause();
+    goto notification_end;
+}
+
+redraw_options: {
+    if (FEDatabase->GetOptionsSettings()->CurrentCategory == OC_GAMEPLAY) {
+        ClearWidgets();
+        SetupGameplay();
+        SetInitialOption(0);
+    } else {
+        for (int i = 0; i < Options.CountElements(); i++) {
+            Options.GetNode(i)->Draw();
+        }
+    }
+    goto notification_end;
+}
+
+notification_end:
+    return;
 }
 
 void UIOptionsScreen::Setup() {

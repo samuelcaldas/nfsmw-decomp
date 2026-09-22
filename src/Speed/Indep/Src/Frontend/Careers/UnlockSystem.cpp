@@ -150,9 +150,13 @@ bool QuickRaceUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, Ca
  * @return True when the package is unlocked; otherwise, false.
  */
 bool QuickRaceUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, int player, bool backroom) {
-    bool answer = UnlockAllThings != 0;
+    bool unlockAll = true;
+    if (UnlockAllThings == 0) {
+        unlockAll = false;
+    }
+    bool answer = unlockAll;
 
-    answer |= QuickRaceUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, backroom, false);
+    answer = answer | QuickRaceUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, backroom, false);
 
     return answer;
 }
@@ -394,9 +398,13 @@ bool CareerUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPa
  * @return True when the package is unlocked; otherwise, false.
  */
 bool CareerUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, bool backroom) {
-    bool answer = UnlockAllThings != 0;
+    bool unlockAll = true;
+    if (UnlockAllThings == 0) {
+        unlockAll = false;
+    }
+    bool answer = unlockAll;
 
-    answer |= CareerUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, backroom);
+    answer = answer | CareerUnlocker::IsUnlockableUnlocked(filter, MapPerfPkgToUnlockable(pkg_type), level, backroom);
 
     return answer;
 }

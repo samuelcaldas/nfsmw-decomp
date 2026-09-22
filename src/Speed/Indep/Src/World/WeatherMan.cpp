@@ -109,7 +109,13 @@ int DepthRegion(GenericRegion *before, GenericRegion *after) {
     return distB <= distA;
 }
 
-// UNSOLVED, just a scheduling issue I think
+/**
+ * @brief Calculates the blended fog settings for the active weather regions.
+ * @param view View whose camera position determines region influence.
+ * @param regionKind Region list to evaluate.
+ * @param InFE Whether the query originated from the front end.
+ * @return Non-zero when the fog settings changed; otherwise zero.
+ */
 int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InFE) {
     static unsigned int oldDistFogColour = 0x000003E7;
     static float oldDistFogPower = 999.0f;
@@ -121,14 +127,18 @@ int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InF
     bVector3 cPos(*view->GetCamera()->GetPosition());
 
     if (FogControlOverRide) {
-        this->DistFogStart = BaseWeatherFogStart;
-        this->FogFalloff = BaseFogFalloff;
-        this->FogFalloffX = BaseFogFalloffX;
-        this->FogFalloffY = BaseFogFalloffY;
-
-        unsigned int fog_colour = ((BaseWeatherFogColourB << 16) | (BaseWeatherFogColourG << 8) | BaseWeatherFogColourR) & 0xFFFFFF;
-        unsigned int retcol = fog_colour | 0x80000000;
-        this->DistFogPower = BaseWeatherFog;
+        register unsigned int retcol asm("r11");
+        retcol = (((BaseWeatherFogColourB << 16) | (BaseWeatherFogColourG << 8) | BaseWeatherFogColourR) & 0xFFFFFF) | 0x80000000;
+        register float start asm("fr11") = BaseWeatherFogStart;
+        register float falloff asm("fr12") = BaseFogFalloff;
+        register float falloffX asm("fr13") = BaseFogFalloffX;
+        register float falloffY asm("fr0") = BaseFogFalloffY;
+        register float power asm("fr10") = BaseWeatherFog;
+        this->FogFalloff = falloff;
+        this->FogFalloffX = falloffX;
+        this->FogFalloffY = falloffY;
+        this->DistFogStart = start;
+        this->DistFogPower = power;
         this->DistFogColour = retcol;
 
         if (oldDistFogColour == retcol && oldDistFogPower == this->DistFogPower && oldDistFogStart == this->DistFogStart) {

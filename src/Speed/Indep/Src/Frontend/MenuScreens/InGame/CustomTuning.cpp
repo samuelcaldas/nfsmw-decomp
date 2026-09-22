@@ -366,7 +366,12 @@ uint32 CustomTuningScreen::AddTuningSlider(FEPlayerCarDB *stable, FECarRecord *r
     return iIndexToAdd - 1;
 }
 
-// UNSOLVED
+/**
+ * @brief Initializes the tuning controls for the currently selected vehicle.
+ *
+ * Loads the active vehicle's tuning record, creates sliders for each tunable
+ * attribute, and enables induction tuning when the vehicle uses a turbocharger.
+ */
 void CustomTuningScreen::Setup() {
     uint32 player_car;
 
@@ -393,7 +398,10 @@ void CustomTuningScreen::Setup() {
 
     Attrib::Gen::pvehicle vehicle(record->VehicleKey, 0, nullptr);
 
-    Physics::Upgrades::SetLevel(vehicle, Physics::Upgrades::PUT_INDUCTION, 1);
+    register Physics::Upgrades::Type induction_type = Physics::Upgrades::PUT_INDUCTION;
+    register int induction_level = 1;
+    asm volatile("" : "+r"(induction_type), "+r"(induction_level));
+    Physics::Upgrades::SetLevel(vehicle, induction_type, induction_level);
 
     bool turbo = Physics::Info::InductionType(vehicle) == Physics::Info::INDUCTION_TURBO_CHARGER;
 

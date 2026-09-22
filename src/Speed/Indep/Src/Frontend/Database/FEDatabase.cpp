@@ -1119,14 +1119,15 @@ uint32 cFrontendDatabase::GetMilestoneIconHash(uint32 type, bool isMilestone) {
         case 0x8ED622AD:
         case 0xC8993341:
             return 0;
-        case 0x1334DAE6:
-        case 0x1BF724E1:
         case 0x254230F5:
-        case 0x4D9777F1:
         case 0x9201E1F4:
         case 0x9F8E56CE:
-        case 0xABDF316E:
         case 0xCA9AFDF0:
+            break;
+        case 0x1334DAE6:
+        case 0x1BF724E1:
+        case 0x4D9777F1:
+        case 0xABDF316E:
         case 0xE9A4423C:
             return 0;
         case 0x5392E4FD:

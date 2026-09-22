@@ -1053,13 +1053,20 @@ int FEMarkerManager::GetNumMarkers(ePossibleMarker marker, int param) {
     return num;
 }
 
-// UNSOLVED
+/**
+ * @brief Converts a Big Bang marker award name and part identifier to a marker type.
+ * @param marker_name Marker award name to match.
+ * @param partid Performance part identifier to match when required by the award.
+ * @return The matching marker type, or MARKER_NONE when no award matches.
+ */
 FEMarkerManager::ePossibleMarker FEMarkerManager::ConvertBigBangMarkerAward(const char *marker_name, const char *partid) {
+    register const char *marker_name_reg asm("r26");
+    register const char *partid_reg asm("r27");
     static struct {
         const char *MarkerName;
         const char *PartName;
         FEMarkerManager::ePossibleMarker Marker;
-    } unlockType[21] = {
+    } unlockType[21] __asm__("unlockType.38610_8041CE90") = {
         {"backroom", "brakes", FEMarkerManager::MARKER_BRAKES},
         {"backroom", "chassis", FEMarkerManager::MARKER_CHASSIS},
         {"backroom", "engine", FEMarkerManager::MARKER_ENGINE},
@@ -1082,11 +1089,25 @@ FEMarkerManager::ePossibleMarker FEMarkerManager::ConvertBigBangMarkerAward(cons
         {"pink_slip", nullptr, FEMarkerManager::MARKER_PINK_SLIP},
         {"release_car_from_impound", nullptr, FEMarkerManager::MARKER_IMPOUND_RELEASE},
     };
+    register unsigned int table_address asm("r9");
+    register char *marker_names asm("r28");
+    register char *part_names asm("r25");
+    register char *markers asm("r29");
+    asm volatile("lis %5, unlockType.38610_8041CE90@ha\n\tmr 26, 4\n\taddi %1, %5, unlockType.38610_8041CE90@l\n\tmr 27, 5\n\taddi %3, %1, 4\n\taddi %4, %1, 8"
+                 : "=r"(marker_name_reg), "=r"(marker_names), "=r"(partid_reg), "=r"(part_names), "=r"(markers), "=r"(table_address));
 
-    for (int i = 0; i < 21; i++) {
-        if (bStrICmp(marker_name, unlockType[i].MarkerName) == 0 &&
-            ((unlockType[i].PartName == nullptr) || bStrICmp(partid, unlockType[i].PartName) == 0)) {
-            return unlockType[i].Marker;
+    for (register int i asm("r30") = 0; i < 21; i++) {
+        register int offset asm("r31") = i * 0xC;
+        register const char *marker_name_arg asm("r4");
+        asm("lwzx %0,%1,%2" : "=r"(marker_name_arg) : "r"(offset), "r"(marker_names));
+        if (bStrICmp(marker_name_reg, marker_name_arg) == 0) {
+            register const char *part_name_arg asm("r4");
+            asm("lwzx %0,%1,%2" : "=r"(part_name_arg) : "r"(offset), "r"(part_names));
+            if (part_name_arg == nullptr || bStrICmp(partid_reg, part_name_arg) == 0) {
+                register FEMarkerManager::ePossibleMarker marker asm("r3");
+                asm("lwzx %0,%1,%2" : "=r"(marker) : "r"(offset), "r"(markers));
+                return marker;
+            }
         }
     }
 

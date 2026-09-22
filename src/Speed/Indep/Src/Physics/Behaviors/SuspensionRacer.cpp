@@ -1894,8 +1894,10 @@ void SuspensionRacer::DoWheelForces(Chassis::State &state) {
         // how angled the wheel is relative to the ground
         float upness = UMath::Clamp(UMath::Dot(groundNormal, vUp), 0.0f, 1.0f);
         const float oldCompression = wheel.GetCompression();
-        float newCompression = rideheight_specs[axle] * upness + penetration;
-        float max_compression = travel_specs[axle];
+        float rideheight = rideheight_specs[axle];
+        float travel = travel_specs[axle];
+        float newCompression = rideheight * upness + penetration;
+        float max_compression = travel;
         if (wheel.GetCompression() == 0.0f) {
             maxDelta = UMath::Max(maxDelta, newCompression - max_compression);
         }

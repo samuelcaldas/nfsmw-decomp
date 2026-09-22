@@ -76,8 +76,7 @@ class PS2ALIGN16 IUnknown {
     friend bool ComparePtr(const IUnknown *pUnk1, const IUnknown *pUnk2);
 
   protected:
-    IUnknown(Object *owner, void *handle) {
-        _mCOMObject = owner;
+    IUnknown(Object *owner, void *handle) : _mCOMObject(owner) {
         _mCOMObject->_mInterfaces.Add(handle, this);
     }
 

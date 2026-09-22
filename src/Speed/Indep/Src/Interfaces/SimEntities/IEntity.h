@@ -21,7 +21,15 @@ class IEntity : public UTL::COM::IUnknown,
                 public UTL::Collections::ListableSet<Sim::IEntity, 8, eEntityList, ENTITY_MAX>,
                 public UTL::COM::Factory<Sim::Param, Sim::IEntity, UCrc32> {
   public:
-    DECL_INTERFACE(IEntity);
+    static HINTERFACE _IHandle() {
+        return (HINTERFACE)_IHandle;
+    }
+
+    IEntity(UTL::COM::Object *owner)
+        : UTL::Collections::ListableSet<Sim::IEntity, 8, eEntityList, ENTITY_MAX>(),
+          UTL::COM::IUnknown(owner, _IHandle()) {}
+
+    virtual ~IEntity() {}
 
     virtual void AttachPhysics(ISimable *object);
     virtual void DetachPhysics();

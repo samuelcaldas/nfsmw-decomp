@@ -6,7 +6,11 @@
 
 namespace Sim {
 
-// UNSOLVED
+/**
+ * @brief Constructs an entity and registers it in the global entity list.
+ * @param none This constructor does not accept parameters.
+ * @return No value is returned.
+ */
 Entity::Entity()
     : Object(4),         //
       IEntity(this),     //

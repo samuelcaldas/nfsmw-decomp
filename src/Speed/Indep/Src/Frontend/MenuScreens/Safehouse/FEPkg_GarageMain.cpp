@@ -654,7 +654,12 @@ void GarageMainScreen::HandleHidePackage(uint32 msg) {
     RenderingCar->Visible = 0;
 }
 
-// UNSOLVED
+/**
+ * @brief Processes queued controller actions for garage camera interaction.
+ *
+ * @param this Garage screen instance receiving the queued actions.
+ * @return Nothing.
+ */
 void GarageMainScreen::HandleJoyEvents() {
     int firstPortToCheck = 0;
     int lastPortToCheck = 2;
@@ -719,13 +724,17 @@ void GarageMainScreen::HandleJoyEvents() {
                             sNumTicksSinceUserMovedCamera = sNumTicksBeforeCamMovesBackToScreenPosition;
                         }
 
+                        register int zero_address asm("r9");
+                        asm("lis %0, lbl_803C70B4@ha" : "=r"(zero_address));
                         if (bAbs(zoomIn) > bAbs(zoomOut)) {
                             mZoom = zoomIn;
                         } else if (bAbs(zoomOut) > bAbs(zoomIn)) {
                             mZoom = zoomOut;
                         } else {
-                            if (zoomOut == 0.0f && zoomIn == 0.0f) {
-                                mZoom = 0.0f;
+                            register float zero asm("fr0");
+                            asm("lfs %0, lbl_803C70B4@l(%1)" : "=f"(zero) : "r"(zero_address));
+                            if (zoomOut == zero && zoomIn == zero) {
+                                mZoom = zero;
                             }
                         }
                         pCameraMover->SetZoomSpeed(mZoom);

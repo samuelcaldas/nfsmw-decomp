@@ -1090,7 +1090,12 @@ uint32 cFrontendDatabase::GetMilestoneDescHash(uint32 hal_id) {
     return FEngHashString("BLACKLIST_PURSUIT_MILESTONES_%02d", hal_id);
 }
 
-// UNSOLVED
+/**
+ * @brief Returns the texture hash associated with a milestone type.
+ * @param type Milestone type hash.
+ * @param isMilestone Whether the type is displayed as a milestone rather than a challenge.
+ * @return Texture hash for the type, or zero when no icon is defined.
+ */
 uint32 cFrontendDatabase::GetMilestoneIconHash(uint32 type, bool isMilestone) {
     uint32 hash = 0;
     switch (type) {

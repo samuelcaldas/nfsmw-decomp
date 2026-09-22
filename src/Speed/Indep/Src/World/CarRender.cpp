@@ -459,6 +459,10 @@ class CarPartModel {
         return reinterpret_cast<eModel *>(this->mModel & ~0x3);
     }
 
+    uint32 GetRawModel() {
+        return this->mModel;
+    }
+
     void SetModel(struct eModel *model) {
         this->mModel = reinterpret_cast<unsigned int>(model) | this->IsHidden();
     }
@@ -2186,7 +2190,10 @@ void CarRenderInfo::UpdateLightStateTextures() {
     }
 }
 
-// TODO regswap
+/**
+ * @brief Builds the light-flare list from the active car model markers.
+ * @return Nothing; the generated flares are appended to LightFlareList.
+ */
 void CarRenderInfo::CreateCarLightFlares() {
     int found_STRINGHASH_LEFT_REVERSE_slot;
     int found_STRINGHASH_RIGHT_REVERSE_slot;
@@ -2197,7 +2204,13 @@ void CarRenderInfo::CreateCarLightFlares() {
 
         for (int slotIndex = CARSLOTID_MODEL_NUM - 1; slotIndex >= 0; slotIndex--) {
             {
-                eModel *model = this->mCarPartModels[slotIndex][0][this->mMinLodLevel].GetModel();
+                register int slotOffset __asm("r11") = slotIndex * 0x14;
+                register int modelOffset __asm("r9") = this->mMinLodLevel << 2;
+                slotOffset += reinterpret_cast<int>(this);
+                modelOffset += slotOffset;
+                register uint32 rawModel __asm("r0") =
+                    *reinterpret_cast<uint32 *>(reinterpret_cast<char *>(modelOffset) + 0xb78);
+                register eModel *model __asm("r19") = reinterpret_cast<eModel *>(rawModel & ~3u);
                 ePositionMarker *position_marker = nullptr;
 
                 if (model == nullptr) {

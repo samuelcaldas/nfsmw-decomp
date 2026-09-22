@@ -154,3 +154,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   unsigned int GManager::GetNumSpeedTraps();
   ```
 - **Description**: Returns the count of speed trap records loaded in the current race session.
+
+---
+
+## 4. World Subsystem (`zWorld`)
+
+### `CarRenderInfo::DrawKeithProjShadow`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld`
+- **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
+- **Virtual Address**: `0x802C9BC0` (`2150430496`)
+- **Size**: 1,692 bytes (423 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, bMatrix4 *localWorld, bMatrix4 *worldLocal, bMatrix4 *biasedIdentity, int body_lod);
+  ```
+- **Description**: Computes and renders the projected car shadow volume mesh onto ground collision surfaces. Handles world-to-local and local-to-world geometry transformations, collision face querying via `FindClosestFace` and `HeightAtPoint`, shadow volume extrusion, ground polygon clipping, vertex coloring/translucency falloff based on height above ground, and triangle fan/strip rendering into the view.
+- **Compiler Details**: Emits PowerPC paired single SIMD instructions (`psq_st`, `psq_l`) for 3D vector transformations. Exact match required separating vertex truncation and decrement across discrete expressions (`int nv = nVert; nv &= ~1; for (i = 0; i < nv - 1; i += 2)`) to guide GCC 2.95 instruction selection to emit `clrrwi r9, r9, 1` and `addi r9, r9, -1` with `cmpw r30, r9`, matching the original binary control flow and register allocation without spilling to the stack.
+

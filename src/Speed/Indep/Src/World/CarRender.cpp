@@ -4212,9 +4212,9 @@ void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, b
         unsigned int colour = static_cast<unsigned int>(bClamp(i, 0, 0xFE) << 24) | 0x00808080;
 
         if (dshad != 0) {
-            int nv = (nVert & ~1) - 1;
-
-            for (i = 0; i < nv; i += 2) {
+            int nv = nVert;
+            nv &= ~1;
+            for (i = 0; i < nv - 1; i += 2) {
                 if (eBeginStrip(this->ShadowRampTexture, 4, biasedIdentity)) {
                     eAddVertex(p[i]);
                     eAddVertex(mid);

@@ -4143,6 +4143,7 @@ int dshad = 1;
  * @param worldLocal World-to-local transformation matrix.
  * @param biasedIdentity Perspective-biased identity matrix.
  * @param body_lod Vehicle body level of detail index.
+ * @return void.
  */
 void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, bMatrix4 *localWorld, bMatrix4 *worldLocal, bMatrix4 *biasedIdentity,
                                         int body_lod) {

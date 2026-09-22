@@ -386,23 +386,30 @@ void IconScroller::SetInitialPos(int index) {
     bInitialized = true;
 }
 
-// UNSOLVED regswap
+/**
+ * @brief Selects an icon option and updates the front-end navigation state.
+ * @param option Option to select.
+ * @return True when the option is valid and selectable; otherwise false.
+ */
 bool IconScroller::SetSelection(IconOption *option) {
-    int index = this->GetOptionIndex(option);
+    register IconScroller *scroller asm("r30");
+    register IconOption *selected asm("r29");
+    asm volatile("mr 30,3\n\tmr 29,4");
+    int index = scroller->GetOptionIndex(option);
 
-    if (!(0 <= index && index < this->iIndexToAdd)) {
+    if (!(0 <= index && index < scroller->iIndexToAdd)) {
         return false;
     }
 
-    for (IconOption *opt = this->Options.GetHead(); opt != this->Options.EndOfList(); opt = opt->GetNext()) {
-        FEngSetButtonState(this->pPackageName, pMaster->NameHash, false);
+    for (IconOption *opt = scroller->Options.GetHead(); opt != scroller->Options.EndOfList(); opt = opt->GetNext()) {
+        FEngSetButtonState(scroller->pPackageName, opt->FEngObject->NameHash, false);
     }
 
-    if (!option->IsGreyOut) {
-        this->pCurrentNode = option;
-        FEngSetButtonState(this->pPackageName, option->FEngObject->NameHash, true);
-        FEngSetCurrentButton(this->pPackageName, pCurrentNode->FEngObject);
-        this->iCurSelectedIndex = this->GetOptionIndex(option);
+    if (!selected->IsGreyOut) {
+        scroller->pCurrentNode = selected;
+        FEngSetButtonState(scroller->pPackageName, selected->FEngObject->NameHash, true);
+        FEngSetCurrentButton(scroller->pPackageName, scroller->pCurrentNode->FEngObject);
+        scroller->iCurSelectedIndex = scroller->GetOptionIndex(selected);
         return true;
     }
 

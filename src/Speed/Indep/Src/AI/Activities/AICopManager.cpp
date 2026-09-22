@@ -1823,6 +1823,13 @@ bool ForcePursuitStart = false; // Decl: 3193
 
 /**
  * @brief Updates active pursuits, support vehicles, and pending roadblocks.
+ *
+ * Removes inactive or destroyed vehicles from their pursuits and roadblocks,
+ * records eligible cop-destruction statistics, caches the active helicopter,
+ * processes pursuit requests, and services pending roadblock requests. Pursuits
+ * that should end are detached and their remaining vehicles are instructed to
+ * flee before any newly requested pursuit is created and attached.
+ *
  * @param none This method operates on the manager's active pursuit state.
  * @return void
  */

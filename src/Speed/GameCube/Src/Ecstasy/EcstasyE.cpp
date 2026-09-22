@@ -667,12 +667,22 @@ void __InitVI(void) {
     }
 }
 
+/**
+ * @brief Initializes the orthographic matrices used by the frontend and screen quad.
+ *
+ * The scale and translation preserve the render mode's aspect ratio for both
+ * NTSC and PAL output before the matrices are sent to the graphics hardware.
+ */
 void __InitMatrices(void) {
     Mtx fe_scale;
-    float gcn_scale = IsPal50Mode ? 0.81f : 0.84f;
-    float transx = ((float)_rmode->fbWidth - (float)_rmode->fbWidth * gcn_scale * (448.f / 378.f)) / 2.0f;
-    float transy = ((float)_rmode->efbHeight - gcn_scale / 448.0f * (float)_rmode->efbHeight * (float)_rmode->xfbHeight) / 2.0f;
-    MTXScale(fe_scale, gcn_scale * (448.f / 378.f), gcn_scale / 448.0f * (float)_rmode->xfbHeight, 1.0f);
+    float transx;
+    float transy;
+    float gcn_scale;
+
+    gcn_scale = IsPal50Mode ? 0.81f : 0.84f;
+    transx = ((float)_rmode->fbWidth - (float)_rmode->fbWidth * gcn_scale * (448.f / 378.f)) * 0.5f;
+    transy = ((float)_rmode->efbHeight - gcn_scale * (1.0f / 448.0f) * (float)_rmode->efbHeight * (float)_rmode->xfbHeight) * 0.5f;
+    MTXScale(fe_scale, gcn_scale * (448.f / 378.f), gcn_scale * (1.0f / 448.0f) * (float)_rmode->xfbHeight, 1.0f);
     MTXTransApply(fe_scale, viewMOrthographic, transx, transy, 10.0f);
     MTXOrtho(projMOrthographic, 0.0f, _rmode->efbHeight, 0.0f, _rmode->fbWidth, 0.0f, -100000.0f);
     MTXIdentity(viewMOrthographicScreenQuad);

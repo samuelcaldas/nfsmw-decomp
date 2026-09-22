@@ -963,7 +963,17 @@ void EmitterSystem::UpdateInterestPoints() {
     }
 }
 
+/**
+ * @brief Advances all active emitter particles by one simulation step.
+ *
+ * Particles are culled when their lifetime or alpha threshold expires. The
+ * emitter data cache is refreshed only when the current emitter uses a
+ * different attribute set, preserving the original particle update order.
+ *
+ * @param dt Elapsed simulation time in seconds.
+ */
 void EmitterSystem::UpdateParticles(float dt) {
+    ProfileNode profile_node("TODO", 0);
     if (!EnableParticleSystem || this->mTotalNumParticles == 0) {
         return;
     }
@@ -977,6 +987,7 @@ void EmitterSystem::UpdateParticles(float dt) {
     EffectParticleAnimation anim_type = ANIMATE_PARTICLE_NONE;   // r18
     float fAnimFPS = 0.0f;                                       // f23
     const EmitterDataAttribWrapper *last_emitter_data = nullptr; // sp68
+    const Attrib::Gen::emitterdata *last_emitter_data_atr = nullptr;
 
     for (EmitterGroup *grp = this->mEmitterGroups.GetHead(); grp != this->mEmitterGroups.EndOfList(); grp = grp->GetNext()) {
         if (!this->IsCloseEnough(grp, 0, 0.7f)) {
@@ -991,28 +1002,30 @@ void EmitterSystem::UpdateParticles(float dt) {
                 if (particles.IsEmpty()) {
                     continue;
                 }
-                EmitterDataAttribWrapper *this_emmiter_data = em->GetEmitterData();
-                const Attrib::Gen::emitterdata *this_emitter_data_atr = &this_emmiter_data->GetAttributes();
-                bool emitter_data_switch = this_emmiter_data != last_emitter_data;
+                const EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
+                const Attrib::Gen::emitterdata *this_emitter_data_atr = &this_emitter_data->GetAttributes();
+                bool emitter_data_switch = this_emitter_data != last_emitter_data;
                 if (emitter_data_switch) {
-                    ed_drag = this_emitter_data_atr->Drag();
-                    ed_gravity = this_emitter_data_atr->Gravity();
-                    ed_life = this_emitter_data_atr->Life();
-                    ExtraBasis = this_emmiter_data->GetExtraBasis();
-                    ColourBasis = this_emmiter_data->GetColourBasis();
+                    last_emitter_data_atr = this_emitter_data_atr;
+                    ed_drag = last_emitter_data_atr->Drag();
+                    ed_gravity = last_emitter_data_atr->Gravity();
+                    ed_life = last_emitter_data_atr->Life();
+                    ExtraBasis = this_emitter_data->GetExtraBasis();
+                    ColourBasis = this_emitter_data->GetColourBasis();
                     texture_animation = true;
-                    const ParticleAnimationInfo &animinfo = this_emitter_data_atr->TextureAnimation();
+                    const ParticleAnimationInfo &animinfo = last_emitter_data_atr->TextureAnimation();
                     if (animinfo.AnimType == ANIMATE_PARTICLE_NONE) {
                         texture_animation = false;
                     }
                     anim_type = animinfo.AnimType;
                     fAnimFPS = animinfo.FPS;
-                    last_emitter_data = this_emmiter_data;
+                    last_emitter_data = this_emitter_data;
                 }
                 for (EmitterParticle *particle = particles.GetHead(); particle != particles.EndOfList();) {
                     bVector3 pvel;
                     bVector3 pacc;
                     bVector3 ppos;
+                    float tlife;
                     UMath::Vector4 t;
                     UMath::Vector4 extra_params;
                     UMath::Vector4 col;
@@ -1057,7 +1070,7 @@ void EmitterSystem::UpdateParticles(float dt) {
                         CompressVector(&pvel, &particle->mVel);
                         CompressVector(&pacc, &particle->mAcc);
                         particle->mLife -= time_step;
-                        float tlife = static_cast<int>(particle->mLife);
+                        tlife = static_cast<int>(particle->mLife);
                         t.w = 1.0f;
                         t.z = 1.0f - tlife / (ed_life * 1024.0f);
                         t.y = t.z * t.z;

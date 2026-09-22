@@ -20,3 +20,11 @@ bool GManager::GetInGameplay() const {
 unsigned int GManager::GetNumMilestones() {
     return this->mNumMilestones;
 }
+
+/**
+ * @brief Returns the number of configured speed traps.
+ * @return The number of speed trap records managed by the gameplay manager.
+ */
+unsigned int GManager::GetNumSpeedTraps() {
+    return this->mNumSpeedTraps;
+}

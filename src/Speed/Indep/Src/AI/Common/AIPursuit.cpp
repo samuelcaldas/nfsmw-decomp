@@ -1091,11 +1091,19 @@ void AIPursuit::EvenOutOffsets(Vector3List &copRelativePositions, FormationTarge
 DECLARE_CONTAINER_TYPE(AIPursuitAssignClosestOffsetsDistances);
 DECLARE_CONTAINER_TYPE(AIPursuitAssignClosestOffsetsMaximums);
 
-// Functionally matching ig? dwarf is matching, some issues with a loop
+/**
+ * @brief Matches participating pursuit vehicles to tactical formation offsets.
+ * @param copRelativePositions List of vehicle positions relative to target vehicle.
+ * @param assignCopList List of pursuit AI agents to be assigned to positions.
+ * @param formationOffsets List of tactical target formation positions.
+ * @param information Flag controlling tactical assignment logging.
+ * @return void
+ */
 void AIPursuit::AssignClosestOffsets(Vector3List &copRelativePositions, Pursuers &assignCopList, FormationTargetList &formationOffsets,
                                      bool information) {
     int numRows = copRelativePositions.size();
     int numCols = formationOffsets.size();
+    const float zScale = 0.25f;
 
     UTL::Std::vector<float, _type_AIPursuitAssignClosestOffsetsDistances> copOffsetDistance;
     UTL::Std::vector<float, _type_AIPursuitAssignClosestOffsetsMaximums> copOffsetMaximums;
@@ -1121,11 +1129,12 @@ void AIPursuit::AssignClosestOffsets(Vector3List &copRelativePositions, Pursuers
         copOffsetMaximums.push_back(maxDistance);
     }
 
-    const float INDEX_ASSIGNED = -1.0f;
     int copsToAssignOffsets = formationOffsets.size();
+    const float INDEX_ASSIGNED = -1.0f;
     do {
         int currentCop = -1;
         int currentOffset;
+        int j;
         float furthestDistance = 0.0f;
 
         for (int i = 0; i < numRows; ++i) {
@@ -1135,54 +1144,63 @@ void AIPursuit::AssignClosestOffsets(Vector3List &copRelativePositions, Pursuers
                 currentCop = i;
             }
         }
-        if (currentCop < 0) {
-            continue;
+        if (currentCop >= 0) {
+            goto search_offsets;
         }
+        goto iteration_done;
 
-        currentOffset = -1;
-        // TODO issue with this loop
-        for (int j = 0; j < numCols; ++j) {
-            float distance = copOffsetDistance[currentCop * numCols + j];
-            if (distance != INDEX_ASSIGNED && distance == furthestDistance) {
-                currentOffset = j;
-                break;
-            }
-        }
-        if (currentOffset < 0) {
-            continue;
-        }
+        found_offset:
+            currentOffset = j;
+            goto offsets_done;
 
-        currentCop = -1;
-        float closestDistance = 100000.0f;
-        for (int i = 0; i < numRows; ++i) {
-            float distance = copOffsetDistance[i * numCols + currentOffset];
-            if (distance != INDEX_ASSIGNED && copOffsetMaximums[i] != INDEX_ASSIGNED && distance < closestDistance) {
-                closestDistance = distance;
-                currentCop = i;
-            }
-        }
-        if (currentCop < 0) {
-            continue;
-        }
-
-        this->AssignCopOffset(currentCop, assignCopList, formationOffsets[currentOffset].Offset, formationOffsets[currentOffset].InPositionOffset,
-                              formationOffsets[currentOffset].Goal, information);
-        copOffsetMaximums[currentCop] = INDEX_ASSIGNED;
-        for (int i = 0; i < numRows; ++i) {
-            copOffsetDistance[i * numCols + currentOffset] = INDEX_ASSIGNED;
-
-            if (copOffsetMaximums[i] < 0.0f) {
-                continue;
+        search_offsets:
+            j = 0;
+            currentOffset = -1;
+            for (; j < numCols; ++j) {
+                float distance = copOffsetDistance[currentCop * numCols + j];
+                if (distance == INDEX_ASSIGNED) {
+                    continue;
+                }
+                if (distance == furthestDistance) {
+                    goto found_offset;
+                }
             }
 
-            float maxDistance = 0.0f;
-            for (int j = 0; j < numCols; ++j) {
-                float distance = copOffsetDistance[i * numCols + j];
+        offsets_done:
+            if (currentOffset >= 0) {
+                currentCop = -1;
+                float closestDistance = 100000.0f;
+                for (int i = 0; i < numRows; ++i) {
+                    float distance = copOffsetDistance[i * numCols + currentOffset];
+                    if (distance != INDEX_ASSIGNED && copOffsetMaximums[i] != INDEX_ASSIGNED && distance < closestDistance) {
+                        closestDistance = distance;
+                        currentCop = i;
+                    }
+                }
+                if (currentCop >= 0) {
+                    this->AssignCopOffset(currentCop, assignCopList, formationOffsets[currentOffset].Offset,
+                                          formationOffsets[currentOffset].InPositionOffset, formationOffsets[currentOffset].Goal, information);
+                    copOffsetMaximums[currentCop] = INDEX_ASSIGNED;
+                    for (int i = 0; i < numRows; ++i) {
+                        copOffsetDistance[i * numCols + currentOffset] = INDEX_ASSIGNED;
 
-                maxDistance = UMath::Max(distance, maxDistance);
+                        if (copOffsetMaximums[i] < 0.0f) {
+                            continue;
+                        }
+
+                        float maxDistance = 0.0f;
+                        for (int j = 0; j < numCols; ++j) {
+                            float distance = copOffsetDistance[i * numCols + j];
+
+                            maxDistance = UMath::Max(distance, maxDistance);
+                        }
+                        copOffsetMaximums[i] = maxDistance;
+                    }
+                }
             }
-            copOffsetMaximums[i] = maxDistance;
-        }
+
+        iteration_done:
+            ;
     } while (--copsToAssignOffsets > 0);
 }
 

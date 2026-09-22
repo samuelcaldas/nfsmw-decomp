@@ -141,13 +141,13 @@ bool QuickRaceUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, Ca
 }
 
 /**
- * @brief Checks whether a performance package is unlocked in quick race mode.
- * @param filter Unlock filter category.
- * @param pkg_type Performance package upgrade type.
- * @param level Upgrade level.
- * @param player Player index.
- * @param backroom Flag indicating backroom availability.
- * @return True if the package is unlocked, false otherwise.
+ * @brief Determines whether a performance package is available in Quick Race mode.
+ * @param filter Unlock filter category used to evaluate the package.
+ * @param pkg_type Performance package upgrade type to check.
+ * @param level Required upgrade level.
+ * @param player Player index associated with the unlock query.
+ * @param backroom Whether the package is being checked in the backroom.
+ * @return True when the package is unlocked; otherwise, false.
  */
 bool QuickRaceUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, int player, bool backroom) {
     bool answer = UnlockAllThings != 0;
@@ -386,12 +386,12 @@ bool CareerUnlocker::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPa
 }
 
 /**
- * @brief Checks whether a performance package is unlocked in career mode.
- * @param filter Unlock filter category.
- * @param pkg_type Performance package upgrade type.
- * @param level Upgrade level.
- * @param backroom Flag indicating backroom availability.
- * @return True if the package is unlocked, false otherwise.
+ * @brief Determines whether a performance package is available in Career mode.
+ * @param filter Unlock filter category used to evaluate the package.
+ * @param pkg_type Performance package upgrade type to check.
+ * @param level Required upgrade level.
+ * @param backroom Whether the package is being checked in the backroom.
+ * @return True when the package is unlocked; otherwise, false.
  */
 bool CareerUnlocker::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, bool backroom) {
     bool answer = UnlockAllThings != 0;

@@ -12,3 +12,11 @@
 bool GManager::GetInGameplay() const {
     return this->mInGameplay;
 }
+
+/**
+ * @brief Returns the number of configured milestones.
+ * @return The number of milestone records managed by the gameplay manager.
+ */
+unsigned int GManager::GetNumMilestones() {
+    return this->mNumMilestones;
+}

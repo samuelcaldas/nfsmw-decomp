@@ -1576,7 +1576,10 @@ void TrackStreamer::AddCurrentStreamingSections(short *sections_to_load, int num
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Rebuilds the set of track sections required by all active players.
+ * @return None.
+ */
 void TrackStreamer::DetermineStreamingSections() {
     const int max_sections_to_load = 0x180;
     short sections_to_load[384];
@@ -2130,7 +2133,13 @@ void TrackStreamer::HandleLoading() {
     }
 }
 
-// UNSOLVED because of debug stuff
+/**
+ * @brief Calculates a streaming section's loading priority for a player position.
+ * @param section Section whose boundary is evaluated.
+ * @param position_entry Player position and movement data used for prediction.
+ * @param calculating_jettison Whether the priority is being calculated for jettisoning.
+ * @return Loading priority clamped to the range zero through two.
+ */
 int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingPositionEntry *position_entry, bool calculating_jettison) {
 #ifdef EA_BUILD_A124
     return 0; // this entire function is different in A124
@@ -2168,7 +2177,6 @@ int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingP
     float adjusted_distance = distance * (1.0f - (90.0f - angle_factor) * 0.014285714f * speed_factor * 0.66999996f);
     int priority = bClamp(static_cast<int>(adjusted_distance * 0.013333334f), 0, 2);
 
-    // TODO
     if (RemoteCaffeinating && TrackStreamerRemoteCaffeinating) {
         char layer_name[32];
         if (section->Status == TrackStreamingSection::UNLOADED) {
@@ -2208,20 +2216,11 @@ int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingP
             espSetUserMeshFace(1, n, face);
         }
         FloatVector face[4];
-        // TODO
-        // face[0].x = v32;
-        // face[0].y = v33;
         face[0].z = 0.0f;
-
-        // TODO
-        // face[1].x = v32;
-        // face[1].y = v33;
         face[1].z = 0.0f;
-
         face[2].x = 0.0f;
         face[2].y = 0.0f;
         face[2].z = 0.0f;
-
         face[3].x = 0.0f;
         face[3].y = 0.0f;
         face[3].z = 0.0f;

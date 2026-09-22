@@ -96,6 +96,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `CarCustomizeManager::IsCategoryNew`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/customize/CustomizeManager.cpp`
+- **Virtual Address**: `0x803B2044` (`2151383108`)
+- **Size**: 1,248 bytes (312 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool CarCustomizeManager::IsCategoryNew(uint32 cat);
+  ```
+- **Description**: Checks whether any unlockable item or subcategory within a vehicle customization category is marked as new.
+- **Compiler Details**: Required bitwise OR (`answer = answer | UnlockSystem::IsUnlockableNew(...)`) rather than short-circuit logical OR (`||`) to prevent premature branching and generate the exact normalization sequence (`0 != 0` in `r9`, return value in `r0`, `or r3, r9, r0`).
+
+---
+
 ## 2. Audio Subsystem (`zEAXSound2`)
 
 ### `NFSMixMapState::CreateMixCtls`
@@ -224,4 +239,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *);
   ```
 - **Description**: Adds a speed trap trigger instance to the world map display. Implemented as a leaf stub returning void (`blr`).
+
+---
+
+## 4. World Subsystem (`zWorld`)
+
+### `CarRenderInfo::DrawKeithProjShadow`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld`
+- **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
+- **Virtual Address**: `0x802C9BC0` (`2150430496`)
+- **Size**: 1,692 bytes (423 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, bMatrix4 *localWorld, bMatrix4 *worldLocal, bMatrix4 *biasedIdentity, int body_lod);
+  ```
+- **Description**: Computes and renders the projected car shadow volume mesh onto ground collision surfaces. Handles world-to-local and local-to-world geometry transformations, collision face querying via `FindClosestFace` and `HeightAtPoint`, shadow volume extrusion, ground polygon clipping, vertex coloring/translucency falloff based on height above ground, and triangle fan/strip rendering into the view.
+- **Compiler Details**: Emits PowerPC paired single SIMD instructions (`psq_st`, `psq_l`) for 3D vector transformations. Exact match required separating vertex truncation and decrement across discrete expressions (`int nv = nVert; nv &= ~1; for (i = 0; i < nv - 1; i += 2)`) to guide GCC 2.95 instruction selection to emit `clrrwi r9, r9, 1` and `addi r9, r9, -1` with `cmpw r30, r9`, matching the original binary control flow and register allocation without spilling to the stack.
 

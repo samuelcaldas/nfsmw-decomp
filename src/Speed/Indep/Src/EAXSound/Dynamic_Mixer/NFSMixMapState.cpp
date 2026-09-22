@@ -94,7 +94,15 @@ stMasterMixChProc *NFSMixMapState::GetMasterMixChProc(int nMIXCHIN_ID, int nInst
     return nullptr;
 }
 
-// UNSOLVED
+/**
+ * @brief Creates the per-state processing records for each mix control.
+ *
+ * The mix-map header stores variable-sized control records. This method resolves
+ * each record's curve and scale references, initializes its shared and unique
+ * processing data, and advances to the next packed record.
+ * @param this The mix-map state whose packed control records are initialized.
+ * @return Nothing. The initialized records are stored in the state and map pools.
+ */
 void NFSMixMapState::CreateMixCtls() {
     int offset = this->m_pMMStateHdr->OffsetMixCtlData;
     this->m_MixCtlsAdded = 0;
@@ -110,7 +118,8 @@ void NFSMixMapState::CreateMixCtls() {
 
         this->m_MixStateParams.pMixCtlProcs = this->m_pNFSMixMap->GetProcessMixCtlPtr(false);
 
-        for (int n = 0; n < this->m_pMixCtlHdr->NumMixCtls; n++) {
+        register int n asm("r28") = 0;
+        for (; n < this->m_pMixCtlHdr->NumMixCtls;) {
             mixctlparm.nINPUTID = pparams->nINPUTID;
             mixctlparm.nUScaleCntSwing = pparams->nUScaleCntSwing;
             mixctlparm.nINPUTID &= 0xFFFF07FFU;
@@ -146,8 +155,12 @@ void NFSMixMapState::CreateMixCtls() {
                 int ntmp;
 
                 if ((pparams->nUScaleCntSwing & 0x8000) == 0) {
-                    pmcp->psdata->nOffset = pparams->nUScaleCntSwing & 0x7FFF;
-                    ntmp = -pmcp->psdata->nOffset;
+                    {
+                        register stMixCtlSharedData *psdata asm("r11") = pmcp->psdata;
+                        psdata->nOffset = pparams->nUScaleCntSwing & 0x7FFF;
+                    }
+                    register int nOffset asm("r3") = pmcp->psdata->nOffset;
+                    ntmp = -nOffset;
                 } else {
                     ntmp = pparams->nUScaleCntSwing | 0xFFFF0000;
                 }
@@ -155,6 +168,8 @@ void NFSMixMapState::CreateMixCtls() {
                 pmcp->psdata->nRatio = 0x7FFF - NFSMixShape::GetQ15FromHundredthsdB(ntmp);
             }
 
+            asm volatile("" : : : "memory");
+            n++;
             pmcp->pudata->CmpdBOut = 0;
             pmcp->pudata->pstCurveData = pcurvedata;
             pmcp->pudata->ppScaleRatios = reinterpret_cast<int **>(pscaleaddr);

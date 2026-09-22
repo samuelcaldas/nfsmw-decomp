@@ -736,9 +736,13 @@ bool CarCustomizeManager::IsPartNew(SelectablePart *part, int perf_unlock_level)
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Checks if any items within a customization category are newly unlocked.
+ * @param cat The car customization category identifier.
+ * @return True if newly unlocked items exist in the category; otherwise false.
+ */
 bool CarCustomizeManager::IsCategoryNew(uint32 cat) {
-    bool answer;
+    bool answer = false;
     eUnlockableEntity titty;
 
     switch (cat) {
@@ -909,7 +913,7 @@ bool CarCustomizeManager::IsCategoryNew(uint32 cat) {
             return true;
     }
 
-    answer = UnlockSystem::IsUnlockableNew(GetUnlockFilter(), titty, -2);
+    answer = answer | UnlockSystem::IsUnlockableNew(GetUnlockFilter(), titty, -2);
     return answer;
 }
 

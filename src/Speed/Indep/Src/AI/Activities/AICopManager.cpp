@@ -1823,6 +1823,8 @@ bool ForcePursuitStart = false; // Decl: 3193
 
 /**
  * @brief Updates active pursuits, support vehicles, and pending roadblocks.
+ * @param none This method operates on the manager's active pursuit state.
+ * @return void
  */
 void AICopManager::UpdatePursuits() {
     IVehicle *ivehicle_chopper = nullptr;

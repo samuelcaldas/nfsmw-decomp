@@ -2,3 +2,13 @@
 #ifdef _MSC_VER
 #pragma warning(disable : 4716)
 #endif
+
+#include "Speed/Indep/Src/Gameplay/GManager.h"
+
+/**
+ * @brief Reports whether gameplay is currently active.
+ * @return True when the manager is in gameplay; otherwise false.
+ */
+bool GManager::GetInGameplay() const {
+    return this->mInGameplay;
+}

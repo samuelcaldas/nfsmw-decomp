@@ -390,6 +390,16 @@ static const float Tweak_AITurningDragReductionMin = 0.23f;
 static const float Tweak_AITurningDragReductionMax = 0.3f;
 
 // UNSOLVED, float math
+/**
+ * @brief Updates a loaded tire's slip, traction, and force state.
+ * @param lat_vel Lateral tire velocity.
+ * @param fwd_vel Forward tire velocity.
+ * @param body_speed Vehicle body speed.
+ * @param load Normal tire load.
+ * @param dT Simulation timestep.
+ * @param drag_reduction Lateral-force drag reduction factor.
+ * @return The calculated lateral force.
+ */
 float SuspensionSimple::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float body_speed, float load, float dT, float drag_reduction) {
     if (this->mLoad <= 0.0f && !this->mBrakeLocked) {
         this->mAV = fwd_vel / this->mRadius;

@@ -672,6 +672,7 @@ void __InitVI(void) {
  *
  * The scale and translation preserve the render mode's aspect ratio for both
  * NTSC and PAL output before the matrices are sent to the graphics hardware.
+ * @return void
  */
 void __InitMatrices(void) {
     Mtx fe_scale;

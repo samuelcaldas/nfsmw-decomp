@@ -154,3 +154,74 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   unsigned int GManager::GetNumSpeedTraps();
   ```
 - **Description**: Returns the count of speed trap records loaded in the current race session.
+
+---
+
+### `GRaceStatus::OnRemovedVehicleCache`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019F324` (`2149181956`)
+- **Size**: 4 bytes (1 instruction)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::OnRemovedVehicleCache(IVehicle *);
+  ```
+- **Description**: Handles notification when a vehicle is removed from the cache. Implemented as a leaf stub returning void (`blr`).
+
+---
+
+### `GRaceStatus::SetRaceContext`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019F328` (`2149181960`)
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::SetRaceContext(GRace::Context context);
+  ```
+- **Description**: Assigns the race context for the active race event to `mRaceContext` (`stw r4, 0x1aa8(r3); blr`).
+
+---
+
+### `GRaceStatus::GetRacerCount`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019F4C8` (`2149182376`)
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  int GRaceStatus::GetRacerCount() const;
+  ```
+- **Description**: Retrieves the count of racers participating in the current event from `mRacerCount` (`lwz r3, 0x1a9c(r3); blr`).
+
+---
+
+### `GRaceStatus::AddAvailableEventToMap`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801A0268` (`2149185864`)
+- **Size**: 4 bytes (1 instruction)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::AddAvailableEventToMap(GRuntimeInstance *, GRuntimeInstance *);
+  ```
+- **Description**: Adds an available event trigger and associated activity to the world map display. Implemented as a leaf stub returning void (`blr`).
+
+---
+
+### `GRaceStatus::AddSpeedTrapToMap`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801A026C` (`2149185868`)
+- **Size**: 4 bytes (1 instruction)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *);
+  ```
+- **Description**: Adds a speed trap trigger instance to the world map display. Implemented as a leaf stub returning void (`blr`).
+

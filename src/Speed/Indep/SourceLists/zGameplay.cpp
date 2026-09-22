@@ -4,6 +4,7 @@
 #endif
 
 #include "Speed/Indep/Src/Gameplay/GManager.h"
+#include "Speed/Indep/Src/Gameplay/GRaceStatus.cpp"
 
 /**
  * @brief Reports whether gameplay is currently active.

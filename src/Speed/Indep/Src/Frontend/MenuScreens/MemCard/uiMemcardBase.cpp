@@ -309,7 +309,14 @@ eMenuSoundTriggers UIMemcardBase::NotifySoundMessage(u32 msg, eMenuSoundTriggers
     return MenuScreen::NotifySoundMessage(msg, maybe);
 }
 
-// UNSOLVED
+/**
+ * @brief Handles frontend notifications for memory card interactions.
+ * @param msg The frontend message hash.
+ * @param obj The frontend object associated with the message.
+ * @param param1 The first message parameter.
+ * @param param2 The second message parameter.
+ * @return Nothing.
+ */
 void UIMemcardBase::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2) {
     if (msg != __BUTTON_PRESSED__ && MemoryCard::GetInstance()->GetOp() == 0) {
         UIMemcardKeyboard::NotificationMessage(msg, obj, param1, param2);
@@ -320,54 +327,111 @@ void UIMemcardBase::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 
     const u32 FEObj_HIGHLIGHTCOMPLETE = 0;
     const u32 FEObj_UNHIGHLIGHTCOMPLETE = 0;
 
-    switch (msg) {
-        case FEHASH_EXITCOMPLETE:
-            ExitComplete();
-            break;
-        case 0x3a2be557:
-        case FEHASH_INITCOMPLETE:
-            InitComplete();
-            break;
-        case 0xda5b8712:
-            bStrCpy(m_FileName, FEngGetEditedString());
-            FEDatabase->GetUserProfile(0)->SetProfileName(m_FileName, true);
-            FEDatabase->DeallocBackupDB();
-            FEDatabase->bProfileLoaded = true;
-            DoSaveFlow(MCSF_PromptForSave);
-            break;
-        case 0xc9d30688:
-            if ((gMemcardSetup.GetCommand()) == MCO_CreateNew && !FEDatabase->bProfileLoaded) {
-                DoSaveFlow(MCSF_PromptForCreate);
-            } else if ((gMemcardSetup.GetCommand() & MCO_CreateNew) != 0 && FEDatabase->bProfileLoaded) {
-                DoSaveFlow(MCSF_PromptForDestoryCreate);
-            } else {
-                FEPrintf(m_pDisplayMsg, "");
-                m_bDelayedFailed = true;
-            }
-            break;
-        case FEMSG_SCREEN_TICK:
-            if (m_bDelayedFailed) {
-                m_bDelayedFailed = false;
-                cFEng::Get()->QueueGameMessage(0x8867412d, GetPackageName(), 0xff);
-            }
-            break;
-        case 0xc502df5d:
-            m_bInButtonAnimation = true;
-            TranslateButton(obj);
-            break;
-        case __BUTTON_PRESSED__:
-            m_bInButtonAnimation = false;
-            gMemcardSetup.mLastController = param1;
-            HandleButtonPressed(__BUTTON_PRESSED__, obj, param1, param2, false);
-            break;
-        case 0xf35d144e:
-            SetupPromptCorruptProfile();
-            break;
-        case 0x54b3ac6c:
-            SetScreenVisible(false, 0);
-            cFEng::Get()->QueuePackagePush("MC_List.fng", 0, 0, false);
-            break;
+    if (msg == 0xc502df5d) {
+        goto translate_button;
     }
+    if (msg > 0xc502df5d) {
+        goto msg_gt_c502df5d;
+    }
+    if (msg == 0x3a2be557) {
+        goto init_complete;
+    }
+    if (msg > 0x3a2be557) {
+        goto msg_gt_3a2be557;
+    }
+    if (msg == __BUTTON_PRESSED__) {
+        goto button_pressed;
+    }
+    if (msg == FEHASH_INITCOMPLETE) {
+        goto init_complete;
+    }
+    goto notification_end;
+
+msg_gt_3a2be557:
+    if (msg == 0x54b3ac6c) {
+        goto package_push;
+    }
+    goto notification_end;
+
+msg_gt_c502df5d:
+    if (msg == 0xda5b8712) {
+        goto accept_edited_text;
+    }
+    if (msg > 0xda5b8712) {
+        goto msg_gt_da5b8712;
+    }
+    if (msg == FEMSG_SCREEN_TICK) {
+        goto screen_tick;
+    }
+    if (msg == 0xc9d30688) {
+        goto decline_edited_text;
+    }
+    goto notification_end;
+
+msg_gt_da5b8712:
+    if (msg == FEHASH_EXITCOMPLETE) {
+        goto exit_complete;
+    }
+    if (msg == 0xf35d144e) {
+        goto corrupt_profile;
+    }
+    goto notification_end;
+
+exit_complete:
+    ExitComplete();
+    goto notification_end;
+
+init_complete:
+    InitComplete();
+    goto notification_end;
+
+accept_edited_text:
+    bStrCpy(m_FileName, FEngGetEditedString());
+    FEDatabase->GetUserProfile(0)->SetProfileName(m_FileName, true);
+    FEDatabase->DeallocBackupDB();
+    FEDatabase->bProfileLoaded = true;
+    DoSaveFlow(MCSF_PromptForSave);
+    goto notification_end;
+
+decline_edited_text:
+    if ((gMemcardSetup.GetCommand()) == MCO_CreateNew && !FEDatabase->bProfileLoaded) {
+        DoSaveFlow(MCSF_PromptForCreate);
+    } else if ((gMemcardSetup.GetCommand() & MCO_CreateNew) != 0 && FEDatabase->bProfileLoaded) {
+        DoSaveFlow(MCSF_PromptForDestoryCreate);
+    } else {
+        FEPrintf(m_pDisplayMsg, "");
+        m_bDelayedFailed = true;
+    }
+    goto notification_end;
+
+screen_tick:
+    if (m_bDelayedFailed) {
+        m_bDelayedFailed = false;
+        cFEng::Get()->QueueGameMessage(0x8867412d, GetPackageName(), 0xff);
+    }
+    goto notification_end;
+
+translate_button:
+    m_bInButtonAnimation = true;
+    TranslateButton(obj);
+    goto notification_end;
+
+button_pressed:
+    m_bInButtonAnimation = false;
+    gMemcardSetup.mLastController = param1;
+    HandleButtonPressed(__BUTTON_PRESSED__, obj, param1, param2, false);
+    goto notification_end;
+
+corrupt_profile:
+    SetupPromptCorruptProfile();
+    goto notification_end;
+
+package_push:
+    SetScreenVisible(false, 0);
+    cFEng::Get()->QueuePackagePush("MC_List.fng", 0, 0, false);
+
+notification_end:
+    return;
 }
 
 void UIMemcardBase::HandleButtonPressed(u32 msg, FEObject *obj, u32 param1, u32 param2, bool bPadBack) {

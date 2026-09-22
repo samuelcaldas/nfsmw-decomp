@@ -4130,7 +4130,19 @@ inline bVector3 sh_Adjust(const bVector3 &p, const bVector3 &mid) {
 
 int dshad = 1;
 
-// UNSOLVED r29, r24
+/**
+ * @brief Renders the projected car shadow volume onto the world geometry.
+ *
+ * Computes world-space shadow vertices, aligns them with the ground collision
+ * surface plane, and renders the projected shadow mesh for the active vehicle.
+ *
+ * @param view Active camera view rendering the scene.
+ * @param position World-space vehicle position.
+ * @param localWorld Local-to-world transformation matrix.
+ * @param worldLocal World-to-local transformation matrix.
+ * @param biasedIdentity Perspective-biased identity matrix.
+ * @param body_lod Vehicle body level of detail index.
+ */
 void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, bMatrix4 *localWorld, bMatrix4 *worldLocal, bMatrix4 *biasedIdentity,
                                         int body_lod) {
     if (body_lod >= 3) {
@@ -4150,7 +4162,8 @@ void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, b
     if (IsGameFlowInGame()) {
         eUnSwizzleWorldVector(*position, reinterpret_cast<bVector3 &>(usPoint));
         this->mWorldPos.FindClosestFace(this->mWCollider, usPoint, false);
-        if (this->mWorldPos.OnValidFace()) {
+        bColour2 = this->mWorldPos.OnValidFace();
+        if (bColour2) {
             zplane = this->mWorldPos.HeightAtPoint(usPoint);
         }
     }
@@ -4198,9 +4211,7 @@ void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, b
         unsigned int colour = static_cast<unsigned int>(bClamp(i, 0, 0xFE) << 24) | 0x00808080;
 
         if (dshad != 0) {
-            int nv = (nVert & ~1) - 1;
-
-            for (i = 0; i < nv; i += 2) {
+            for (i = 0; i < (nVert & ~1) - 1; i += 2) {
                 if (eBeginStrip(this->ShadowRampTexture, 4, biasedIdentity)) {
                     eAddVertex(p[i]);
                     eAddVertex(mid);

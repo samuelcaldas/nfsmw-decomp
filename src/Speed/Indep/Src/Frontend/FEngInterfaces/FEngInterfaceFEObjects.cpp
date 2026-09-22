@@ -520,22 +520,28 @@ float FEngGetScaleY(FEObject *object) {
     }
 }
 
+/**
+ * @brief Sets the horizontal scale factor for a frontend object and recalculates dimensions.
+ * @param object Pointer to the FEObject to scale.
+ * @param x Horizontal scale factor.
+ */
 void FEngSetScaleX(FEObject *object, float x) {
-    if (object == nullptr) {
+    register FEObject *obj asm("r30") = object;
+    object = nullptr;
+    if (obj == nullptr) {
         return;
     }
 
-    FEObjData *data = object->GetObjData();
+    register FEObjData *data asm("r31") = obj->GetObjData();
     float scale = x;
     float size = data->Size.x;
 
-    // UNSOLVED
-    switch (object->Type) {
+    switch (obj->Type) {
         case FE_Image:
         case FE_Movie:
         case FE_ColoredImage:
         case FE_MultiImage: {
-            TextureInfo *pTex = GetTextureInfo(object->Handle, 1, 0);
+            TextureInfo *pTex = GetTextureInfo(obj->Handle, 1, 0);
             scale *= pTex->Width;
         }
         case FE_String:
@@ -551,26 +557,32 @@ void FEngSetScaleX(FEObject *object, float x) {
 
     const float SizeEpsilon = 0.001f;
     if (scale + SizeEpsilon < size || scale - SizeEpsilon > size) {
-        object->Flags |= FF_DirtyCode;
+        obj->Flags |= FF_DirtyCode;
     }
 }
 
+/**
+ * @brief Sets the vertical scale factor for a frontend object and recalculates dimensions.
+ * @param object Pointer to the FEObject to scale.
+ * @param y Vertical scale factor.
+ */
 void FEngSetScaleY(FEObject *object, float y) {
-    if (object == nullptr) {
+    register FEObject *obj asm("r30") = object;
+    object = nullptr;
+    if (obj == nullptr) {
         return;
     }
 
-    FEObjData *data = object->GetObjData();
+    register FEObjData *data asm("r31") = obj->GetObjData();
     float scale = y;
     float size = data->Size.y;
 
-    // UNSOLVED
-    switch (object->Type) {
+    switch (obj->Type) {
         case FE_Image:
         case FE_Movie:
         case FE_ColoredImage:
         case FE_MultiImage: {
-            TextureInfo *pTex = GetTextureInfo(object->Handle, 1, 0);
+            TextureInfo *pTex = GetTextureInfo(obj->Handle, 1, 0);
             scale *= pTex->Height;
         }
         case FE_String:
@@ -586,7 +598,7 @@ void FEngSetScaleY(FEObject *object, float y) {
 
     const float SizeEpsilon = 0.001f;
     if (scale + SizeEpsilon < size || scale - SizeEpsilon > size) {
-        object->Flags |= FF_DirtyCode;
+        obj->Flags |= FF_DirtyCode;
     }
 }
 

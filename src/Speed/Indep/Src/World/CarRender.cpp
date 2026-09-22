@@ -4162,8 +4162,7 @@ void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, b
     if (IsGameFlowInGame()) {
         eUnSwizzleWorldVector(*position, reinterpret_cast<bVector3 &>(usPoint));
         this->mWorldPos.FindClosestFace(this->mWCollider, usPoint, false);
-        bColour2 = this->mWorldPos.OnValidFace();
-        if (bColour2) {
+        if (this->mWorldPos.OnValidFace()) {
             zplane = this->mWorldPos.HeightAtPoint(usPoint);
         }
     }
@@ -4211,7 +4210,9 @@ void CarRenderInfo::DrawKeithProjShadow(eView *view, const bVector3 *position, b
         unsigned int colour = static_cast<unsigned int>(bClamp(i, 0, 0xFE) << 24) | 0x00808080;
 
         if (dshad != 0) {
-            for (i = 0; i < (nVert & ~1) - 1; i += 2) {
+            int nv = (nVert & ~1) - 1;
+
+            for (i = 0; i < nv; i += 2) {
                 if (eBeginStrip(this->ShadowRampTexture, 4, biasedIdentity)) {
                     eAddVertex(p[i]);
                     eAddVertex(mid);

@@ -260,7 +260,12 @@ void CarPartCuller::InitPart(eCullableCarParts type, const bVector3 *position) {
 // UNSOLVED
 void CarPartCuller::RenderPart(eCullableCarParts type, eView *view, const bMatrix4 *local_world, unsigned short stang) {}
 
-// UNSOLVED, weird debug_print stuff
+/**
+ * @brief Evaluates visibility planes to cull hidden vehicle body parts from rendering.
+ * @param camera_eye Pointer to the camera position vector in world space.
+ * @param stang Steering angle offset used to adjust front wheel culling planes.
+ * @return void
+ */
 void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
     ProfileNode profile_node("TODO", 0);
     bVector3 Modcamera_eye = *camera_eye;
@@ -298,10 +303,7 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
 
             if (plane_info->NumPlanes > 0) {
                 bVector3 v = *camera_eye - part_info->Position;
-                int debug_print = 0;
-
                 if (plane_info->Polarity == CULLING_POLARITY_ANY_VISIBLE) {
-                    debug_print = plane_info->NumPlanes;
                     int n = 0;
 
                     for (; n < plane_info->NumPlanes; n++) {
@@ -312,13 +314,12 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
                         }
 
                         float distance = bDot(&v, &normal) - plane_info->NormalDistance[n];
-                        debug_print = plane_info->NumPlanes;
                         if (distance < 0.0f) {
                             break;
                         }
                     }
 
-                    if (n == debug_print) {
+                    if (n == plane_info->NumPlanes) {
                         visible = false;
                     }
                 } else if (plane_info->Polarity == CULLING_POLARITY_ALL_MUST_BE_VISIBLE) {

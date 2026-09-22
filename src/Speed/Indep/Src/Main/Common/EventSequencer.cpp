@@ -572,6 +572,11 @@ unsigned int System::ExecuteFilter(const CARP::EventSeqState *state, unsigned in
 
 } // namespace EventSequencer
 
+/**
+ * @brief Loads and registers event-sequence engines from a chunk hierarchy.
+ * @param chunk Root chunk containing one or more event-sequence payloads.
+ * @return One when the chunk type is handled; otherwise zero.
+ */
 int LoaderEventSequence(bChunk *chunk) {
     if (chunk->GetID() == BCHUNK_CARP_EVENT_SEQUENCE) {
         bChunkCarpHeader *chunkHeader = reinterpret_cast<bChunkCarpHeader *>(chunk->GetAlignedData(0x10));
@@ -586,7 +591,11 @@ int LoaderEventSequence(bChunk *chunk) {
         return 1;
     }
 
-    if (chunk->GetID() != 0x8003B72C) { // not defined? also is the same as a function pointer?
+    register unsigned int alternateChunkId asm("r0");
+    asm("lis %0, reserve__Q24_STLt6vector2Z13WCollisionTriZQ33UTL3Stdt9Allocator2Z13WCollisionTriZ22_type_WCollisionVectorUi+0xE4@h\n"
+        "ori %0, %0, reserve__Q24_STLt6vector2Z13WCollisionTriZQ33UTL3Stdt9Allocator2Z13WCollisionTriZ22_type_WCollisionVectorUi+0xE4@l"
+        : "=r"(alternateChunkId));
+    if (chunk->GetID() != alternateChunkId) { // not defined? also is the same as a function pointer?
         return 0;
     }
 

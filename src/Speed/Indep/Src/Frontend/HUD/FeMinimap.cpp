@@ -241,7 +241,10 @@ void Minimap::ConvertPos(bVector2 &worldPos, bVector2 &minimapPos, TrackInfo *tr
                    1.0f;
 }
 
-// UNSOLVED MinimapRotateWithPlayer
+/**
+ * @brief Updates HUD minimap position, orientation, track alignment, and player blips.
+ * @param player Pointer to the active player interface.
+ */
 void Minimap::Update(IPlayer *player) {
     if (IsElementVisible() && (player != nullptr)) {
         if (player->GetSimable() == nullptr) {
@@ -251,9 +254,12 @@ void Minimap::Update(IPlayer *player) {
         MinimapRotateWithPlayer = 1;
         if (Sim::GetUserMode() == Sim::USER_SPLIT_SCREEN) {
             MinimapRotateWithPlayer = 0;
-        } else if (((GRaceStatus::Get().GetRaceParameters() == nullptr) ? FEDatabase->GetGameplaySettings()->ExploringMiniMapMode
-                                                                        : FEDatabase->GetGameplaySettings()->RacingMiniMapMode) == 0) {
-            MinimapRotateWithPlayer = 0;
+        } else {
+            uint8 mode = (GRaceStatus::Get().GetRaceParameters() == nullptr) ? FEDatabase->GetGameplaySettings()->ExploringMiniMapMode
+                                                                             : FEDatabase->GetGameplaySettings()->RacingMiniMapMode;
+            if (mode == 0) {
+                MinimapRotateWithPlayer = mode;
+            }
         }
 
         SetupMinimap(player);

@@ -66,6 +66,36 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `Minimap::Update`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/HUD/FeMinimap.cpp`
+- **Virtual Address**: `0x80144FFC` (`2148814560`)
+- **Size**: 616 bytes (154 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void Minimap::Update(IPlayer *player);
+  ```
+- **Description**: Updates HUD minimap position, orientation, track alignment, and player blips. Computes vehicle world coordinates and orientation, checks splitscreen and exploring/racing minimap preferences, and handles speed clamp bounds.
+- **Compiler Details**: Retains single store target for `MinimapRotateWithPlayer` across splitscreen guard and `mode == 0` check by preserving intermediate `mode` assignment.
+
+---
+
+### `SplashScreen::NotificationMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Loading/FESplashScreen.cpp`
+- **Virtual Address**: `0x80159E5C` (`2148900188`)
+- **Size**: 628 bytes (157 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void SplashScreen::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2);
+  ```
+- **Description**: Handles notifications, screen tick timeouts, pad inputs, and transitions for the splash screen. Enforces movie and total timeout thresholds, verifies track streaming permanent file status, and triggers attract mode via `BootFlowManager`.
+- **Compiler Details**: Pre-calculates `CalculateLastJoyEventTime()` before boolean evaluation to keep `timed_out` in volatile register `r7` and separate `bAttract` in `r11`, avoiding non-volatile register spilling to `r30` and maintaining the exact 0x28-byte stack frame.
+
+---
+
 ## 2. Audio Subsystem (`zEAXSound2`)
 
 ### `NFSMixMapState::CreateMixCtls`

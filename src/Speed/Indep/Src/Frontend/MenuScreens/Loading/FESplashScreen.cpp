@@ -94,7 +94,13 @@ Timer SplashScreen::CalculateLastJoyEventTime() {
 float SplashScreenMovieTimeout = 30.0f;
 float SplashScreenTotalTimeout = 0.0f;
 
-// UNSOLVED
+/**
+ * @brief Handles notifications, screen tick timeouts, pad inputs, and transitions for the splash screen.
+ * @param msg Notification event identifier.
+ * @param obj Front-end object associated with the notification.
+ * @param param1 Additional event parameter.
+ * @param param2 Additional event parameter.
+ */
 void SplashScreen::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2) {
     switch (msg) {
         case 0x98257537:
@@ -107,14 +113,16 @@ void SplashScreen::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 p
             DialogInterface::ShowOneButton(GetPackageName(), "", dialog_alert, 0x417b2601, 0x1fab5998, 0xa1161aaf);
             break;
         case FEMSG_SCREEN_TICK: {
-            bool timed_out = ((RealTimer - CalculateLastJoyEventTime()).GetSeconds() > SplashScreenMovieTimeout ||
+            Timer joy_timer = CalculateLastJoyEventTime();
+            bool timed_out = ((RealTimer - joy_timer).GetSeconds() > SplashScreenMovieTimeout ||
                               (SplashScreenTotalTimeout != 0 && (RealTimer - SplashStartedTimer).GetSeconds() > SplashScreenTotalTimeout));
 
+            bool bAttract = timed_out;
             if (TheTrackStreamer.IsPermFileLoading()) {
-                timed_out = false;
+                bAttract = false;
             }
 
-            if (timed_out) {
+            if (bAttract) {
                 if (!BootFlowManager::Get()->DoAttract()) {
                     SplashStartedTimer.ResetHigh();
                 }

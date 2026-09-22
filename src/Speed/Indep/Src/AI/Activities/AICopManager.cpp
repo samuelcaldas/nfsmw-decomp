@@ -1866,10 +1866,10 @@ void AICopManager::UpdatePursuits() {
             }
 
             if (IsDestroyed && vehicleRemoved && bAllowStatsToAccumulate) {
-                GManager::Get().TrackValue("cops_destroyed", (float)++this->mTotalCopsDestroyed);
+                GManager::Get().TrackValue("cops_destroyed", ++this->mTotalCopsDestroyed);
             }
         } else {
-            if (ivehicle->GetVehicleClass().GetValue() == VehicleClass::CHOPPER.GetValue()) {
+            if (ivehicle->GetVehicleClass() == VehicleClass::CHOPPER) {
                 ivehicle_chopper = ivehicle;
             }
         }

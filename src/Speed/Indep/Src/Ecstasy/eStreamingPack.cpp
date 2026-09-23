@@ -807,17 +807,12 @@ void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param
     stream_pack_loader->LoadingHeaderPhase2Callback(&user_load_info);
 
     streaming_pack->StreamingEntryTable = user_load_info.StreamingEntryTable;
+    int load_amount = user_load_info.LoadResourceFileAmount;
     streaming_pack->StreamingEntryNumEntries = user_load_info.StreamingEntryNumEntries;
     streaming_pack->SolidListHeader = user_load_info.SolidListHeader;
     streaming_pack->pTexturePackHeader = user_load_info.pTexturePackHeader;
 
-    // TODO
-    // for (int n = 0; n < 10; n++) {
-    //     eStreamingEntry *entry;
-    //     eStreamingPack *other_pack;
-    // }
-
-    if (user_load_info.LoadResourceFileAmount != 0) {
+    if (load_amount != 0) {
         streaming_pack->pResourceFile = CreateResourceFile(streaming_pack->Filename, RESOURCE_FILE_CAR, 0x0, user_load_info.LoadResourceFilePosition,
                                                            user_load_info.LoadResourceFileAmount);
 

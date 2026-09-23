@@ -3,7 +3,7 @@
 #include "Speed/Indep/Src/Generated/Messages/MMiscSound.h"
 #include "Speed/Indep/Src/Misc/Config.h"
 
-int Debug_Common_FE_OFF = 0; // Decl: 38
+extern int Debug_Common_FE_OFF;
 
 static const int CommonUISFXVolume = 16383; // Decl: 41
 static const int HARDCODED_FEVOL = 6553;    // Decl: 42
@@ -228,7 +228,8 @@ int EAXCommon::Play(void *peventst) {
         return -1;
     }
 
-    if (this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr() == nullptr) {
+    int *pout = this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr();
+    if (pout == nullptr) {
         return 0;
     }
 

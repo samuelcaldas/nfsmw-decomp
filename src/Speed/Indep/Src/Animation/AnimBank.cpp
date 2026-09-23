@@ -10,9 +10,6 @@
 #include "Speed/Indep/bWare/Inc/bSlotPool.hpp"
 #include "Speed/Indep/Libs/Support/Utility/UMath.h"
 
-SlotPool *AnimBankSlotPool = nullptr;
-bool AnimBankSlotPoolInitialized = false;
-
 CAnimBank::CAnimBank() {
     m_internalDynLoader = 0;
     m_pDynLoader = nullptr;
@@ -84,6 +81,9 @@ void CAnimBank::Cleanup() {
 
 // STRIPPED
 void CAnimBank::PrintfAnimBankContents() {}
+
+SlotPool *AnimBankSlotPool = nullptr;
+bool AnimBankSlotPoolInitialized = false;
 
 void InitAnimBankSlotPool() {
     if (!AnimBankSlotPoolInitialized) {

@@ -7,7 +7,7 @@
 #include "Speed/Indep/Src/World/WWorldMath.h"
 #include "Speed/Indep/Src/World/WWorldPos.h"
 
-bVector3 gNISSceneOrigin;
+bVector3 gNISSceneOrigin(0.0f, 0.0f, 0.0f);
 bAngle gNISSceneAngle = 0;
 
 bool ANIM_GetWorldHeight(const UMath::Vector3 &pt, float &height, UMath::Vector3 &norm);

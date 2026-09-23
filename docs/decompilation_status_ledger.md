@@ -66,6 +66,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEngine::UpdateMouseState` (`zFEng`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (96.67% match, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEPackageCommand::~FEPackageCommand` (`zFEng`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 - **`EAXSound::GetCurMusicVolume` (`zEAXSound`)**: Decompiled, verified (100.0% match, 52 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

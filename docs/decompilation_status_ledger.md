@@ -112,6 +112,10 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`Dynamics::Collision::Moment::SetInertia`, `SetMass`, `SetCG` (`zDynamics`)**: Decompiled, verified (100.0% match, 80 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
 - **`Dynamics::Collision::Geometry::FindIntersection`, `BoxVsSphere`, `Move`, Constructors (`zDynamics`)**: Decompiled, verified (100.0% match, 256 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
 - **`Dynamics::Articulation` Debug Draw Stubs (`Joint`, `Lever`, `Constraint`) (`zDynamics`)**: Decompiled, verified (100.0% match, 12 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Geometry::SphereVsSphere` (`zDynamics`)**: Decompiled, verified (100.0% match, 332 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation::Joint::AddConstraint` (`zDynamics`)**: Decompiled, verified (84.7% match, 272 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Moment::Moment` (`zDynamics`)**: Decompiled, verified (50.6% match, 440 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation::Constraint::Constraint` (`zDynamics`)**: Decompiled, verified (36.3% match, 416 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Collision Subsystem (`zWorld2`)
 - **`WRoadNav::UpdateOccludedPosition`**: Decompiled, verified (98.12% match, 4,368 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

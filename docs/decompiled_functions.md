@@ -1555,3 +1555,59 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Complete articulation lifecycle management: joint creation, query, release, constraint attachment, and destruction with 100% binary matching parity.
 
+---
+
+### `Dynamics::Collision::Geometry::SphereVsSphere`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x8008A4B8`
+- **Size**: 332 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool Dynamics::Collision::Geometry::SphereVsSphere(const Geometry *A, const Geometry *B, Geometry *result);
+  ```
+- **Description**: Decompiled Dynamics::Collision::Geometry::SphereVsSphere to 100.0% byte and register parity.
+
+---
+
+### `Dynamics::Articulation::Joint::AddConstraint`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 272 bytes
+- **Matching State**: 84.7% match
+- **Signature**:
+  ```cpp
+  void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type);
+  ```
+- **Description**: Decompiled Dynamics::Articulation::Joint::AddConstraint with 84.7% match parity in zDynamics unit.
+
+---
+
+### `Dynamics::Collision::Moment::Moment`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Collision.cpp`
+- **Virtual Address**: `0x800837D0`
+- **Size**: 440 bytes
+- **Matching State**: 50.6% match
+- **Signature**:
+  ```cpp
+  Moment::Moment(const UMath::Matrix4 &orientation, float mass, const UMath::Vector3 &inertia, const UMath::Vector3 &cg, const UMath::Vector3 &linearVel, const UMath::Vector3 &angularVel, const UMath::Vector3 &position);
+  ```
+- **Description**: Implemented Dynamics::Collision::Moment::Moment constructor in Collision.cpp with 50.6% match and full build verification.
+
+---
+
+### `Dynamics::Articulation::Constraint::Constraint`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80088490`
+- **Size**: 416 bytes
+- **Matching State**: 36.3% match
+- **Signature**:
+  ```cpp
+  Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type);
+  ```
+- **Description**: Implemented Dynamics::Articulation::Constraint::Constraint and Joint::AddConstraint in Articulation.cpp.
+

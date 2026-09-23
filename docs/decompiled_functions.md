@@ -162,6 +162,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEPackageCommand::~FEPackageCommand`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEngine.h`
+- **Virtual Address**: `unknown`
+- **Size**: 32 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  FEPackageCommand::~FEPackageCommand(void);
+  ```
+- **Description**: Decompiled FEPackageCommand::~FEPackageCommand to 100% match by removing the explicit destructor definition and allowing the compiler to generate a non-virtual-table-assigning destructor pattern.
+
+---
+
 ### `FEGameInterface::UnloadUnreferencedLibrary`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEGameInterface.h`

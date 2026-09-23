@@ -2178,7 +2178,8 @@ int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingP
     float speed_factor = bMin(speed * 0.016666668f, 1.0f);
     float angle = bAngToDeg(bACos(dot));
     float angle_factor = bClamp(angle, 20.0f, 90.0f);
-    float adjusted_distance = distance * (1.0f - (90.0f - angle_factor) * 0.014285714f * speed_factor * 0.66999996f);
+    float f = (90.0f - angle_factor) * 0.014285714f * speed_factor * 0.66999996f;
+    float adjusted_distance = distance * (1.0f - f);
     int priority = bClamp(static_cast<int>(adjusted_distance * 0.013333334f), 0, 2);
 
 #if 0

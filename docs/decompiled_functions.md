@@ -303,6 +303,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `MemcardCallbacks::CardChecked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`
+- **Virtual Address**: `0x8013A5C4`
+- **Size**: 668 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void MemcardCallbacks::CardChecked(const RealmcIface::CardInfo *info);
+  ```
+- **Description**: Successfully decompiled and matched MemcardCallbacks::CardChecked to 100.0% parity with zero regressions.
+
+---
+
 ### `IJoyHelper::EmulateMemoryCardLibrary`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`

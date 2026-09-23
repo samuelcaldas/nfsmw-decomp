@@ -1050,6 +1050,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GetPaddedObjectSize<T>`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GObjectBlock.cpp`
+- **Virtual Address**: `0x80252870`
+- **Size**: 48 bytes (each instance)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  template <typename T> unsigned int GetPaddedObjectSize();
+  ```
+- **Description**: Implemented GetPaddedObjectSize template function and instantiated it for GTrigger, GMarker, GCharacter, GActivity, GState, and GHandler, achieving 100.0% match.
+
+---
+
 ## 4. World Subsystem (`zWorld`)
 
 ### `CarRenderInfo::UpdateWheelYRenderOffset`
@@ -1761,6 +1775,78 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   lua_State *LuaMessageDeliveryInfo::GetLuaState() const;
   ```
 - **Description**: Successfully decompiled ICEManager::Update and LuaMessageDeliveryInfo accessors achieving 100.0% match parity and passing main.dol sha1 verification.
+
+---
+
+### `ICE::Cubic1D` Polynomial Routines
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/ICE/ICEPoint.cpp`
+- **Virtual Address**: `0x800791B8`
+- **Size**: 184 bytes (total)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void ICE::Cubic1D::MakeCoeffs();
+  float ICE::Cubic1D::GetVal(float t) const;
+  float ICE::Cubic1D::GetdVal(float t) const;
+  float ICE::Cubic1D::GetddVal(float t) const;
+  float ICE::Cubic1D::GetValDesired() const;
+  ```
+- **Description**: Decompiled ICE::Cubic1D polynomial math methods (MakeCoeffs, GetVal, GetdVal, GetddVal, GetValDesired) in zCamera unit with 100% byte match.
+
+---
+
+### CameraMover Subclass Accessors (`CubicCameraMover`, `RearViewMirrorCameraMover`, `TrackCarCameraMover`, `TrackCopCameraMover`)
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraMover.cpp`
+- **Virtual Address**: `0x800820E8`
+- **Size**: 40 bytes (total)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  CameraAnchor *CubicCameraMover::GetAnchor();
+  CameraAnchor *RearViewMirrorCameraMover::GetAnchor();
+  CameraAnchor *TrackCarCameraMover::GetAnchor();
+  CameraAnchor *TrackCopCameraMover::GetAnchor();
+  bool TrackCopCameraMover::RenderCarPOV();
+  ```
+- **Description**: Decompiled CameraMover subclass accessors and fixed CubicCameraMover struct layout to 100% byte match.
+
+---
+
+### `ICE::Cubic1D` Polynomial Routines
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/ICE/ICEPoint.cpp`
+- **Virtual Address**: `0x800791B8`
+- **Size**: 184 bytes (total)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void ICE::Cubic1D::MakeCoeffs();
+  float ICE::Cubic1D::GetVal(float t) const;
+  float ICE::Cubic1D::GetdVal(float t) const;
+  float ICE::Cubic1D::GetddVal(float t) const;
+  float ICE::Cubic1D::GetValDesired() const;
+  ```
+- **Description**: Decompiled ICE::Cubic1D polynomial math methods (MakeCoeffs, GetVal, GetdVal, GetddVal, GetValDesired) in zCamera unit with 100% byte match.
+
+---
+
+### CameraMover Subclass Accessors (`CubicCameraMover`, `RearViewMirrorCameraMover`, `TrackCarCameraMover`, `TrackCopCameraMover`)
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraMover.cpp`
+- **Virtual Address**: `0x800820E8`
+- **Size**: 40 bytes (total)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  CameraAnchor *CubicCameraMover::GetAnchor();
+  CameraAnchor *RearViewMirrorCameraMover::GetAnchor();
+  CameraAnchor *TrackCarCameraMover::GetAnchor();
+  CameraAnchor *TrackCopCameraMover::GetAnchor();
+  bool TrackCopCameraMover::RenderCarPOV();
+  ```
+- **Description**: Decompiled CameraMover subclass accessors and fixed CubicCameraMover struct layout to 100% byte match.
 
 ---
 

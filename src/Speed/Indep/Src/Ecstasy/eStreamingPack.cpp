@@ -330,6 +330,9 @@ void eStreamPackLoader::InternalLoadedStreamingEntryCallback(void *callback_para
     }
 }
 
+/**
+ * @brief Internally loads a streaming entry for a streaming pack.
+ */
 void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack,
                                                    eStreamingEntry *streaming_entry) {
     uint32 name_hash = streaming_entry->NameHash;
@@ -376,8 +379,13 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
         }
         streaming_entry->Flags |= 0x10;
         bChunk *aligned_chunk_data = this->GetAlignedChunkDataPtr(streaming_entry->ChunkData);
-        AddQueuedFile2(aligned_chunk_data, streaming_pack->Filename, streaming_entry->ChunkByteOffset, streaming_entry->ChunkByteSize,
-                       eStreamPackLoader::InternalLoadedStreamingEntryCallback, streaming_entry, loading_table, nullptr);
+        const char *filename = streaming_pack->Filename;
+        int chunk_offset = streaming_entry->ChunkByteOffset;
+        int chunk_size = streaming_entry->ChunkByteSize;
+        void (*callback)(void *, int, void *) = eStreamPackLoader::InternalLoadedStreamingEntryCallback;
+        eStreamingEntry *entry = streaming_entry;
+        eStreamingPackLoadTable *table = loading_table;
+        AddQueuedFile2(aligned_chunk_data, filename, chunk_offset, chunk_size, callback, entry, table, nullptr);
     }
 
     streaming_pack->NumLoadedStreamingEntries++;

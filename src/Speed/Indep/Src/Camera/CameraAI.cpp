@@ -23,8 +23,8 @@ bool AreMomentCamerasEnabled() {
  * @brief Resets all camera directors.
  */
 void CameraAI::Reset() {
-    const CameraAI::Director::List &directors = UTL::Collections::Listable<CameraAI::Director, 2>::GetList();
-    for (CameraAI::Director::List::const_iterator iter = directors.begin(); iter != directors.end(); ++iter) {
+    for (CameraAI::Director *const *iter = UTL::Collections::Listable<CameraAI::Director, 2>::GetList().begin();
+         iter != UTL::Collections::Listable<CameraAI::Director, 2>::GetList().end(); iter++) {
         (*iter)->Reset();
     }
 }

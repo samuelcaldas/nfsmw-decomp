@@ -2346,3 +2346,63 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   virtual GameplayObjType GCharacter::GetType() const;
   ```
 - **Description**: Returns `kGameplayObjType_Character` (1) identifying the runtime instance type.
+
+---
+
+### `GCharacter::GCharacter`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.cpp`
+- **Virtual Address**: `0x801A9CC0`
+- **Size**: 344 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GCharacter::GCharacter(const Attrib::Key &triggerKey);
+  ```
+- **Description**: Constructs a GCharacter runtime instance, initializes base classes (`GRuntimeInstance`, `UTL::COM::Object(1)`, `IAttachable(this)`), member fields, and dynamically allocates the `Sim::Attachments` container via FastMem.
+
+---
+
+### `GCharacter::~GCharacter`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.cpp`
+- **Virtual Address**: `0x801A9E18`
+- **Size**: 200 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GCharacter::~GCharacter();
+  ```
+- **Description**: Destroys the GCharacter instance and deletes its dynamic `Sim::Attachments` container.
+
+---
+
+### `GCharacter::OnAttached`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.cpp`
+- **Virtual Address**: `0x801A9EE0`
+- **Size**: 84 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual void GCharacter::OnAttached(IAttachable *pOther);
+  ```
+- **Description**: Queries `IVehicle` interface on the attached object and retains the vehicle pointer.
+
+---
+
+### `GCharacter` Inline Accessors (`Attach`, `Detach`, `IsAttached`, `GetAttachments`, `IsFlagSet`)
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.h`
+- **Virtual Address**: `0x801BC288` - `0x801BC314`
+- **Size**: 140 bytes total
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual bool GCharacter::Attach(UTL::COM::IUnknown *object);
+  virtual bool GCharacter::Detach(UTL::COM::IUnknown *object);
+  virtual bool GCharacter::IsAttached(const UTL::COM::IUnknown *object) const;
+  virtual const List *GCharacter::GetAttachments() const;
+  bool GCharacter::IsFlagSet(unsigned short flag) const;
+  ```
+- **Description**: Inlined attachment management and state query methods for `GCharacter`.

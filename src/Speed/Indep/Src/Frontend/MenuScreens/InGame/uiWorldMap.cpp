@@ -768,6 +768,9 @@ void WorldMap::MoveCursor(float x, float y) {
     FEngSetCenter(Cursor, dx, dy);
 }
 
+/**
+ * @brief Snaps cursor to closest map item.
+ */
 bool WorldMap::SnapCursor() {
     bVector2 cursor;
     FEngGetCenter(Cursor, cursor.x, cursor.y);
@@ -784,7 +787,6 @@ bool WorldMap::SnapCursor() {
             last_closest = cur_dist;
         }
     }
-    // UNSOLVED
     if (snap_to != nullptr) {
         FEngSetCenter(Cursor, item_pos.x, item_pos.y);
         if (snap_to == SelectedItem) {

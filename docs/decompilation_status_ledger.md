@@ -125,6 +125,10 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`Dynamics::Articulation::Joint::AddConstraint` (`zDynamics`)**: Decompiled, verified (84.7% match, 272 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`Dynamics::Collision::Moment::Moment` (`zDynamics`)**: Decompiled, verified (50.6% match, 440 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`Dynamics::Articulation::Constraint::Constraint` (`zDynamics`)**: Decompiled, verified (36.3% match, 416 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation::Joint::Joint` (`zDynamics`)**: Decompiled, verified (46.3% match, 220 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Geometry::Set` (`zDynamics`)**: Decompiled, verified (11.8% match, 704 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Moment::Moment` (`zDynamics`)**: Decompiled, verified (100.0% match, 668 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation::Lever::SetFulcrum` (`zDynamics`)**: Decompiled, verified (10.6% match, 968 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Collision Subsystem (`zWorld2`)
 - **`WRoadNav::UpdateOccludedPosition`**: Decompiled, verified (98.12% match, 4,368 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

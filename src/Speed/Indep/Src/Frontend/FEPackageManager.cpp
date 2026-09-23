@@ -73,11 +73,14 @@ void FEPackageManager::NotificationMessage(u32 Message, FEObject *pObject, u32 P
 }
 
 // UNSOLVED
+/**
+ * @brief Get the base package name from a path string.
+ */
 const char *FEPackageManager::GetBasePkgName(const char *pkg_name) {
     int len = bStrLen(pkg_name);
     const char *ptr = pkg_name + len;
     if (ptr != pkg_name) {
-        char c = pkg_name[len];
+        char c = *ptr;
         while (c != '\\') {
             ptr--;
             if (ptr == pkg_name) {

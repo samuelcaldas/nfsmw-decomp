@@ -25,6 +25,10 @@ class Geometry {
     };
 
     static bool FindIntersection(const Geometry *A, const Geometry *B, Geometry *result);
+    static bool BoxVsBox(const Geometry *A, const Geometry *B, Geometry *result);
+    static bool SphereVsBox(const Geometry *A, const Geometry *B, Geometry *result);
+    static bool SphereVsSphere(const Geometry *A, const Geometry *B, Geometry *result);
+    static bool BoxVsSphere(const Geometry *A, const Geometry *B, Geometry *result);
 
     Geometry();
     Geometry(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta);
@@ -99,6 +103,8 @@ struct Friction {
         mUk *= scale;
         mUs *= scale;
     }
+
+    State GetForce(const UVector3 &p, float impulse, const UVector3 &n, UVector3 &Ff) const;
 
     float mUk; // offset 0x0, size 0x4
     float mUs; // offset 0x4, size 0x4

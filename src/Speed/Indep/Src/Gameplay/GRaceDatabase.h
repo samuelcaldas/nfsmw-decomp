@@ -378,6 +378,7 @@ class GRaceDatabase {
     static void Init();
 
     GRaceCustom *GetStartupRace();
+    GRace::Context GetStartupRaceContext();
     void ClearStartupRace();
     void SetStartupRace(GRaceCustom *custom, GRace::Context context);
     void FreeCustomRace(GRaceCustom *custom);

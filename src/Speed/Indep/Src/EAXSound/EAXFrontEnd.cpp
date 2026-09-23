@@ -195,7 +195,7 @@ int EAXCommon::Play(eMenuSoundTriggers etrigger) {
     if (this->m_pSFXOBJ_FEHUD == nullptr) {
         return -1;
     }
-    if (this->m_pSFXOBJ_FEHUD->GetOutputPtr(0) == nullptr) {
+    if (this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr() == nullptr) {
         return 0;
     }
 

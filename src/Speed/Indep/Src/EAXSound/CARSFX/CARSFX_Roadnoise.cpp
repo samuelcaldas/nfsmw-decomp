@@ -450,7 +450,9 @@ void CARSFX_RoadNoise::GenerateRoadNoise() {
     this->m_nRTRoadNoisePitch = static_cast<int>(fRightPitch);
 }
 
-// UNSOLVED
+/**
+ * @brief Plays road noise loop or stitch loop for the specified side.
+ */
 void CARSFX_RoadNoise::Play(FXROADNOISE_LOOP ID, int side) {
     delete this->m_pRoadNoiseControl[side];
     delete this->m_pStitchLoopControl[side];
@@ -460,9 +462,7 @@ void CARSFX_RoadNoise::Play(FXROADNOISE_LOOP ID, int side) {
         m_pStitchLoopControl[side] = new ("Stitch Loop", 0) cStitchLoop(attribID);
     } else {
         g_pEAXSound->SetCsisName(this);
-        {
-            m_pRoadNoiseControl[side] = new Csis::FX_ROADNOISE(ID, 0, 0x1000, 0, Csis::FXROADNOISETYPETYPE_LOOP, 0, 0, 25000, 0, 0x7FFF, 0);
-            int refcnt = m_pRoadNoiseControl[side]->GetRefCount();
-        }
+        m_pRoadNoiseControl[side] = new Csis::FX_ROADNOISE(ID, 0, 0x1000, 0, Csis::FXROADNOISETYPETYPE_LOOP, 0, 0, 25000, 0, 0x7FFF, 0);
+        int refcnt = m_pRoadNoiseControl[side]->GetRefCount();
     }
 }

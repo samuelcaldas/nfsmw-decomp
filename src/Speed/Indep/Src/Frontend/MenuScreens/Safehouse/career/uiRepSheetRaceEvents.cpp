@@ -122,7 +122,9 @@ void UISafehouseRaceSheet::NotificationMessage(u32 msg, FEObject *obj, u32 param
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Refreshes the header information of the safehouse race sheet screen.
+ */
 void UISafehouseRaceSheet::RefreshHeader() {
     ArrayScrollerMenu::RefreshHeader();
 
@@ -183,7 +185,8 @@ void UISafehouseRaceSheet::RefreshHeader() {
     FEPrintf(GetPackageName(), 0xebd7f926, "%$0.2f %s", top_speed, distUnits);
     FEPrintf(GetPackageName(), 0xde9145fb, "%$0.2f %s", avg_speed, distUnits);
     FEPrintf(GetPackageName(), 0x763f4b5b, "%$0.0f", race->GetCashValue());
-    FEngSetTextureHash(FEngFindImage(GetPackageName(), 0xf97ec5d5), FEDatabase->GetRaceIconHash(race->GetRaceType()));
+    u32 iconHash = FEDatabase->GetRaceIconHash(race->GetRaceType());
+    FEngSetTextureHash(FEngFindImage(GetPackageName(), 0xf97ec5d5), iconHash);
 
     for (int i = 0; i < GetNumSlots(); i++) {
         RaceDatum *datum = static_cast<RaceDatum *>(GetDatumAt(i + GetStartDatumNum()));

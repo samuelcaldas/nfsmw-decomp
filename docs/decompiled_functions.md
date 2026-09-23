@@ -706,6 +706,22 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 3. Gameplay Subsystem (`zGameplay`)
 
+### `GetNumBountySpawnMarkers`, `GetBountySpawnMarker` & `GetBountySpawnMarkerTag`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x8001634c`
+- **Size**: 204 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GetNumBountySpawnMarkers() const;
+  Attrib::Key GetBountySpawnMarker(unsigned int index) const;
+  int GetBountySpawnMarkerTag(unsigned int index) const;
+  ```
+- **Description**: Decompiled GManager bounty spawn marker methods with 100% assembly parity.
+
+---
+
 ### `GManager::GetInGameplay`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/SourceLists/zGameplay.cpp`
@@ -1519,6 +1535,48 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ---
 
 ## 11. Camera Subsystem (`zCamera`)
+
+### `CameraMover::GetAnchorID`
+- **Unit**: `zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraMover.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 64 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  WUID CameraMover::GetAnchorID();
+  ```
+- **Description**: Decompiled CameraMover::GetAnchorID and CubicCameraMover accessors (SetLookBack, SetDisableLag, GetLookbackAngle, GetAnchor) with 100% assembly matching in GOWE69.
+
+---
+
+### `AreMomentCamerasEnabled`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x80069424`
+- **Size**: 84 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool AreMomentCamerasEnabled();
+  ```
+- **Description**: Successfully decompiled AreMomentCamerasEnabled with 100% byte match in zCamera unit.
+
+---
+
+### `AverageBase::Recalculate`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Misc/Table.hpp`
+- **Virtual Address**: `0x800834A4`
+- **Size**: 4 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void AverageBase::Recalculate();
+  ```
+- **Description**: Decompiled AverageBase::Recalculate to 100% match.
+
+---
 
 ### `CameraAI::Director::JumpStart`
 - **Unit**: `main/Speed/Indep/SourceLists/zCamera`

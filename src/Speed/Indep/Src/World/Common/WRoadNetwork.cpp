@@ -2423,7 +2423,7 @@ void WRoadNav::InitLaneOffset(const UMath::Vector3 &vehicle_pos) {
 }
 
 /**
- * @brief Initializes navigation state from a road segment, lane, and segment time.
+ * @brief Initializes navigation state from a road segment, lane, and segment time..
  * @param segInd Index of the road segment to follow.
  * @param laneInd Traffic lane index to use for the navigation path.
  * @param timeStep Normalized position along the selected segment.

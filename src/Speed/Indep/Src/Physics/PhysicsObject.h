@@ -62,6 +62,7 @@ class PhysicsObject : public Sim::Object,
     virtual class IRigidBody *GetRigidBody();
 
   private:
+    char _pad_base[4];              // offset 0x54, size 0x4
     WWorldPos *mWPos;               // offset 0x58, size 0x4
     SimableType mObjType;           // offset 0x5C, size 0x4
     HSIMABLE mOwner;                // offset 0x60, size 0x4

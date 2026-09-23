@@ -266,7 +266,11 @@ unsigned short bFixATanTableHigh[129] = {
     0x3EA1, 0x3EA4, 0x3EA7, 0x3EAA, 0x3EAC, 0x3EAF, 0x3EB2, 0x3EB4, 0x3EB7, 0x3EBA,
 };
 
-// UNSOLVED, matches in ProStreet
+/**
+ * @brief Computes the arcsine of a floating-point value and returns an angle.
+ * @param x Input value in the range [-1.0, 1.0].
+ * @return Computed bAngle representing the arcsine.
+ */
 bAngle bASin(float x) {
     int negative = 0;
     if (x < 0.0f) {
@@ -281,10 +285,10 @@ bAngle bASin(float x) {
         }
     }
 
-    bFix fix_x = static_cast<int>(x * 65536.0f);
-    int table_number = 0;     // r7
     bFix table_size = 0x8000; // r8
+    int table_number = 0;     // r7
     bFix table_top = 0x8000;  // r0
+    bFix fix_x = static_cast<int>(x * 65536.0f);
 
     while (fix_x >= table_top && table_number < 11) {
         table_size >>= 1;

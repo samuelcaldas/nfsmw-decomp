@@ -515,6 +515,11 @@ void CarLoader::SetLoadingMode(eLoadingMode mode, int two_player_flag) {
  *
  * @param size New memory pool size in bytes.
  */
+/**
+ * @brief Sets the memory pool size for the car loader.
+ *
+ * @param size New memory pool size in bytes.
+ */
 void CarLoader::SetMemoryPoolSize(int size) {
     bool success;
 

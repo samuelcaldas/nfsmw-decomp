@@ -269,7 +269,11 @@ FEPackage *FEngine::FindLibraryPackage(u32 NameHash) const {
     return nullptr;
 }
 
-// UNSOLVED
+/**
+ * @brief Updates the front-end engine state, input devices, packages, and message queues.
+ * @param tDeltaTicks Delta time ticks for the update step.
+ * @param lock Synchronization lock bitmask.
+ */
 void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
     FEPackage *pPackage;
     if (bDebugMessages) {
@@ -293,18 +297,14 @@ void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
                 }
             }
         }
-        u32 i = 0;
-        u32 MaskBit = 1;
-        do {
+        for (u32 i = 0, MaskBit = 1; i < 19; i++, MaskBit <<= 1) {
             if ((PadHoldRegistered & MaskBit) != 0) {
                 for (u8 PadIdx = 0; PadIdx < NumJoyPads; PadIdx++) {
                     pJoyPad[PadIdx].DecrementHold(MaskBit, HoldDecrement[i]);
                 }
             }
             HoldDecrement[i] = 0;
-            i++;
-            MaskBit <<= 1;
-        } while (i < 19);
+        }
         FastRep = FastRepCache;
     }
     if (bExecuting) {

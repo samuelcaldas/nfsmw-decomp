@@ -234,7 +234,9 @@ void MemcardCallbacks::ClearEntries() {
     JLog(MJ_ClearEntries);
 }
 
-// UNSOLVED
+/**
+ * @brief Callback invoked when a save entry is found during memory card operations.
+ */
 void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info) {
     JLog(MJ_FoundEntry);
     JLog(info);

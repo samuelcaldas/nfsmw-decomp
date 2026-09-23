@@ -326,7 +326,7 @@ bAngle bFastATan(float x, float y) {}
  * @return bAngle Resulting angle.
  */
 bAngle bATan(float x, float y) {
-    int quad = 0;
+    register int quad asm("r6") = 0;
     if (x < 0.0f) {
         quad = 1;
         x = -x;

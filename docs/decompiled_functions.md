@@ -4,7 +4,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 1. Frontend Subsystem (`zFe`, `zFe2`, `zFEng`)
+## 1. Frontend Subsystem (`zFe`, `zFe2`, `zFeOverlay`, `zFEng`)
 
 ### `FEngine::UpdateMouseState`
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`
@@ -164,6 +164,76 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void UIQRCarSelect::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2);
   ```
 - **Description**: Handles notification messages for the Quick Race car selection screen.
+
+---
+
+### `UIQRCarSelect::SetupForPlayer`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/quickrace/uiQRCarSelect.cpp`
+- **Virtual Address**: `0x8016DC10`
+- **Size**: 324 bytes (81 instructions)
+- **Matching State**: 95.93% match
+- **Signature**:
+  ```cpp
+  void UIQRCarSelect::SetupForPlayer(int player);
+  ```
+- **Description**: Sets up the car selection state for the specified player, resolving selectable cars, filtered lists, career cars, and initializing default selected vehicle.
+
+---
+
+### `FEPackageManager::GetBasePkgName`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/FEPackageManager.cpp`
+- **Virtual Address**: `0x80183F1C`
+- **Size**: 100 bytes (25 instructions)
+- **Matching State**: 93.60% match
+- **Signature**:
+  ```cpp
+  const char *FEPackageManager::GetBasePkgName(const char *pkg_name);
+  ```
+- **Description**: Extracts the base package name from a given package path or filename string by scanning backwards for directory separator `/` or `\\`.
+
+---
+
+### `UIWidgetMenu::Scroll`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feUIWidgetMenu.cpp`
+- **Virtual Address**: `0x801452D8`
+- **Size**: 536 bytes (134 instructions)
+- **Matching State**: 97.01% match
+- **Signature**:
+  ```cpp
+  void UIWidgetMenu::Scroll(eScrollDir dir);
+  ```
+- **Description**: Scrolls the UI widget menu in the specified direction, updating focus, widget animations, and UI sound effects.
+
+---
+
+### `UIQRChallengeSeries::NotificationMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/quickrace/uiQRChallengeSeries.cpp`
+- **Virtual Address**: `0x8016B610`
+- **Size**: 676 bytes (169 instructions)
+- **Matching State**: 97.69% match
+- **Signature**:
+  ```cpp
+  void UIQRChallengeSeries::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2);
+  ```
+- **Description**: Handles UI notifications, button clicks, and pad messages for the challenge series screen, delegating base messages to ArrayScrollerMenu.
+
+---
+
+### `DebugCarCustomizeScreen::NotificationMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/customize/DebugCarCustomize.cpp`
+- **Virtual Address**: `0x801646E4`
+- **Size**: 1,064 bytes (266 instructions)
+- **Matching State**: 98.40% match
+- **Signature**:
+  ```cpp
+  void DebugCarCustomizeScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2);
+  ```
+- **Description**: Handles notification messages and pad controls for the debug car customization menu, navigating car types, parts lists, and cycling debug car options.
 
 ---
 

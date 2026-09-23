@@ -39,7 +39,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`VehicleSystem::Init` (`zPhysics`)**: Decompiled, verified (100.0% match, 36 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`Physics::Info::ShiftPoints` (`zPhysics`)**: Decompiled, verified (90.41% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SuspensionSimple::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Refined, verified (98.90% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Decompiled, verified (97.21% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Decompiled, verified (97.6% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Frontend Subsystem (`zFe`, `zFeOverlay`, `zFEng`)
 - **`FEQuaternion::operator*` (`zFEng`)**: Decompiled, verified (89.1% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

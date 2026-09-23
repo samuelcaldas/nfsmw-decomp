@@ -176,6 +176,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEGroup::~FEGroup(void)`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEGroup.h`
+- **Virtual Address**: `unknown`
+- **Size**: 76 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  FEGroup::~FEGroup(void);
+  ```
+- **Description**: 100% matching decompilation of FEGroup::~FEGroup(void).
+
+---
+
 ### `FEGameInterface::UnloadUnreferencedLibrary`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEGameInterface.h`

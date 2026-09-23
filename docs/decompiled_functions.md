@@ -395,6 +395,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 
+### `EAXSound::GetCurMusicVolume`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/EAXSound.cpp`
+- **Virtual Address**: `0x800A6DAC`
+- **Size**: 52 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  float EAXSound::GetCurMusicVolume();
+  ```
+- **Description**: Decompiled EAXSound::GetCurMusicVolume matching 100% byte-for-byte.
+
+---
+
 ### `AssignAudioStreamHandle`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/Stream/EAXS_StreamManager.cpp`

@@ -59,6 +59,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
+- **`EAXSound::GetCurMusicVolume` (`zEAXSound`)**: Decompiled, verified (100.0% match, 52 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`AssignAudioStreamHandle` (`zEAXSound`)**: Decompiled, verified (100.0% match, 16 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`NFSMixMapState::CreateMixCtls`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`EAXCommon::Play`**: Decompiled, verified (96.83% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

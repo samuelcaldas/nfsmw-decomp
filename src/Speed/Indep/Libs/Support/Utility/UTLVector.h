@@ -266,12 +266,18 @@ template <typename T, int Alignment = 16> class FastVector : public Vector<T, Al
     }
 
   protected:
+    /**
+     * @brief Allocates vector space using fast memory.
+     */
     typename Vector<T, Alignment>::pointer AllocVectorSpace(std::size_t num, unsigned int alignment) override {
-        return static_cast<typename Vector<T, Alignment>::pointer>(gFastMem.Alloc(num * sizeof(T), nullptr));
+        return static_cast<typename Vector<T, Alignment>::pointer>(gFastMem.Alloc(num * sizeof(T), "FastVector"));
     }
 
+    /**
+     * @brief Frees vector space using fast memory.
+     */
     void FreeVectorSpace(typename Vector<T, Alignment>::pointer buffer, std::size_t num) override {
-        gFastMem.Free(buffer, num * sizeof(T), nullptr);
+        gFastMem.Free(buffer, num * sizeof(T), "FastVector");
     }
 };
 }; // namespace UTL

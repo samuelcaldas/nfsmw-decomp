@@ -1878,8 +1878,6 @@ def generate_build_ninja(
             name="split",
             command=f"{dtk} {what_to_split} split $in $out_dir",
             description="SPLIT $in",
-            depfile="$out_dir/dep",  # TODO?
-            deps="gcc",
         )
         n.build(
             inputs=config.config_path,

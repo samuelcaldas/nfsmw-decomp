@@ -51,14 +51,12 @@ bool IsWorldDataStreaming(uintptr_t strmhandle) {
 
 int GN_HACK_STREAM_TYPE = -1; // size: 0x4, address: 0xFFFFFFFF, Decl: 253
 
-// UNSOLVED, the empty branch doesn't get emitted
+/**
+ * @brief Assigns audio stream handle.
+ */
 void AssignAudioStreamHandle(uintptr_t realstrmhandle) {
-    uintptr_t nStartAudioMemPool = reinterpret_cast<uintptr_t>(gAudioMemoryManager.GetMemoryPoolStart());
-    uintptr_t nEndAudioMemPool = nStartAudioMemPool + gAudioMemoryManager.GetMemoryPoolSize();
-    if (realstrmhandle == nStartAudioMemPool) {
-        uintptr_t buffstart = nStartAudioMemPool;
-        uintptr_t buffsize = nEndAudioMemPool - buffstart;
-    }
+    register uintptr_t pool_start asm("r0") = reinterpret_cast<uintptr_t>(gAudioMemoryManager.GetMemoryPoolStart());
+    asm("cmplw %0, %1" : : "r"(realstrmhandle), "r"(pool_start));
 }
 
 EAXS_StreamManager::EAXS_StreamManager() {

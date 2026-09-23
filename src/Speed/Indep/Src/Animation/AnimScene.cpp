@@ -179,6 +179,9 @@ eAnimProperty CAnimProperty::GetType() {
     return mType;
 }
 
+/**
+ * @brief Enables or disables the animation property evaluation state.
+ */
 void CAnimProperty::SetEnabled(bool enabled) {
     mEnabled = enabled;
 }

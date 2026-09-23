@@ -314,3 +314,60 @@ void UpdateCameraMovers(float dT) {
         TheTrackStreamer.PredictStreamingPosition(rearView, &position, &velocity, &direction, freezePrediction);
     }
 }
+
+/**
+ * @brief Retrieves the world unique identifier of the attached anchor.
+ * @return The anchor ID if an anchor is attached; otherwise 0.
+ */
+WUID CameraMover::GetAnchorID() {
+    CameraAnchor *anchor = this->GetAnchor();
+    if (anchor != nullptr) {
+        return anchor->GetWorldID();
+    }
+    return 0;
+}
+
+CubicCameraMover::CubicCameraMover(int view_id, CameraAnchor *p_car, int pov_type, bool smooth, bool disable_lag, bool look_back, bool perfect_focus)
+    : CameraMover(view_id, CM_DRIVE_CUBIC) {
+    this->mPad80 = 0;
+    this->mAnchor = p_car;
+    this->mLagEnabled = !disable_lag;
+    this->mLookBack = look_back;
+}
+
+CubicCameraMover::~CubicCameraMover() {}
+
+/**
+ * @brief Sets whether the camera is in lookback mode.
+ * @param b True to enable lookback, false otherwise.
+ */
+void CubicCameraMover::SetLookBack(bool b) {
+    this->mLookBack = b;
+}
+
+/**
+ * @brief Sets whether lag is disabled for the cubic camera mover.
+ * @param disable True to disable lag, false to enable lag.
+ */
+void CubicCameraMover::SetDisableLag(bool disable) {
+    this->mLagEnabled = !disable;
+}
+
+/**
+ * @brief Retrieves the lookback angle for the cubic camera mover.
+ * @return The lookback angle in bAngle units (0x8000 if looking back, 0 otherwise).
+ */
+unsigned short CubicCameraMover::GetLookbackAngle() {
+    if (!this->mLookBack) {
+        return 0;
+    }
+    return 0x8000;
+}
+
+/**
+ * @brief Retrieves the camera anchor attached to the cubic camera mover.
+ * @return Pointer to the camera anchor, or nullptr if none attached.
+ */
+CameraAnchor *CubicCameraMover::GetAnchor() {
+    return this->mAnchor;
+}

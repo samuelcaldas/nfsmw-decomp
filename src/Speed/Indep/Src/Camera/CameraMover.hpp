@@ -191,6 +191,23 @@ class CameraMover : public bTNode<CameraMover>, public WCollisionMgr::ICollision
     bVector3 vSavedForward;      // offset 0x70, size 0x10
 };
 
+class CubicCameraMover : public CameraMover {
+  public:
+    CubicCameraMover(int view_id, CameraAnchor *p_car, int pov_type, bool smooth, bool disable_lag, bool look_back, bool perfect_focus);
+    virtual ~CubicCameraMover();
+    virtual void SetLookBack(bool b);
+    virtual void SetDisableLag(bool disable);
+    virtual unsigned short GetLookbackAngle();
+    virtual CameraAnchor *GetAnchor();
+    virtual bool HighliteMode() { return false; }
+  private:
+    int mPad80;
+    CameraAnchor *mAnchor; // offset 0x84
+    int mPad88[6];         // offset 0x88..0xa4
+    int mLagEnabled;       // offset 0xa4
+    int mLookBack;         // offset 0xa8
+};
+
 void CameraMoverRestartRace();
 void UpdateCameraMovers(float dT);
 

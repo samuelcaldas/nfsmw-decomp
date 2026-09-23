@@ -143,8 +143,6 @@ bool GinsuSynthData::BindToData(void *ptr) {
     this->mMinFrequency = memdata->minFrequency;
     this->mMaxFrequency = memdata->maxFrequency;
 
-    int *cyclePos;
-    int minperiod;
     {
         register int segCount asm("r9") = memdata->segCount;
         this->mSegCount = segCount;
@@ -161,12 +159,12 @@ bool GinsuSynthData::BindToData(void *ptr) {
         register int *freqPos asm("r8") = reinterpret_cast<int *>(memdata->data);
         this->mFreqPos = freqPos;
 
-        cyclePos = freqPos + (segCount + 1);
+        int *cyclePos = freqPos + (segCount + 1);
         this->mCyclePos = cyclePos;
 
         this->mSampleData = reinterpret_cast<unsigned char *>(cyclePos + (cycleCount + 1));
 
-        minperiod = sampleCount;
+        register int minperiod asm("r3") = sampleCount;
 
         {
             register int r0_val asm("r0") = -1;
@@ -180,9 +178,9 @@ bool GinsuSynthData::BindToData(void *ptr) {
                 minperiod = period;
             }
         }
-    }
 
-    this->mMinPeriod = static_cast<float>(minperiod);
+        this->mMinPeriod = static_cast<float>(minperiod);
+    }
 
     return true;
 }

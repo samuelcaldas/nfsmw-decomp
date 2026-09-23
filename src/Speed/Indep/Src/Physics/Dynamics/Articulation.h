@@ -39,6 +39,8 @@ class Lever {
         return this->mEntity;
     }
 
+    void SetFulcrum(const UVector3 &fulcrum, bool fixed);
+
   private:
     int mPad;
     UMath::Vector3 mArm;

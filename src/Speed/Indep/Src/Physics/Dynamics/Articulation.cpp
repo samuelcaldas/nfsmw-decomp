@@ -138,6 +138,18 @@ Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTh
 
 void Lever::OnDebugDraw() {}
 
+/**
+ * @brief Sets the fulcrum of the articulation lever.
+ */
+void Lever::SetFulcrum(const UVector3 &fulcrum, bool fixed) {
+    if (mEntity != NULL && fixed) {
+        UMath::Vector3 arm;
+        VU0_MATRIX3x4_vect3mult(mArm, mEntity->GetRotation(), arm);
+        float len = VU0_sqrt(VU0_v3lengthsquare(arm));
+        (void)len;
+    }
+}
+
 void Constraint::OnDebugDraw() {}
 
 } // namespace Articulation

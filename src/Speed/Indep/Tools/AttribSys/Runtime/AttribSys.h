@@ -575,8 +575,13 @@ class Attribute {
     unsigned int GetLength() const;
     bool SetLength(unsigned int);
     void SendChangeMsg() const;
-    // TODO
-    template <typename T> const T &Get(unsigned int index) const;
+    /**
+     * @brief Retrieves a const reference to the element at the specified index, or the default data area if not found.
+     */
+    template <typename T> const T &Get(unsigned int index) const {
+        const T *resultptr = reinterpret_cast<const T *>(this->GetElementPointer(index));
+        return (resultptr != NULL) ? *resultptr : *reinterpret_cast<const T *>(Attrib::DefaultDataArea(sizeof(T)));
+    }
 
     void operator delete(void *ptr, std::size_t bytes) {
         Free(ptr, bytes, "Attrib::Attribute");

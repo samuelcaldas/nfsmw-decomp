@@ -1945,9 +1945,14 @@ def generate_objdiff_config(
     # Load existing objdiff.json
     existing_units = {}
     if Path("objdiff.json").is_file():
-        with open("objdiff.json", "r", encoding="utf-8") as r:
-            existing_config = json.load(r)
-            existing_units = {unit["name"]: unit for unit in existing_config["units"]}
+        try:
+            with open("objdiff.json", "r", encoding="utf-8") as r:
+                content = r.read().strip()
+                if content:
+                    existing_config = json.loads(content)
+                    existing_units = {unit["name"]: unit for unit in existing_config.get("units", [])}
+        except Exception:
+            existing_units = {}
 
     if config.ninja_path:
         ninja = str(config.ninja_path.absolute())
@@ -2170,13 +2175,15 @@ def generate_objdiff_config(
         else:
             return d
 
-    # Write objdiff.json
-    with open("objdiff.json", "w", encoding="utf-8") as w:
+    # Write objdiff.json atomically
+    temp_objdiff = Path(f"objdiff.json.tmp.{os.getpid()}")
+    with open(temp_objdiff, "w", encoding="utf-8") as w:
 
         def unix_path(input: Any) -> str:
             return str(input).replace(os.sep, "/") if input else ""
 
         json.dump(cleandict(objdiff_config), w, indent=2, default=unix_path)
+    temp_objdiff.replace("objdiff.json")
 
 
 def generate_compile_commands(

@@ -547,6 +547,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `WorldMap::SnapCursor`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/InGame/uiWorldMap.cpp`
+- **Virtual Address**: `0x8012bde0`
+- **Size**: 436 bytes
+- **Matching State**: 95.7% match
+- **Signature**:
+  ```cpp
+  bool WorldMap::SnapCursor();
+  ```
+- **Description**: Decompiled and matched WorldMap::SnapCursor function in uiWorldMap.cpp
+
+---
+
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 
 ### `EAXTunerCar::UpdateRotation`

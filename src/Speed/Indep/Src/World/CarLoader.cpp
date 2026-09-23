@@ -508,16 +508,8 @@ void CarLoader::SetLoadingMode(eLoadingMode mode, int two_player_flag) {
     this->TwoPlayerFlag = two_player_flag;
 }
 
-// UNSOLVED, scheduling
-// TODO dwarf
-/**
- * Sets the memory pool size for the car loader, reallocating or freeing the pool as needed.
- *
- * @param size New memory pool size in bytes.
- */
 /**
  * @brief Sets the memory pool size for the car loader.
- *
  * @param size New memory pool size in bytes.
  */
 void CarLoader::SetMemoryPoolSize(int size) {

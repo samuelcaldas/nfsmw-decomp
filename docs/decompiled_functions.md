@@ -1183,6 +1183,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `eStreamPackLoader::CreateStreamingPack`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
+- **Virtual Address**: `0x800F5F30`
+- **Size**: 372 bytes
+- **Matching State**: 92.31% match
+- **Signature**:
+  ```cpp
+  eStreamingPack *eStreamPackLoader::CreateStreamingPack(const char *filename, void (*callback_function)(void *), void *callback_param, int memory_pool_num);
+  ```
+- **Description**: Decompiled eStreamPackLoader::CreateStreamingPack with 92.31% matching assembly parity.
+
+---
+
 ### `InternalLoadStreamingEntry`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
 - **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`

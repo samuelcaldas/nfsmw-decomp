@@ -59,25 +59,29 @@ Moment::Moment(const UMath::Matrix4 &orientation, float mass, const UMath::Vecto
  * @brief Constructs a Moment object from an IEntity.
  */
 Moment::Moment(const IEntity *entity) {
-    mOrientation = entity->GetRotation();
+    mInertiaP = entity->GetPrincipalInertia();
     mCG = entity->GetCenterOfGravity();
     mLinearVelocity = entity->GetLinearVelocity();
     mAngularVelocity = entity->GetAngularVelocity();
     mPosition = entity->GetPosition();
-    mInertiaP = entity->GetPrincipalInertia();
     mInertialScale = UVector3(1.0f, 1.0f, 1.0f);
     mImmobile = entity->IsImmobile();
     mBrakingForce = 0.0f;
+    mElasticity = 0.0f;
     mMass = entity->GetMass();
-    mMassInv = 1.0f / mMass;
+    mFixedCG = false;
     mClosingVelocity = UVector3::kZero;
     mSlidingVelocity = UVector3::kZero;
     mForce = UVector3::kZero;
     mFriction = UVector3::kZero;
     mFrictionState = Friction::None;
-    mElasticity = 0.0f;
-    mFixedCG = false;
-    UMath::Transpose(mOrientation, mOrientationInv);
+    mOrientation = entity->GetRotation();
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            mOrientationInv[i][j] = mOrientation[j][i];
+        }
+    }
+    mMassInv = 1.0f / mMass;
 }
 
 void Moment::SetInertia(const UMath::Vector3 &inertiaP) {

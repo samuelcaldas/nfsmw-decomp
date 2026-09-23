@@ -777,6 +777,35 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRuntimeInstance::SetConnectionBuffer & GetConnectionCount`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRuntimeInstance.cpp`
+- **Virtual Address**: `0x8019A3C0`
+- **Size**: 24 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRuntimeInstance::SetConnectionBuffer(ConnectedInstance *buffer, unsigned int maxConnections);
+  unsigned short GRuntimeInstance::GetConnectionCount() const;
+  ```
+- **Description**: Decompiled GRuntimeInstance::SetConnectionBuffer and GetConnectionCount achieving 100% match.
+
+---
+
+### `GCharacter::GetAttachments`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.cpp`
+- **Virtual Address**: `0x801BC2F4`
+- **Size**: 116 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Sim::Attachments *GCharacter::GetAttachments() const;
+  ```
+- **Description**: Successfully decompiled GCharacter::Attach, Detach, IsAttached, and GetAttachments with 100.0% byte and assembly match.
+
+---
+
 ## 4. World Subsystem (`zWorld`)
 
 ### `CarRenderInfo::UpdateLightStateTextures`
@@ -1239,4 +1268,35 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void CameraAI::Reset();
   ```
 - **Description**: Decompiled CameraAI::Director methods & CameraAI::Reset in zCamera unit.
+
+---
+
+### `CDActionIce::Reset`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/Actions/CDActionIce.cpp`
+- **Virtual Address**: `0x800709E8`
+- **Size**: 12 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CDActionIce::Reset();
+  ```
+- **Description**: Decompiled CDActionIce methods (Reset, SetSpecial, OnAttached) with 100% match.
+
+---
+
+### `CDActionShowcase::Reset & CDActionTrackCar::Reset`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/Actions/CDActionShowcase.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CDActionShowcase::Reset();
+  void CDActionShowcase::OnAttached(IAttachable *);
+  void CDActionTrackCar::Reset();
+  void CDActionTrackCar::OnAttached(IAttachable *);
+  ```
+- **Description**: Decompiled Reset and OnAttached methods for CDActionShowcase and CDActionTrackCar in zCamera unit with 100% match.
 

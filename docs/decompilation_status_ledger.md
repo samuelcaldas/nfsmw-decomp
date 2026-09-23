@@ -79,6 +79,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GRaceDatabase::SimulateDDayComplete`**: Decompiled, verified (100.0% match, 4 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`LuaMessageDeliveryInfo::GetActivity`**: Decompiled, verified (100.0% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GVault::GetAttribVault & GRaceBin::GetAwardedRaceWins`**: Decompiled, verified (100.0% match, 16 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GRuntimeInstance::SetConnectionBuffer & GetConnectionCount` (`zGameplay`)**: Decompiled, verified (100.0% match, 24 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GCharacter::GetAttachments` (`zGameplay`)**: Decompiled, verified (100.0% match, 116 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Camera Subsystem (`zCamera`)
 - **`CameraAI::Director::JumpStart` (`zCamera`)**: Decompiled, verified (100.0% match, 20 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -87,6 +89,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`CameraAI::MaybeKillPursuitCam` (`zCamera`)**: Decompiled, verified (100.0% match, 44 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CameraAI::MaybeKillJumpCam` (`zCamera`)**: Decompiled, verified (100.0% match, 44 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CameraAI::Reset` (`zCamera`)**: Decompiled, verified (94.1% match, 732 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CDActionIce::Reset` (`zCamera`)**: Decompiled, verified (100.0% match, 12 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CDActionShowcase::Reset & CDActionTrackCar::Reset` (`zCamera`)**: Decompiled, verified (100.0% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Collision Subsystem (`zWorld2`)
 - **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

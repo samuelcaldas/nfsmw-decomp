@@ -319,6 +319,12 @@ bAngle bOldATan(float x, float y) {}
 bAngle bFastATan(float x, float y) {}
 
 // Credit: Brawltendo
+/**
+ * @brief Computes the arctangent of y/x returning an angle in bAngle units.
+ * @param x X coordinate.
+ * @param y Y coordinate.
+ * @return bAngle Resulting angle.
+ */
 bAngle bATan(float x, float y) {
     int quad = 0;
     if (x < 0.0f) {
@@ -342,7 +348,8 @@ bAngle bATan(float x, float y) {
             float r = y;
             int i = static_cast<int>((x / r) * 65536.0f);
             const bAngle *table = &bFastATanTable[i >> 8];
-            a = bDegToAng(90.0f) - (table[0] + (((table[1] - table[0]) * (i & 0xFF)) >> 8));
+            bAngle calc = table[0] + (((table[1] - table[0]) * (i & 0xFF)) >> 8);
+            a = bDegToAng(90.0f) - calc;
         } else if (y == 0.0f) {
             a = 0;
         } else {

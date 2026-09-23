@@ -162,6 +162,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `cFEng::FindPackage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/FEngInterfaces/FEngInterface.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 156 bytes
+- **Matching State**: 91.79% match
+- **Signature**:
+  ```cpp
+  FindPackage__5cFEngPCc
+  ```
+- **Description**: Decompiled cFEng::FindPackage achieving 91.79% match parity.
+
+---
+
 ### `MoviePlayer_Play`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MoviePlayer/MoviePlayer.cpp`
@@ -494,6 +508,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GinsuSynthData::BindToData`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsudata.cpp`
+- **Virtual Address**: `0x8001ff18`
+- **Size**: 340 bytes
+- **Matching State**: 95.87% match
+- **Signature**:
+  ```cpp
+  bool GinsuSynthData::BindToData(void *ptr);
+  ```
+- **Description**: Successfully matched GinsuSynthData::BindToData in zEAXSound2 unit.
+
+---
+
 ## 3. Gameplay Subsystem (`zGameplay`)
 
 ### `GManager::GetInGameplay`
@@ -781,6 +809,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   Sim::IEntity *GetEntity() const;
   ```
 - **Description**: Successfully implemented PhysicsObject::GetEntity and related inline physics object getters with Doxygen docstrings.
+
+---
+
+### `PhysicsObject::GetPlayer`
+- **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
+- **Source File**: `src/Speed/Indep/Src/Physics/PhysicsObject.h`
+- **Virtual Address**: `unknown`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  struct IPlayer *GetPlayer() const;
+  ```
+- **Description**: Decompiled PhysicsObject::GetPlayer to 100.0% match by adding 4-byte base padding in PhysicsObject.h.
 
 ---
 

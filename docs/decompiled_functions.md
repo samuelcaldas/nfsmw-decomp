@@ -332,7 +332,6 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```cpp
   bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst, WCollisionTri &retFace, float &retDist);
   ```
-<<<<<<< HEAD
 - **Description**: Finds the nearest collision face intersected by a transformed segment against a collision instance. Evaluates strip spheres, orthogonal inverse matrix transformations, ray-strip intersection, and distance thresholds to locate the closest colliding triangle.
 
 ---
@@ -349,21 +348,3 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void EmitterSystem::UpdateParticles(float dt);
   ```
 - **Description**: Advances all active emitter particles by one simulation step. Handles culling expired particles, updating position, velocity, and acceleration based on drag and gravity attributes, compressing vectors, evaluating particle lifetime and alpha curves, and applying basis rotations and color transformations.
-=======
-- **Description**: Updates loaded tire physics behavior including lateral and longitudinal forces, braking torque application, slip calculation, and normal load integration during vehicle simulation ticks.
-
----
-
-## 8. Collision Subsystem (`zWorld2`)
-
-### `WCollisionMgr::FindFaceInCInst`
-- **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
-- **Source File**: `src/Speed/Indep/Src/World/Common/WCollisionMgr.cpp`
-- **Size**: 1,436 bytes (359 instructions)
-- **Matching State**: 99.9% match
-- **Signature**:
-  ```cpp
-  bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst, WCollisionTri &retFace, float &retDist);
-  ```
-- **Description**: Finds the nearest collision face intersected by a transformed segment against a collision instance. Evaluates strip spheres, orthogonal inverse matrix transformations, ray-strip intersection, and distance thresholds to locate the closest colliding triangle.
->>>>>>> 6e31ad2b (docs: add WCollisionMgr::FindFaceInCInst documentation)

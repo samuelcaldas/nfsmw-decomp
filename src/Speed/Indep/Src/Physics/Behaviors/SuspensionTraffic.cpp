@@ -267,8 +267,10 @@ void SuspensionTraffic::Tire::UpdateFree(float dT) {
 extern float BrakingTorque;
 extern float EBrakingTorque;
 
-// UNSOLVED, stack issues due to scheduling
-void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT) {
+    /**
+     * @brief Updates tire state when loaded.
+     */
+    void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT) {
     float slip_speed;
     float catchupfriction;
     float skid_speed;
@@ -281,19 +283,19 @@ void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float l
     this->mLateralSpeed = lat_vel;
     this->mLoad = UMath::Max(load, 0.0f);
 
-    if (0.0f < this->mBrake) {
+    if (this->mBrake > 0.0f) {
         const float brake_spec = this->mBrakes->BRAKES().At(this->mAxleIndex);
         float bt = this->mBrake * (FTLB2NM(brake_spec) * BrakingTorque);
-        if (0.0f < this->mAV) {
+        if (this->mAV > 0.0f) {
             bt = -bt;
         }
         this->ApplyTorque(bt);
     }
 
-    if (0.0f < this->mEBrake) {
+    if (this->mEBrake > 0.0f) {
         const float ebrake_spec = this->mBrakes->EBRAKE();
         float ebt = this->mEBrake * (FTLB2NM(ebrake_spec) * EBrakingTorque);
-        if (0.0f < this->mAV) {
+        if (this->mAV > 0.0f) {
             ebt = -ebt;
         }
         this->ApplyTorque(ebt);
@@ -302,7 +304,7 @@ void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float l
     this->mSlipAngle = UMath::Atan2a(lat_vel, UMath::Abs(fwd_vel));
     slip_speed = this->mAV * this->mRadius - fwd_vel;
 
-    if (0.0f < this->mEBrake && 1.0f < UMath::Abs(fwd_vel)) {
+    if (this->mEBrake > 0.0f && UMath::Abs(fwd_vel) > 1.0f) {
         this->mSlip = slip_speed;
     } else {
         this->mSlip = 0.0f;
@@ -311,17 +313,17 @@ void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float l
     skid_speed = UMath::Sqrt(slip_speed * slip_speed + lat_vel * lat_vel);
     if (this->mEBrake > 0.5f && skid_speed > 1.0f) {
         this->mSlipping = true;
-        this->mLongitudeForce = ((-fwd_vel * 2) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex)) / skid_speed;
+        this->mLongitudeForce = ((-fwd_vel * 2.0f) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex)) / skid_speed;
     } else {
         this->mLongitudeForce = this->mAppliedTorque / this->mRadius;
     }
 
-    this->mLateralForce = (-lat_vel * 2) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex);
-    if (1.0f < skid_speed) {
+    this->mLateralForce = (-lat_vel * 2.0f) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex);
+    if (skid_speed > 1.0f) {
         this->mLateralForce /= skid_speed;
     }
 
-    if (1.0f < UMath::Abs(fwd_vel)) {
+    if (UMath::Abs(fwd_vel) > 1.0f) {
         this->mLongitudeForce -= UMath::Sina(this->mSlipAngle) * this->mLateralForce * 0.5f;
     } else {
         catchupfriction = UMath::Min(UMath::Abs(lat_vel), 1.0f);

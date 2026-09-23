@@ -155,7 +155,11 @@ void FEListBox::IncrementCellByColumn() {
     }
 }
 
-// UNSOLVED
+/**
+ * Scroll selection by column and row offsets.
+ * @param lColumnNum Column scroll delta
+ * @param lRowNum Row scroll delta
+ */
 void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
     if ((mulFlags & FELISTBOX_FLAGS_SCROLLH) && (mulFlags & FELISTBOX_FLAGS_SCROLLV)) {
         return;

@@ -1921,7 +1921,9 @@ void CarRenderInfo::UpdateCarParts() {
 int TweakKitWheelOffsetFront = 0;
 int TweakKitWheelOffsetRear = 0;
 
-// UNSOLVED
+/**
+ * @brief Updates wheel Y render offsets and scale factors based on ride info and attributes.
+ */
 void CarRenderInfo::UpdateWheelYRenderOffset() {
     if (this->pCarTypeInfo == nullptr) {
         bMemSet(this->WheelYRenderOffset, 0, sizeof(this->WheelYRenderOffset));

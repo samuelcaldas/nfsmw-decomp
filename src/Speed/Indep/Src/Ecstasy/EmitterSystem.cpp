@@ -1213,16 +1213,16 @@ void EmitterSystem::Render(eView *view) {
                 PlatGetViewVectors(view, rightVec, upVec, fwdVec);
                 bool submitParticles = PlatStartParticleRender(view, this->mCurrentTexture, em->GetNumParticles());
                 if (submitParticles) {
-                    EmitterDataAttribWrapper *last_emitter_data_atr = nullptr;
+                    EmitterDataAttribWrapper *last_emitter_data = nullptr;
+                    const Attrib::Gen::emitterdata *last_emitter_data_atr = nullptr;
                     for (EmitterParticle *particle = plist->GetHead(); particle != plist->EndOfList(); particle = particle->GetNext()) {
                         unsigned int sprite_hack_flags = 0;
                         EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
-                        const Attrib::Gen::emitterdata *this_emitter_data_atr = &this_emitter_data->GetAttributes();
-                        bool emitter_data_switch = this_emitter_data != last_emitter_data_atr;
-                        if (emitter_data_switch) {
-                            last_emitter_data_atr = this_emitter_data;
+                        if (this_emitter_data != last_emitter_data) {
+                            last_emitter_data = this_emitter_data;
+                            last_emitter_data_atr = &this_emitter_data->GetAttributes();
                         }
-                        const EffectParticleConstraint &constraint = this_emitter_data_atr->AxisConstraint();
+                        const EffectParticleConstraint &constraint = last_emitter_data_atr->AxisConstraint();
                         bool axis_constrained = constraint != CONSTRAIN_PARTICLE_NONE;
                         bVector4 xbasis;
                         bVector4 ybasis;

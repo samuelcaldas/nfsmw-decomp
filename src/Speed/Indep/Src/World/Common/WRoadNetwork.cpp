@@ -3309,27 +3309,25 @@ float WRoadNav::CookieTrailCurvature(const UMath::Vector3 &car_position, const U
                 }
             }
         }
-        {
-            float distance = 0.0f;
-            float total_curvature = 0.0f;
-            float previous_curvature = 0.0f;
-            int num_cookies = this->pCookieTrail->Count();
+        float distance = 0.0f;
+        float total_curvature = 0.0f;
+        float previous_curvature = 0.0f;
+        int num_cookies = this->pCookieTrail->Count();
 
-            for (int i = this->nCookieIndex; i < num_cookies; i++) {
-                const NavCookie &cookie = this->pCookieTrail->NthOldest(i);
-                float current_curvature = UMath::Clamp(cookie.Curvature, -0.01f, 0.01f);
-                if (i > this->nCookieIndex) {
-                    float length = cookie.Length;
-                    float avg_curvature = (current_curvature + previous_curvature) * 0.5f;
-                    total_curvature += length * avg_curvature;
-                    distance += length;
-                }
-                previous_curvature = current_curvature;
+        for (int i = this->nCookieIndex; i < num_cookies; i++) {
+            const NavCookie &cookie = this->pCookieTrail->NthOldest(i);
+            float current_curvature = UMath::Clamp(cookie.Curvature, -0.01f, 0.01f);
+            if (i > this->nCookieIndex) {
+                float length = cookie.Length;
+                float avg_curvature = (current_curvature + previous_curvature) * 0.5f;
+                total_curvature += length * avg_curvature;
+                distance += length;
             }
+            previous_curvature = current_curvature;
+        }
 
-            if (distance > 0.0f) {
-                road_curvature = bAbs(total_curvature / distance);
-            }
+        if (distance > 0.0f) {
+            road_curvature = bAbs(total_curvature / distance);
         }
 
         return UMath::Max(apex, road_curvature);

@@ -513,6 +513,9 @@ void CAnimPlayer::InitWorldAnimScene() {
     }
 }
 
+/**
+ * @brief Returns a pointer to the active world animation scene instance.
+ */
 CAnimWorldScene *CAnimPlayer::GetWorldAnimScene() {
     return mWorldAnimScene;
 }

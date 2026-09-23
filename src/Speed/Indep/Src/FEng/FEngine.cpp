@@ -310,14 +310,13 @@ void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
     if (bExecuting) {
         int iTicksRemaining = tDeltaTicks;
         do {
-            int iIterationTicks;
-            if (!bRenderedRecently) {
-                FEPackage::uHoldDirtyFlags = 0xFFFFFFFF;
-            } else {
+            if (bRenderedRecently) {
                 FEPackage::uHoldDirtyFlags = 0;
+            } else {
+                FEPackage::uHoldDirtyFlags = 0xFFFFFFFF;
             }
             pPackage = PackList.GetFirstPackage();
-            iIterationTicks = 0;
+            int iIterationTicks = 0;
             while (pPackage != nullptr) {
                 FEPackage *pCachedNext = pPackage->GetNext();
                 if (!bErrorScreenMode || pPackage->IsErrorScreen()) {

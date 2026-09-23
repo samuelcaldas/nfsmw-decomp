@@ -12,6 +12,37 @@ Geometry::Geometry(const UMath::Matrix4 &orient, const UMath::Vector3 &position,
     this->Set(orient, position, dimension, shape, delta);
 }
 
+/**
+ * @brief Sets the geometry orientation, position, dimension, shape, and delta.
+ */
+void Geometry::Set(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta) {
+    this->mShape = shape;
+    *reinterpret_cast<UMath::Vector3 *>(&this->mPosition) = position;
+    this->mDelta = delta;
+    this->mCollision_normal.w = 0.0f;
+    this->mCollision_point.w = 0.0f;
+    this->mOverlap = -100000.0f;
+    this->mPenetratesOther = 0;
+
+    if (shape == BOX) {
+        this->mDimension[0] = dimension.x;
+        this->mDimension[1] = dimension.y;
+        this->mDimension[2] = dimension.z;
+
+        for (int i = 0; i < 3; ++i) {
+            this->mNormal[i] = orient[i];
+            this->mExtent[i].x = this->mNormal[i].x * this->mDimension[i];
+            this->mExtent[i].y = this->mNormal[i].y * this->mDimension[i];
+            this->mExtent[i].z = this->mNormal[i].z * this->mDimension[i];
+            this->mExtent[i].w = 0.0f;
+        }
+    } else if (shape == SPHERE) {
+        this->mDimension[0] = dimension.x;
+        this->mDimension[1] = dimension.y;
+        this->mDimension[2] = dimension.z;
+    }
+}
+
 void Geometry::Move(const UMath::Vector3 &deltaP) {
     UMath::Add(reinterpret_cast<UMath::Vector3 &>(this->mPosition), deltaP);
     UMath::Add(this->mDelta, deltaP);

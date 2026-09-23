@@ -81,3 +81,13 @@ void GRaceStatus::DisableBarriers() {
     WRoadNetwork::Get().ResetBarriers();
     WRoadNetwork::Get().ResetRaceSegments();
 }
+
+/**
+ * @brief Returns the racer info for the specified index.
+ * @param index Index of the racer in the race status table.
+ * @return Reference to the racer info record.
+ */
+GRacerInfo &GRaceStatus::GetRacerInfo(int index) {
+    return this->mRacerInfo[index];
+}
+

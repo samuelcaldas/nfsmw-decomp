@@ -32,25 +32,27 @@ Friction::State Friction::GetForce(const UVector3 &p, float impulse, const UVect
  */
 Moment::Moment(const UMath::Matrix4 &orientation, float mass, const UMath::Vector3 &inertia, const UMath::Vector3 &cg, const UMath::Vector3 &linearVel,
                const UMath::Vector3 &angularVel, const UMath::Vector3 &position) {
-    mOrientation = orientation;
+    mInertiaP = inertia;
     mCG = cg;
     mLinearVelocity = linearVel;
     mAngularVelocity = angularVel;
     mPosition = position;
-    mInertiaP = inertia;
-    mInertialScale = UVector3(1.0f, 1.0f, 1.0f);
+    mInertialScale.x = 1.0f;
+    mInertialScale.y = 1.0f;
+    mInertialScale.z = 1.0f;
+    mMass = mass;
+    mElasticity = 0.0f;
+    mFixedCG = false;
     mImmobile = false;
     mBrakingForce = 0.0f;
-    mMass = mass;
-    mMassInv = 1.0f / mass;
     mClosingVelocity = UVector3::kZero;
     mSlidingVelocity = UVector3::kZero;
     mForce = UVector3::kZero;
     mFriction = UVector3::kZero;
     mFrictionState = Friction::None;
-    mElasticity = 0.0f;
-    mFixedCG = false;
+    mOrientation = orientation;
     UMath::Transpose(orientation, mOrientationInv);
+    mMassInv = 1.0f / mass;
 }
 
 /**

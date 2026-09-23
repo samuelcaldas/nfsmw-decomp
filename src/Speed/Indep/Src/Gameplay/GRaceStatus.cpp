@@ -46,3 +46,12 @@ void GRaceStatus::AddAvailableEventToMap(GRuntimeInstance *, GRuntimeInstance *)
  */
 void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *) {
 }
+
+/**
+ * @brief Enables the race bin barriers if a race bin is active.
+ */
+void GRaceStatus::EnableBinBarriers() {
+    if (this->mRaceBin != nullptr) {
+        this->mRaceBin->EnableBarriers();
+    }
+}

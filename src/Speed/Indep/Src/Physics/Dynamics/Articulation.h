@@ -32,8 +32,7 @@ struct Quaternion : public UMath::Vector4 {
 class Lever {
   public:
     Lever() {}
-    Lever(IEntity *entity, const UMath::Vector3 &arm, bool immobile)
-        : mArm(arm), mEntity(entity), mImmobile(immobile) {}
+    Lever(IEntity *entity, const UMath::Vector3 &arm, bool immobile);
     virtual void OnDebugDraw();
 
     const IEntity *GetEntity() const {

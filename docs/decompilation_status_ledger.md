@@ -49,6 +49,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`DebugCarCustomizeScreen::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (98.40% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEngine::Update` (`zFEng`)**: Decompiled, verified (97.98% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEngine::UpdateMouseState` (`zFEng`)**: Decompiled, verified (97.47% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (96.7% match, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 - **`NFSMixMapState::CreateMixCtls`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

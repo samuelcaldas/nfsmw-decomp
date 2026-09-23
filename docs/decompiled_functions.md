@@ -730,6 +730,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `RenderVisibleSectionBoundary`
+- **Unit**: `main/Speed/Indep/SourceLists/zTrack`
+- **Source File**: `src/Speed/Indep/Src/World/Scenery.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 888 bytes
+- **Matching State**: 95.43% match
+- **Signature**:
+  ```cpp
+  void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view);
+  ```
+- **Description**: Renders visible section boundaries in the track scenery subsystem.
+
+---
+
 ## 8. Collision Subsystem (`zWorld2`)
 
 ### `WCollisionMgr::FindFaceInCInst`
@@ -760,6 +774,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `WRoadNav::CookieTrailCurvature`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
+- **Source File**: `src/Speed/Indep/Src/World/Common/WRoadNetwork.cpp`
+- **Virtual Address**: `0x80304A70`
+- **Size**: 1,284 bytes
+- **Matching State**: 95.94% match
+- **Signature**:
+  ```cpp
+  float WRoadNav::CookieTrailCurvature(const UMath::Vector3 &car_position, const UMath::Vector3 &car_velocity);
+  ```
+- **Description**: Computes road curvature along the cookie trail ahead of the vehicle based on current position and velocity vectors.
+
+---
+
 ## 9. Ecstasy / Particle Subsystem (`zEcstasy`)
 
 ### `EmitterSystem::UpdateParticles`
@@ -772,6 +800,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void EmitterSystem::UpdateParticles(float dt);
   ```
 - **Description**: Advances all active emitter particles by one simulation step. Handles culling expired particles, updating position, velocity, and acceleration based on drag and gravity attributes, compressing vectors, evaluating particle lifetime and alpha curves, and applying basis rotations and color transformations.
+
+---
+
+### `EmitterSystem::Render`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/EmitterSystem.cpp`
+- **Virtual Address**: `0x8011290C`
+- **Size**: 696 bytes
+- **Matching State**: 94.54% match
+- **Signature**:
+  ```cpp
+  void EmitterSystem::Render(eView *view);
+  ```
+- **Description**: Renders particle emitter systems within the ecstasy graphics/particle engine pipeline for the given view.
 
 ---
 

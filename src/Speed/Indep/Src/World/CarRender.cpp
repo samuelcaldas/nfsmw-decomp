@@ -295,8 +295,7 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
                     stang = -stang;
                 }
 
-                float fstang = static_cast<float>(stang);
-                modifier = fstang / culldiv;
+                modifier = static_cast<float>(stang) / culldiv;
                 plane_info->NormalDistance[0] = omodifier + modifier;
             } else {
                 plane_info->NormalDistance[0] = omodifier;

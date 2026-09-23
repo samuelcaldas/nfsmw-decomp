@@ -102,8 +102,8 @@ void GinsuSynthesis::HandlePacketRelease(short *samples) {
         for (int i = 0; i < this->mOverlapSize; i++) {
             float val = static_cast<float>(dest[i]) + blend * static_cast<float>(buff[i] - dest[i]);
 
-            dest[i] = static_cast<short>(IntRound(val));
             blend += blendstep;
+            dest[i] = static_cast<short>(IntRound(val));
         }
 
         sampleCount += this->mOverlapSize;

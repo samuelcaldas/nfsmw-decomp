@@ -606,6 +606,9 @@ void WorldMap::ClearItems() {
 }
 
 // UNSOLVED
+/**
+ * @brief Clamps the given coordinates to the map bounds.
+ */
 bool WorldMap::ClampToMapBounds(float &x, float &y) {
     bool clamped = false;
     bVector2 map_br;
@@ -615,16 +618,16 @@ bool WorldMap::ClampToMapBounds(float &x, float &y) {
         x = MapTopLeft.x + 8.0f;
         clamped = true;
     } else {
-        if (x > map_br.x - 8.0f) {
-            x = map_br.x - 8.0f;
+        if (x > map_br.x + -8.0f) {
+            x = map_br.x + -8.0f;
             clamped = true;
         } else {
             if (y < MapTopLeft.y + 26.0f) {
                 y = MapTopLeft.y + 26.0f;
                 clamped = true;
             } else {
-                if (y > map_br.y - 32.0f) {
-                    y = map_br.y - 32.0f;
+                if (y > map_br.y + -32.0f) {
+                    y = map_br.y + -32.0f;
                     clamped = true;
                 }
             }

@@ -680,6 +680,7 @@ void __InitMatrices(void) {
     float transy;
     float gcn_scale;
 
+    // Calculate GameCube frontend scale and translation
     gcn_scale = IsPal50Mode ? 0.81f : 0.84f;
     transx = ((float)_rmode->fbWidth - (float)_rmode->fbWidth * gcn_scale * (448.f / 378.f)) * 0.5f;
     transy = ((float)_rmode->efbHeight - gcn_scale * (1.0f / 448.0f) * (float)_rmode->efbHeight * (float)_rmode->xfbHeight) * 0.5f;

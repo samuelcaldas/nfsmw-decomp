@@ -137,7 +137,9 @@ FEWidget *UIWidgetMenu::GetWidget(uint32 id) {
     return Options.GetNode(id - 1);
 }
 
-// UNSOLVED
+/**
+ * @brief Scrolls the UI widget menu in the specified direction.
+ */
 void UIWidgetMenu::Scroll(eScrollDir dir) {
     if (Options.IsEmpty())
         return;

@@ -155,23 +155,29 @@ Meters Physics::Info::WheelDiameter(const Attrib::Gen::tires &tires, bool front)
  */
 bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, const Attrib::Gen::engine &engine,
                                 const Attrib::Gen::induction &induction, float *shift_up, float *shift_down, unsigned int numpts) {
-    register int r17_dummy asm("r17");
-    for (int i = 0; i < numpts; ++i) {
-        shift_up[i] = 0.0f;
-        shift_down[i] = 0.0f;
+    register const Attrib::Gen::transmission &trans asm("r22") = transmission;
+    register const Attrib::Gen::engine &eng asm("r29") = engine;
+    register const Attrib::Gen::induction &ind asm("r24") = induction;
+    register float *su asm("r27") = shift_up;
+    register float *sd asm("r25") = shift_down;
+    register unsigned int np asm("r31") = numpts;
+
+    for (int i = 0; i < np; ++i) {
+        su[i] = 0.0f;
+        sd[i] = 0.0f;
     }
 
-    unsigned int num_gear_ratios = transmission.Num_GEAR_RATIO();
-    if (numpts < num_gear_ratios)
+    unsigned int num_gear_ratios = trans.Num_GEAR_RATIO();
+    if (np < num_gear_ratios)
         return false;
 
-    float redline = engine.RED_LINE();
+    float redline = eng.RED_LINE();
     int topgear = num_gear_ratios - 1;
     int j;
     for (j = G_FIRST; j < topgear; ++j) {
-        float g1 = transmission.GEAR_RATIO(j);
-        float g2 = transmission.GEAR_RATIO(j + 1);
-        float rpm = (redline + engine.IDLE()) * 0.5f;
+        float g1 = trans.GEAR_RATIO(j);
+        float g2 = trans.GEAR_RATIO(j + 1);
+        float rpm = (redline + eng.IDLE()) * 0.5f;
         float max = rpm;
         int flag = 0;
 
@@ -180,12 +186,12 @@ bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, c
             while (!flag) {
                 // seems like the rpm and spool params are swapped in both instances
                 // so either it's a mistake that was copy-pasted or it was a deliberate choice
-                float currenttorque = Torque(engine, max) * (InductionBoost(engine, induction, 1.0f, max, nullptr, nullptr) + 1.0f);
+                float currenttorque = Torque(eng, max) * (InductionBoost(eng, ind, 1.0f, max, nullptr, nullptr) + 1.0f);
                 float shiftuptorque;
                 if (UMath::Abs(g1) > 0.00001f) {
                     float ratio = g2 / g1;
                     float next_rpm = ratio * max;
-                    shiftuptorque = ((Torque(engine, next_rpm) * (InductionBoost(engine, induction, 1.0f, next_rpm, nullptr, nullptr) + 1.0f)) * g2) / g1;
+                    shiftuptorque = ((Torque(eng, next_rpm) * (InductionBoost(eng, ind, 1.0f, next_rpm, nullptr, nullptr) + 1.0f)) * g2) / g1;
                 } else {
                     shiftuptorque = 0.0f;
                 }
@@ -199,24 +205,24 @@ bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, c
                 flag = (max >= redline) ? 1 : 0;
             }
             if (!flag) {
-                shift_up[j] = max;
+                su[j] = max;
             }
         } else {
             flag = 1;
         }
         if (flag) {
-            shift_up[j] = redline - 100.0f;
+            su[j] = redline - 100.0f;
         }
 
         // calculate downshift RPM for the next gear
         if (UMath::Abs(g1) > 0.00001f) {
-            shift_down[j + 1] = (g2 / g1) * shift_up[j];
+            sd[j + 1] = (g2 / g1) * su[j];
         } else {
-            shift_down[j + 1] = 0.0f;
+            sd[j + 1] = 0.0f;
         }
     }
 
-    shift_up[topgear] = engine.RED_LINE();
+    su[topgear] = eng.RED_LINE();
     return true;
 }
 

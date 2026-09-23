@@ -2111,7 +2111,9 @@ void CarRenderInfo::UpdateCarReplacementTextures() {
     this->CarbonReplacementTextureTable[REPLACETEX_GLOBALCARBONSKIN].SetNewNameHash(bStringHash("CARBONFIBRE"));
 }
 
-// UNSOLVED
+/**
+ * @brief Updates headlight and brakelight texture replacement hashes based on vehicle light states.
+ */
 void CarRenderInfo::UpdateLightStateTextures() {
     bool lights_always_on = true;
 

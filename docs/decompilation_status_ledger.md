@@ -69,6 +69,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackageCommand::~FEPackageCommand` (`zFEng`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEGroup::~FEGroup(void)` (`zFEng`)**: Decompiled, verified (100.0% match, 76 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`UISafehouseRaceSheet::RefreshHeader` (`zFe`)**: Decompiled, verified (97.9% match, 1,776 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`WorldMap::AddCops` (`zFe`)**: Decompiled, verified (97.0% match, 968 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 - **`EAXSound::GetCurMusicVolume` (`zEAXSound`)**: Decompiled, verified (100.0% match, 52 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -82,6 +84,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`SFXObj_PFEATrax::GenMusicType` (`zEAXSound2`)**: Decompiled, verified (57.1% match, 244 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthesis::HandlePacketRelease`**: Decompiled, verified (98.93% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthData::BindToData` (`zEAXSound2`)**: Decompiled, verified (95.87% match, 340 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CARSFX_RoadNoise::GenerateRoadNoise` (`zEAXSound2`)**: Decompiled, verified (93.0% match, 1,240 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GinsuSynthData::SampleToCycle` (`zEAXSound2`)**: Decompiled, verified (86.0% match, 876 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SFXCTL_Physics::UpdateMixerOutputs`**: Decompiled, verified (98.22% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Gameplay Subsystem (`zGameplay`)

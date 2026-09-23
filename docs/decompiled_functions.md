@@ -477,6 +477,34 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `UISafehouseRaceSheet::RefreshHeader`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/career/uiRepSheetRaceEvents.cpp`
+- **Virtual Address**: `0x801263FC`
+- **Size**: 1,776 bytes
+- **Matching State**: 97.9% match
+- **Signature**:
+  ```cpp
+  void UISafehouseRaceSheet::RefreshHeader();
+  ```
+- **Description**: Decompiled UISafehouseRaceSheet::RefreshHeader improving matching to 97.9% by reordering parameter evaluation order for FEngSetTextureHash.
+
+---
+
+### `WorldMap::AddCops`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/InGame/uiWorldMap.cpp`
+- **Virtual Address**: `0x8012028C`
+- **Size**: 968 bytes
+- **Matching State**: 97.0% match
+- **Signature**:
+  ```cpp
+  void WorldMap::AddCops();
+  ```
+- **Description**: Decompiled WorldMap::AddCops to 97.0% match with exact iterator filtering and map item placement logic.
+
+---
+
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 
 ### `EAXTunerCar::UpdateRotation`
@@ -645,6 +673,34 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   bool GinsuSynthData::BindToData(void *ptr);
   ```
 - **Description**: Successfully matched GinsuSynthData::BindToData in zEAXSound2 unit.
+
+---
+
+### `CARSFX_RoadNoise::GenerateRoadNoise`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/CARSFX_Roadnoise.cpp`
+- **Virtual Address**: `0x800D80FC`
+- **Size**: 1,240 bytes
+- **Matching State**: 93.0% match
+- **Signature**:
+  ```cpp
+  void CARSFX_RoadNoise::GenerateRoadNoise();
+  ```
+- **Description**: Decompiled CARSFX_RoadNoise::GenerateRoadNoise in main/Speed/Indep/SourceLists/zEAXSound2 with 93.0% match.
+
+---
+
+### `GinsuSynthData::SampleToCycle`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsudata.cpp`
+- **Virtual Address**: `0x800ED4C8`
+- **Size**: 876 bytes
+- **Matching State**: 86.0% match
+- **Signature**:
+  ```cpp
+  float GinsuSynthData::SampleToCycle(int sample) const;
+  ```
+- **Description**: Decompiled GinsuSynthData::SampleToCycle with improved register allocation and exact Doxygen documentation.
 
 ---
 

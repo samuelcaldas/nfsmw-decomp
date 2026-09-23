@@ -187,7 +187,9 @@ void DebugCarCustomizeScreen::Redraw() {
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Handles notification messages for the debug car customization screen.
+ */
 void DebugCarCustomizeScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     switch (msg) {
         case __PAD_BUTTON3__:
@@ -213,10 +215,10 @@ void DebugCarCustomizeScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 p
                     if (!wasCarCustomized) {
                         car->Customization = INVALID_CUSTOMIZATION_HANDLE;
                     }
+                    CurrentCarTypeNameHash = CarTypeNameHashes.GetPrevCircular(CurrentCarTypeNameHash);
                     for (int i = 0; i < iFastScroll; i++) {
                         pDebugCar = FilteredCarsList.GetPrevCircular(pDebugCar);
                     }
-                    CurrentCarTypeNameHash = CarTypeNameHashes.GetPrevCircular(CurrentCarTypeNameHash);
                     LoadCurrentCar();
                     RebuildPartsList();
                     break;
@@ -247,10 +249,10 @@ void DebugCarCustomizeScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 p
                     if (!wasCarCustomized) {
                         car->Customization = INVALID_CUSTOMIZATION_HANDLE;
                     }
+                    CurrentCarTypeNameHash = CarTypeNameHashes.GetNextCircular(CurrentCarTypeNameHash);
                     for (int i = 0; i < iFastScroll; i++) {
                         pDebugCar = FilteredCarsList.GetNextCircular(pDebugCar);
                     }
-                    CurrentCarTypeNameHash = CarTypeNameHashes.GetNextCircular(CurrentCarTypeNameHash);
                     LoadCurrentCar();
                     RebuildPartsList();
                     break;

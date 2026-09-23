@@ -283,8 +283,8 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
         bool visible = true;
         CarPartInfo *part_info = &this->CarPartInfoTable[type];
         CarPartCullingPlaneInfo *plane_info = &CarPartCullingPlaneInfoTable[type];
-        float modifier = 0.0f;
         float omodifier = plane_info->NormalDistance[0];
+        float modifier = 0.0f;
 
         if (!IsGameFlowInFrontEnd()) {
             // TODO

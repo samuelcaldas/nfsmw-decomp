@@ -266,14 +266,11 @@ void SuspensionTraffic::Tire::UpdateFree(float dT) {
 
 extern float BrakingTorque;
 extern float EBrakingTorque;
-extern "C" const float lbl_803FB6B8;
-extern "C" const float lbl_803FB6B0;
 
     /**
      * @brief Updates tire state when loaded.
      */
     void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT) {
-    register const float *kAtanConst asm("r30") = &lbl_803FB6B8;
     float slip_speed;
     float catchupfriction;
     float skid_speed;

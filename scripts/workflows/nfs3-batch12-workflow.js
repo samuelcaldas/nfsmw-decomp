@@ -1,9 +1,9 @@
 export const meta = {
   name: 'nfsmw-parallel-decomp-batch12-nfs3',
-  description: 'Batch 12 decompilation for nfs3: SuspensionTraffic::Tire::UpdateLoaded (zPhysicsBehaviors), cFEngJoyInput::HandleJoy (zFe), UISafehouseRaceSheet::RefreshHeader (zFe), CARSFX_RoadNoise::GenerateRoadNoise (zEAXSound2)',
+  description: 'Batch 12 decompilation for nfs3: UISafehouseRaceSheet::RefreshHeader (zFe), CARSFX_RoadNoise::GenerateRoadNoise (zEAXSound2), WorldMap::AddCops (zFe), GinsuSynthData::SampleToCycle (zEAXSound2)',
   phases: [
-    { title: 'Decomp-1', detail: 'Pair 1: SuspensionTraffic::Tire::UpdateLoaded (zPhysicsBehaviors) & cFEngJoyInput::HandleJoy (zFe)' },
-    { title: 'Decomp-2', detail: 'Pair 2: UISafehouseRaceSheet::RefreshHeader (zFe) & CARSFX_RoadNoise::GenerateRoadNoise (zEAXSound2)' },
+    { title: 'Decomp-1', detail: 'Pair 1: UISafehouseRaceSheet::RefreshHeader (zFe) & CARSFX_RoadNoise::GenerateRoadNoise (zEAXSound2)' },
+    { title: 'Decomp-2', detail: 'Pair 2: WorldMap::AddCops (zFe) & GinsuSynthData::SampleToCycle (zEAXSound2)' },
     { title: 'Merge', detail: 'Sequential merge to main' },
     { title: 'Docs', detail: 'Update docs/decompiled_functions.md and status ledger' },
   ],
@@ -40,29 +40,6 @@ const MERGE_SCHEMA = {
 
 const CANDIDATES_PAIR1 = [
   {
-    demangled: 'SuspensionTraffic::Tire::UpdateLoaded',
-    symbol: 'UpdateLoaded__Q217SuspensionTraffic4Tireffff',
-    unit: 'main/Speed/Indep/SourceLists/zPhysicsBehaviors',
-    size: 856,
-    match: 97.2,
-    source_file: 'src/Speed/Indep/Src/Physics/Behaviors/SuspensionTraffic.cpp',
-    virtual_address: '0x8024B310',
-    extra_instructions: 'In SuspensionTraffic.cpp SuspensionTraffic::Tire::UpdateLoaded: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zPhysicsBehaviors -d UpdateLoaded__Q217SuspensionTraffic4Tireffff. Notice the prologue/epilogue mismatch: target saves r30 and r31 with stmw r30, 0x10(r1) and stack size -0x30. Target caches the float constant address in r30 across VU0_Atan2 calls. Declare a local variable (e.g. register const float * or intermediate constant pointer) so the compiler uses r30. Aim for 100.0% match parity.',
-  },
-  {
-    demangled: 'cFEngJoyInput::HandleJoy',
-    symbol: 'HandleJoy__13cFEngJoyInput',
-    unit: 'main/Speed/Indep/SourceLists/zFe',
-    size: 768,
-    match: 96.9,
-    source_file: 'src/Speed/Indep/Src/Frontend/FEJoyInput.cpp',
-    virtual_address: '0x801307E0',
-    extra_instructions: 'In FEJoyInput.cpp cFEngJoyInput::HandleJoy: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zFe -d HandleJoy__13cFEngJoyInput. At line 183-188, simplify boolean logic for Sim::GetUserMode() == 1 and FEDatabase checks to align r31/r0 boolean evaluation. At line 210, float register assignment for f30 and f31 can be matched by declaring the float variables in the exact order of use. Aim for 100.0% match parity.',
-  },
-]
-
-const CANDIDATES_PAIR2 = [
-  {
     demangled: 'UISafehouseRaceSheet::RefreshHeader',
     symbol: 'RefreshHeader__20UISafehouseRaceSheet',
     unit: 'main/Speed/Indep/SourceLists/zFe',
@@ -70,7 +47,7 @@ const CANDIDATES_PAIR2 = [
     match: 96.6,
     source_file: 'src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/career/uiRepSheetRaceEvents.cpp',
     virtual_address: '0x801263FC',
-    extra_instructions: 'In uiRepSheetRaceEvents.cpp UISafehouseRaceSheet::RefreshHeader: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zFe -d RefreshHeader__20UISafehouseRaceSheet. Look at lines 152-186: reorder intermediate calls to FEngFindImage, cFrontendDatabase::GetRaceIconHash, and GRaceParameters::GetRaceType to prevent unnecessary register spills and match original instruction order. Aim for 100.0% match parity.',
+    extra_instructions: 'In uiRepSheetRaceEvents.cpp UISafehouseRaceSheet::RefreshHeader: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zFe -d RefreshHeader__20UISafehouseRaceSheet. Look at lines 152-186: reorder intermediate calls to FEngFindImage, cFrontendDatabase::GetRaceIconHash, and GRaceParameters::GetRaceType to prevent unnecessary register spills and match original instruction order. Aim for 100.0% match parity. Ensure 0 regressions with ninja changes.',
   },
   {
     demangled: 'CARSFX_RoadNoise::GenerateRoadNoise',
@@ -81,6 +58,29 @@ const CANDIDATES_PAIR2 = [
     source_file: 'src/Speed/Indep/Src/EAXSound/CARSFX/CARSFX_Roadnoise.cpp',
     virtual_address: '0x800D80FC',
     extra_instructions: 'In CARSFX_Roadnoise.cpp CARSFX_RoadNoise::GenerateRoadNoise: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zEAXSound2 -d GenerateRoadNoise__16CARSFX_RoadNoise. The differences stem from the inlined vector length / rsqrt calculations and float constant loading sequence for the road surface graphs. Reorder local temporary float declarations to match target compiler register allocation. Aim for 100.0% match.',
+  },
+]
+
+const CANDIDATES_PAIR2 = [
+  {
+    demangled: 'WorldMap::AddCops',
+    symbol: 'AddCops__8WorldMap',
+    unit: 'main/Speed/Indep/SourceLists/zFe',
+    size: 968,
+    match: 96.4,
+    source_file: 'src/Speed/Indep/Src/Frontend/MenuScreens/InGame/uiWorldMap.cpp',
+    virtual_address: '0x8012028C',
+    extra_instructions: 'In uiWorldMap.cpp WorldMap::AddCops: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zFe -d AddCops__8WorldMap. Currently at 96.4% match. Refine cop entity iteration, position vector transformation, and map marker icon placement logic. Aim for 100.0% match parity with 0 regressions.',
+  },
+  {
+    demangled: 'GinsuSynthData::SampleToCycle',
+    symbol: 'SampleToCycle__C14GinsuSynthDatai',
+    unit: 'main/Speed/Indep/SourceLists/zEAXSound2',
+    size: 876,
+    match: 85.6,
+    source_file: 'src/Speed/Indep/Src/EAXSound/Ginsu/ginsudata.cpp',
+    virtual_address: '0x800ED4C8',
+    extra_instructions: 'In ginsudata.cpp GinsuSynthData::SampleToCycle: inspect diff using python3 tools/decomp-diff.py -u main/Speed/Indep/SourceLists/zEAXSound2 -d SampleToCycle__C14GinsuSynthDatai. Currently at 85.6% match. Align binary search / indexing loop over sample cycles to recover exact register allocation and condition branch structure. Aim for 100.0% match.',
   },
 ]
 
@@ -129,14 +129,14 @@ function makePrompt(c) {
     'If any regression occurs, revert problematic edits.\n\n' +
     '## Step 6 — Commit on branch\n' +
     '  git add -u\n' +
-    '  git commit -m "match: ' + c.demangled + '\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"\n\n' +
+    '  git commit -m "match: ' + c.demangled + '\n\nCo-Authored-By: Claude Code <noreply@anthropic.com>"\n\n' +
     '## Step 7 — Structured report\n' +
     'Query branch: git rev-parse --abbrev-ref HEAD\n' +
     'Return structured result with all required schema fields.'
   )
 }
 
-log('Starting Batch 12 for nfs3: SuspensionTraffic::Tire::UpdateLoaded, cFEngJoyInput::HandleJoy, UISafehouseRaceSheet::RefreshHeader, CARSFX_RoadNoise::GenerateRoadNoise')
+log('Starting Batch 12 for nfs3: UISafehouseRaceSheet::RefreshHeader, CARSFX_RoadNoise::GenerateRoadNoise, WorldMap::AddCops, GinsuSynthData::SampleToCycle')
 
 phase('Decomp-1')
 const resultsPair1 = await parallel(CANDIDATES_PAIR1.map(c => () =>
@@ -240,7 +240,7 @@ if (mergedFunctions.length > 0) {
     '3. Read docs/decompilation_status_ledger.md and add each function as [Completed & Merged] under its subsystem in Section 1.\n' +
     '4. Commit documentation changes:\n' +
     '   git add docs/decompiled_functions.md docs/decompilation_status_ledger.md\n' +
-    '   git commit -m "docs: record Batch 12 decompiled functions in ledger and documentation\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"',
+    '   git commit -m "docs: record Batch 12 decompiled functions in ledger and documentation\n\nCo-Authored-By: Claude Code <noreply@anthropic.com>"',
     {
       phase: 'Docs',
       label: 'docs:update',

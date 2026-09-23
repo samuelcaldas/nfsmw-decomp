@@ -3,8 +3,8 @@
 const char GRaceDatabase::sDDayRaces[5][8] = {"16.1.0", "16.2.2", "16.2.3", "16.1.1", "16.2.1"};
 
 /**
- * @brief Simulates completion of D-Day races.
+ * @brief Forces instantiation of GRaceBin methods.
  */
-void GRaceDatabase::SimulateDDayComplete() {
+static unsigned short ForceGRaceBinInstantiation(const GRaceBin *bin) {
+    return bin->GetAwardedRaceWins();
 }
-

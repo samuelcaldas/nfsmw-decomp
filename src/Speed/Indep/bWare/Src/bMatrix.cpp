@@ -7,7 +7,9 @@ void bInvertMatrix(bMatrix4 *dest, const bMatrix4 *src) {
     eInvertMatrix(dest, const_cast<bMatrix4 *>(src));
 }
 
-// UNSOLVED
+    /**
+     * @brief Calculates the determinant of a 4x4 matrix.
+     */
 float fDeterminant(bMatrix4 *m) {
     float value =
         m->v0.x * m->v1.y * m->v2.z * m->v3.w +

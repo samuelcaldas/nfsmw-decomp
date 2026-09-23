@@ -48,6 +48,7 @@ void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *) {
 }
 
 /**
+<<<<<<< HEAD
  * @brief Refreshes the current race bin while in game.
  */
 void GRaceStatus::RefreshBinWhileInGame() {
@@ -59,4 +60,12 @@ void GRaceStatus::RefreshBinWhileInGame() {
  */
 void GRaceStatus::StopMasterTimer() {
     mRaceMasterTimer.Stop();
+=======
+ * @brief Enables the race bin barriers if a race bin is active.
+ */
+void GRaceStatus::EnableBinBarriers() {
+    if (this->mRaceBin != nullptr) {
+        this->mRaceBin->EnableBarriers();
+    }
+>>>>>>> worktree-wf_e92e2f66-32b-3
 }

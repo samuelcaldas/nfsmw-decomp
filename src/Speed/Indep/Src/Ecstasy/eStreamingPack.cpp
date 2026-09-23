@@ -349,9 +349,8 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
         streaming_entry->RefCount++;
     } else {
         char malloc_name[128];
-        eStreamingPack *pack = streaming_pack;
 
-        bSPrintf(malloc_name, "%s%s", pack->Filename, (streaming_entry->Flags & 0x1) ? " - Compressed" : "");
+        bSPrintf(malloc_name, "%s%s", streaming_pack->Filename, (streaming_entry->Flags & 0x1) ? " - Compressed" : "");
 
         int malloc_size = streaming_entry->ChunkByteSize + this->RequiredChunkAlignment;
         int allocation_params = 0x2000;
@@ -373,13 +372,13 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
 
         streaming_entry->ChunkData = (unsigned char *)bMalloc(malloc_size, "TODO", __LINE__, allocation_params);
         streaming_entry->RefCount++;
-        pack->NumLoadsPending++;
+        streaming_pack->NumLoadsPending++;
         if (loading_table) {
             loading_table->NumLoadsPending++;
         }
         streaming_entry->Flags |= 0x10;
         void *aligned_ptr = this->GetAlignedChunkDataPtr(streaming_entry->ChunkData);
-        const char *filename = pack->Filename;
+        const char *filename = streaming_pack->Filename;
         int chunk_byte_offset = streaming_entry->ChunkByteOffset;
         void (*callback)(void *, int, void *) = eStreamPackLoader::InternalLoadedStreamingEntryCallback;
         int chunk_byte_size = streaming_entry->ChunkByteSize;

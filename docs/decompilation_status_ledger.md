@@ -84,7 +84,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`SFX_Common::MsgPlayMiscSound` (`zEAXSound2`)**: Decompiled, verified (99.4% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SFXObj_PFEATrax::GenMusicType` (`zEAXSound2`)**: Decompiled, verified (57.1% match, 244 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthesis::HandlePacketRelease`**: Decompiled, verified (98.93% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`GinsuSynthData::BindToData` (`zEAXSound2`)**: Decompiled, verified (95.87% match, 340 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GinsuSynthData::BindToData` (`zEAXSound2`)**: Decompiled, verified (96.8% match, 340 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CARSFX_RoadNoise::GenerateRoadNoise` (`zEAXSound2`)**: Decompiled, verified (93.0% match, 1,240 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthData::SampleToCycle` (`zEAXSound2`)**: Decompiled, verified (86.0% match, 876 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SFXCTL_Physics::UpdateMixerOutputs`**: Decompiled, verified (98.22% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

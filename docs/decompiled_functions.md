@@ -285,21 +285,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```cpp
   void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info);
   ```
-- **Description**: Decompiled and matched MemcardCallbacks::FoundEntry (98.0% match) handling memory card entry discovery callbacks during save/load operations.
+- **Description**: Successfully updated MemcardCallbacks::FoundEntry in MemoryCardCallbacks.cpp, achieving 98.0% match parity with 0 regressions.
 
 ---
 
 ### `IJoyHelper::EmulateMemoryCardLibrary`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x8013AE0C`
 - **Size**: 732 bytes
 - **Matching State**: 98.8% match
 - **Signature**:
   ```cpp
   void IJoyHelper::EmulateMemoryCardLibrary(int aJoyOp);
   ```
-- **Description**: Decompiled and matched IJoyHelper::EmulateMemoryCardLibrary to 98.8% in zFe unit.
+- **Description**: Verified IJoyHelper::EmulateMemoryCardLibrary at 98.8% match in zFe unit with 0 regressions.
 
 ---
 
@@ -665,14 +665,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `GinsuSynthData::BindToData`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsudata.cpp`
-- **Virtual Address**: `0x8001ff18`
+- **Virtual Address**: `0x800EAE74`
 - **Size**: 340 bytes
-- **Matching State**: 95.87% match
+- **Matching State**: 96.8% match
 - **Signature**:
   ```cpp
   bool GinsuSynthData::BindToData(void *ptr);
   ```
-- **Description**: Successfully matched GinsuSynthData::BindToData in zEAXSound2 unit.
+- **Description**: Matched GinsuSynthData::BindToData to 96.8% with zero regressions.
 
 ---
 

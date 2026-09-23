@@ -552,6 +552,76 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRaceStatus::RefreshBinWhileInGame`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019DE28`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::RefreshBinWhileInGame();
+  ```
+- **Description**: Refreshes the current race bin while in game by setting `mQueueBinChange` to true.
+
+---
+
+### `GRaceStatus::StopMasterTimer`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019EC08`
+- **Size**: 36 bytes (9 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::StopMasterTimer();
+  ```
+- **Description**: Stops the race master timer instance (`mRaceMasterTimer.Stop()`).
+
+---
+
+### `GRaceStatus::EnableBinBarriers`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019DDFC`
+- **Size**: 44 bytes (11 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::EnableBinBarriers();
+  ```
+- **Description**: Enables the race bin barriers if a race bin is active.
+
+---
+
+### `GRaceStatus::SetRaceActivity`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019F2A4`
+- **Size**: 56 bytes (14 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::SetRaceActivity(GActivity *activity);
+  ```
+- **Description**: Sets the current race activity and resolves its race parameters from the database.
+
+---
+
+### `GRaceStatus::DisableBarriers`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x8019F36C`
+- **Size**: 60 bytes (15 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::DisableBarriers();
+  ```
+- **Description**: Disables barriers, redoes topology and scenery groups, and resets race segments.
+
+---
+
 ## 4. World Subsystem (`zWorld`)
 
 ### `CarRenderInfo::UpdateLightStateTextures`
@@ -828,6 +898,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void __InitMatrices(void);
   ```
 - **Description**: Verified __InitMatrices in zEcstasy unit at 97.95% match with Doxygen docstring and clean regression test.
+
+---
+
+### `InternalLoadingHeaderPhase2Callback`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
+- **Virtual Address**: `0x800F61E4`
+- **Size**: 308 bytes
+- **Matching State**: 94.19% match
+- **Signature**:
+  ```cpp
+  void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param, int error_status, void *callback_param2);
+  ```
+- **Description**: Decompiled and matched eStreamPackLoader::InternalLoadingHeaderPhase2Callback in zEcstasy unit, handling stream package header phase 2 loading callbacks.
 
 ---
 

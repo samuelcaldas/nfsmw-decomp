@@ -9,5 +9,6 @@
 #include "Speed/Indep/Src/Gameplay/GVault.cpp"
 #include "Speed/Indep/Src/Gameplay/GRaceDatabase.cpp"
 #include "Speed/Indep/Src/Gameplay/GRuntimeInstance.cpp"
+#include "Speed/Indep/Src/Gameplay/GObjectBlock.cpp"
 #include "Speed/Indep/Src/Gameplay/GCharacter.cpp"
 #include "Speed/Indep/Src/Gameplay/GManager.cpp"

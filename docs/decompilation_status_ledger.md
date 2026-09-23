@@ -10,6 +10,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GetType__13CAnimProperty`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SetEnabled__13CAnimPropertyb`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CAnimScene::GetHandle`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`__static_initialization_and_destruction_0` (`zAnim`)**: Decompiled, verified (100.0% match, 588 bytes), documented in `docs/decompiled_functions.md`. Reaches **100.0% complete decompilation of `zAnim` unit (315/315 functions, 42,292 bytes code)**. **Status: [Completed & Verified 100.0%]**
 
 ### AI Subsystem (`zAI`)
 - **`AICopManager::UpdatePursuits`**: Decompiled, verified (99.97% match / 100% fuzzy match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

@@ -64,7 +64,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `CAnimScene::GetHandle`
 - **Unit**: `main/Speed/Indep/SourceLists/zAnim`
-- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_0f4a6bda-d09-5/src/Speed/Indep/Src/Animation/AnimScene.cpp`
+- **Source File**: `src/Speed/Indep/Src/Animation/AnimScene.cpp`
 - **Virtual Address**: `0x8004BE48`
 - **Size**: 8 bytes
 - **Matching State**: 100.0% match
@@ -73,6 +73,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   int CAnimScene::GetHandle()
   ```
 - **Description**: Returns the unique runtime handle assigned to the animation scene instance.
+
+---
+
+### `__static_initialization_and_destruction_0`
+- **Unit**: `main/Speed/Indep/SourceLists/zAnim`
+- **Source File**: `src/Speed/Indep/Src/Animation/AnimWorldTypes.hpp`
+- **Virtual Address**: `0x8004FE18`
+- **Size**: 588 bytes
+- **Matching State**: 100.0% match (completes `zAnim` unit at 315/315 functions, 100.0%)
+- **Signature**:
+  ```cpp
+  static void __static_initialization_and_destruction_0(int __initialize_p, int __priority);
+  ```
+- **Description**: Module-level static initialization routine for `zAnim.cpp`. Evaluates global static hashes `WAM_*` (`WAM_START_TRIGGER`, `WAM_STOP_TRIGGER`, `WAM_FIRST_FRAME`, `WAM_LAST_FRAME`, `WAM_SOUND_TRIGGER_START`, `WAM_SOUND_TRIGGER_STOP`, `WAM_NIS_GENERIC_CONTROL_MSG`, `WAM_FWD_REV_TRACK_CONTROL_MSG`) and float conversion scales when `__initialize_p` is 1 and `__priority` is 0xFFFF. Const qualification on static hashes marks expressions as read-only, prompting ProDG GCC 2.95 tree-to-RTL to allocate callee-saved registers (`r30..r23`) across function calls and hoisting `lis` loads into floating-point division pipeline stalls for 100.0% machine-code match.
 
 ---
 

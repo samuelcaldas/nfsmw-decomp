@@ -55,7 +55,9 @@ eMenuSoundTriggers UIQRChallengeSeries::NotifySoundMessage(u32 msg, eMenuSoundTr
     return maybe;
 }
 
-// UNSOLVED
+/**
+ * @brief Handles UI notifications and messages for the challenge series screen.
+ */
 void UIQRChallengeSeries::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2) {
     ArrayScrollerMenu::NotificationMessage(msg, obj, param1, param2);
     switch (msg) {

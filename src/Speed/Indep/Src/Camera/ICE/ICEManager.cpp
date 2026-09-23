@@ -39,5 +39,11 @@ ICEManager::ICEManager() {
     this->nMarkerIndex = -1;
 }
 
+/**
+ * @brief Updates ICE camera manager state.
+ */
+void ICEManager::Update() {
+}
+
 // TODO move this?
 struct ICEManager TheICEManager; // size: 0x80

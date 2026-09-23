@@ -349,8 +349,9 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
         streaming_entry->RefCount++;
     } else {
         char malloc_name[128];
+        eStreamingPack *pack = streaming_pack;
 
-        bSPrintf(malloc_name, "%s%s", streaming_pack->Filename, (streaming_entry->Flags & 0x1) ? " - Compressed" : "");
+        bSPrintf(malloc_name, "%s%s", pack->Filename, (streaming_entry->Flags & 0x1) ? " - Compressed" : "");
 
         int malloc_size = streaming_entry->ChunkByteSize + this->RequiredChunkAlignment;
         int allocation_params = 0x2000;
@@ -372,14 +373,19 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
 
         streaming_entry->ChunkData = (unsigned char *)bMalloc(malloc_size, "TODO", __LINE__, allocation_params);
         streaming_entry->RefCount++;
-        streaming_pack->NumLoadsPending++;
+        pack->NumLoadsPending++;
         if (loading_table) {
             loading_table->NumLoadsPending++;
         }
         streaming_entry->Flags |= 0x10;
-        AddQueuedFile2(this->GetAlignedChunkDataPtr(streaming_entry->ChunkData), streaming_pack->Filename,
-                       streaming_entry->ChunkByteOffset, streaming_entry->ChunkByteSize,
-                       eStreamPackLoader::InternalLoadedStreamingEntryCallback, streaming_entry, loading_table, nullptr);
+        void *aligned_ptr = this->GetAlignedChunkDataPtr(streaming_entry->ChunkData);
+        const char *filename = pack->Filename;
+        int chunk_byte_offset = streaming_entry->ChunkByteOffset;
+        void (*callback)(void *, int, void *) = eStreamPackLoader::InternalLoadedStreamingEntryCallback;
+        int chunk_byte_size = streaming_entry->ChunkByteSize;
+        eStreamingPackLoadTable *table = loading_table;
+        eStreamingEntry *entry = streaming_entry;
+        AddQueuedFile2(aligned_ptr, filename, chunk_byte_offset, chunk_byte_size, callback, entry, table, nullptr);
     }
 
     streaming_pack->NumLoadedStreamingEntries++;

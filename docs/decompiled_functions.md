@@ -106,6 +106,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEQuaternion::GetMatrix`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEMath.cpp`
+- **Virtual Address**: `0x80184A10`
+- **Size**: 196 bytes
+- **Matching State**: 88.6% match
+- **Signature**:
+  ```cpp
+  void FEQuaternion::GetMatrix(FEMatrix4 *rotmat);
+  ```
+- **Description**: Maintained and documented FEQuaternion::GetMatrix(FEMatrix4 *) matching decompilation at 88.6% match.
+
+---
+
 ### `FEngine::UpdateMouseState`
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`

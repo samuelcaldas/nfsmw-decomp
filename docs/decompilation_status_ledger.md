@@ -44,6 +44,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 
 ### Frontend Subsystem (`zFe`, `zFeOverlay`, `zFEng`)
 - **`FEQuaternion::operator*` (`zFEng`)**: Decompiled, verified (89.1% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEQuaternion::GetMatrix` (`zFEng`)**: Decompiled, verified (88.6% match, 196 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIOptionsScreen::NotificationMessage` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`PauseMenu::NotificationMessage` (`zFe`)**: Decompiled, verified (97.7% match, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`MemcardCallbacks::FoundEntry` (`zFe`)**: Decompiled, verified (98.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

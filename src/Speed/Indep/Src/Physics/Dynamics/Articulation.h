@@ -32,10 +32,16 @@ enum eJointFlags {
 struct Quaternion : public UMath::Vector4 {
 };
 
-class Lever {
+class Lever : public Debugable {
   public:
     Lever() {}
-    Lever(IEntity *entity, const UMath::Vector3 &arm, bool immobile);
+    Lever(IEntity *entity, const UMath::Vector3 &arm, bool immobile) {
+        mArm.x = arm.x;
+        mArm.y = arm.y;
+        mArm.z = arm.z;
+        mEntity = entity;
+        mImmobile = immobile;
+    }
     virtual void OnDebugDraw();
 
     const IEntity *GetEntity() const {
@@ -45,10 +51,9 @@ class Lever {
     void SetFulcrum(const UVector3 &fulcrum, bool fixed);
 
   private:
-    int mPad;
     UMath::Vector3 mArm;
     IEntity *mEntity;
-    int mImmobile;
+    bool mImmobile;
 };
 
 class Constraint : public Debugable {
@@ -72,7 +77,7 @@ class Constraint : public Debugable {
     eConstraint mType;
 };
 
-class Joint : public bTNode<Joint> {
+class Joint : public bTNode<Joint>, public Debugable {
   public:
     USE_FASTALLOC(Joint);
     Joint(IEntity *female, const UMath::Vector3 &female_arm, IEntity *male, const UMath::Vector3 &male_arm, eJointFlags flags);
@@ -89,7 +94,6 @@ class Joint : public bTNode<Joint> {
     static HJOINT mNextHandle;
 
   private:
-    int mPad0;
     Lever mFemale;
     Lever mMale;
     HJOINT mHandle;

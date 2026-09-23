@@ -2098,3 +2098,59 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Decompiled Dynamics::Articulation::Lever::SetFulcrum in src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp with initial implementation and Doxygen docstring.
 
+
+---
+
+### `Dynamics::Collision::Geometry::Set`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x80089398`
+- **Size**: 704 bytes
+- **Matching State**: 100.0% fuzzy match
+- **Signature**:
+  ```cpp
+  void Geometry::Set(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta);
+  ```
+- **Description**: Sets collision geometry parameters (box and sphere branches), converting orient vectors, computing extent scaling, and initializing collision normals and points with 100% register and instruction parity.
+
+---
+
+### `Dynamics::Collision::Geometry::SphereVsSphere`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x80089E40`
+- **Size**: 332 bytes
+- **Matching State**: 100.0% fuzzy match
+- **Signature**:
+  ```cpp
+  bool Geometry::SphereVsSphere(const Geometry *A, const Geometry *B, Geometry *result);
+  ```
+- **Description**: Tests intersection between two sphere geometries, computing distance, reciprocal square root, overlap, and contact points with 100% register and instruction parity.
+
+---
+
+### `Dynamics::Articulation::Joint::Joint`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80088924`
+- **Size**: 220 bytes
+- **Matching State**: 100.0% fuzzy match
+- **Signature**:
+  ```cpp
+  Joint::Joint(IEntity *female, const UMath::Vector3 &female_arm, IEntity *male, const UMath::Vector3 &male_arm, eJointFlags flags);
+  ```
+- **Description**: Constructs articulation joint connecting female and male levers with handle allocation and 100% instruction parity.
+
+---
+
+### `Dynamics::Articulation::Joint::AddConstraint`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80088AA4`
+- **Size**: 272 bytes
+- **Matching State**: 100.0% fuzzy match
+- **Signature**:
+  ```cpp
+  void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type);
+  ```
+- **Description**: Appends a new constraint to joint list with female/male lever orientation dispatch and 100% instruction parity.

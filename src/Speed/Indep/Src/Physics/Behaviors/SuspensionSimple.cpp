@@ -389,7 +389,6 @@ static const float Tweak_SimpleBrakeSpeed = 5.0f;
 static const float Tweak_AITurningDragReductionMin = 0.23f;
 static const float Tweak_AITurningDragReductionMax = 0.3f;
 
-// UNSOLVED, float math
 /**
  * @brief Updates a loaded tire's slip, traction, and force state.
  * @param lat_vel Lateral tire velocity.

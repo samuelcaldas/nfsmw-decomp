@@ -390,7 +390,7 @@ class TrackStreamer {
     int UserMemoryAllocationSize;                         // offset 0x85C, size 0x4
     TSMemoryPool *pMemoryPool;                            // offset 0x860, size 0x4
     bBitTable CurrentVisibleSectionTable;                 // offset 0x864, size 0x8
-    int16 KeepSectionTable[4];                            // offset 0x86C, size 0x8
+    uint16 KeepSectionTable[4];                            // offset 0x86C, size 0x8
     void (*pCallback)(intptr_t);                          // offset 0x874, size 0x4
     intptr_t CallbackParam;                               // offset 0x878, size 0x4
     void (*MakeSpaceInPoolCallback)(intptr_t);            // offset 0x87C, size 0x4

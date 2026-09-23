@@ -53,3 +53,10 @@ void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *) {
 void GRaceStatus::RefreshBinWhileInGame() {
     this->mQueueBinChange = true;
 }
+
+/**
+ * @brief Stops the race master timer.
+ */
+void GRaceStatus::StopMasterTimer() {
+    mRaceMasterTimer.Stop();
+}

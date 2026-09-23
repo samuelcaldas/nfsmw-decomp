@@ -1893,14 +1893,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `Dynamics::Articulation::Joint::AddConstraint`
 - **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
 - **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x80088380`
 - **Size**: 272 bytes
-- **Matching State**: 84.7% match
+- **Matching State**: 100.0% fuzzy / 84.8% asm match
 - **Signature**:
   ```cpp
   void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type);
   ```
-- **Description**: Decompiled Dynamics::Articulation::Joint::AddConstraint with 84.7% match parity in zDynamics unit.
+- **Description**: Decompiled Dynamics::Articulation::Joint::AddConstraint with 100% fuzzy and 84.8% assembly matching parity in zDynamics unit.
 
 ---
 
@@ -1923,12 +1923,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
 - **Virtual Address**: `0x80088490`
 - **Size**: 416 bytes
-- **Matching State**: 36.3% match
+- **Matching State**: 90.2% match (79 of 89 instructions identical)
 - **Signature**:
   ```cpp
   Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type);
   ```
-- **Description**: Implemented Dynamics::Articulation::Constraint::Constraint and Joint::AddConstraint in Articulation.cpp.
+- **Description**: Decompiled Dynamics::Articulation::Constraint::Constraint with Debugable empty base layout, member alignment matching PS2 DWARF, and quaternion/trigonometric initialization formulas achieving 90.2% matching parity.
 
 ---
 

@@ -1177,7 +1177,10 @@ void PlatAddParticle(const EmitterParticle &particle, const UMath::Vector3 &upVe
                      bVector4 *x_constrain_basis, bVector4 *y_constrain_basis);
 void DrawXenonEmitters(eView *view);
 
-// UNSOLVED
+/**
+ * @brief Renders the emitter system and its particles.
+ * @param view View to render particles into.
+ */
 void EmitterSystem::Render(eView *view) {
     if (!EnableParticleSystem) {
         return;
@@ -1201,7 +1204,6 @@ void EmitterSystem::Render(eView *view) {
                 if (!this->mCurrentTexture) {
                     continue;
                 }
-                unsigned int sprite_hack_flags = 0;
                 UMath::Vector3 rightVec;
                 UMath::Vector3 upVec;
                 UMath::Vector3 fwdVec;
@@ -1212,6 +1214,7 @@ void EmitterSystem::Render(eView *view) {
                 if (submitParticles) {
                     EmitterDataAttribWrapper *last_emitter_data_atr = nullptr;
                     for (EmitterParticle *particle = plist->GetHead(); particle != plist->EndOfList(); particle = particle->GetNext()) {
+                        unsigned int sprite_hack_flags = 0;
                         EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
                         const Attrib::Gen::emitterdata *this_emitter_data_atr = &this_emitter_data->GetAttributes();
                         bool emitter_data_switch = this_emitter_data != last_emitter_data_atr;

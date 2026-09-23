@@ -106,6 +106,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEGameInterface::UnloadUnreferencedLibrary`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEGameInterface.h`
+- **Virtual Address**: `0x8013EE78`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual bool UnloadUnreferencedLibrary(FEPackage *pPackage = nullptr);
+  ```
+- **Description**: Frontend game interface method to unload unreferenced library packages, returning false by default.
+
+---
+
 ### `UIOptionsScreen::NotificationMessage`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/options/uiOptionsScreen.cpp`

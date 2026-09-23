@@ -3,6 +3,7 @@
 #pragma warning(disable : 4716)
 #endif
 
+#include "Speed/Indep/Src/Physics/Common/PhysicsObject.cpp"
 #include "Speed/Indep/Src/Physics/Common/Wheel.cpp"
 
 #include "Speed/Indep/Src/Physics/Common/VehicleSystem.cpp"

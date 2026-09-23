@@ -31,6 +31,36 @@ class PhysicsObject : public Sim::Object,
     // Overrides
     virtual ~PhysicsObject();
 
+    /**
+     * @brief Gets the entity associated with this physics object.
+     */
+    virtual Sim::IEntity *GetEntity() const;
+
+    /**
+     * @brief Gets the simable type of this physics object.
+     */
+    virtual SimableType GetSimableType() const;
+
+    /**
+     * @brief Gets the player associated with this physics object.
+     */
+    virtual struct IPlayer *GetPlayer() const;
+
+    /**
+     * @brief Gets the owner handle of this physics object.
+     */
+    virtual HSIMABLE GetOwnerHandle() const;
+
+    /**
+     * @brief Gets the attributes instance of this physics object.
+     */
+    virtual const Attrib::Instance &GetAttributes() const;
+
+    /**
+     * @brief Gets the rigid body associated with this physics object.
+     */
+    virtual class IRigidBody *GetRigidBody();
+
   private:
     WWorldPos *mWPos;               // offset 0x58, size 0x4
     SimableType mObjType;           // offset 0x5C, size 0x4

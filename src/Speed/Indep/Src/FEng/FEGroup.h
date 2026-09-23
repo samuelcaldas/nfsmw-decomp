@@ -5,16 +5,25 @@
 
 // total size: 0x6C
 // Decl: 28
+/**
+ * @brief Represents a group container object in the frontend engine holding child objects.
+ */
 class FEGroup : public FEObject {
   private:
     FEMinList Children; // offset 0x5C, size 0x10, Decl: 30
 
   public:
+    /**
+     * @brief Constructs an empty FEGroup object.
+     */
     FEGroup() { // Decl: 33
         Type = FE_Group;
     }
     FEGroup(const FEGroup &Object, bool bCloneChildren, bool bReference);
-    ~FEGroup() override {}
+
+    /**
+     * @brief Clones the FEGroup object.
+     */
     FEObject *Clone(bool bReference) override { // Decl: 36
         return FNEW FEGroup(*this, true, bReference);
     }

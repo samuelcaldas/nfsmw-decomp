@@ -147,17 +147,29 @@ static const int Smoother_PlayerPosion = 2000;    // size: 0x4, Decl: 214
 void SFXCTL_Physics::UpdateMixerOutputs() {
     int TargeVal;
 
-    TargeVal = bClamp(static_cast<int>(bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH()) * 1092.2334f), 0, 0x7FFF);
-    this->SetDMIX_Input(0, TargeVal);
+    {
+        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        TargeVal = bClamp(static_cast<int>(vel * 1092.2334f), 0, 0x7FFF);
+        this->SetDMIX_Input(0, TargeVal);
+    }
 
-    TargeVal = bClamp(static_cast<int>(bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH()) * 546.1167f), 0, 0x7FFF);
-    this->SetDMIX_Input(1, TargeVal);
+    {
+        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        TargeVal = bClamp(static_cast<int>(vel * 546.1167f), 0, 0x7FFF);
+        this->SetDMIX_Input(1, TargeVal);
+    }
 
-    TargeVal = bClamp(static_cast<int>(bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH()) * 327.66998f), 0, 0x7FFF);
-    this->SetDMIX_Input(2, TargeVal);
+    {
+        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        TargeVal = bClamp(static_cast<int>(vel * 327.66998f), 0, 0x7FFF);
+        this->SetDMIX_Input(2, TargeVal);
+    }
 
-    TargeVal = bClamp(static_cast<int>(bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH()) * 234.05f), 0, 0x7FFF);
-    this->SetDMIX_Input(3, TargeVal);
+    {
+        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        TargeVal = bClamp(static_cast<int>(vel * 234.05f), 0, 0x7FFF);
+        this->SetDMIX_Input(3, TargeVal);
+    }
 
     TargeVal = bClamp(static_cast<int>((10000.0f - this->m_pEAXCar->GetPhysRPM()) * 3.6407778f), 0, 0x7FFF);
     this->SetDMIX_Input(4, TargeVal);

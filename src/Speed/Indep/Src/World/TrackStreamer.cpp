@@ -2179,6 +2179,7 @@ int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingP
     float adjusted_distance = distance * (1.0f - (90.0f - angle_factor) * 0.014285714f * speed_factor * 0.66999996f);
     int priority = bClamp(static_cast<int>(adjusted_distance * 0.013333334f), 0, 2);
 
+#if 0
     if (RemoteCaffeinating && TrackStreamerRemoteCaffeinating) {
         char layer_name[32];
         if (section->Status == TrackStreamingSection::UNLOADED) {
@@ -2229,6 +2230,7 @@ int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingP
 
         espSetUserMeshFace(1, boundary->GetNumPoints(), face);
     }
+#endif
 
     return priority;
 #endif

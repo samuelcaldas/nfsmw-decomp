@@ -201,11 +201,10 @@ class CubicCameraMover : public CameraMover {
     virtual CameraAnchor *GetAnchor();
     virtual bool HighliteMode() { return false; }
   private:
-    int mPad80;
-    CameraAnchor *mAnchor; // offset 0x84
-    int mPad88[6];         // offset 0x88..0xa4
-    int mLagEnabled;       // offset 0xa4
-    int mLookBack;         // offset 0xa8
+    CameraAnchor *mAnchor; // offset 0x80
+    int mPad84[7];         // offset 0x84..0xa0
+    int mLagEnabled;       // offset 0xa0
+    int mLookBack;         // offset 0xa4
 };
 
 class RearViewMirrorCameraMover : public CameraMover {

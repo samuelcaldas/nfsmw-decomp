@@ -329,7 +329,6 @@ WUID CameraMover::GetAnchorID() {
 
 CubicCameraMover::CubicCameraMover(int view_id, CameraAnchor *p_car, int pov_type, bool smooth, bool disable_lag, bool look_back, bool perfect_focus)
     : CameraMover(view_id, CM_DRIVE_CUBIC) {
-    this->mPad80 = 0;
     this->mAnchor = p_car;
     this->mLagEnabled = !disable_lag;
     this->mLookBack = look_back;

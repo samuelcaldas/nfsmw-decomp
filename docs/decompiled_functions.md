@@ -997,6 +997,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 8. Track Subsystem (`zTrack`)
 
+### `TrackStreamer::BuildHoleMovements`
+- **Unit**: `main/Speed/Indep/SourceLists/zTrack`
+- **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
+- **Virtual Address**: `0x802B9E98`
+- **Size**: 1992 bytes
+- **Matching State**: 89.82% match
+- **Signature**:
+  ```cpp
+  int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_movements, int filler_method, int largest_free, int *pamount_moved, int max_amount_to_move);
+  ```
+- **Description**: Decompiled and documented TrackStreamer::BuildHoleMovements in zTrack unit with 89.82% match.
+
+---
+
 ### `RegionQuery::CalculateRegionInfo`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
 - **Source File**: `src/Speed/Indep/Src/World/WeatherMan.cpp`
@@ -1055,6 +1069,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ---
 
 ## 8. Collision Subsystem (`zWorld2`)
+
+### `WRoadNav::UpdateOccludedPosition`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
+- **Source File**: `src/Speed/Indep/Src/World/Common/WRoadNetwork.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 4368 bytes
+- **Matching State**: 98.12% match
+- **Signature**:
+  ```cpp
+  void WRoadNav::UpdateOccludedPosition(bool arg1);
+  ```
+- **Description**: Decompiled and refined WRoadNav::UpdateOccludedPosition in zWorld2 unit
+
+---
 
 ### `WCollisionMgr::FindFaceInCInst`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld2`

@@ -429,6 +429,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `AIPursuit::AssignClosestOffsets`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `src/Speed/Indep/Src/AI/Common/AIPursuit.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 1,684 bytes
+- **Matching State**: 99.67% match
+- **Signature**:
+  ```cpp
+  void AIPursuit::AssignClosestOffsets(Vector3List &copRelativePositions, Pursuers &assignCopList, FormationTargetList &formationOffsets, bool information);
+  ```
+- **Description**: Decompiled and refined AIPursuit::AssignClosestOffsets to 99.67% match in zAI unit.
+
+---
+
 ## 6. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 
 ### `Physics::Info::ShiftPoints`
@@ -486,6 +500,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Evaluates region weather, fog parameters, and lighting configuration for the specified view and region type. Manages fog color overrides, distance fog falloff, power, and start positions, updating cache state when modified.
 - **Compiler Details**: High-fidelity matching achieved following ProDG GCC 2.95 floating-point and register allocation rules.
+
+---
+
+### `TrackStreamer::GetLoadingPriority`
+- **Unit**: `main/Speed/Indep/SourceLists/zTrack`
+- **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 708 bytes
+- **Matching State**: 97.01% match
+- **Signature**:
+  ```cpp
+  int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingPositionEntry *position_entry, bool calculating_jettison);
+  ```
+- **Description**: Calculates a streaming section's loading priority for a player position.
 
 ---
 

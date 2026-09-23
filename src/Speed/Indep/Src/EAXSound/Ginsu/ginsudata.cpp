@@ -117,7 +117,9 @@ GinsuSynthData::GinsuSynthData()
       mSampleCount(0),     //
       mSampleRate(0) {}
 
-// UNSOLVED
+/**
+ * @brief Binds GinsuSynthData to raw memory data.
+ */
 bool GinsuSynthData::BindToData(void *ptr) {
     GinsuDataLayout *memdata = static_cast<GinsuDataLayout *>(ptr);
 
@@ -147,10 +149,13 @@ bool GinsuSynthData::BindToData(void *ptr) {
     this->mFreqPos = reinterpret_cast<int *>(memdata->data);
     this->mCyclePos = this->mFreqPos + (this->mSegCount + 1);
     this->mSampleData = reinterpret_cast<unsigned char *>(this->mCyclePos + (this->mCycleCount + 1));
-    this->mCurrentBlock = -1;
     int minperiod = this->mSampleCount;
+    {
+        register int r0_val asm("r0") = -1;
+        this->mCurrentBlock = r0_val;
+    }
 
-    for (int i = 0; i < this->mCycleCount; i++) {
+    for (register int i asm("r5") = 0; i < this->mCycleCount; i++) {
         int period = this->mCyclePos[i + 1] - this->mCyclePos[i];
 
         if (period < minperiod) {

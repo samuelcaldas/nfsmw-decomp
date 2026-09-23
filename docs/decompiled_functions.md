@@ -78,6 +78,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 2. Frontend Subsystem (`zFe`, `zFe2`, `zFeOverlay`, `zFEng`)
 
+### `FEQuaternion::operator*`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEMath.h`
+- **Virtual Address**: `0x801906F0`
+- **Size**: 212 bytes
+- **Matching State**: 89.1% match
+- **Signature**:
+  ```cpp
+  FEQuaternion operator*(const FEQuaternion &q1);
+  ```
+- **Description**: Decompiled and documented FEQuaternion::operator* in zFEng unit with 89.1% match rate.
+
+---
+
 ### `FEngine::UpdateMouseState`
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
@@ -366,6 +380,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ---
 
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
+
+### `AssignAudioStreamHandle`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/Stream/EAXS_StreamManager.cpp`
+- **Virtual Address**: `0x800B604C`
+- **Size**: 16 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void AssignAudioStreamHandle(uintptr_t realstrmhandle);
+  ```
+- **Description**: Successfully decompiled AssignAudioStreamHandle with 100.0% binary match.
+
+---
 
 ### `EAXCommon::Play`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`

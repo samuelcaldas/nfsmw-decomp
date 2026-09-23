@@ -43,6 +43,9 @@ template <int N> class FEObjectSorter {
         return mastFinalList;
     }
 
+    /**
+     * @brief Sorts objects using radix sort based on Z-values.
+     */
     void SortObjects();
 };
 
@@ -53,23 +56,21 @@ template <int N> void FEObjectSorter<N>::SortObjects() { // Decl: 81
     i32 alElemCount[256];
     i32 alElemIndex[256];
     i32 lNumBytes = mulNumObjects << 3;
-    i32 i = 0;
 
     for (int32 b = 3; b >= 0; b--) {
         FEngMemSet(alElemCount, 0, sizeof(alElemCount));
         u8 *pucByte = reinterpret_cast<u8 *>(pstSrcList) + b + 4;
-        for (i = 0; i < lNumBytes; i += 8) {
-            alElemIndex[pucByte[i]]++;
+        for (int i = 0; i < lNumBytes; i += 8) {
+            alElemCount[pucByte[i]]++;
         }
         alElemIndex[0] = 0;
-        for (i = 0; i < 255; i++) {
+        for (int i = 0; i < 255; i++) {
             alElemIndex[i + 1] = alElemIndex[i] + alElemCount[i];
         }
-        for (i = 0; i < static_cast<i32>(mulNumObjects); i++) {
+        for (int i = 0; i < static_cast<i32>(mulNumObjects); i++) {
             u8 ucIndex = pucByte[i * 8];
             SFERadixKey *pstTemp = pstDestList + alElemIndex[ucIndex];
-            pstTemp->pobObject = pstSrcList[i].pobObject;
-            pstTemp->ulKey = pstSrcList[i].ulKey;
+            *pstTemp = pstSrcList[i];
             alElemIndex[ucIndex]++;
         }
         SFERadixKey *pstTemp = pstSrcList;

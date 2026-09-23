@@ -273,7 +273,6 @@ unsigned short bFixATanTableHigh[129] = {
  */
 bAngle bASin(float x) {
     int negative = 0;
-    bFix table_size = 0x8000;
     if (x < 0.0f) {
         x = -x;
         negative = 1;
@@ -286,8 +285,9 @@ bAngle bASin(float x) {
         }
     }
 
-    int table_number = 0;
+    bFix table_size = 0x8000;
     bFix table_top = 0x8000;
+    int table_number = 0;
     bFix fix_x = static_cast<int>(x * 65536.0f);
 
     while (fix_x >= table_top && table_number < 11) {

@@ -111,6 +111,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `UIQRCarSelect::NotificationMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFeOverlay`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/quickrace/uiQRCarSelect.cpp`
+- **Virtual Address**: `0x803AB4A4`
+- **Size**: 5,096 bytes (1,274 instructions)
+- **Matching State**: 99.18% match
+- **Signature**:
+  ```cpp
+  void UIQRCarSelect::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2);
+  ```
+- **Description**: Handles notification messages for the Quick Race car selection screen.
+
+---
+
 ## 2. Audio Subsystem (`zEAXSound2`)
 
 ### `NFSMixMapState::CreateMixCtls`
@@ -125,6 +139,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Parses packed variable-length control records from the dynamic mixer state header, resolves curve tables and scale arrays, assigns processing pointers, computes initial decibel-to-Q15 ratios, and tracks control counts.
 - **Compiler Details**: Utilizes PowerPC register aliases (`register stMixCtlSharedData *psdata asm("r11")`, `register int nOffset asm("r3")`) and an inline memory barrier (`asm volatile("" : : : "memory");`) to guide instruction scheduling across Q15 conversion without spilling to stack.
+
+---
+
+### `GinsuSynthesis::HandlePacketRelease`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsusynth.cpp`
+- **Virtual Address**: `0x800EB9F0`
+- **Size**: 1,936 bytes (484 instructions)
+- **Matching State**: 98.93% match
+- **Signature**:
+  ```cpp
+  void GinsuSynthesis::HandlePacketRelease(short *);
+  ```
+- **Description**: Processes packet audio release and synthesizes granular playback buffers.
 
 ---
 
@@ -333,6 +361,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst, WCollisionTri &retFace, float &retDist);
   ```
 - **Description**: Finds the nearest collision face intersected by a transformed segment against a collision instance. Evaluates strip spheres, orthogonal inverse matrix transformations, ray-strip intersection, and distance thresholds to locate the closest colliding triangle.
+
+---
+
+### `WRoadNav::InitAtSegment`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
+- **Source File**: `src/Speed/Indep/Src/World/Common/WRoadNetwork.cpp`
+- **Virtual Address**: `0x8030183C`
+- **Size**: 816 bytes (204 instructions)
+- **Matching State**: 99.0% match
+- **Signature**:
+  ```cpp
+  void WRoadNav::InitAtSegment(short segInd, char laneInd, float timeStep);
+  ```
+- **Description**: Initializes road navigation network at the specified segment index, lane index, and time step.
 
 ---
 

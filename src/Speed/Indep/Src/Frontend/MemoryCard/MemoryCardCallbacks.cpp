@@ -258,7 +258,9 @@ void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info) {
     }
     if (GetMemcard()->IsTypeProfile()) {
         unsigned int sec = GetMemcard()->m_DataSize;
-        GetScreen()->AddItem(info->mName, "", iGuessSize, fDefault);
+        int gs = iGuessSize;
+        int fd = fDefault;
+        GetScreen()->AddItem(info->mName, "", gs, fd);
     } else {
         if (info->mStatus != RealmcIface::STATUS_OK) {
             return;

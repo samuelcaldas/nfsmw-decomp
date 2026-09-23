@@ -59,7 +59,7 @@ void *GamecubeMaybeAllocateFromCarLoader(int size, const char *name, int alloc_p
 }
 
 MoviePlayer *gMoviePlayer = nullptr;
-unsigned int gMovieStartTime = 0xFFFFFFFF;
+u32 gMovieStartTime = 0xFFFFFFFF;
 ShapeMemoryAllocator gShapeMemoryAllocator;
 
 // total size: 0x8
@@ -112,10 +112,15 @@ bool MoviePlayer_Bypass() {
 }
 
 // UNSOLVED
+/**
+ * @brief Plays the movie player if available and updates movie start time.
+ */
 void MoviePlayer_Play() {
-    if (gMoviePlayer != nullptr) {
-        gMovieStartTime = bGetTicker();
-        gMoviePlayer->Play();
+    register MoviePlayer *pPlayer asm("r31") = gMoviePlayer;
+    if (pPlayer != nullptr) {
+        register u32 *pStartTime asm("r30") = &gMovieStartTime;
+        *pStartTime = bGetTicker();
+        pPlayer->Play();
     }
 }
 

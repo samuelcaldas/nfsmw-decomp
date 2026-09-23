@@ -700,6 +700,9 @@ void eStreamPackLoader::WaitForLoadingToFinish(const char *filename) {
     }
 }
 
+/**
+ * @brief Creates or loads a streaming pack from the given file.
+ */
 eStreamingPack *eStreamPackLoader::CreateStreamingPack(const char *filename, void (*callback_function)(void *), void *callback_param,
                                                        int memory_pool_num) {
     eStreamingPack *streaming_pack = this->GetLoadedStreamingPack(filename);

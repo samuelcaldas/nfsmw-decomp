@@ -29,16 +29,6 @@ int GRaceStatus::GetRacerCount() const {
 }
 
 /**
- * @brief Sets the current race activity and resolves its race parameters from the database.
- *
- * @param activity Pointer to the GActivity representing the race.
- * @return void
- */
-void GRaceStatus::SetRaceActivity(GActivity *activity) {
-    this->mRaceParms = GRaceDatabase::mObj->GetRaceFromActivity(activity);
-}
-
-/**
  * @brief Adds an available event trigger and associated activity to the world map.
  *
  * @param trigger Pointer to the event trigger runtime instance.

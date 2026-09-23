@@ -204,6 +204,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEObjectSorter<1024>::SortObjects(void)`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEObjectSorter.h`
+- **Virtual Address**: `unknown`
+- **Size**: 316 bytes
+- **Matching State**: 94.7% match
+- **Signature**:
+  ```cpp
+  void SortObjects();
+  ```
+- **Description**: Decompiled FEObjectSorter<1024>::SortObjects(void) to 94.7% match, sorting front-end objects by priority or depth.
+
+---
+
 ### `FEGameInterface::UnloadUnreferencedLibrary`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEGameInterface.h`

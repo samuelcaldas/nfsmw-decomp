@@ -134,10 +134,10 @@ int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InF
         register float falloffX asm("fr13") = BaseFogFalloffX;
         register float falloffY asm("fr0") = BaseFogFalloffY;
         register float power asm("fr10") = BaseWeatherFog;
+        this->DistFogStart = start;
         this->FogFalloff = falloff;
         this->FogFalloffX = falloffX;
         this->FogFalloffY = falloffY;
-        this->DistFogStart = start;
         this->DistFogPower = power;
         this->DistFogColour = retcol;
 

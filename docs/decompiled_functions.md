@@ -1826,3 +1826,59 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Decompiled Dynamics::Articulation::Lever::SetFulcrum in src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp with initial implementation and Doxygen docstring.
 
+---
+
+### `Dynamics::Articulation::Joint::Joint`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 220 bytes
+- **Matching State**: 46.3% match
+- **Signature**:
+  ```cpp
+  __Q38Dynamics12Articulation5JointPQ28Dynamics7IEntityRCQ25UMath7Vector3T1T2Q38Dynamics12Articulation11eJointFlags
+  ```
+- **Description**: Decompiled and matched Dynamics::Articulation::Joint::Joint constructor.
+
+---
+
+### `Dynamics::Collision::Geometry::Set`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x80089398`
+- **Size**: 704 bytes
+- **Matching State**: 11.8% match
+- **Signature**:
+  ```cpp
+  void Geometry::Set(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta);
+  ```
+- **Description**: Implemented Dynamics::Collision::Geometry::Set in Geometry.cpp.
+
+---
+
+### `Dynamics::Collision::Moment::Moment` (Entity Constructor)
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Collision.cpp`
+- **Virtual Address**: `0x80047E5C`
+- **Size**: 668 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Dynamics::Collision::Moment::Moment(const IEntity *entity);
+  ```
+- **Description**: Decompiled Dynamics::Collision::Moment constructors in zDynamics unit with 100% register and byte parity.
+
+---
+
+### `Dynamics::Articulation::Lever::SetFulcrum`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80087FB4`
+- **Size**: 968 bytes
+- **Matching State**: 10.6% match
+- **Signature**:
+  ```cpp
+  SetFulcrum__Q38Dynamics12Articulation5LeverRC8UVector3b
+  ```
+- **Description**: Decompiled Dynamics::Articulation::Lever::SetFulcrum in src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp with initial implementation and Doxygen docstring.
+

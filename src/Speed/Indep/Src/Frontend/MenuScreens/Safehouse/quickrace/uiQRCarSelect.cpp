@@ -402,7 +402,9 @@ void UIQRCarSelect::CommitChangeStartRace(bool allowError) {
     RaceStarter::StartRace();
 }
 
-// UNSOLVED
+/**
+ * @brief Handles notification messages for the Quick Race car selection screen.
+ */
 void UIQRCarSelect::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     if (TheBustedManager.IsImpoundInfoVisible()) {
         TheBustedManager.NotificationMessage(msg, pobj, param1, param2);

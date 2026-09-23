@@ -915,7 +915,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `TrackStreamer::GetLoadingPriority`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
 - **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x802BC0A4`
 - **Size**: 708 bytes
 - **Matching State**: 97.01% match
 - **Signature**:

@@ -149,7 +149,7 @@ bool GinsuSynthData::BindToData(void *ptr) {
         register int segCount asm("r9") = memdata->segCount;
         this->mSegCount = segCount;
 
-        register int cycleCount asm("r4") = memdata->cycleCount;
+        register int cycleCount asm("r6") = memdata->cycleCount;
         this->mCycleCount = cycleCount;
 
         register int sampleCount asm("r11") = memdata->sampleCount;

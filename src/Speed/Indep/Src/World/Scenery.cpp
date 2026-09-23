@@ -589,9 +589,8 @@ SceneryInstance *FindSceneryInstance(unsigned int name_hash) {
  * @brief Renders the visible section boundary for debugging/display purposes.
  */
 void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view) {
-    float perimeter;
     for (int n = 0; n < boundary->GetNumPoints(); n++) {
-        perimeter = bDistBetween(boundary->GetPoint(n), boundary->GetPoint((n + 1) % boundary->GetNumPoints()));
+        bDistBetween(boundary->GetPoint(n), boundary->GetPoint((n + 1) % boundary->GetNumPoints()));
     }
 
     bVector3 position;

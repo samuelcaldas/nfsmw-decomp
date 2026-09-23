@@ -1080,7 +1080,9 @@ struct HoleMovement {
     uint32 Checksum;     // offset 0xC, size 0x4
 };
 
-// UNSOLVED, TODO this is pretty wrong
+    /**
+     * @brief Builds hole movements for track streamer memory pool.
+     */
 int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_movements, int filler_method, int largest_free, int *pamount_moved,
                                       int max_amount_to_move) {
     ProfileNode profile_node("TODO", 0);

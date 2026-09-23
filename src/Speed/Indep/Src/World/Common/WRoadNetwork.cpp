@@ -2433,6 +2433,8 @@ void WRoadNav::InitLaneOffset(const UMath::Vector3 &vehicle_pos) {
  * @return None.
  */
 void WRoadNav::InitAtSegment(short segInd, char laneInd, float timeStep) {
+    register char laneIndReg asm("r24") = laneInd;
+    register float timeStepReg asm("fr31") = timeStep;
     WRoadNetwork &roadNetwork = WRoadNetwork::Get();
 
     this->fValid = true;
@@ -2444,14 +2446,14 @@ void WRoadNav::InitAtSegment(short segInd, char laneInd, float timeStep) {
     UMath::Vector3 vec;
     roadNetwork.GetSegmentForwardVector(segInd, vec);
 
-    if (!roadNetwork.GetSegmentTrafficLaneRightSide(*segment, laneInd) && !(segment->fFlags & 0x40)) {
+    if (!roadNetwork.GetSegmentTrafficLaneRightSide(*segment, laneIndReg) && !(segment->fFlags & 0x40)) {
         this->fNodeInd = 0;
         this->fForwardVector = UMath::Vector3Make(-vec.x, -vec.y, -vec.z);
-        this->fSegTime = fabsf(1.0f - timeStep);
+        this->fSegTime = fabsf(1.0f - timeStepReg);
     } else {
         this->fNodeInd = 1;
         this->fForwardVector = UMath::Vector3Make(vec.x, vec.y, vec.z);
-        this->fSegTime = timeStep;
+        this->fSegTime = timeStepReg;
     }
 
     this->fStartPos = roadNetwork.GetNode(segment->fNodeIndex[this->fNodeInd == 0])->fPosition;
@@ -2460,15 +2462,15 @@ void WRoadNav::InitAtSegment(short segInd, char laneInd, float timeStep) {
     this->SetLaneOffset(0.0f);
 
     {
-        this->SetLaneInd(laneInd);
+        this->SetLaneInd(laneIndReg);
         const WRoadNode *nodePtr[2];
         roadNetwork.GetSegmentNodes(*segment, nodePtr);
 
         const WRoadProfile *profile = roadNetwork.GetProfile(nodePtr[this->fNodeInd == 0]->fProfileIndex);
-        float startOffset = profile->GetRawLaneOffset(laneInd);
+        float startOffset = profile->GetRawLaneOffset(laneIndReg);
 
         profile = roadNetwork.GetProfile(nodePtr[this->fNodeInd]->fProfileIndex);
-        float endOffset = profile->GetRawLaneOffset(laneInd);
+        float endOffset = profile->GetRawLaneOffset(laneIndReg);
 
         float laneOffset = startOffset + (endOffset - startOffset) * this->fSegTime;
         this->SetLaneOffset(laneOffset);

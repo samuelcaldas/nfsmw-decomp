@@ -463,13 +463,15 @@ SndBase *EAXSound::GetSndBase_Object(int nID) {
     return ReturnObj;
 }
 
-// TODO after we merge FE
-// float EAXSound::GetCurMusicVolume() {
-//     if (this->m_eSndGameMode == SND_FRONTEND) {
-//         return this->m_pCurAudioSettings->GetMasteredFEMusicVol();
-//     }
-//     return this->m_pCurAudioSettings->GetMasteredIGMusicVol();
-// }
+/**
+ * @brief Gets the current music volume based on sound game mode.
+ */
+float EAXSound::GetCurMusicVolume() {
+    if (this->m_eSndGameMode == 1) {
+        return this->m_pCurAudioSettings->MasterVol * this->m_pCurAudioSettings->FEMusicVol;
+    }
+    return this->m_pCurAudioSettings->MasterVol * this->m_pCurAudioSettings->IGMusicVol;
+}
 
 void EAXSound::ReInitMasterVolumes() {
     int i;

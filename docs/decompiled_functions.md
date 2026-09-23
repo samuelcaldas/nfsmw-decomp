@@ -106,6 +106,34 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEPackageReader::ReadObjectChunk`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEPackageReader.cpp`
+- **Virtual Address**: `0x8018C1B0`
+- **Size**: 964 bytes
+- **Matching State**: 96.7% match
+- **Signature**:
+  ```cpp
+  bool FEPackageReader::ReadObjectChunk();
+  ```
+- **Description**: Decompiled and refined FEPackageReader::ReadObjectChunk in zFEng unit, parsing object chunks during frontend package loading.
+
+---
+
+### `FEListBox::ScrollSelection`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEListBox.cpp`
+- **Virtual Address**: `0x80184188`
+- **Size**: 1104 bytes
+- **Matching State**: 96.5% match
+- **Signature**:
+  ```cpp
+  void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum);
+  ```
+- **Description**: Decompiled and matched FEListBox::ScrollSelection to 96.5% with Doxygen documentation added, managing list box item selection scrolling.
+
+---
+
 ### `FEGameInterface::UnloadUnreferencedLibrary`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEGameInterface.h`
@@ -572,8 +600,9 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `CarPartCuller::CullParts`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld`
 - **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
+- **Virtual Address**: `0x802C72F4`
 - **Size**: 836 bytes (209 instructions)
-- **Matching State**: 99.4% match (Non-matching / high match)
+- **Matching State**: 99.35% match
 - **Signature**:
   ```cpp
   void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang);

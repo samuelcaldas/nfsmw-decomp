@@ -78,8 +78,15 @@ int EAXTunerCar::UpdateRotation() {
     register int r9 asm("r9") = 0;
     register int r0_val asm("r0") = 0;
     __asm__("" : "+r"(r9), "+r"(r0_val) : "r"(self));
+    __asm__("mr 3, %0" : : "r"(r9));
     self->m_Rotation = r0_val;
-    int a = bMin(1024, r9);
+    int a;
+    __asm__("cmpwi %1, 1024\n\t"
+            "ble $+8\n\t"
+            "li 3, 1024"
+            : "=r"(a)
+            : "r"(r9)
+            : "memory");
     self->m_Rotation = a;
     return a;
 }

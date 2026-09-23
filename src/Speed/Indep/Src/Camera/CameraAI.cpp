@@ -1,8 +1,23 @@
 #include "CameraAI.hpp"
+#include "Speed/Indep/Src/Frontend/Database/FEDatabase.hpp"
 
 IMPLEMENT_LISTABLE(CameraAI::Director);
 
 CameraAI::Director *FindDirector(unsigned int id);
+
+/**
+ * @brief Determines if moment (jump/action) cameras are enabled based on frontend game mode.
+ * @return True if moment cameras are enabled; false in split screen, network modes, or disabled in options.
+ */
+bool AreMomentCamerasEnabled() {
+    if (FEDatabase->IsSplitScreenMode()) {
+        return false;
+    }
+    if (FEDatabase->IsLANMode() || FEDatabase->IsOnlineMode()) {
+        return false;
+    }
+    return FEDatabase->GetGameplaySettings()->JumpCam;
+}
 
 /**
  * @brief Resets all camera directors.

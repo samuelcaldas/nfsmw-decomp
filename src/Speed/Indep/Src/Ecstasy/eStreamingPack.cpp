@@ -795,7 +795,9 @@ void eStreamPackLoader::InternalLoadingHeaderPhase1Callback(void *callback_param
     }
 }
 
-// FIXME
+/**
+ * @brief Callback executed during phase 2 of streaming pack header loading.
+ */
 void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param, int error_status, void *callback_param2) {
     eStreamPackLoader *stream_pack_loader = (eStreamPackLoader *)callback_param;
     eStreamingPack *streaming_pack = (eStreamingPack *)callback_param2;
@@ -812,6 +814,7 @@ void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param
 
     streaming_pack->StreamingEntryTable = user_load_info.StreamingEntryTable;
     streaming_pack->StreamingEntryNumEntries = user_load_info.StreamingEntryNumEntries;
+    int load_amount = user_load_info.LoadResourceFileAmount;
     streaming_pack->SolidListHeader = user_load_info.SolidListHeader;
     streaming_pack->pTexturePackHeader = user_load_info.pTexturePackHeader;
 
@@ -821,15 +824,15 @@ void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param
     //     eStreamingPack *other_pack;
     // }
 
-    if (user_load_info.LoadResourceFileAmount != 0) {
+    if (load_amount != 0) {
         streaming_pack->pResourceFile = CreateResourceFile(streaming_pack->Filename, RESOURCE_FILE_CAR, 0x0, user_load_info.LoadResourceFilePosition,
-                                                           user_load_info.LoadResourceFileAmount);
+                                                           load_amount);
 
         char malloc_name[1024];
         bSPrintf(malloc_name, "%s: StrmHdrRes", streaming_pack->Filename);
 
         int allocation_params = 0x2000;
-        if (streaming_pack->HeaderMemoryPoolNum != 0 && bLargestMalloc(streaming_pack->HeaderMemoryPoolNum) > user_load_info.LoadResourceFileAmount) {
+        if (streaming_pack->HeaderMemoryPoolNum != 0 && bLargestMalloc(streaming_pack->HeaderMemoryPoolNum) > load_amount) {
             allocation_params = (streaming_pack->HeaderMemoryPoolNum & 0xF) | 0x2040;
         }
 

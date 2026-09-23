@@ -77,6 +77,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`UISafehouseRaceSheet::RefreshHeader` (`zFe`)**: Decompiled, verified (97.9% match, 1,776 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::AddCops` (`zFe`)**: Decompiled, verified (97.0% match, 968 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::SnapCursor` (`zFe`)**: Decompiled, verified (95.7% match, 436 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`WorldMap::ClampToMapBounds` (`zFe`)**: Decompiled, verified (100.0% match, 216 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 - **`EAXSound::GetCurMusicVolume` (`zEAXSound`)**: Decompiled, verified (100.0% match, 52 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

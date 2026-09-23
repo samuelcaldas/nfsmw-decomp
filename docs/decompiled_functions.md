@@ -575,6 +575,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `WorldMap::ClampToMapBounds`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/InGame/uiWorldMap.cpp`
+- **Virtual Address**: `0x8012B558`
+- **Size**: 216 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool WorldMap::ClampToMapBounds(float &x, float &y);
+  ```
+- **Description**: Decompiled WorldMap::ClampToMapBounds to 100.0% matching binary parity.
+
+---
+
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 
 ### `EAXTunerCar::UpdateRotation`

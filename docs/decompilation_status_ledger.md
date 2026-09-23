@@ -32,6 +32,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`CarRenderInfo::UpdateLightStateTextures`**: Decompiled, verified (96.21% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CarRenderInfo::UpdateWheelYRenderOffset` (`zWorld`)**: Decompiled, verified (95.2% match, 876 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CarLoader::SetMemoryPoolSize`**: Decompiled, verified (97.4% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CarLoader::DefragmentPool` (`zWorld`)**: Decompiled, verified (92.47% match, 684 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 - **`PhysicsObject::GetEntity` (`zPhysics`)**: Decompiled, verified (99.5% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

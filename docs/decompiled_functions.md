@@ -1094,6 +1094,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `CarLoader::DefragmentPool`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld`
+- **Source File**: `src/Speed/Indep/Src/World/CarLoader.cpp`
+- **Virtual Address**: `0x802DFCAC`
+- **Size**: 684 bytes
+- **Matching State**: 92.47% match
+- **Signature**:
+  ```cpp
+  int CarLoader::DefragmentPool();
+  ```
+- **Description**: Defragments vehicle model memory pool by compacting allocations and updating pointers via DefragFixer.
+
+---
+
 ### `CarRenderInfo::DrawKeithProjShadow`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld`
 - **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`

@@ -11,4 +11,6 @@
 #include "Speed/Indep/Src/Gameplay/GRuntimeInstance.cpp"
 #include "Speed/Indep/Src/Gameplay/GObjectBlock.cpp"
 #include "Speed/Indep/Src/Gameplay/GCharacter.cpp"
+#include "Speed/Indep/Src/Gameplay/GState.cpp"
+#include "Speed/Indep/Src/Gameplay/GHandler.cpp"
 #include "Speed/Indep/Src/Gameplay/GManager.cpp"

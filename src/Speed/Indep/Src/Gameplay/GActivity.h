@@ -26,6 +26,14 @@ class GActivity : public GRuntimeInstance {
 
     GActivity(const Attrib::Key &activityKey);
 
+    /**
+     * @brief Gets the gameplay object type for this activity.
+     * @return The activity gameplay object type (kGameplayObjType_Activity).
+     */
+    GameplayObjType GetType() const override {
+        return kGameplayObjType_Activity;
+    }
+
     void EnterState(GState *state);
 
   private:

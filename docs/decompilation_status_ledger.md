@@ -110,6 +110,9 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GVault` Status Methods (`IsLoaded`, `IsResident`, `IsTransient`, `IsRaceBin`, `SetRaceBin`) (`zGameplay`)**: Decompiled, verified (100.0% match, 80 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceParameters` & `GRaceBin` Vault Accessors (`GetGameplayObj`, `GetParentVault`, `GetChildVault`, `GetCollectionKey`) (`zGameplay`)**: Decompiled, verified (100.0% match, 64 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GetPaddedObjectSize<T>` (`GTrigger`, `GMarker`, `GCharacter`, `GActivity`, `GState`, `GHandler`) (`zGameplay`)**: Decompiled, verified (100.0% match, 288 bytes total across 6 instantiations), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GState::GState`, `GState::~GState`, `GState::GetType`, `_vt.6GState` (`zGameplay`)**: Decompiled, verified (100.0% match, 176 bytes code, 32 bytes vtable), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
+- **`GHandler::GHandler`, `GHandler::~GHandler`, `GHandler::NotifyBytecodeFlushed`, `GHandler::HandleMessage`, `GHandler::GetType`, `_vt.8GHandler` (`zGameplay`)**: Decompiled, verified (100.0% match, 248 bytes code, 32 bytes vtable), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
+- **`GCharacter::GetType` (`zGameplay`)**: Decompiled, verified (100.0% match, 8 bytes code), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
 
 ### Camera Subsystem (`zCamera`)
 - **`CameraMover::GetAnchorID` & CubicCameraMover Accessors (`zCamera`)**: Decompiled, verified (100.0% match, 64 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

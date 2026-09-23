@@ -2194,3 +2194,129 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type);
   ```
 - **Description**: Appends a new constraint to joint list with female/male lever orientation dispatch and 100% instruction parity.
+
+---
+
+### `GState::GState`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GState.cpp`
+- **Virtual Address**: `0x801AAACC`
+- **Size**: 64 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GState::GState(const Attrib::Key &stateKey);
+  ```
+- **Description**: Constructs a GState runtime instance forwarding the state attribute key and `kGameplayObjType_State` (enum value 4) to GRuntimeInstance base class with 100% register and instruction parity.
+
+---
+
+### `GState::~GState`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GState.cpp`
+- **Virtual Address**: `0x801AAB0C`
+- **Size**: 104 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GState::~GState();
+  ```
+- **Description**: Destroys GState runtime instance with compiler-synthesized deleting destructor calling `gFastMem.Free(this, 0x28, NULL)` via `USE_FASTALLOC(GRuntimeInstance)` base class with 100% byte parity.
+
+---
+
+### `GState::GetType`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GState.h`
+- **Virtual Address**: `0x801BC0FC`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GameplayObjType GState::GetType() const;
+  ```
+- **Description**: Returns `kGameplayObjType_State` (4) identifying the runtime instance type.
+
+---
+
+### `GHandler::GHandler`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GHandler.cpp`
+- **Virtual Address**: `0x801AAB74`
+- **Size**: 72 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GHandler::GHandler(const Attrib::Key &handlerKey);
+  ```
+- **Description**: Constructs a GHandler runtime instance forwarding handler key and `kGameplayObjType_Handler` (2) to GRuntimeInstance and initializing `mAttached` to 0 with 100% instruction parity.
+
+---
+
+### `GHandler::~GHandler`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GHandler.cpp`
+- **Virtual Address**: `0x801AABBC`
+- **Size**: 124 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GHandler::~GHandler();
+  ```
+- **Description**: Destroys GHandler runtime instance by detaching from Lua engine via `Detach(LuaRuntime::Get().GetState())` and freeing 44-byte instance memory through `gFastMem.Free(this, 0x2C, NULL)` with 100% register and instruction parity.
+
+---
+
+### `GHandler::NotifyBytecodeFlushed`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GHandler.cpp`
+- **Virtual Address**: `0x801AADD4`
+- **Size**: 12 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GHandler::NotifyBytecodeFlushed();
+  ```
+- **Description**: Resets handler attachment state (`mAttached = 0`) when Lua bytecode is flushed.
+
+---
+
+### `GHandler::HandleMessage`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GHandler.cpp`
+- **Virtual Address**: `0x801AAFA4`
+- **Size**: 32 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GHandler::HandleMessage(LuaMessageDeliveryInfo *info);
+  ```
+- **Description**: Dispatches incoming message delivery info to the scripted handler via `ExecuteScriptedHandler(info)`.
+
+---
+
+### `GHandler::GetType`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GHandler.h`
+- **Virtual Address**: `0x801BC1CC`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GameplayObjType GHandler::GetType() const;
+  ```
+- **Description**: Returns `kGameplayObjType_Handler` (2) identifying the runtime instance type.
+
+---
+
+### `GCharacter::GetType`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.h`
+- **Virtual Address**: `0x801BC280`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GameplayObjType GCharacter::GetType() const;
+  ```
+- **Description**: Returns `kGameplayObjType_Character` (1) identifying the runtime instance type.

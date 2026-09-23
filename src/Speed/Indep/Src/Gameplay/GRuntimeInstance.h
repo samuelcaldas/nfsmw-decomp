@@ -2,11 +2,14 @@
 #define GAMEPLAY_GRUNTIMEINSTANCE_H
 
 #include "GUserIncludes.h"
+#include "Speed/Indep/Libs/Support/Utility/FastMem.h"
 #include "Speed/Indep/Src/Generated/AttribSys/Classes/gameplay.h"
 
 // total size: 0x28
 class GRuntimeInstance : public Attrib::Gen::gameplay {
   public:
+    USE_FASTALLOC(GRuntimeInstance);
+
     struct ConnectedInstance;
 
     GRuntimeInstance(const Attrib::Key &key, GameplayObjType type);

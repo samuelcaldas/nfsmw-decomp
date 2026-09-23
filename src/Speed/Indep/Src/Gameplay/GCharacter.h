@@ -14,6 +14,15 @@
 class GCharacter : public GRuntimeInstance, public UTL::COM::Object, public IAttachable {
   public:
     GCharacter(const Attrib::Key &triggerKey);
+
+    /**
+     * @brief Gets the gameplay object type for this character.
+     * @return The character gameplay object type (kGameplayObjType_Character).
+     */
+    GameplayObjType GetType() const override {
+        return kGameplayObjType_Character;
+    }
+
     virtual bool Attach(UTL::COM::IUnknown *object);
     virtual bool Detach(UTL::COM::IUnknown *object);
     virtual bool IsAttached(const UTL::COM::IUnknown *object) const;

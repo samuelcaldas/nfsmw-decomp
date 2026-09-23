@@ -65,9 +65,6 @@ void Release(IEntity *entity) {
     }
 }
 
-Lever::Lever(IEntity *entity, const UMath::Vector3 &arm, bool immobile)
-    : mArm(arm), mEntity(entity), mImmobile(immobile) {}
-
 /**
  * @brief Constructs an articulation joint between female and male entities.
  */

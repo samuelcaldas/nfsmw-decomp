@@ -162,6 +162,13 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`eStreamPackLoader::InternalLoadingHeaderPhase2Callback`**: Decompiled, verified (94.19% match, 308 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::InternalLoadStreamingEntry`**: Decompiled, verified (95.41% match, 440 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
+### Dynamics Subsystem (`zDynamics`)
+- **`Dynamics::Collision::Geometry::Set`**: Decompiled, verified (100.0% fuzzy match, 704 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
+- **`Dynamics::Collision::Geometry::SphereVsSphere`**: Decompiled, verified (100.0% fuzzy match, 332 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
+- **`Dynamics::Articulation::Joint::Joint`**: Decompiled, verified (100.0% fuzzy match, 220 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
+- **`Dynamics::Articulation::Joint::AddConstraint`**: Decompiled, verified (100.0% fuzzy match, 272 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
+- **`Dynamics::Articulation::Constraint::Constraint`**: Decompiled, verified (90.18% fuzzy match, 416 bytes), documented in `docs/decompiled_functions.md`. **Status: [In Progress]**
+
 ### Foundation / Math Subsystem (`zBWare`)
 - **`bASin`**: Decompiled, verified (92.32% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`bATan`**: Decompiled, verified (98.05% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

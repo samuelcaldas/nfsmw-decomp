@@ -17,30 +17,51 @@ Geometry::Geometry(const UMath::Matrix4 &orient, const UMath::Vector3 &position,
  */
 void Geometry::Set(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta) {
     this->mShape = shape;
-    *reinterpret_cast<UMath::Vector3 *>(&this->mPosition) = position;
-    this->mDelta = delta;
+
+    switch (shape) {
+    case BOX:
+        UMath::Vector4To3(this->mPosition) = position;
+        this->mDimension[0] = dimension.x;
+        this->mDimension[1] = dimension.y;
+        this->mDimension[2] = dimension.z;
+        this->mDelta = delta;
+
+        for (unsigned int i = 0; i < 3; ++i) {
+            unsigned int offset = i * sizeof(UMath::Vector4);
+            offset += reinterpret_cast<unsigned int>(this);
+            UMath::Vector4 *base = reinterpret_cast<UMath::Vector4 *>(offset);
+            UMath::Vector4 &normal = base[1];
+            UMath::Vector4 &extent = base[4];
+            UMath::Vector4To3(normal) = UMath::Vector4To3(orient[i]);
+            VU0_v4scalexyz(normal, this->mDimension[i], extent);
+        }
+        break;
+
+    case SPHERE: {
+        this->mNormal[0] = UMath::Vector4::kIdentity;
+        this->mNormal[1] = UMath::Vector4::kIdentity;
+        this->mNormal[2] = UMath::Vector4::kIdentity;
+        this->mExtent[0] = UMath::Vector4::kIdentity;
+        this->mExtent[1] = UMath::Vector4::kIdentity;
+        this->mExtent[2] = UMath::Vector4::kIdentity;
+        this->mPosition = UMath::Vector4Make(position, 1.0f);
+        float s = UMath::Max(dimension.x, UMath::Max(dimension.y, dimension.z));
+        this->mDimension[2] = s;
+        this->mDimension[1] = s;
+        this->mDimension[0] = s;
+        this->mDelta = delta;
+        break;
+    }
+
+    default:
+        this->mShape = UNKNOWN;
+        break;
+    }
+
     this->mCollision_normal.w = 0.0f;
     this->mCollision_point.w = 0.0f;
     this->mOverlap = -100000.0f;
     this->mPenetratesOther = 0;
-
-    if (shape == BOX) {
-        this->mDimension[0] = dimension.x;
-        this->mDimension[1] = dimension.y;
-        this->mDimension[2] = dimension.z;
-
-        for (int i = 0; i < 3; ++i) {
-            this->mNormal[i] = orient[i];
-            this->mExtent[i].x = this->mNormal[i].x * this->mDimension[i];
-            this->mExtent[i].y = this->mNormal[i].y * this->mDimension[i];
-            this->mExtent[i].z = this->mNormal[i].z * this->mDimension[i];
-            this->mExtent[i].w = 0.0f;
-        }
-    } else if (shape == SPHERE) {
-        this->mDimension[0] = dimension.x;
-        this->mDimension[1] = dimension.y;
-        this->mDimension[2] = dimension.z;
-    }
 }
 
 void Geometry::Move(const UMath::Vector3 &deltaP) {
@@ -71,8 +92,8 @@ bool Geometry::SphereVsSphere(const Geometry *A, const Geometry *B, Geometry *re
         result->mCollision_normal.z = 0.0f;
 
         result->mCollision_point.x = A->mPosition.x;
-        result->mCollision_point.y = A->mPosition.y + A->mDimension[0];
-        result->mCollision_point.z = A->mPosition.z;
+        result->mCollision_point.x = A->mPosition.y + A->mDimension[0];
+        result->mCollision_point.x = A->mPosition.z;
 
         result->mOverlap = -A->mDimension[0];
     } else if (dist >= sum) {

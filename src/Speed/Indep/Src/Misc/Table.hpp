@@ -163,7 +163,10 @@ class AverageBase {
         return this->nSamples;
     }
 
-    virtual void Recalculate() {} // Decl: 181
+    /**
+     * @brief Recalculate base average values.
+     */
+    virtual void Recalculate();
 
   protected:
     static void *Allocate(unsigned int size, const char *name);             // Decl: 184
@@ -174,6 +177,9 @@ class AverageBase {
     uint8 nSamples;     // Decl: 189
     uint8 nCurrentSlot; // Decl: 190
 };
+
+inline void AverageBase::Recalculate() {
+}
 
 // total size: 0x28
 // Decl: 195

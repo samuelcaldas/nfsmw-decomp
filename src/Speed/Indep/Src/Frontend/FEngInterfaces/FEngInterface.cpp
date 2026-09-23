@@ -38,7 +38,7 @@ cFEng::cFEng() {
  */
 void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask) {
     if (FEDatabase == nullptr) {
-        if (!cFEng::Get()->IsPackagePushed(pPackageName)) {
+        if (cFEng::Get()->IsPackagePushed(pPackageName)) {
             return;
         }
         FEPackageManager::Get()->SetPackageDataArg(pPackageName, pArg);

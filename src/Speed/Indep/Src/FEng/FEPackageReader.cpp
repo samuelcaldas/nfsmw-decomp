@@ -246,7 +246,11 @@ bool FEPackageReader::ReadPackageResponseChunk() {
     return true;
 }
 
-// UNSOLVED
+/**
+ * Reads and processes the object chunk and its child chunks within a frontend package.
+ *
+ * @return true on success, false on failure.
+ */
 bool FEPackageReader::ReadObjectChunk() {
     FEChunk *pObjList = FindChild(pChunk, Chunk_FEObjectList);
     if (pObjList == nullptr) {
@@ -261,11 +265,12 @@ bool FEPackageReader::ReadObjectChunk() {
     }
 
     while (true) {
-        if (pObjChunk->GetID() != Chunk_FEObject) {
+        u32 objID = pObjChunk->GetID();
+        if (objID != Chunk_FEObject) {
             if (pObjChunk >= pLast) {
                 return true;
             }
-            switch (pObjChunk->GetID()) {
+            switch (objID) {
                 case Chunk_FEButtonCount:
                     ButtonCount = FEngGetu32(*reinterpret_cast<u32 *>(pObjChunk->GetData()));
                     pPack->ButtonMap.SetCount(ButtonCount);
@@ -282,7 +287,8 @@ bool FEPackageReader::ReadObjectChunk() {
             pParent = nullptr;
 
             while (pSubChunk < pLastSub) {
-                switch (pSubChunk->GetID()) {
+                u32 subID = pSubChunk->GetID();
+                switch (subID) {
                     case Chunk_FEObjectData:
                         if (!ReadObjectTags(reinterpret_cast<FETag *>(pSubChunk->GetData()), pSubChunk->GetSize())) {
                             return false;

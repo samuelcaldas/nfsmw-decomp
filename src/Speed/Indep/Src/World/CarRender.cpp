@@ -295,7 +295,8 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
                     stang = -stang;
                 }
 
-                modifier = static_cast<float>(stang) / culldiv;
+                float fstang = static_cast<float>(stang);
+                modifier = fstang / culldiv;
                 plane_info->NormalDistance[0] = omodifier + modifier;
             } else {
                 plane_info->NormalDistance[0] = omodifier;
@@ -303,7 +304,8 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
 
             if (plane_info->NumPlanes > 0) {
                 bVector3 v = *camera_eye - part_info->Position;
-                if (plane_info->Polarity == CULLING_POLARITY_ANY_VISIBLE) {
+                eCullingPolarity polarity = plane_info->Polarity;
+                if (polarity == CULLING_POLARITY_ANY_VISIBLE) {
                     int n = 0;
 
                     for (; n < plane_info->NumPlanes; n++) {
@@ -322,7 +324,7 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
                     if (n == plane_info->NumPlanes) {
                         visible = false;
                     }
-                } else if (plane_info->Polarity == CULLING_POLARITY_ALL_MUST_BE_VISIBLE) {
+                } else if (polarity == CULLING_POLARITY_ALL_MUST_BE_VISIBLE) {
                     for (int n = 0; n < plane_info->NumPlanes; n++) {
                         bVector3 normal = plane_info->Normal[n];
 

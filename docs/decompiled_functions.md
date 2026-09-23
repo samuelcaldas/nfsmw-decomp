@@ -6,6 +6,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 1. Frontend Subsystem (`zFe`, `zFe2`, `zFEng`)
 
+### `FEngine::UpdateMouseState`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
+- **Virtual Address**: `0x80186E48`
+- **Size**: 728 bytes (182 instructions)
+- **Matching State**: 97.47% match
+- **Signature**:
+  ```cpp
+  void FEngine::UpdateMouseState(FEPackage *pkg, FEObjectMouseState *state, float mx, float my);
+  ```
+- **Description**: Refined and documented FEngine::UpdateMouseState in zFEng unit, handling frontend mouse pointer position and state updates.
+
+---
+
 ### `FEngine::Update`
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
@@ -32,6 +46,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Handles pad input events (`__PAD_BACK__`, `__PAD_BUTTON5__`, triggers, `__PAD_START__`), dialog confirmation responses, and package lifecycle messages (`FEHASH_EXITCOMPLETE`). Manages settings dirty state, controller port mappings, audio volume updates, and option menu redrawing.
 - **Compiler Details**: ProDG GCC 2.95 generates a binary decision tree for sparse switch statements. Matching required structured jump labels matching the exact instruction dispatch order for `msg` comparisons.
+
+---
+
+### `MemcardCallbacks::FoundEntry`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`
+- **Virtual Address**: `0x80139CFC`
+- **Size**: 512 bytes
+- **Matching State**: 98.0% match
+- **Signature**:
+  ```cpp
+  void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info);
+  ```
+- **Description**: Decompiled and matched MemcardCallbacks::FoundEntry (98.0% match) handling memory card entry discovery callbacks during save/load operations.
 
 ---
 
@@ -141,6 +169,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 
+### `EAXCommon::Play`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/EAXFrontEnd.cpp`
+- **Virtual Address**: `0x800ADA44`
+- **Size**: 492 bytes (123 instructions)
+- **Matching State**: 96.83% match
+- **Signature**:
+  ```cpp
+  int EAXCommon::Play(eMenuSoundTriggers etrigger);
+  ```
+- **Description**: Decompiled and matched EAXCommon::Play function in zEAXSound unit, managing menu sound trigger playback.
+
+---
+
 ### `SFXCTL_Physics::UpdateMixerOutputs`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Physics.cpp`
@@ -167,6 +209,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Parses packed variable-length control records from the dynamic mixer state header, resolves curve tables and scale arrays, assigns processing pointers, computes initial decibel-to-Q15 ratios, and tracks control counts.
 - **Compiler Details**: Utilizes PowerPC register aliases (`register stMixCtlSharedData *psdata asm("r11")`, `register int nOffset asm("r3")`) and an inline memory barrier (`asm volatile("" : : : "memory");`) to guide instruction scheduling across Q15 conversion without spilling to stack.
+
+---
+
+### `SFX_Common::MsgPlayMiscSound`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/SFX_Common.cpp`
+- **Virtual Address**: `0x800D36C4`
+- **Size**: 780 bytes
+- **Matching State**: 97.26% match
+- **Signature**:
+  ```cpp
+  void SFX_Common::MsgPlayMiscSound(const MMiscSound &message);
+  ```
+- **Description**: Decompiled SFX_Common::MsgPlayMiscSound with 97.26% match and Doxygen docstring, processing miscellaneous sound event messages for audio playback.
 
 ---
 
@@ -300,6 +356,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 4. World Subsystem (`zWorld`)
 
+### `CarRenderInfo::UpdateLightStateTextures`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld`
+- **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
+- **Virtual Address**: `0x802CAA44`
+- **Size**: 1,068 bytes (267 instructions)
+- **Matching State**: 96.21% match
+- **Signature**:
+  ```cpp
+  void CarRenderInfo::UpdateLightStateTextures();
+  ```
+- **Description**: Decompiled and documented CarRenderInfo::UpdateLightStateTextures matching 96.21% of original assembly with zero regressions, updating vehicle light state textures.
+
+---
+
 ### `CarLoader::SetMemoryPoolSize`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld`
 - **Source File**: `src/Speed/Indep/Src/World/CarLoader.cpp`
@@ -359,7 +429,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 6. Physics Subsystem (`zPhysicsBehaviors`)
+## 6. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
+
+### `Physics::Info::ShiftPoints`
+- **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
+- **Source File**: `src/Speed/Indep/Src/Physics/PhysicsInfo.cpp`
+- **Virtual Address**: `0x80224CB8`
+- **Size**: 824 bytes
+- **Matching State**: 90.41% match
+- **Signature**:
+  ```cpp
+  bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &, const Attrib::Gen::engine &, const Attrib::Gen::induction &, float *, float *, unsigned int);
+  ```
+- **Description**: Decompiled and matched Physics::Info::ShiftPoints to 90.41% accuracy with precise expression grouping and conditional structure for vehicle transmission shifting point calculations.
+
+---
 
 ### `SuspensionSimple::Tire::UpdateLoaded`
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysicsBehaviors`
@@ -371,6 +455,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   float SuspensionSimple::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float body_speed, float load, float dT, float drag_reduction);
   ```
 - **Description**: Updates loaded tire physics behavior including lateral and longitudinal forces, braking torque application, slip calculation, and normal load integration during vehicle simulation ticks.
+
+---
+
+### `SuspensionTraffic::Tire::UpdateLoaded`
+- **Unit**: `main/Speed/Indep/SourceLists/zPhysicsBehaviors`
+- **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionTraffic.cpp`
+- **Virtual Address**: `0x8024B310`
+- **Size**: 856 bytes
+- **Matching State**: 97.21% match
+- **Signature**:
+  ```cpp
+  void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT);
+  ```
+- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded function to 97.21% match parity, handling traffic vehicle tire simulation and load calculations.
 
 ---
 
@@ -463,3 +561,17 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   bAngle bASin(float x);
   ```
 - **Description**: Decompiled and matched bASin function in zBWare unit computing arcsine for angular calculations.
+
+---
+
+### `bATan`
+- **Unit**: `main/Speed/Indep/SourceLists/zBWare`
+- **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
+- **Virtual Address**: `0x8005D1F0`
+- **Size**: 328 bytes (82 instructions)
+- **Matching State**: 97.0% match
+- **Signature**:
+  ```cpp
+  bAngle bATan(float x, float y);
+  ```
+- **Description**: Decompiled bATan to 97.0% match parity in zBWare unit computing arctangent for angular calculations.

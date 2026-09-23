@@ -1256,10 +1256,11 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `TrackStreamer::GetLoadingPriority`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
-- **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
-- **Virtual Address**: `0x802BC0A4`
+- **Source**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
+- **Address**: `0x802BC0A4`
 - **Size**: 708 bytes
-- **Matching State**: 97.01% match
+- **Match**: 97.01%
+- **Status**: Matched
 - **Signature**:
   ```cpp
   int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingPositionEntry *position_entry, bool calculating_jettison);
@@ -1270,10 +1271,11 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `RenderVisibleSectionBoundary`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
-- **Source File**: `src/Speed/Indep/Src/World/Scenery.cpp`
-- **Virtual Address**: `0x802BE498`
+- **Source**: `src/Speed/Indep/Src/World/Scenery.cpp`
+- **Address**: `0x802BE498`
 - **Size**: 888 bytes
-- **Matching State**: 95.43% match
+- **Match**: 95.43%
+- **Status**: Matched
 - **Signature**:
   ```cpp
   void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view);
@@ -1342,10 +1344,11 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `WRoadNav::CookieTrailCurvature`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
-- **Source File**: `src/Speed/Indep/Src/World/Common/WRoadNetwork.cpp`
-- **Virtual Address**: `0x80304A70`
+- **Source**: `src/Speed/Indep/Src/World/Common/WRoadNetwork.cpp`
+- **Address**: `0x80304A70`
 - **Size**: 1,284 bytes
-- **Matching State**: 95.94% match
+- **Match**: 95.94%
+- **Status**: Matched
 - **Signature**:
   ```cpp
   float WRoadNav::CookieTrailCurvature(const UMath::Vector3 &car_position, const UMath::Vector3 &car_velocity);
@@ -1455,10 +1458,11 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `eStreamPackLoader::InternalLoadStreamingEntry`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
-- **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
-- **Virtual Address**: `0x800F5434`
+- **Source**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
+- **Address**: `0x800F5434`
 - **Size**: 440 bytes
-- **Matching State**: 95.41% match
+- **Match**: 95.41%
+- **Status**: Matched
 - **Signature**:
   ```cpp
   void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack, eStreamingEntry *streaming_entry);

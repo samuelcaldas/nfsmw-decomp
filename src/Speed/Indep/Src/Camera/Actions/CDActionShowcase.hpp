@@ -8,6 +8,7 @@ class CDActionShowcase : public CameraAI::Action {
 public:
     virtual ~CDActionShowcase();
     virtual void Reset() override;
+    virtual void SetSpecial(float) override;
     virtual void OnAttached(IAttachable *) override;
 };
 

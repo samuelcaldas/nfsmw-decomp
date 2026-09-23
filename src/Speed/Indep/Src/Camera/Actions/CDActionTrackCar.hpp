@@ -8,6 +8,7 @@ class CDActionTrackCar : public CameraAI::Action {
 public:
     virtual ~CDActionTrackCar();
     virtual void Reset() override;
+    virtual void SetSpecial(float) override;
     virtual void OnAttached(IAttachable *) override;
 };
 

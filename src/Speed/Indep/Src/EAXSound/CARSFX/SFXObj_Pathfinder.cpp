@@ -828,3 +828,31 @@ void SFXObj_PFEATrax::MessageSwapInteractive(const MControlPathfinder &message) 
     this->m_PrevPathEvent = 0;
     this->m_PFParms[m_ActiveProject].queue_next = 1;
 }
+
+/**
+ * @brief Generates and returns the current music type based on EATrax state, volume settings, pursuit state, and flags.
+ */
+eMUSIC_TYPE SFXObj_PFEATrax::GenMusicType() {
+    if (this->m_EATraxState == EATRAX_IG) {
+        if (FEDatabase->CurrentUserProfiles[0]->GetOptions()->TheAudioSettings.IGMusicVol <= 0.0f) {
+            return (eMUSIC_TYPE)((this->m_Flags & 0x800) != 0);
+        }
+        if ((this->m_Flags & 0x800) != 0) {
+            return eMUSIC_TYPE_LICENCED;
+        }
+        SoundAI *ai = SoundAI::Get();
+        if (ai != nullptr && (ai->GetPursuitState() == SoundAI::kActive || ai->GetPursuitState() == SoundAI::kSearching)) {
+            return eMUSIC_TYPE_INTERACTIVE;
+        }
+        return eMUSIC_TYPE_LICENCED;
+    } else if (this->m_EATraxState == EATRAX_FE) {
+        if (FEDatabase->CurrentUserProfiles[0]->GetOptions()->TheAudioSettings.FEMusicVol <= 0.0f) {
+            return (eMUSIC_TYPE)((this->m_Flags & 0x800) != 0);
+        }
+        return eMUSIC_TYPE_LICENCED;
+    } else if (this->m_EATraxState != EATRAX_OFF) {
+        return eMUSIC_TYPE_AMBIENCE;
+    } else {
+        return (eMUSIC_TYPE)((this->m_Flags & 0x800) != 0);
+    }
+}

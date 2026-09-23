@@ -150,8 +150,9 @@ Meters Physics::Info::WheelDiameter(const Attrib::Gen::tires &tires, bool front)
 // 	return MaxInductedTorque(engine, induction, atrpm, tunings);
 // }
 
-// Credits: Brawltendo
-// TODO not matching on GC yet
+/**
+ * @brief Calculates optimal shift points for vehicle transmission gears.
+ */
 bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, const Attrib::Gen::engine &engine,
                                 const Attrib::Gen::induction &induction, float *shift_up, float *shift_down, unsigned int numpts) {
     for (int i = 0; i < numpts; ++i) {
@@ -183,7 +184,7 @@ bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, c
                 if (UMath::Abs(g1) > 0.00001f) {
                     float ratio = g2 / g1;
                     float next_rpm = ratio * max;
-                    shiftuptorque = Torque(engine, next_rpm) * (InductionBoost(engine, induction, 1.0f, next_rpm, nullptr, nullptr) + 1.0f) * g2 / g1;
+                    shiftuptorque = ((Torque(engine, next_rpm) * (InductionBoost(engine, induction, 1.0f, next_rpm, nullptr, nullptr) + 1.0f)) * g2) / g1;
                 } else {
                     shiftuptorque = 0.0f;
                 }
@@ -194,7 +195,7 @@ bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, c
 
                 max += 50.0f;
                 // set the upshift RPM to the redline RPM
-                flag = static_cast<int>(!(max < redline));
+                flag = (max >= redline) ? 1 : 0;
             }
             if (!flag) {
                 shift_up[j] = max;

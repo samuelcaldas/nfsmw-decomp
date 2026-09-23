@@ -219,6 +219,9 @@ FEPackage *cFEng::FindPackageIdle(const char *pPackageName) {
     return mFEng->FindIdlePackage(pPackageName);
 }
 
+/**
+ * @brief Finds a package by name.
+ */
 FEPackage *cFEng::FindPackage(const char *pPackageName) {
     if (pPackageName != nullptr && strlen(pPackageName) != 0) {
         if (!FEPackageData::IsInScreenConstructor()) {

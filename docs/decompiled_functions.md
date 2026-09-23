@@ -247,6 +247,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `IJoyHelper::EmulateMemoryCardLibrary`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 732 bytes
+- **Matching State**: 98.8% match
+- **Signature**:
+  ```cpp
+  void IJoyHelper::EmulateMemoryCardLibrary(int aJoyOp);
+  ```
+- **Description**: Decompiled and matched IJoyHelper::EmulateMemoryCardLibrary to 98.8% in zFe unit.
+
+---
+
 ### `QuickRaceUnlocker::IsPerfPackageUnlocked`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe2`
 - **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`

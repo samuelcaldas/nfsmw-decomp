@@ -70,13 +70,18 @@ void DebugPrintSkidBar(int Horz, int Vert, char *Str, int Value) {}
 
 void DebugPrintColumn(int x, int y, char *label, unsigned int label_color, float val, unsigned int bar_color) {}
 
-// UNSOLVED
+/**
+ * @brief Updates car rotation.
+ */
 int EAXTunerCar::UpdateRotation() {
-    this->m_Rotation = 0;
-
-    this->m_Rotation = bClamp(this->m_Rotation, 0, 1024);
-
-    return this->m_Rotation;
+    register EAXTunerCar *self asm("r11") = this;
+    register int r9 asm("r9") = 0;
+    register int r0_val asm("r0") = 0;
+    __asm__("" : "+r"(r9), "+r"(r0_val) : "r"(self));
+    self->m_Rotation = r0_val;
+    int a = bMin(1024, r9);
+    self->m_Rotation = a;
+    return a;
 }
 
 void EAXTunerCar::UpdatePov() {

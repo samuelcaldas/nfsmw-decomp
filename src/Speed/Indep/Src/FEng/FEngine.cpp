@@ -179,7 +179,7 @@ void FEngine::UnloadLibraryPackage(FEPackage *pLibPack) {
     register FEngine *self asm("r29") = this;
     register FEPackage *pLibPackReg asm("r31") = pLibPack;
     register bool bDelete asm("r30");
-    if (!self->pInterface->UnloadUnreferencedLibrary()) {
+    if (!self->pInterface->UnloadUnreferencedLibrary(pLibPackReg)) {
         return;
     }
     self->RemoveFromLibraryList(pLibPackReg);

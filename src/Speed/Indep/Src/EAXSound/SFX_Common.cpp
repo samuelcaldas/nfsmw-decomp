@@ -32,7 +32,9 @@ void SFX_Common::AttachController(SFXCTL *psfxctl) {}
 
 void SFX_Common::Destroy() {}
 
-// UNSOLVED because of Csis::FX_UVES
+/**
+ * @brief Handles playing miscellaneous sound messages and managing EAX sound effects.
+ */
 void SFX_Common::MsgPlayMiscSound(const MMiscSound &message) {
     this->SetDMIX_Input(message.GetSoundID(), 0x7FFF);
 

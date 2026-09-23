@@ -247,6 +247,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `PauseMenu::NotificationMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/InGame/uiPause.cpp`
+- **Virtual Address**: `0x8011E0C8`
+- **Size**: 1204 bytes
+- **Matching State**: 97.7% match
+- **Signature**:
+  ```cpp
+  void PauseMenu::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2);
+  ```
+- **Description**: Successfully decompiled and matched PauseMenu::NotificationMessage with 97.7% match parity in zFe unit.
+
+---
+
 ### `MemcardCallbacks::FoundEntry`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`

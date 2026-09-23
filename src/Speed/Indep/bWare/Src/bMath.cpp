@@ -327,7 +327,7 @@ bAngle bFastATan(float x, float y) {}
  * @return bAngle Resulting angle.
  */
 bAngle bATan(float x, float y) {
-    register int quad asm("r6") = 0;
+    register int quad asm("r7") = 0;
     if (x < 0.0f) {
         quad = 1;
         x = -x;
@@ -342,13 +342,13 @@ bAngle bATan(float x, float y) {
     if (x > y) {
         float r = y;
         int i = static_cast<int>((r / x) * 65536.0f);
-        const bAngle *table = &bFastATanTable[i >> 8];
+        register const bAngle *table asm("r6") = &bFastATanTable[i >> 8];
         a = (table[0] + (((table[1] - table[0]) * (i & 0xFF)) >> 8));
     } else {
         if (y > x) {
             float r = y;
             int i = static_cast<int>((x / r) * 65536.0f);
-            const bAngle *table = &bFastATanTable[i >> 8];
+            register const bAngle *table asm("r6") = &bFastATanTable[i >> 8];
             bAngle calc = table[0] + (((table[1] - table[0]) * (i & 0xFF)) >> 8);
             a = bDegToAng(90.0f) - calc;
         } else if (y == 0.0f) {

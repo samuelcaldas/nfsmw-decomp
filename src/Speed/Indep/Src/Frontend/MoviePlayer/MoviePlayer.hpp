@@ -757,7 +757,7 @@ class MoviePlayer {
 };
 
 extern MoviePlayer *gMoviePlayer;
-extern unsigned int gMovieStartTime;
+extern u32 gMovieStartTime;
 
 #define MoviePlayer_Init(_a) gMoviePlayer->Init(_a) // :308
 

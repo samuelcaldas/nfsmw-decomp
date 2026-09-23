@@ -1,6 +1,6 @@
 # GOWE69 Decompilation Status Ledger
 
-This ledger tracks the completion and blockage status of all code chunks, modules, and subsystems for Need for Speed: Most Wanted (`GOWE69` GameCube target) in accordance with project directives and parallel workflow rules (including Batch 15, Batch 16, Batch 17, and Batch 18 functions: `UTL::FastVector<unsigned int, 16>::AllocVectorSpace`, `TrackStreamer::GetLoadingPriority`, and `eStreamPackLoader::InternalLoadStreamingEntry`).
+This ledger tracks the completion and blockage status of all code chunks, modules, and subsystems for Need for Speed: Most Wanted (`GOWE69` GameCube target) in accordance with project directives and parallel workflow rules (including Batch 15, Batch 16, Batch 17, Batch 18, and Batch 19 functions: `AICopManager::UpdatePursuits`, `WCollisionMgr::FindFaceInCInst`, `RegionQuery::CalculateRegionInfo`, and `__InitMatrices`).
 
 ## 1. Completed and Merged Modules & Functions
 

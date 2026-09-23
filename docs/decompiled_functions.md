@@ -1239,16 +1239,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `AICopManager::UpdatePursuits`
 - **Unit**: `main/Speed/Indep/SourceLists/zAI`
-- **Source File**: `src/Speed/Indep/Src/AI/Activities/AICopManager.cpp`
-- **Virtual Address**: `0x8000C47C`
-- **Size**: 2,516 bytes (629 instructions)
-- **Matching State**: 100.0% match
+- **Source**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_db765815-f10-1/src/Speed/Indep/Src/AI/Activities/AICopManager.cpp`
+- **Address**: `0x8000C47C`
+- **Size**: 2516 bytes
+- **Match**: 99.97%
 - **Signature**:
   ```cpp
-  void AICopManager::UpdatePursuits();
+  void AICopManager::UpdatePursuits()
   ```
-- **Description**: Iterates through active cop and pursuit vehicles, updates pursuit state, manages vehicle removal on destruction or roadblock completion, increments police statistics when enabled by race parameters, and coordinates pursuit dispatching.
-- **Compiler Details**: Exact 100% binary match achieved following ProDG GCC 2.95 calling conventions and control-flow ordering.
+- **Description**: AICopManager::UpdatePursuits update active pursuits, support vehicles, and pending roadblocks
 
 ---
 
@@ -1383,16 +1382,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `RegionQuery::CalculateRegionInfo`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
-- **Source File**: `src/Speed/Indep/Src/World/WeatherMan.cpp`
-- **Virtual Address**: `0x802C1640`
-- **Size**: 1,208 bytes (302 instructions)
-- **Matching State**: 99.9% match
+- **Source**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_db765815-f10-3/src/Speed/Indep/Src/World/WeatherMan.cpp`
+- **Address**: `0x802C1640`
+- **Size**: 1208 bytes
+- **Match**: 99.92%
 - **Signature**:
   ```cpp
-  int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InFE);
+  int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InFE)
   ```
-- **Description**: Evaluates region weather, fog parameters, and lighting configuration for the specified view and region type. Manages fog color overrides, distance fog falloff, power, and start positions, updating cache state when modified.
-- **Compiler Details**: High-fidelity matching achieved following ProDG GCC 2.95 floating-point and register allocation rules.
+- **Description**: Decompiled and matched RegionQuery::CalculateRegionInfo with 99.92% match accuracy.
 
 ---
 
@@ -1457,15 +1455,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `WCollisionMgr::FindFaceInCInst`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
-- **Source File**: `src/Speed/Indep/Src/World/Common/WCollisionMgr.cpp`
-- **Virtual Address**: `0x802F0818`
-- **Size**: 1,436 bytes (359 instructions)
-- **Matching State**: 99.92% match
+- **Source**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_db765815-f10-2/src/Speed/Indep/Src/World/Common/WCollisionMgr.cpp`
+- **Address**: `0x802F0818`
+- **Size**: 1436 bytes
+- **Match**: 99.92%
 - **Signature**:
   ```cpp
-  bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &, const UMath::Vector3 &, WCollisionInstance const &, WCollisionTri &, float &);
+  bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst, WCollisionTri &retFace, float &retDist)
   ```
-- **Description**: Finds the nearest collision face intersected by a transformed segment against a collision instance. Evaluates strip spheres, orthogonal inverse matrix transformations, ray-strip intersection, and distance thresholds to locate the closest colliding triangle.
+- **Description**: Decompiled and verified matching implementation of WCollisionMgr::FindFaceInCInst for Need for Speed: Most Wanted (GOWE69)
 
 ---
 
@@ -1543,15 +1541,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `__InitMatrices`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
-- **Source File**: `src/Speed/GameCube/Src/Ecstasy/EcstasyE.cpp`
-- **Virtual Address**: `0x801026D0`
-- **Size**: 508 bytes (127 instructions)
-- **Matching State**: 97.95% match
+- **Source**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_db765815-f10-4/src/Speed/GameCube/Src/Ecstasy/EcstasyE.cpp`
+- **Address**: `0x801026D0`
+- **Size**: 508 bytes
+- **Match**: 98%
 - **Signature**:
   ```cpp
-  void __InitMatrices(void);
+  void __InitMatrices(void)
   ```
-- **Description**: Verified __InitMatrices in zEcstasy unit at 97.95% match with Doxygen docstring and clean regression test.
+- **Description**: Inspected and verified __InitMatrices in zEcstasy unit achieving 98.0% match.
 
 ---
 

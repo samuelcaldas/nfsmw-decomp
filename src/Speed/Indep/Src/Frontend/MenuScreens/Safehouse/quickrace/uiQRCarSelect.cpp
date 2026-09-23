@@ -923,7 +923,9 @@ int UIQRCarSelect::GetFilterType() {
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Sets up the car selection for the specified player.
+ */
 void UIQRCarSelect::SetupForPlayer(int player) {
     SelectableCar *car = nullptr;
 

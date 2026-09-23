@@ -220,6 +220,9 @@ CAnimScene::CAnimScene(CAnimSceneData *anim_scene_data, int camera_track_number,
 
 CAnimScene::~CAnimScene() {}
 
+/**
+ * @brief Returns the unique runtime handle assigned to the animation scene instance.
+ */
 int CAnimScene::GetHandle() {
     return mHandle;
 }

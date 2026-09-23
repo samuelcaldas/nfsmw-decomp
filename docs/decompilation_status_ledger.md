@@ -36,6 +36,10 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Collision Subsystem (`zWorld2`)
 - **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.9% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
+### Particle Subsystem (`zEcstasy`)
+- **`EmitterSystem::UpdateParticles`**: Decompiled, verified (99.1% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+
+
 ## 2. Remaining Binary Chunks and Subsystems
 - **Remaining 6,920 Candidate Functions across Unity Units (`zAI`, `zWorld`, `zTrack`, `zPhysics`, `zFe`, `zSim`, `zCamera`, etc.)**:
   - **Status: [Blocked]**

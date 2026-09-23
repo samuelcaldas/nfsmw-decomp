@@ -208,6 +208,46 @@ class CubicCameraMover : public CameraMover {
     int mLookBack;         // offset 0xa8
 };
 
+class RearViewMirrorCameraMover : public CameraMover {
+public:
+    RearViewMirrorCameraMover(int view_id, CameraAnchor *p_car);
+    virtual ~RearViewMirrorCameraMover();
+    virtual void Update(float dT);
+    virtual CameraAnchor *GetAnchor() override;
+private:
+    CameraAnchor *mAnchor; // offset 0x80
+};
+
+class TrackCarCameraMover : public CameraMover {
+public:
+    TrackCarCameraMover(int view_id, CameraAnchor *p_car, bool b);
+    virtual ~TrackCarCameraMover();
+    void Init();
+    void GetTarget();
+    virtual void Update(float dT);
+    virtual CameraAnchor *GetAnchor() override;
+private:
+    char mPad80[0x20];
+    CameraAnchor *mAnchor; // offset 0xa0
+};
+
+class TrackCopCameraMover : public CameraMover {
+public:
+    TrackCopCameraMover(int view_id, CameraAnchor *p_car, bool b);
+    virtual ~TrackCopCameraMover();
+    void FindPursuitVehiclePosition(bVector3 *p);
+    void Init();
+    void GetTarget();
+    virtual void Update(float dT);
+    virtual CameraAnchor *GetAnchor() override;
+    virtual bool RenderCarPOV() override;
+private:
+    char mPad80[0x198];
+    CameraAnchor *mAnchor; // offset 0x218
+    char mPad21C[0x30];
+    bool mRenderCarPOV; // offset 0x24c
+};
+
 void CameraMoverRestartRace();
 void UpdateCameraMovers(float dT);
 

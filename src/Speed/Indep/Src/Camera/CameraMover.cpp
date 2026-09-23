@@ -371,3 +371,35 @@ unsigned short CubicCameraMover::GetLookbackAngle() {
 CameraAnchor *CubicCameraMover::GetAnchor() {
     return this->mAnchor;
 }
+
+/**
+ * @brief Retrieves the camera anchor attached to the rear view mirror camera mover.
+ * @return Pointer to the camera anchor.
+ */
+CameraAnchor *RearViewMirrorCameraMover::GetAnchor() {
+    return this->mAnchor;
+}
+
+/**
+ * @brief Retrieves the camera anchor attached to the track car camera mover.
+ * @return Pointer to the camera anchor.
+ */
+CameraAnchor *TrackCarCameraMover::GetAnchor() {
+    return this->mAnchor;
+}
+
+/**
+ * @brief Retrieves the camera anchor attached to the track cop camera mover.
+ * @return Pointer to the camera anchor.
+ */
+CameraAnchor *TrackCopCameraMover::GetAnchor() {
+    return this->mAnchor;
+}
+
+/**
+ * @brief Determines whether to render car POV for the track cop camera mover.
+ * @return True if rendering car POV, false otherwise.
+ */
+bool TrackCopCameraMover::RenderCarPOV() {
+    return mRenderCarPOV;
+}

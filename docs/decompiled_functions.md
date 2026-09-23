@@ -111,12 +111,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
 - **Virtual Address**: `0x80186E48`
 - **Size**: 728 bytes (182 instructions)
-- **Matching State**: 97.47% match
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void FEngine::UpdateMouseState(FEPackage *pkg, FEObjectMouseState *state, float mx, float my);
   ```
-- **Description**: Refined and documented FEngine::UpdateMouseState in zFEng unit, handling frontend mouse pointer position and state updates.
+- **Description**: Decompiled FEngine::UpdateMouseState to 100.0% matching parity by caching cFEng::Get() locally to align instruction order and register allocation.
 
 ---
 
@@ -470,12 +470,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/EAXSound/EAXFrontEnd.cpp`
 - **Virtual Address**: `0x800ADA44`
 - **Size**: 492 bytes (123 instructions)
-- **Matching State**: 96.83% match
+- **Matching State**: 96.8% match
 - **Signature**:
   ```cpp
   int EAXCommon::Play(eMenuSoundTriggers etrigger);
   ```
-- **Description**: Decompiled and matched EAXCommon::Play function in zEAXSound unit, managing menu sound trigger playback.
+- **Description**: Decompiled and refined EAXCommon::Play with 96.8% match parity in zEAXSound unit.
 
 ---
 
@@ -898,12 +898,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
 - **Virtual Address**: `0x802C72F4`
 - **Size**: 836 bytes (209 instructions)
-- **Matching State**: 99.35% match
+- **Matching State**: 99.4% match
 - **Signature**:
   ```cpp
   void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang);
   ```
-- **Description**: Evaluates visibility planes to cull hidden vehicle body parts (tires, brakes, side parts, underbody) from rendering based on camera position and steering angle adjustments.
+- **Description**: Refined CarPartCuller::CullParts to 99.4% match parity in zWorld unity unit.
 
 ---
 
@@ -1288,15 +1288,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `bATan`
 - **Unit**: `main/Speed/Indep/SourceLists/zBWare`
-- **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
+- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_4d25ea9b-05c-1/src/Speed/Indep/bWare/Src/bMath.cpp`
 - **Virtual Address**: `0x8005D1F0`
 - **Size**: 328 bytes (82 instructions)
-- **Matching State**: 97.0% match
+- **Matching State**: 98.05% match
 - **Signature**:
   ```cpp
   bAngle bATan(float x, float y);
   ```
-- **Description**: Decompiled bATan to 97.0% match parity in zBWare unit computing arctangent for angular calculations.
+- **Description**: Matched bATan function in zBWare unit with 98.05% parity.
 
 ---
 

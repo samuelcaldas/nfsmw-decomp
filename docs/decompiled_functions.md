@@ -507,6 +507,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `CARSFX_RoadNoise::Play`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/CARSFX_Roadnoise.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 392 bytes
+- **Matching State**: 94.94% match
+- **Signature**:
+  ```cpp
+  void CARSFX_RoadNoise::Play(FXROADNOISE_LOOP ID, int side);
+  ```
+- **Description**: Decompiled CARSFX_RoadNoise::Play to 94.94% match parity with Doxygen docstring and robust implementation.
+
+---
+
 ### `NFSMixMapState::CreateMixCtls`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/Dynamic_Mixer/NFSMixMapState.cpp`
@@ -527,12 +541,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/EAXSound/SFX_Common.cpp`
 - **Virtual Address**: `0x800D36C4`
 - **Size**: 780 bytes
-- **Matching State**: 97.26% match
+- **Matching State**: 99.4% match
 - **Signature**:
   ```cpp
   void SFX_Common::MsgPlayMiscSound(const MMiscSound &message);
   ```
-- **Description**: Decompiled SFX_Common::MsgPlayMiscSound with 97.26% match and Doxygen docstring, processing miscellaneous sound event messages for audio playback.
+- **Description**: Decompiled SFX_Common::MsgPlayMiscSound with 99.4% match and Doxygen docstring, processing miscellaneous sound event messages for audio playback.
 
 ---
 
@@ -1014,12 +1028,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionTraffic.cpp`
 - **Virtual Address**: `0x8024B310`
 - **Size**: 856 bytes
-- **Matching State**: 97.21% match
+- **Matching State**: 97.6% match
 - **Signature**:
   ```cpp
   void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT);
   ```
-- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded function to 97.21% match parity, handling traffic vehicle tire simulation and load calculations.
+- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded to 97.6% match using register r30 for constant addressing across VU0_Atan2 calls.
 
 ---
 

@@ -139,12 +139,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/FEng/FEPackageReader.cpp`
 - **Virtual Address**: `0x8018C1B0`
 - **Size**: 964 bytes
-- **Matching State**: 96.7% match
+- **Matching State**: 96.67% match
 - **Signature**:
   ```cpp
   bool FEPackageReader::ReadObjectChunk();
   ```
-- **Description**: Decompiled and refined FEPackageReader::ReadObjectChunk in zFEng unit, parsing object chunks during frontend package loading.
+- **Description**: Verified FEPackageReader::ReadObjectChunk decompilation matching at 96.67% in main/Speed/Indep/SourceLists/zFEng unit
 
 ---
 
@@ -483,13 +483,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Physics.cpp`
 - **Virtual Address**: `0x800BFFC8`
-- **Size**: 1,212 bytes (303 instructions)
+- **Size**: 1212 bytes
 - **Matching State**: 98.22% match
 - **Signature**:
   ```cpp
   void SFXCTL_Physics::UpdateMixerOutputs();
   ```
-- **Description**: Updates physics mixer outputs for EAX sound based on vehicle speed, RPM, wheels on ground, and POV.
+- **Description**: Decompiled SFXCTL_Physics::UpdateMixerOutputs in zEAXSound unit with 98.22% match.
 
 ---
 
@@ -899,14 +899,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `CarLoader::SetMemoryPoolSize`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld`
 - **Source File**: `src/Speed/Indep/Src/World/CarLoader.cpp`
-- **Virtual Address**: `0x802DD360`
-- **Size**: 304 bytes (76 instructions)
-- **Matching State**: 97.37% match
+- **Virtual Address**: `0x80017E1C`
+- **Size**: 304 bytes
+- **Matching State**: 97.4% match
 - **Signature**:
   ```cpp
   void CarLoader::SetMemoryPoolSize(int size);
   ```
-- **Description**: Configures car loader memory pool size with Doxygen documentation and verified matching state.
+- **Description**: Decompiled and matched CarLoader::SetMemoryPoolSize with 97.4% match percentage and added Doxygen docstring.
 
 ---
 
@@ -1322,13 +1322,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zBWare`
 - **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
 - **Virtual Address**: `0x8005D0A0`
-- **Size**: 336 bytes (84 instructions)
-- **Matching State**: 97.08% match
+- **Size**: 336 bytes
+- **Matching State**: 92.32% match
 - **Signature**:
   ```cpp
   bAngle bASin(float x);
   ```
-- **Description**: Decompiled and matched bASin function in zBWare unit computing arcsine for angular calculations.
+- **Description**: Decompiled and analyzed bASin function in bMath.cpp for GOWE69 target
 
 ---
 

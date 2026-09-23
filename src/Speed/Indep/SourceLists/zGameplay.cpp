@@ -6,6 +6,7 @@
 #include "Speed/Indep/Src/Gameplay/GManager.h"
 #include "Speed/Indep/Src/Gameplay/GRaceStatus.cpp"
 #include "Speed/Indep/Src/Gameplay/GRaceDatabase.cpp"
+#include "Speed/Indep/Src/Lua/LuaPostOffice.h"
 
 /**
  * @brief Reports whether gameplay is currently active.

@@ -72,3 +72,4 @@ worktrees/
 
 # Ralph-loop instructions
 .claude/ralph-loop.local.md
+orig/

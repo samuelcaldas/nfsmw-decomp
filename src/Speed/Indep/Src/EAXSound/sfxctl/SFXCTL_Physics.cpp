@@ -141,7 +141,9 @@ void SFXCTL_Physics::InitSFX() {
 static const int Smoother_CameraStateChange = 60; // size: 0x4, Decl: 213
 static const int Smoother_PlayerPosion = 2000;    // size: 0x4, Decl: 214
 
-// UNSOLVED
+/**
+ * Updates physics mixer outputs for EAX sound based on vehicle speed, RPM, wheels on ground, and POV.
+ */
 void SFXCTL_Physics::UpdateMixerOutputs() {
     int TargeVal;
 

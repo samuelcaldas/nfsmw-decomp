@@ -281,10 +281,10 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
     for (eCullableCarParts type = CULLABLE_CAR_PART_TIRE_FL; type < NUM_CULLABLE_CAR_PARTS;
          type = static_cast<eCullableCarParts>(static_cast<int>(type) + 1)) {
         bool visible = true;
-        CarPartCullingPlaneInfo *plane_info = &CarPartCullingPlaneInfoTable[type];
         CarPartInfo *part_info = &this->CarPartInfoTable[type];
-        float omodifier = plane_info->NormalDistance[0];
+        CarPartCullingPlaneInfo *plane_info = &CarPartCullingPlaneInfoTable[type];
         float modifier = 0.0f;
+        float omodifier = plane_info->NormalDistance[0];
 
         if (!IsGameFlowInFrontEnd()) {
             // TODO
@@ -303,8 +303,7 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
 
             if (plane_info->NumPlanes > 0) {
                 bVector3 v = *camera_eye - part_info->Position;
-                eCullingPolarity polarity = plane_info->Polarity;
-                if (polarity == CULLING_POLARITY_ANY_VISIBLE) {
+                if (plane_info->Polarity == CULLING_POLARITY_ANY_VISIBLE) {
                     int n = 0;
 
                     for (; n < plane_info->NumPlanes; n++) {
@@ -323,7 +322,7 @@ void CarPartCuller::CullParts(bVector3 *camera_eye, bAngle stang) {
                     if (n == plane_info->NumPlanes) {
                         visible = false;
                     }
-                } else if (polarity == CULLING_POLARITY_ALL_MUST_BE_VISIBLE) {
+                } else if (plane_info->Polarity == CULLING_POLARITY_ALL_MUST_BE_VISIBLE) {
                     for (int n = 0; n < plane_info->NumPlanes; n++) {
                         bVector3 normal = plane_info->Normal[n];
 

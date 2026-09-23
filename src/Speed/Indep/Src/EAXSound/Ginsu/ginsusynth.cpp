@@ -96,10 +96,11 @@ void GinsuSynthesis::HandlePacketRelease(short *samples) {
             this->mSynthData->GetSamples(this->mPlaybackPos, this->mOverlapSize, buff);
         }
 
+        int i = 0;
         float blend = 0.0f;
         float blendstep = 1.0f / static_cast<float>(this->mOverlapSize);
 
-        for (int i = 0; i < this->mOverlapSize; i++) {
+        for (; i < this->mOverlapSize; i++) {
             float val = static_cast<float>(dest[i]) + blend * static_cast<float>(buff[i] - dest[i]);
 
             blend += blendstep;

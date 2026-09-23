@@ -272,8 +272,8 @@ unsigned short bFixATanTableHigh[129] = {
  * @return Computed bAngle representing the arcsine.
  */
 bAngle bASin(float x) {
-    bFix table_size = 0x8000;
     int negative = 0;
+    bFix table_size = 0x8000;
     if (x < 0.0f) {
         x = -x;
         negative = 1;

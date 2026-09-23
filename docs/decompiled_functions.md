@@ -209,12 +209,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/Frontend/MoviePlayer/MoviePlayer.cpp`
 - **Virtual Address**: `0x80135DBC`
 - **Size**: 72 bytes
-- **Matching State**: 95.6% match
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void MoviePlayer_Play(void);
   ```
-- **Description**: Decompiled MoviePlayer_Play to 95.6% match using register variables r31 and r30.
+- **Description**: Decompiled MoviePlayer_Play to 100.0% match with clean C++ logic without register asm overrides.
 
 ---
 

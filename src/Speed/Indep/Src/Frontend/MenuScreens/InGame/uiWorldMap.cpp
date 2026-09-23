@@ -948,12 +948,14 @@ void WorldMap::AddPlayerCar() {
     TheMapItems.AddTail(new ("MapItem", 0) MapItem(WMIT_PLAYER_CAR, icon, target_pos, world_pos, rot, nullptr));
 }
 
-// UNSOLVED
+/**
+ * @brief Adds active pursuit cops to the world map.
+ */
 void WorldMap::AddCops() {
     int img_num = 0;
     const IVehicle::List &vehicles = IVehicle::GetList(VEHICLE_AICOPS);
     for (IVehicle *const *iter = vehicles.begin(); iter != vehicles.end(); iter++) {
-        if ((*iter)->IsActive()) {
+        if (!(*iter)->IsActive()) {
             continue;
         }
         IPursuitAI *ipursuitai = nullptr;

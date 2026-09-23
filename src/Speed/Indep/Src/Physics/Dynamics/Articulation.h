@@ -42,7 +42,7 @@ class Lever {
 
   private:
     int mPad;
-    UVector3 mArm;
+    UMath::Vector3 mArm;
     IEntity *mEntity;
     int mImmobile;
 };

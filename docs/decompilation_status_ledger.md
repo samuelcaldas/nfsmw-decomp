@@ -132,6 +132,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`EmitterSystem::UpdateParticles`**: Decompiled, verified (99.1% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`EmitterSystem::Render`**: Decompiled, verified (94.54% match, 696 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`__InitMatrices`**: Decompiled, verified (97.95% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`epInitViews`**: Decompiled, verified (84.3% match, 516 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::CreateStreamingPack`**: Decompiled, verified (92.31% match, 372 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::InternalLoadingHeaderPhase2Callback`**: Decompiled, verified (94.19% match, 308 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::InternalLoadStreamingEntry`**: Decompiled, verified (95.41% match, 440 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

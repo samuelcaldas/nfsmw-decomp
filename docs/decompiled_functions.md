@@ -1103,7 +1103,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `RenderVisibleSectionBoundary`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
 - **Source File**: `src/Speed/Indep/Src/World/Scenery.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x802BE498`
 - **Size**: 888 bytes
 - **Matching State**: 95.43% match
 - **Signature**:
@@ -1243,6 +1243,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `epInitViews`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/GameCube/Src/Ecstasy/EcstasyE.cpp`
+- **Virtual Address**: `0x800FE1E4`
+- **Size**: 516 bytes
+- **Matching State**: 84.3% match
+- **Signature**:
+  ```cpp
+  void epInitViews(void);
+  ```
+- **Description**: Initialize all game rendering views and viewports.
+
+---
+
 ### `InternalLoadingHeaderPhase2Callback`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
 - **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
@@ -1271,17 +1285,17 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-### `InternalLoadStreamingEntry`
+### `eStreamPackLoader::InternalLoadStreamingEntry`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
 - **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x800F5434`
 - **Size**: 440 bytes
 - **Matching State**: 95.41% match
 - **Signature**:
   ```cpp
   void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack, eStreamingEntry *streaming_entry);
   ```
-- **Description**: Decompiled eStreamPackLoader::InternalLoadStreamingEntry to 95.41% match.
+- **Description**: Decompiled and matched eStreamPackLoader::InternalLoadStreamingEntry at 95.41% match.
 
 ---
 

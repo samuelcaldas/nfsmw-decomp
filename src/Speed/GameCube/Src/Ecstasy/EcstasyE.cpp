@@ -221,6 +221,9 @@ void InitSlotPools(void) {
     InitSlotPoolsEx();
 }
 
+/**
+ * @brief Initialize all game rendering views and viewports.
+ */
 void epInitViews(void) {
     {
         eView *view = eGetView(0, false);

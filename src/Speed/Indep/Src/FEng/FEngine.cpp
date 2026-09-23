@@ -714,11 +714,12 @@ void FEngine::UpdateMouseState(FEPackage *pkg, FEObjectMouseState *state, float 
     bool was_mouse_right_down = state->GetBit(4);
 
     if (is_mouse_over) {
+        cFEng *feng = cFEng::Get();
         unsigned int msg = 0x13f4bd45;
         if (was_mouse_over) {
             msg = 0xb30d0683;
         }
-        cFEng::Get()->QueuePackageMessage(msg, pkg->name, obj);
+        feng->QueuePackageMessage(msg, pkg->name, obj);
     } else {
         if (was_mouse_over) {
             cFEng::Get()->QueuePackageMessage(0xb30793c1, pkg->name, obj);

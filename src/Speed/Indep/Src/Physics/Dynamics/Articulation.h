@@ -82,8 +82,8 @@ class Joint : public bTNode<Joint> {
     static HJOINT mNextHandle;
 
   private:
+    int mPad0;
     Lever mFemale;
-    int mPad1;
     Lever mMale;
     HJOINT mHandle;
     UTL::Std::list<Constraint *, _type_list> mConstraints;

@@ -1929,7 +1929,9 @@ void CarLoader::FreeDefragmentStorage() {
     DefragmentParams.NumCopyStorage = 0;
 }
 
-// UNSOLVED
+/**
+ * @brief Defragments vehicle model memory pool by compacting allocations and updating pointers via DefragFixer.
+ */
 int CarLoader::DefragmentPool() {
     ProfileNode profile_node("TODO", 0);
     if (this->MayNeedDefragmentation == 0) {

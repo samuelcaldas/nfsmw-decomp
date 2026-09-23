@@ -335,7 +335,6 @@ void eStreamPackLoader::InternalLoadedStreamingEntryCallback(void *callback_para
  */
 void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack,
                                                    eStreamingEntry *streaming_entry) {
-    uint32 name_hash = streaming_entry->NameHash;
 
     if (!loading_table || !streaming_pack || !streaming_entry)
         return;
@@ -378,14 +377,9 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
             loading_table->NumLoadsPending++;
         }
         streaming_entry->Flags |= 0x10;
-        bChunk *aligned_chunk_data = this->GetAlignedChunkDataPtr(streaming_entry->ChunkData);
-        const char *filename = streaming_pack->Filename;
-        int chunk_offset = streaming_entry->ChunkByteOffset;
-        int chunk_size = streaming_entry->ChunkByteSize;
-        void (*callback)(void *, int, void *) = eStreamPackLoader::InternalLoadedStreamingEntryCallback;
-        eStreamingEntry *entry = streaming_entry;
-        eStreamingPackLoadTable *table = loading_table;
-        AddQueuedFile2(aligned_chunk_data, filename, chunk_offset, chunk_size, callback, entry, table, nullptr);
+        AddQueuedFile2(this->GetAlignedChunkDataPtr(streaming_entry->ChunkData), streaming_pack->Filename,
+                       streaming_entry->ChunkByteOffset, streaming_entry->ChunkByteSize,
+                       eStreamPackLoader::InternalLoadedStreamingEntryCallback, streaming_entry, loading_table, nullptr);
     }
 
     streaming_pack->NumLoadedStreamingEntries++;

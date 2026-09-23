@@ -190,6 +190,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `cFEng::PushErrorPackage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/FEngInterfaces/FEngInterface.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 332 bytes
+- **Matching State**: 96.81% match
+- **Signature**:
+  ```cpp
+  void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask);
+  ```
+- **Description**: Matched cFEng::PushErrorPackage in unit main/Speed/Indep/SourceLists/zFe.
+
+---
+
 ### `MoviePlayer_Play`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MoviePlayer/MoviePlayer.cpp`

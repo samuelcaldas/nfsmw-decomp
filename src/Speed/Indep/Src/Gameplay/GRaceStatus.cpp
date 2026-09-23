@@ -46,3 +46,10 @@ void GRaceStatus::AddAvailableEventToMap(GRuntimeInstance *, GRuntimeInstance *)
  */
 void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *) {
 }
+
+/**
+ * @brief Refreshes the current race bin while in game.
+ */
+void GRaceStatus::RefreshBinWhileInGame() {
+    this->mQueueBinChange = true;
+}

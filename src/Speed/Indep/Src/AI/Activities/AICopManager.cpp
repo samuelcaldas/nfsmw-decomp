@@ -1834,7 +1834,8 @@ bool ForcePursuitStart = false; // Decl: 3193
  * @return void
  */
 void AICopManager::UpdatePursuits() {
-    IVehicle *ivehicle_chopper = nullptr;
+    IVehicle *ivehicle_chopper;
+    ivehicle_chopper = nullptr;
 
     for (IVehicle::List::const_iterator iter = this->mIVehicleList.begin(); iter != this->mIVehicleList.end(); ++iter) {
         IVehicle *ivehicle = *iter;

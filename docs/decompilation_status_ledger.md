@@ -18,6 +18,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Track Subsystem (`zTrack`)
 - **`RegionQuery::CalculateRegionInfo`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`TrackStreamer::GetLoadingPriority`**: Decompiled, verified (97.01% match, 708 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`RenderVisibleSectionBoundary`**: Decompiled, verified (95.43% match, 888 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### World & Render Subsystem (`zWorld`)
 - **`CarPartCuller::CullParts`**: Refined, verified (99.35% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -67,9 +68,11 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Collision Subsystem (`zWorld2`)
 - **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WRoadNav::InitAtSegment`**: Decompiled, verified (99.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`WRoadNav::CookieTrailCurvature`**: Decompiled, verified (95.94% match, 1,284 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Particle Subsystem (`zEcstasy`)
 - **`EmitterSystem::UpdateParticles`**: Decompiled, verified (99.1% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`EmitterSystem::Render`**: Decompiled, verified (94.54% match, 696 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`__InitMatrices`**: Decompiled, verified (97.95% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Foundation / Math Subsystem (`zBWare`)

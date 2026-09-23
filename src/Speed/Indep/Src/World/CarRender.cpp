@@ -1928,23 +1928,11 @@ void CarRenderInfo::UpdateWheelYRenderOffset() {
         return;
     }
 
-    CarPart *front_wheel;
-    CarPart *rear_wheel;
-    int front_upgrade_level;
-    int rear_upgrade_level;
     if (this->pRideInfo != nullptr) {
-        front_wheel = this->pRideInfo->GetPart(CARSLOTID_FRONT_WHEEL);
+        this->pRideInfo->GetPart(CARSLOTID_FRONT_WHEEL);
     }
     if (this->pRideInfo != nullptr) {
-        rear_wheel = this->pRideInfo->GetPart(CARSLOTID_REAR_WHEEL);
-
-        if (rear_wheel != nullptr) {
-            rear_upgrade_level = rear_wheel->GetUpgradeLevel();
-        }
-    }
-
-    if (front_wheel != nullptr) {
-        front_upgrade_level = front_wheel->GetUpgradeLevel();
+        this->pRideInfo->GetPart(CARSLOTID_REAR_WHEEL);
     }
 
     UMath::Vector4 tire_offset;

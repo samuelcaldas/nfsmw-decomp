@@ -172,6 +172,9 @@ CAnimProperty::CAnimProperty(eAnimProperty type, bool enabled)
 
 CAnimProperty::~CAnimProperty() {}
 
+/**
+ * @brief Retrieves the property type identifier for the animation property.
+ */
 eAnimProperty CAnimProperty::GetType() {
     return mType;
 }

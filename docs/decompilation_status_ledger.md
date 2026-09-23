@@ -4,6 +4,13 @@ This ledger tracks the completion and blockage status of all code chunks, module
 
 ## 1. Completed and Merged Modules & Functions
 
+### Animation Subsystem (`zAnim`, `zAnim0`)
+- **`CAnimPlayer::Init`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CAnimPlayer::GetWorldAnimScene`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GetType__13CAnimProperty`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SetEnabled__13CAnimPropertyb`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CAnimScene::GetHandle`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+
 ### AI Subsystem (`zAI`)
 - **`AICopManager::UpdatePursuits`**: Decompiled, verified (99.97% match / 100% fuzzy match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`AIPursuit::AssignClosestOffsets`**: Decompiled, verified (99.67% match, 1,684 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

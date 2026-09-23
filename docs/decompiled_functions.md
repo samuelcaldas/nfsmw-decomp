@@ -4,7 +4,79 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 1. Frontend Subsystem (`zFe`, `zFe2`, `zFeOverlay`, `zFEng`)
+## 1. Animation Subsystem (`zAnim`, `zAnim0`)
+
+### `CAnimPlayer::Init`
+- **Unit**: `main/Speed/Indep/SourceLists/zAnim0`
+- **Source File**: `src/Speed/Indep/Src/Animation/AnimPlayer.cpp`
+- **Virtual Address**: `0x8004B3B4`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool CAnimPlayer::Init()
+  ```
+- **Description**: Initializes the animation player subsystem, returning true on successful setup.
+
+---
+
+### `CAnimPlayer::GetWorldAnimScene`
+- **Unit**: `main/Speed/Indep/SourceLists/zAnim`
+- **Source File**: `src/Speed/Indep/Src/Animation/AnimPlayer.cpp`
+- **Virtual Address**: `0x8004B434`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  CAnimWorldScene *CAnimPlayer::GetWorldAnimScene()
+  ```
+- **Description**: Returns a pointer to the active world animation scene instance.
+
+---
+
+### `GetType__13CAnimProperty`
+- **Unit**: `main/Speed/Indep/SourceLists/zAnim`
+- **Source File**: `src/Speed/Indep/Src/Animation/AnimScene.cpp`
+- **Virtual Address**: `0x8004BC74`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  eAnimProperty CAnimProperty::GetType()
+  ```
+- **Description**: Retrieves the property type identifier for the animation property.
+
+---
+
+### `SetEnabled__13CAnimPropertyb`
+- **Unit**: `main/Speed/Indep/SourceLists/zAnim`
+- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_0f4a6bda-d09-4/src/Speed/Indep/Src/Animation/AnimScene.cpp`
+- **Virtual Address**: `0x8004BC7C`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CAnimProperty::SetEnabled(bool enabled)
+  ```
+- **Description**: Enables or disables the animation property evaluation state.
+
+---
+
+### `CAnimScene::GetHandle`
+- **Unit**: `main/Speed/Indep/SourceLists/zAnim`
+- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_0f4a6bda-d09-5/src/Speed/Indep/Src/Animation/AnimScene.cpp`
+- **Virtual Address**: `0x8004BE48`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  int CAnimScene::GetHandle()
+  ```
+- **Description**: Returns the unique runtime handle assigned to the animation scene instance.
+
+---
+
+## 2. Frontend Subsystem (`zFe`, `zFe2`, `zFeOverlay`, `zFEng`)
 
 ### `FEngine::UpdateMouseState`
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`

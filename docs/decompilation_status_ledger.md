@@ -71,6 +71,13 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GRaceStatus::OnRemovedVehicleCache`, `SetRaceContext`, `GetRacerCount`, `AddAvailableEventToMap`, `AddSpeedTrapToMap`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceStatus::RefreshBinWhileInGame`, `StopMasterTimer`, `EnableBinBarriers`, `SetRaceActivity`, `DisableBarriers`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
+### Camera Subsystem (`zCamera`)
+- **`CameraAI::Director::JumpStart` (`zCamera`)**: Decompiled, verified (100.0% match, 20 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CameraAI::Director::EndJumping` (`zCamera`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CameraAI::Director::EndPursuitStart` (`zCamera`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CameraAI::MaybeKillPursuitCam` (`zCamera`)**: Decompiled, verified (100.0% match, 44 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CameraAI::MaybeKillJumpCam` (`zCamera`)**: Decompiled, verified (100.0% match, 44 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+
 ### Collision Subsystem (`zWorld2`)
 - **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WRoadNav::InitAtSegment`**: Decompiled, verified (99.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

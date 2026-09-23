@@ -1012,3 +1012,76 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   bAngle bATan(float x, float y);
   ```
 - **Description**: Decompiled bATan to 97.0% match parity in zBWare unit computing arctangent for angular calculations.
+
+---
+
+## 11. Camera Subsystem (`zCamera`)
+
+### `CameraAI::Director::JumpStart`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x80069C7C`
+- **Size**: 20 bytes (5 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CameraAI::Director::JumpStart(float time);
+  ```
+- **Description**: Starts jump camera sequence by scaling the given duration by 4/3 (`time * 1.3333334f`) and storing into `mJumpTime` (offset `0x2B8`).
+
+---
+
+### `CameraAI::Director::EndJumping`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x80069C90`
+- **Size**: 40 bytes (10 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CameraAI::Director::EndJumping();
+  ```
+- **Description**: Ends the jumping camera sequence if the jump timer (`mJumpTime`) is below 1.0s, resetting it to -1.0f.
+
+---
+
+### `CameraAI::Director::EndPursuitStart`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x80069E6C`
+- **Size**: 40 bytes (10 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CameraAI::Director::EndPursuitStart();
+  ```
+- **Description**: Ends pursuit start camera sequence if pursuit timer (`mPursuitStartTime`, offset `0x2B4`) is below 2.0s, resetting it to -1.0f.
+
+---
+
+### `CameraAI::MaybeKillPursuitCam`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x8006A664`
+- **Size**: 44 bytes (11 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CameraAI::MaybeKillPursuitCam(unsigned int id);
+  ```
+- **Description**: Cancels or ends active pursuit start camera sequence for the specified view ID by querying `FindDirector(id)` and calling `EndPursuitStart()`.
+
+---
+
+### `CameraAI::MaybeKillJumpCam`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x8006AE84`
+- **Size**: 44 bytes (11 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CameraAI::MaybeKillJumpCam(unsigned int id);
+  ```
+- **Description**: Cancels or ends active jump camera sequence for the specified view ID by querying `FindDirector(id)` and calling `EndJumping()`.
+

@@ -1182,6 +1182,7 @@ void DrawXenonEmitters(eView *view);
  * @param view View to render particles into.
  */
 void EmitterSystem::Render(eView *view) {
+    // Render particles
     if (!EnableParticleSystem) {
         return;
     }

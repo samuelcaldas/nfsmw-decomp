@@ -577,15 +577,18 @@ RealmcIface::TaskStatus MemcardCallbacks::LoadReady(const char *entryName, unsig
     return res;
 }
 
-// UNSOLVED
+/**
+ * @brief Emulates memory card library operations.
+ */
 void IJoyHelper::EmulateMemoryCardLibrary(int aJoyOp) {
     char *pBuf = new ("MemcardJoyLogBuffer", 0) char[0x400];
     char *pBuf1 = pBuf + 1;
-    const wchar_t *pOptions[4];
-    pOptions[0] = reinterpret_cast<const wchar_t *>(pBuf + 0x338);
-    pOptions[1] = reinterpret_cast<const wchar_t *>(pBuf + 0x36a);
-    pOptions[2] = reinterpret_cast<const wchar_t *>(pBuf + 0x39c);
-    pOptions[3] = reinterpret_cast<const wchar_t *>(pBuf + 0x3ce);
+    const wchar_t *pOptions[4] = {
+        reinterpret_cast<const wchar_t *>(pBuf + 0x338),
+        reinterpret_cast<const wchar_t *>(pBuf + 0x36a),
+        reinterpret_cast<const wchar_t *>(pBuf + 0x39c),
+        reinterpret_cast<const wchar_t *>(pBuf + 0x3ce)
+    };
     RealmcIface::CardInfo lCardInfo;
     RealmcIface::EntryInfo lEntryInfo;
     lEntryInfo.mName = pBuf;

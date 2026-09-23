@@ -42,7 +42,6 @@ void CARSFX_PreColWoosh::Destroy() {
     SndBase::Destroy();
 }
 
-// UNSOLVED, instruction swap
 /**
  * @brief Handles the barrier message for pre-collision woosh sound effects.
  */

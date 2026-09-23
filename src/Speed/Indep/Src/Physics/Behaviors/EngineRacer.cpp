@@ -26,7 +26,7 @@
 #include "Speed/Indep/Src/Physics/VehicleBehaviors.h"
 #include "Speed/Indep/Src/Render/RenderConn.h"
 #include "Speed/Indep/Src/Sim/Simulation.h"
-#include "Speed/Indep/Src/Sim/UTil.h"
+#include "Speed/Indep/Src/Sim/Util.h"
 #include "Speed/Indep/Tools/Inc/ConversionUtil.hpp"
 #include "Speed/Indep/bWare/Inc/bMath.hpp"
 

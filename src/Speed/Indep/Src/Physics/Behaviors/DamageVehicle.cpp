@@ -7,7 +7,7 @@
 #include "Speed/Indep/Src/Interfaces/Simables/IEngineDamage.h"
 #include "Speed/Indep/Src/Interfaces/Simables/IRigidBody.h"
 #include "Speed/Indep/Src/Sim/Simulation.h"
-#include "Speed/Indep/Src/World/Damagezones.h"
+#include "Speed/Indep/Src/World/DamageZones.h"
 
 static const bool Tweak_KillCops = false; // TODO use
 BIND_BEHAVIOR_FACTORY(DamageVehicle);

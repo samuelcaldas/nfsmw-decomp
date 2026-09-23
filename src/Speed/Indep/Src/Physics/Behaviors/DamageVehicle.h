@@ -1,7 +1,7 @@
 #ifndef DAMAGEVEHICLE_H
 #define DAMAGEVEHICLE_H
 
-#include "Speed/Indep/Src/World/Damagezones.h"
+#include "Speed/Indep/Src/World/DamageZones.h"
 #include "Speed/Indep/Libs/Support/Utility/UStandard.h"
 #include "Speed/Indep/Src/Generated/AttribSys/Classes/damagespecs.h"
 #include "Speed/Indep/Src/Interfaces/IListener.h"

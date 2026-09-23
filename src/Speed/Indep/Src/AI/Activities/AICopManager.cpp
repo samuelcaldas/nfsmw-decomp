@@ -49,7 +49,7 @@
 #include "Speed/Indep/Src/Physics/PVehicle.h"
 #include "Speed/Indep/Src/Sim/SimActivity.h"
 #include "Speed/Indep/Src/Sim/Simulation.h"
-#include "Speed/Indep/Src/Sim/UTil.h"
+#include "Speed/Indep/Src/Sim/Util.h"
 #include "Speed/Indep/Src/Speech/SoundAI.h"
 #include "Speed/Indep/Src/World/WCollisionMgr.h"
 #include "Speed/Indep/Src/World/WRoadNetwork.h"

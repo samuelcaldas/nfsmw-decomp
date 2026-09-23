@@ -2,7 +2,7 @@
 #define IDAMAGEABLE_H
 
 #include "Speed/Indep/Libs/Support/Utility/UCOM.h"
-#include "Speed/Indep/Src/World/Damagezones.h"
+#include "Speed/Indep/Src/World/DamageZones.h"
 #include "Speed/Indep/Src/World/VehicleFX.h"
 
 class IDamageable : public UTL::COM::IUnknown {

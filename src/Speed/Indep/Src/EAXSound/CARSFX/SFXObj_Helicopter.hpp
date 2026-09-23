@@ -4,7 +4,7 @@
 #include "Speed/Indep/Src/EAXSound/CARSFX/CARSFX.hpp"
 #include "Speed/Indep/Src/EAXSound/SndBase.hpp"
 #include "Speed/Indep/Src/EAXSound/SND_GEN/MAIN_AEMS.h"
-#include "Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Helicopter.hpp"
+#include "Speed/Indep/Src/EAXSound/sfxctl/sfxctl_helicopter.hpp"
 
 // total size: 0x60
 // Decl: 9

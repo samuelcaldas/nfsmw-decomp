@@ -1,4 +1,4 @@
-#include "Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_MasterVol.hpp"
+#include "Speed/Indep/Src/EAXSound/sfxctl/sfxctl_mastervol.hpp"
 #include "Speed/Indep/Src/EAXSound/EAXSOund.hpp"
 
 int GameFlowSndState[15];

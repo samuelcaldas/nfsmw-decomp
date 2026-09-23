@@ -1,4 +1,4 @@
-#include "Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Helicopter.hpp"
+#include "Speed/Indep/Src/EAXSound/sfxctl/sfxctl_helicopter.hpp"
 #include "Speed/Indep/Src/EAXSound/EAXSndUtil.h"
 #include "Speed/Indep/Src/EAXSound/SndCamera.hpp"
 

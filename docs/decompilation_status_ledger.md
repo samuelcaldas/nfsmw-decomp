@@ -73,7 +73,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`NFSMixMapState::CreateMixCtls`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`EAXCommon::Play`**: Decompiled, verified (96.8% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CARSFX_PreColWoosh::MsgBarrier` (`zEAXSound2`)**: Decompiled, verified (94.29% match, 140 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`SFX_Common::MsgPlayMiscSound` (`zEAXSound2`)**: Decompiled, verified (97.26% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CARSFX_RoadNoise::Play` (`zEAXSound2`)**: Decompiled, verified (94.94% match, 392 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SFX_Common::MsgPlayMiscSound` (`zEAXSound2`)**: Decompiled, verified (99.4% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SFXObj_PFEATrax::GenMusicType` (`zEAXSound2`)**: Decompiled, verified (57.1% match, 244 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthesis::HandlePacketRelease`**: Decompiled, verified (98.93% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthData::BindToData` (`zEAXSound2`)**: Decompiled, verified (95.87% match, 340 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

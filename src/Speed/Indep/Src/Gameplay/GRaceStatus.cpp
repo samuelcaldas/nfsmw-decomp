@@ -1,4 +1,7 @@
 #include "Speed/Indep/Src/Gameplay/GRaceStatus.h"
+#include "Speed/Indep/Src/World/WRoadNetwork.h"
+
+extern void RedoTopologyAndSceneryGroups();
 
 /**
  * @brief Handles notification when a vehicle is removed from the cache.
@@ -45,4 +48,13 @@ void GRaceStatus::AddAvailableEventToMap(GRuntimeInstance *, GRuntimeInstance *)
  * @return void
  */
 void GRaceStatus::AddSpeedTrapToMap(GRuntimeInstance *) {
+}
+
+/**
+ * @brief Disables barriers and resets race segments.
+ */
+void GRaceStatus::DisableBarriers() {
+    RedoTopologyAndSceneryGroups();
+    WRoadNetwork::Get().ResetBarriers();
+    WRoadNetwork::Get().ResetRaceSegments();
 }

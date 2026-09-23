@@ -106,6 +106,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Dynamics Subsystem (`zDynamics`)
 - **`Dynamics::Articulation::Joint::Owns` (`zDynamics`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
 - **`Dynamics::Articulation::Resolve` (`zDynamics`)**: Decompiled, verified (100.0% match, 72 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation Lifecycle (Constrain, IsJoined, Create, Release, Joint::Joint, Joint::~Joint)` (`zDynamics`)**: Decompiled, verified (100.0% match, 1,052 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`Dynamics::Collision::Friction::GetForce` (`zDynamics`)**: Decompiled, verified (100.0% match, 336 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
 - **`Dynamics::Collision::Moment::SetInertia`, `SetMass`, `SetCG` (`zDynamics`)**: Decompiled, verified (100.0% match, 80 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
 - **`Dynamics::Collision::Geometry::FindIntersection`, `BoxVsSphere`, `Move`, Constructors (`zDynamics`)**: Decompiled, verified (100.0% match, 256 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**

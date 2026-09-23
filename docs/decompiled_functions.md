@@ -1507,3 +1507,23 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Empty virtual debug rendering stubs establishing vtable layouts for articulation classes.
 
+---
+
+### `Dynamics::Articulation` Joint & Articulation Lifecycle Methods
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80087610`, `0x80087668`, `0x800876E4`, `0x80087790`, `0x80087820`, `0x800878A0`, `0x80087980`
+- **Size**: 88 bytes, 124 bytes, 100 bytes, 144 bytes, 128 bytes, 220 bytes, 248 bytes
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  void Dynamics::Articulation::Constrain(HJOINT handle, IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type);
+  bool Dynamics::Articulation::IsJoined(const IEntity *A, const IEntity *B);
+  bool Dynamics::Articulation::IsJoined(const IEntity *entity);
+  HJOINT Dynamics::Articulation::Create(IEntity *female, const UMath::Vector3 &female_arm, IEntity *male, const UMath::Vector3 &male_arm, eJointFlags flags);
+  void Dynamics::Articulation::Release(IEntity *entity);
+  Dynamics::Articulation::Joint::Joint(IEntity *female, const UMath::Vector3 &female_arm, IEntity *male, const UMath::Vector3 &male_arm, eJointFlags flags);
+  Dynamics::Articulation::Joint::~Joint();
+  ```
+- **Description**: Complete articulation lifecycle management: joint creation, query, release, constraint attachment, and destruction with 100% binary matching parity.
+

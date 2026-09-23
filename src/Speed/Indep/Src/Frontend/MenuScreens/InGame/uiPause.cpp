@@ -39,7 +39,9 @@ eMenuSoundTriggers PauseMenu::NotifySoundMessage(u32 msg, eMenuSoundTriggers may
     return maybe;
 }
 
-// UNSOLVED
+/**
+ * @brief Handles notification messages for the pause menu.
+ */
 void PauseMenu::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     if (msg != __PAD_BACK__ || !mCalledFromPostRace) {
         IconScrollerMenu::NotificationMessage(msg, pobj, param1, param2);
@@ -118,7 +120,7 @@ void PauseMenu::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 par
                         break;
                 }
             }
-        case 0x409e9120:
+        case 0x9120409e:
             break;
     }
 }

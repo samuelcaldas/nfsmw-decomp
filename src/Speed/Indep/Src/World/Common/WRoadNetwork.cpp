@@ -1692,8 +1692,9 @@ int WRoadNav::FetchAvoidables(IBody **avoidables, const int listsize) const {
     return num_avoidables;
 }
 
-// TODO pretty unfinished
-// https://decomp.me/scratch/MXqTq
+/**
+ * @brief Punches holes in avoidables for road navigation.
+ */
 void WRoadNav::HolePunchAvoidables(NavCookie *cookies, int num_cookies, float current_offset, float delta_offset) {
     if (num_cookies == 0)
         return;

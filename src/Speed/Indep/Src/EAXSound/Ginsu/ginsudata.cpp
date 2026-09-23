@@ -142,28 +142,48 @@ bool GinsuSynthData::BindToData(void *ptr) {
 
     this->mMinFrequency = memdata->minFrequency;
     this->mMaxFrequency = memdata->maxFrequency;
-    this->mSegCount = memdata->segCount;
-    this->mCycleCount = memdata->cycleCount;
-    this->mSampleCount = memdata->sampleCount;
-    this->mSampleRate = memdata->sampleRate;
-    this->mFreqPos = reinterpret_cast<int *>(memdata->data);
-    this->mCyclePos = this->mFreqPos + (this->mSegCount + 1);
-    this->mSampleData = reinterpret_cast<unsigned char *>(this->mCyclePos + (this->mCycleCount + 1));
-    int minperiod = this->mSampleCount;
+
+    int *cyclePos;
+    int minperiod;
     {
-        register int r0_val asm("r0") = -1;
-        this->mCurrentBlock = r0_val;
-    }
+        register int segCount asm("r9") = memdata->segCount;
+        this->mSegCount = segCount;
 
-    for (register int i asm("r5") = 0; i < this->mCycleCount; i++) {
-        int period = this->mCyclePos[i + 1] - this->mCyclePos[i];
+        register int cycleCount asm("r4") = memdata->cycleCount;
+        this->mCycleCount = cycleCount;
 
-        if (period < minperiod) {
-            minperiod = period;
+        register int sampleCount asm("r11") = memdata->sampleCount;
+        this->mSampleCount = sampleCount;
+
+        register int sampleRate asm("r10") = memdata->sampleRate;
+        this->mSampleRate = sampleRate;
+
+        register int *freqPos asm("r8") = reinterpret_cast<int *>(memdata->data);
+        this->mFreqPos = freqPos;
+
+        cyclePos = freqPos + (segCount + 1);
+        this->mCyclePos = cyclePos;
+
+        this->mSampleData = reinterpret_cast<unsigned char *>(cyclePos + (cycleCount + 1));
+
+        minperiod = sampleCount;
+
+        {
+            register int r0_val asm("r0") = -1;
+            this->mCurrentBlock = r0_val;
+        }
+
+        for (register int i asm("r5") = 0; i < cycleCount; i++) {
+            int period = cyclePos[i + 1] - cyclePos[i];
+
+            if (period < minperiod) {
+                minperiod = period;
+            }
         }
     }
 
     this->mMinPeriod = static_cast<float>(minperiod);
+
     return true;
 }
 

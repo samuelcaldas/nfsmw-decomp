@@ -94,6 +94,14 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`CDActionIce::Reset` (`zCamera`)**: Decompiled, verified (100.0% match, 12 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CDActionShowcase::Reset & CDActionTrackCar::Reset` (`zCamera`)**: Decompiled, verified (100.0% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
+### Dynamics Subsystem (`zDynamics`)
+- **`Dynamics::Articulation::Joint::Owns` (`zDynamics`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation::Resolve` (`zDynamics`)**: Decompiled, verified (100.0% match, 72 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Friction::GetForce` (`zDynamics`)**: Decompiled, verified (100.0% match, 336 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Moment::SetInertia`, `SetMass`, `SetCG` (`zDynamics`)**: Decompiled, verified (100.0% match, 80 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Collision::Geometry::FindIntersection`, `BoxVsSphere`, `Move`, Constructors (`zDynamics`)**: Decompiled, verified (100.0% match, 256 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+- **`Dynamics::Articulation` Debug Draw Stubs (`Joint`, `Lever`, `Constraint`) (`zDynamics`)**: Decompiled, verified (100.0% match, 12 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**
+
 ### Collision Subsystem (`zWorld2`)
 - **`WRoadNav::UpdateOccludedPosition`**: Decompiled, verified (98.12% match, 4,368 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

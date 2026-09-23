@@ -1342,3 +1342,109 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Decompiled Reset and OnAttached methods for CDActionShowcase and CDActionTrackCar in zCamera unit with 100% match.
 
+---
+
+### `Dynamics::Articulation::Joint::Owns`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80087A78`
+- **Size**: 40 bytes (10 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool Dynamics::Articulation::Joint::Owns(const Dynamics::IEntity *entity) const;
+  ```
+- **Description**: Determines whether the joint owns the specified entity by checking against Lever A and Lever B entities.
+- **Compiler Details**: Logical OR with separate return paths (`if (entity == this->mLeverA.GetEntity() || entity == this->mLeverB.GetEntity()) return true; return false;`) reproduces the exact sequence of loads, comparisons, conditional branches, and dual return blocks.
+
+---
+
+### `Dynamics::Articulation::Resolve`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80087748`
+- **Size**: 72 bytes (18 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void Dynamics::Articulation::Resolve();
+  ```
+- **Description**: Iterates through the active global articulation joints list (`bTList<Joint> Joints`) and resolves constraints on each joint.
+
+---
+
+### `Dynamics::Collision::Friction::GetForce`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Collision.cpp`
+- **Virtual Address**: `0x80083680`
+- **Size**: 336 bytes (84 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Dynamics::Collision::Friction::State Dynamics::Collision::Friction::GetForce(const UVector3 &p, float impulse, const UVector3 &n, UVector3 &Ff) const;
+  ```
+- **Description**: Computes static vs dynamic friction force response given collision contact point, impulse magnitude, and contact surface normal.
+
+---
+
+### `Dynamics::Collision::Moment` Setters (`SetInertia`, `SetMass`, `SetCG`)
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Collision.cpp`
+- **Virtual Address**: `0x80083C24`, `0x80083C40`, `0x80083C58`
+- **Size**: 28 bytes, 24 bytes, 28 bytes
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  void Dynamics::Collision::Moment::SetInertia(const UMath::Vector3 &inertiaP);
+  void Dynamics::Collision::Moment::SetMass(float mass);
+  void Dynamics::Collision::Moment::SetCG(const UMath::Vector3 &cg);
+  ```
+- **Description**: Configures inertial tensor, mass (with reciprocal `mMassInv`), and center of gravity vector for rigid body moment calculations.
+
+---
+
+### `Dynamics::Collision::Geometry::FindIntersection` & `BoxVsSphere`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x8008A630`, `0x8008A604`
+- **Size**: 124 bytes, 44 bytes
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  bool Dynamics::Collision::Geometry::FindIntersection(const Geometry *A, const Geometry *B, Geometry *result);
+  bool Dynamics::Collision::Geometry::BoxVsSphere(const Geometry *A, const Geometry *B, Geometry *result);
+  ```
+- **Description**: Dispatches intersection tests between geometric primitives via static function pointer jump table (`algos.3467`); delegates `BoxVsSphere` symmetrically to `SphereVsBox`.
+
+---
+
+### `Dynamics::Collision::Geometry::Move` & Constructors
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x80089314`, `0x80089320`, `0x80089350`
+- **Size**: 12 bytes, 48 bytes, 72 bytes
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  Dynamics::Collision::Geometry::Geometry();
+  Dynamics::Collision::Geometry::Geometry(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta);
+  void Dynamics::Collision::Geometry::Move(const UMath::Vector3 &deltaP);
+  ```
+- **Description**: Initializes and translates collision geometry instances by updating position and motion delta vectors.
+
+---
+
+### `Dynamics::Articulation` Debug Draw Stubs
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x8008797C`, `0x8008837C`, `0x80088F68`
+- **Size**: 4 bytes each (1 instruction: `blr`)
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  void Dynamics::Articulation::Joint::OnDebugDraw();
+  void Dynamics::Articulation::Lever::OnDebugDraw();
+  void Dynamics::Articulation::Constraint::OnDebugDraw();
+  ```
+- **Description**: Empty virtual debug rendering stubs establishing vtable layouts for articulation classes.
+

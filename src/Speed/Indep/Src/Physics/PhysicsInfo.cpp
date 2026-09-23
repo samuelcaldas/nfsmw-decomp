@@ -155,6 +155,7 @@ Meters Physics::Info::WheelDiameter(const Attrib::Gen::tires &tires, bool front)
  */
 bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &transmission, const Attrib::Gen::engine &engine,
                                 const Attrib::Gen::induction &induction, float *shift_up, float *shift_down, unsigned int numpts) {
+    register int r17_dummy asm("r17");
     for (int i = 0; i < numpts; ++i) {
         shift_up[i] = 0.0f;
         shift_down[i] = 0.0f;

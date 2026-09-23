@@ -52,6 +52,11 @@ class FEQuaternion {
         return *this;
     }
 
+    /**
+     * @brief Multiplies two quaternions.
+     * @param q1 Multiplier quaternion.
+     * @return Resulting product quaternion.
+     */
     FEQuaternion operator*(const FEQuaternion &q1) {
         FEQuaternion qRet;
         qRet.x = (y * q1.z - z * q1.y) + (q1.w * x + q1.x * w);

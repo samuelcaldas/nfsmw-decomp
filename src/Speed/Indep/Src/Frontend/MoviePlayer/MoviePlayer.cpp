@@ -111,16 +111,13 @@ bool MoviePlayer_Bypass() {
     return bGetTickerDifference(gMovieStartTime) > 5000.0f;
 }
 
-// UNSOLVED
 /**
  * @brief Plays the movie player if available and updates movie start time.
  */
 void MoviePlayer_Play() {
-    register MoviePlayer *pPlayer asm("r31") = gMoviePlayer;
-    if (pPlayer != nullptr) {
-        register u32 *pStartTime asm("r30") = &gMovieStartTime;
-        *pStartTime = bGetTicker();
-        pPlayer->Play();
+    if (gMoviePlayer != nullptr) {
+        gMovieStartTime = bGetTicker();
+        gMoviePlayer->Play();
     }
 }
 

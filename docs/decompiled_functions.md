@@ -423,6 +423,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 
+### `EAXTunerCar::UpdateRotation`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/EAXTunerCar.cpp`
+- **Virtual Address**: `0x800AE864`
+- **Size**: 40 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  int EAXTunerCar::UpdateRotation();
+  ```
+- **Description**: Successfully decompiled EAXTunerCar::UpdateRotation with 100% byte and register parity for GameCube (GOWE69) target.
+
+---
+
 ### `EAXSound::GetCurMusicVolume`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/EAXSound.cpp`
@@ -822,6 +836,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 4. World Subsystem (`zWorld`)
 
+### `CarRenderInfo::UpdateWheelYRenderOffset`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld`
+- **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
+- **Virtual Address**: `0x802C9FB8`
+- **Size**: 876 bytes
+- **Matching State**: 95.2% match
+- **Signature**:
+  ```cpp
+  void CarRenderInfo::UpdateWheelYRenderOffset();
+  ```
+- **Description**: Refactored and documented CarRenderInfo::UpdateWheelYRenderOffset in zWorld unit (95.2% match).
+
+---
+
 ### `CarRenderInfo::UpdateLightStateTextures`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld`
 - **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
@@ -1208,6 +1236,23 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack, eStreamingEntry *streaming_entry);
   ```
 - **Description**: Decompiled eStreamPackLoader::InternalLoadStreamingEntry to 95.41% match.
+
+---
+
+## 10. Foundation Subsystem (`zBWare`)
+
+### `fDeterminant`
+- **Unit**: `main/Speed/Indep/SourceLists/zBWare`
+- **Source File**: `src/Speed/Indep/bWare/Src/bMatrix.cpp`
+- **Virtual Address**: `0x8005D604`
+- **Size**: 448 bytes
+- **Matching State**: 69.04% match
+- **Signature**:
+  ```cpp
+  float fDeterminant(bMatrix4 *m);
+  ```
+- **Description**: Decompiled fDeterminant in zBWare unit with Doxygen docstring.
+
 
 ---
 

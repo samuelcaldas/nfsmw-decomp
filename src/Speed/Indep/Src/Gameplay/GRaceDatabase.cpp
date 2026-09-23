@@ -80,3 +80,44 @@ GRaceCustom *GRaceDatabase::GetStartupRace() {
 GRace::Context GRaceDatabase::GetStartupRaceContext() {
     return this->mStartupRaceContext;
 }
+
+/**
+ * @brief Gets the gameplay object associated with these race parameters.
+ * @return Pointer to the gameplay attribute object.
+ */
+const Attrib::Gen::gameplay *GRaceParameters::GetGameplayObj() const {
+    return this->mRaceRecord;
+}
+
+/**
+ * @brief Gets the parent vault of these race parameters.
+ * @return Pointer to the parent vault.
+ */
+GVault *GRaceParameters::GetParentVault() const {
+    return this->mParentVault;
+}
+
+/**
+ * @brief Gets the child vault of these race parameters.
+ * @return Pointer to the child vault.
+ */
+GVault *GRaceParameters::GetChildVault() const {
+    return this->mChildVault;
+}
+
+/**
+ * @brief Gets the collection key of this race bin.
+ * @return Collection key identifier.
+ */
+unsigned int GRaceBin::GetCollectionKey() const {
+    return this->mBinRecord.GetCollection();
+}
+
+/**
+ * @brief Gets the child vault of this race bin.
+ * @return Pointer to the child vault.
+ */
+GVault *GRaceBin::GetChildVault() const {
+    return this->mChildVault;
+}
+

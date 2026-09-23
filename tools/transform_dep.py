@@ -30,6 +30,9 @@ def import_d_file(in_file: str) -> str:
     out_text = ""
     build_root = os.getcwd()
 
+    if not os.path.exists(in_file):
+        return ""
+
     with open(in_file) as file:
         for idx, line in enumerate(file):
             if idx == 0:
@@ -82,6 +85,11 @@ def main() -> None:
         help="""Dependency file out""",
     )
     args = parser.parse_args()
+
+    if not os.path.exists(args.d_file):
+        with open(args.d_file_out, "w", encoding="UTF-8") as f:
+            f.write("")
+        return
 
     output = import_d_file(args.d_file)
 

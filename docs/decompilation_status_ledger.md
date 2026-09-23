@@ -1,6 +1,6 @@
 # GOWE69 Decompilation Status Ledger
 
-This ledger tracks the completion and blockage status of all code chunks, modules, and subsystems for Need for Speed: Most Wanted (`GOWE69` GameCube target) in accordance with project directives and parallel workflow rules (including Batch 13, Batch 14, and Batch 15 functions: `FindFaceInCInst`, `EmitterSystem::UpdateParticles`, `__InitMatrices`, `TrackStreamer::BuildHoleMovements`, `TrackStreamer::GetLoadingPriority`, `WRoadNav::CookieTrailCurvature`, `eStreamPackLoader::InternalLoadStreamingEntry`, and `RenderVisibleSectionBoundary`).
+This ledger tracks the completion and blockage status of all code chunks, modules, and subsystems for Need for Speed: Most Wanted (`GOWE69` GameCube target) in accordance with project directives and parallel workflow rules (including Batch 15, Batch 16, Batch 17, and Batch 18 functions: `UTL::FastVector<unsigned int, 16>::AllocVectorSpace`, `TrackStreamer::GetLoadingPriority`, and `eStreamPackLoader::InternalLoadStreamingEntry`).
 
 ## 1. Completed and Merged Modules & Functions
 
@@ -18,6 +18,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### AI Subsystem (`zAI`)
 - **`AICopManager::UpdatePursuits`**: Decompiled, verified (99.97% match / 100% fuzzy match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`AIPursuit::AssignClosestOffsets`**: Decompiled, verified (99.67% match, 1,684 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`UTL::FastVector<unsigned int, 16>::AllocVectorSpace`**: Decompiled, verified (100.0% match, 52 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Track Subsystem (`zTrack`)
 - **`TrackStreamer::BuildHoleMovements`**: Decompiled, verified (89.82% match, 1,992 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

@@ -1238,6 +1238,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `UTL::FastVector<unsigned int, 16>::AllocVectorSpace`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_a5a06317-d45-1/src/Speed/Indep/Libs/Support/Utility/UTLVector.h`
+- **Virtual Address**: `0x80042754`
+- **Size**: 52 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual void *UTL::FastVector<T, Alignment>::AllocVectorSpace(std::size_t num, unsigned int alignment);
+  ```
+- **Description**: Successfully matched UTL::FastVector<unsigned int, 16>::AllocVectorSpace to 100.0% by passing FastVector string literal to FastMem allocations.
+
+---
+
 ## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 
 ### `PhysicsObject::GetEntity`
@@ -1356,16 +1370,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `TrackStreamer::GetLoadingPriority`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
-- **Source**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
-- **Address**: `0x802BC0A4`
+- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_a5a06317-d45-3/src/Speed/Indep/Src/World/TrackStreamer.cpp`
+- **Virtual Address**: `0x802BAE70`
 - **Size**: 708 bytes
-- **Match**: 97.01%
-- **Status**: Matched
+- **Matching State**: 97.01% match
 - **Signature**:
   ```cpp
   int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingPositionEntry *position_entry, bool calculating_jettison);
   ```
-- **Description**: Calculates a streaming section's loading priority for a player position.
+- **Description**: Decompiled and matched TrackStreamer::GetLoadingPriority to 97.01% in zTrack unity build unit
 
 ---
 
@@ -1558,16 +1571,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `eStreamPackLoader::InternalLoadStreamingEntry`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
-- **Source**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
-- **Address**: `0x800F5434`
+- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_a5a06317-d45-4/src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
+- **Virtual Address**: `0x8010B0E4`
 - **Size**: 440 bytes
-- **Match**: 95.41%
-- **Status**: Matched
+- **Matching State**: 95.41% match
 - **Signature**:
   ```cpp
   void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack, eStreamingEntry *streaming_entry);
   ```
-- **Description**: Decompiled and matched eStreamPackLoader::InternalLoadStreamingEntry at 95.41% match.
+- **Description**: Matched eStreamPackLoader::InternalLoadStreamingEntry in zEcstasy unit to 95.41% accuracy
 
 ---
 

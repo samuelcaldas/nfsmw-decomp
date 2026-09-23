@@ -585,7 +585,9 @@ SceneryInstance *FindSceneryInstance(unsigned int name_hash) {
     return nullptr;
 }
 
-// UNSOLVED
+/**
+ * @brief Renders the visible section boundary for debugging/display purposes.
+ */
 void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view) {
     float perimeter;
     for (int n = 0; n < boundary->GetNumPoints(); n++) {

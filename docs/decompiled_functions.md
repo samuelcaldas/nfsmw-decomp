@@ -289,7 +289,22 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 6. Track Subsystem (`zTrack`)
+## 6. Physics Subsystem (`zPhysicsBehaviors`)
+
+### `SuspensionSimple::Tire::UpdateLoaded`
+- **Unit**: `main/Speed/Indep/SourceLists/zPhysicsBehaviors`
+- **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionSimple.cpp`
+- **Size**: 1,972 bytes
+- **Matching State**: 98.9% match
+- **Signature**:
+  ```cpp
+  float SuspensionSimple::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float body_speed, float load, float dT, float drag_reduction);
+  ```
+- **Description**: Updates loaded tire physics behavior including lateral and longitudinal forces, braking torque application, slip calculation, and normal load integration during vehicle simulation ticks.
+
+---
+
+## 7. Track Subsystem (`zTrack`)
 
 ### `RegionQuery::CalculateRegionInfo`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
@@ -303,21 +318,6 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Evaluates region weather, fog parameters, and lighting configuration for the specified view and region type. Manages fog color overrides, distance fog falloff, power, and start positions, updating cache state when modified.
 - **Compiler Details**: High-fidelity matching achieved following ProDG GCC 2.95 floating-point and register allocation rules.
-
----
-
-## 7. Physics Subsystem (`zPhysicsBehaviors`)
-
-### `SuspensionSimple::Tire::UpdateLoaded`
-- **Unit**: `main/Speed/Indep/SourceLists/zPhysicsBehaviors`
-- **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionSimple.cpp`
-- **Size**: 1,972 bytes
-- **Matching State**: 98.9% match
-- **Signature**:
-  ```cpp
-  float SuspensionSimple::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float body_speed, float load, float dT, float drag_reduction);
-  ```
-- **Description**: Updates loaded tire physics behavior including lateral and longitudinal forces, braking torque application, slip calculation, and normal load integration during vehicle simulation ticks.
 
 ---
 

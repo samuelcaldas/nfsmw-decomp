@@ -1,6 +1,9 @@
 #include "Speed/Indep/Src/FEng/FEMath.h"
 
-// UNSOLVED
+/**
+ * @brief Converts the quaternion to a rotation matrix.
+ * @param rotmat Destination rotation matrix.
+ */
 void FEQuaternion::GetMatrix(FEMatrix4 *rotmat) {
     float *rm = reinterpret_cast<float *>(rotmat);
 

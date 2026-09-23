@@ -1129,8 +1129,8 @@ void AIPursuit::AssignClosestOffsets(Vector3List &copRelativePositions, Pursuers
         copOffsetMaximums.push_back(maxDistance);
     }
 
-    int copsToAssignOffsets = formationOffsets.size();
     const float INDEX_ASSIGNED = -1.0f;
+    int copsToAssignOffsets = formationOffsets.size();
     do {
         int currentCop = -1;
         int currentOffset;

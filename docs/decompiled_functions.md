@@ -1154,6 +1154,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `WRoadNav::HolePunchAvoidables`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
+- **Source File**: `src/Speed/Indep/Src/World/Common/WRoadNetwork.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 2,980 bytes
+- **Matching State**: 94.94% match
+- **Signature**:
+  ```cpp
+  void WRoadNav::HolePunchAvoidables(NavCookie *cookies, int num_cookies, float current_offset, float delta_offset);
+  ```
+- **Description**: Decompiled and matched WRoadNav::HolePunchAvoidables in zWorld2 unit with 94.94% match rate and 2,980 bytes size.
+
+---
+
 ## 9. Ecstasy / Particle Subsystem (`zEcstasy`)
 
 ### `EmitterSystem::UpdateParticles`

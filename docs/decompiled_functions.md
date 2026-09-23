@@ -274,4 +274,22 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Description**: Iterates through active cop and pursuit vehicles, updates pursuit state, manages vehicle removal on destruction or roadblock completion, increments police statistics when enabled by race parameters, and coordinates pursuit dispatching.
 - **Compiler Details**: Exact 100% binary match achieved following ProDG GCC 2.95 calling conventions and control-flow ordering.
 
+---
+
+## 6. Track Subsystem (`zTrack`)
+
+### `RegionQuery::CalculateRegionInfo`
+- **Unit**: `main/Speed/Indep/SourceLists/zTrack`
+- **Source File**: `src/Speed/Indep/Src/World/WeatherMan.cpp`
+- **Virtual Address**: `0x802C1640`
+- **Size**: 1,208 bytes (302 instructions)
+- **Matching State**: 99.9% match
+- **Signature**:
+  ```cpp
+  int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InFE);
+  ```
+- **Description**: Evaluates region weather, fog parameters, and lighting configuration for the specified view and region type. Manages fog color overrides, distance fog falloff, power, and start positions, updating cache state when modified.
+- **Compiler Details**: High-fidelity matching achieved following ProDG GCC 2.95 floating-point and register allocation rules.
+
+
 

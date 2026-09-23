@@ -86,7 +86,6 @@ bool Joint::Owns(const IEntity *entity) const {
 }
 
 /**
-/**
  * @brief Adds a constraint to the articulation joint.
  */
 void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type) {

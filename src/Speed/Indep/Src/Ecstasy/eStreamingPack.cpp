@@ -815,8 +815,8 @@ void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param
 
     stream_pack_loader->LoadingHeaderPhase2Callback(&user_load_info);
 
-    streaming_pack->StreamingEntryTable = user_load_info.StreamingEntryTable;
     int load_amount = user_load_info.LoadResourceFileAmount;
+    streaming_pack->StreamingEntryTable = user_load_info.StreamingEntryTable;
     streaming_pack->StreamingEntryNumEntries = user_load_info.StreamingEntryNumEntries;
     streaming_pack->SolidListHeader = user_load_info.SolidListHeader;
     streaming_pack->pTexturePackHeader = user_load_info.pTexturePackHeader;

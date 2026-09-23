@@ -368,6 +368,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `SFXObj_PFEATrax::GenMusicType`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/SFXObj_Pathfinder.cpp`
+- **Virtual Address**: `0x800E410C`
+- **Size**: 244 bytes
+- **Matching State**: 57.1% match
+- **Signature**:
+  ```cpp
+  eMUSIC_TYPE SFXObj_PFEATrax::GenMusicType();
+  ```
+- **Description**: Decompiled SFXObj_PFEATrax::GenMusicType in zEAXSound2, determining music type based on vehicle audio tracking and pathfinder state.
+
+---
+
 ### `GinsuSynthesis::HandlePacketRelease`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsusynth.cpp`
@@ -586,6 +600,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ---
 
 ## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
+
+### `PhysicsObject::GetEntity`
+- **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Common/PhysicsObject.cpp`
+- **Virtual Address**: `0x8022D794`
+- **Size**: 8 bytes
+- **Matching State**: 99.5% match
+- **Signature**:
+  ```cpp
+  Sim::IEntity *GetEntity() const;
+  ```
+- **Description**: Successfully implemented PhysicsObject::GetEntity and related inline physics object getters with Doxygen docstrings.
+
+---
 
 ### `Physics::Info::ShiftPoints`
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysics`

@@ -54,7 +54,15 @@ class Constraint {
     virtual void OnDebugDraw();
 
   private:
-    char mPad[0x68];
+    Quaternion mOrient;
+    char mPad0[0x30];
+    Lever *mFemale;
+    Lever *mMale;
+    UVector3 mPost;
+    float mMinTheta;
+    float mMaxTheta;
+    int mFlag;
+    eConstraint mType;
 };
 
 class Joint : public bTNode<Joint> {

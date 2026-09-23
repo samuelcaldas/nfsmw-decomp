@@ -86,6 +86,7 @@ bool Joint::Owns(const IEntity *entity) const {
 }
 
 /**
+<<<<<<< HEAD
  * @brief Adds a constraint to the articulation joint.
  */
 void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type) {
@@ -96,6 +97,46 @@ void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float m
         c = new Constraint(orient, minTheta, maxTheta, this->mMale, this->mFemale, post, type);
     }
     this->mConstraints.push_back(c);
+=======
+ * @brief Adds a constraint to the joint.
+ */
+void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type) {
+    (void)entity;
+    Constraint *constraint = new Constraint(orient, minTheta, maxTheta, this->mFemale, this->mMale, post, type);
+    this->mConstraints.push_back(constraint);
+}
+
+/**
+ * @brief Constructs a physics joint constraint.
+ */
+Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type)
+    : mFemale(&female), mMale(&male), mPost(post), mMinTheta(minTheta), mMaxTheta(maxTheta), mFlag(1), mType(type) {
+    VU0_m4toquat(orient, mOrient);
+    float len = VU0_sqrt(VU0_v3lengthsquare(post));
+    (void)len;
+
+    mMinTheta = minTheta * 0.017453292f;
+    mMaxTheta = maxTheta * 0.017453292f;
+
+    float cMin = cosf(mMinTheta);
+    float sMin = sinf(mMinTheta);
+    float cMax = cosf(mMaxTheta);
+    float sMax = sinf(mMaxTheta);
+
+    float *fields = reinterpret_cast<float *>(reinterpret_cast<char *>(this) + 0x14);
+    fields[0] = -cMin;
+    fields[1] = sMin;
+    fields[2] = sMin * cMin;
+    fields[3] = sMin;
+    fields[4] = cMin;
+    fields[5] = sMin;
+    fields[6] = cMax;
+    fields[7] = sMax;
+    fields[8] = sMin;
+    fields[9] = cMax;
+    fields[10] = sMax;
+    fields[11] = -sMax;
+>>>>>>> 13f4f9b8 (match: Dynamics::Articulation::Constraint::Constraint)
 }
 
 void Lever::OnDebugDraw() {}

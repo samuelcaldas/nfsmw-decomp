@@ -493,6 +493,9 @@ void CAnimPlayer::BeginOnlinePause() {}
 
 void CAnimPlayer::EndOnlinePause() {}
 
+/**
+ * @brief Initializes the animation player subsystem, returning true on successful setup.
+ */
 bool CAnimPlayer::Init() {
     return true;
 }

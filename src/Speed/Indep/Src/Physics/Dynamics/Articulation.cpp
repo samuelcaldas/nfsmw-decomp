@@ -86,7 +86,7 @@ bool Joint::Owns(const IEntity *entity) const {
 }
 
 /**
-<<<<<<< HEAD
+/**
  * @brief Adds a constraint to the articulation joint.
  */
 void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type) {
@@ -97,13 +97,6 @@ void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float m
         c = new Constraint(orient, minTheta, maxTheta, this->mMale, this->mFemale, post, type);
     }
     this->mConstraints.push_back(c);
-=======
- * @brief Adds a constraint to the joint.
- */
-void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type) {
-    (void)entity;
-    Constraint *constraint = new Constraint(orient, minTheta, maxTheta, this->mFemale, this->mMale, post, type);
-    this->mConstraints.push_back(constraint);
 }
 
 /**
@@ -136,7 +129,6 @@ Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTh
     fields[9] = cMax;
     fields[10] = sMax;
     fields[11] = -sMax;
->>>>>>> 13f4f9b8 (match: Dynamics::Articulation::Constraint::Constraint)
 }
 
 void Lever::OnDebugDraw() {}

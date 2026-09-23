@@ -41,6 +41,7 @@ class Lever {
     }
 
   private:
+    int mPad;
     UVector3 mArm;
     IEntity *mEntity;
     int mImmobile;
@@ -73,7 +74,6 @@ class Joint : public bTNode<Joint> {
     static HJOINT mNextHandle;
 
   private:
-    int mPad0[2];
     Lever mFemale;
     int mPad1;
     Lever mMale;

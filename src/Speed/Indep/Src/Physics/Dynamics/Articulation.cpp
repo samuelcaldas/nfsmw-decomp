@@ -85,6 +85,19 @@ bool Joint::Owns(const IEntity *entity) const {
     return false;
 }
 
+/**
+ * @brief Adds a constraint to the articulation joint.
+ */
+void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float minTheta, float maxTheta, const UMath::Vector3 &post, eConstraint type) {
+    Constraint *c;
+    if (entity == this->mFemale.GetEntity()) {
+        c = new Constraint(orient, minTheta, maxTheta, this->mFemale, this->mMale, post, type);
+    } else {
+        c = new Constraint(orient, minTheta, maxTheta, this->mMale, this->mFemale, post, type);
+    }
+    this->mConstraints.push_back(c);
+}
+
 void Lever::OnDebugDraw() {}
 
 void Constraint::OnDebugDraw() {}

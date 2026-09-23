@@ -16,3 +16,5 @@
 #include "Speed/Indep/Src/Camera/ICE/ICEReplay.cpp"
 
 #include "Speed/Indep/Src/Camera/Actions/CDActionIce.cpp"
+#include "Speed/Indep/Src/Camera/Actions/CDActionShowcase.cpp"
+#include "Speed/Indep/Src/Camera/Actions/CDActionTrackCar.cpp"

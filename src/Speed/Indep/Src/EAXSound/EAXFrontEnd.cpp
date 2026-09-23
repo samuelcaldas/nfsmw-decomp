@@ -184,6 +184,11 @@ void EAXCommon::Stop(eMenuSoundTriggers etrigger) {}
  * @param etrigger Menu sound trigger enum value.
  * @return 0 on success, -1 on failure.
  */
+/**
+ * @brief Play common menu sound triggers.
+ * @param etrigger Menu sound trigger enum value.
+ * @return 0 on success, -1 on failure.
+ */
 int EAXCommon::Play(eMenuSoundTriggers etrigger) {
     if (IsSoundEnabled == 0) {
         return -1;

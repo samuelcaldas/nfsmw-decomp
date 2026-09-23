@@ -221,14 +221,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `cFEng::PushErrorPackage`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/FEngInterfaces/FEngInterface.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x80133910`
 - **Size**: 332 bytes
-- **Matching State**: 96.81% match
+- **Matching State**: 96.9% match
 - **Signature**:
   ```cpp
   void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask);
   ```
-- **Description**: Matched cFEng::PushErrorPackage in unit main/Speed/Indep/SourceLists/zFe.
+- **Description**: Matched cFEng::PushErrorPackage to 96.9% with clean compilation and zero regressions.
 
 ---
 
@@ -286,6 +286,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info);
   ```
 - **Description**: Successfully updated MemcardCallbacks::FoundEntry in MemoryCardCallbacks.cpp, achieving 98.0% match parity with 0 regressions.
+
+---
+
+### `MemcardCallbacks::CardChecked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`
+- **Virtual Address**: `0x8013A5C4`
+- **Size**: 668 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void MemcardCallbacks::CardChecked(const RealmcIface::CardInfo *info);
+  ```
+- **Description**: Successfully decompiled and matched MemcardCallbacks::CardChecked to 100.0% parity with zero regressions.
 
 ---
 
@@ -594,14 +608,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `CARSFX_RoadNoise::Play`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/CARSFX_Roadnoise.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x800D85D4`
 - **Size**: 392 bytes
-- **Matching State**: 94.94% match
+- **Matching State**: 94.9% match
 - **Signature**:
   ```cpp
   void CARSFX_RoadNoise::Play(FXROADNOISE_LOOP ID, int side);
   ```
-- **Description**: Decompiled CARSFX_RoadNoise::Play to 94.94% match parity with Doxygen docstring and robust implementation.
+- **Description**: Successfully matched CARSFX_RoadNoise::Play to 94.9% with clean compilation and zero regressions.
 
 ---
 

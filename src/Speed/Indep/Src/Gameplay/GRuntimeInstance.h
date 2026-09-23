@@ -7,10 +7,15 @@
 // total size: 0x28
 class GRuntimeInstance : public Attrib::Gen::gameplay {
   public:
+    struct ConnectedInstance;
+
     GRuntimeInstance(const Attrib::Key &key, GameplayObjType type);
     virtual ~GRuntimeInstance();
 
     virtual GameplayObjType GetType() const; // Decl: 47
+
+    void SetConnectionBuffer(ConnectedInstance *buffer, unsigned int maxConnections);
+    unsigned short GetConnectionCount() const;
 
   private:
     uint16 mFlags;                        // offset 0x14, size 0x2

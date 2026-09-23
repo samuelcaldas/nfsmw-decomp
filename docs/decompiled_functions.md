@@ -257,3 +257,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Description**: Computes and renders the projected car shadow volume mesh onto ground collision surfaces. Handles world-to-local and local-to-world geometry transformations, collision face querying via `FindClosestFace` and `HeightAtPoint`, shadow volume extrusion, ground polygon clipping, vertex coloring/translucency falloff based on height above ground, and triangle fan/strip rendering into the view.
 - **Compiler Details**: Emits PowerPC paired single SIMD instructions (`psq_st`, `psq_l`) for 3D vector transformations. Exact match required separating vertex truncation and decrement across discrete expressions (`int nv = nVert; nv &= ~1; for (i = 0; i < nv - 1; i += 2)`) to guide GCC 2.95 instruction selection to emit `clrrwi r9, r9, 1` and `addi r9, r9, -1` with `cmpw r30, r9`, matching the original binary control flow and register allocation without spilling to the stack.
 
+---
+
+## 5. AI Subsystem (`zAI`)
+
+### `AICopManager::UpdatePursuits`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `src/Speed/Indep/Src/AI/Activities/AICopManager.cpp`
+- **Virtual Address**: `0x8000C47C`
+- **Size**: 2,516 bytes (629 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void AICopManager::UpdatePursuits();
+  ```
+- **Description**: Iterates through active cop and pursuit vehicles, updates pursuit state, manages vehicle removal on destruction or roadblock completion, increments police statistics when enabled by race parameters, and coordinates pursuit dispatching.
+- **Compiler Details**: Exact 100% binary match achieved following ProDG GCC 2.95 calling conventions and control-flow ordering.
+
+

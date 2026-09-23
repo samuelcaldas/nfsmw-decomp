@@ -2457,7 +2457,6 @@ void WRoadNav::InitAtSegment(short segInd, char laneInd, float timeStep) {
     this->fStartPos = roadNetwork.GetNode(segment->fNodeIndex[this->fNodeInd == 0])->fPosition;
     this->fEndPos = roadNetwork.GetNode(segment->fNodeIndex[this->fNodeInd])->fPosition;
 
-    this->SetLaneInd(laneInd);
     this->SetLaneOffset(0.0f);
 
     {

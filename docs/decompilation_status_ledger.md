@@ -64,6 +64,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Gameplay Subsystem (`zGameplay`)
 - **`GManager::GetInGameplay`, `GetNumMilestones`, `GetNumSpeedTraps`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceStatus::OnRemovedVehicleCache`, `SetRaceContext`, `GetRacerCount`, `AddAvailableEventToMap`, `AddSpeedTrapToMap`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GRaceStatus::RefreshBinWhileInGame`, `StopMasterTimer`, `EnableBinBarriers`, `SetRaceActivity`, `DisableBarriers`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Collision Subsystem (`zWorld2`)
 - **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

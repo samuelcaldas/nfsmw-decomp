@@ -148,6 +148,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `MoviePlayer_Play`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MoviePlayer/MoviePlayer.cpp`
+- **Virtual Address**: `0x80135DBC`
+- **Size**: 72 bytes
+- **Matching State**: 95.6% match
+- **Signature**:
+  ```cpp
+  void MoviePlayer_Play(void);
+  ```
+- **Description**: Decompiled MoviePlayer_Play to 95.6% match using register variables r31 and r30.
+
+---
+
 ### `UIOptionsScreen::NotificationMessage`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Safehouse/options/uiOptionsScreen.cpp`
@@ -378,6 +392,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void SFXCTL_Physics::UpdateMixerOutputs();
   ```
 - **Description**: Updates physics mixer outputs for EAX sound based on vehicle speed, RPM, wheels on ground, and POV.
+
+---
+
+### `CARSFX_PreColWoosh::MsgBarrier`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/CARSFX_PreColWoosh.cpp`
+- **Virtual Address**: `0x800DC378`
+- **Size**: 140 bytes
+- **Matching State**: 94.29% match
+- **Signature**:
+  ```cpp
+  void CARSFX_PreColWoosh::MsgBarrier(const MAudioReflection &message);
+  ```
+- **Description**: Refined CARSFX_PreColWoosh::MsgBarrier with Doxygen docstring and verified build matching 94.29%.
 
 ---
 
@@ -725,6 +753,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   Sim::IEntity *GetEntity() const;
   ```
 - **Description**: Successfully implemented PhysicsObject::GetEntity and related inline physics object getters with Doxygen docstrings.
+
+---
+
+### `VehicleSystem::Init`
+- **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Common/VehicleSystem.cpp`
+- **Virtual Address**: `0x8021CAC0`
+- **Size**: 36 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void Init();
+  ```
+- **Description**: Successfully decompiled VehicleSystem::Init with 100.0% match parity.
 
 ---
 

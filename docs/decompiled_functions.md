@@ -880,6 +880,62 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GVault::GetName` & Core Accessors (`GetAttribVault`, `GetObjectCount`, `GetFootprint`, `GetDataOffset`, `GetDataSize`, `GetLoadDataOffset`, `GetLoadDataSize`)
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 1,121 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const char *GVault::GetName() const;
+  Attrib::Vault *GVault::GetAttribVault() const;
+  int GVault::GetObjectCount() const;
+  int GVault::GetFootprint() const;
+  int GVault::GetDataOffset() const;
+  int GVault::GetDataSize() const;
+  int GVault::GetLoadDataOffset() const;
+  int GVault::GetLoadDataSize() const;
+  ```
+- **Description**: Decompiled GVault core accessors and footprint methods to 100% match.
+
+---
+
+### `GVault` Status Methods (`IsLoaded`, `IsResident`, `IsTransient`, `IsRaceBin`, `SetRaceBin`)
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 80 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GVault::IsLoaded() const;
+  bool GVault::IsResident() const;
+  bool GVault::IsTransient() const;
+  bool GVault::IsRaceBin() const;
+  void GVault::SetRaceBin();
+  ```
+- **Description**: Decompiled GVault status methods and SetRaceBin to 100.0% matching assembly.
+
+---
+
+### `GRaceParameters` & `GRaceBin` Vault Accessors (`GetGameplayObj`, `GetParentVault`, `GetChildVault`, `GetCollectionKey`)
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x8022cc44`
+- **Size**: 64 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const Attrib::Gen::gameplay *GRaceParameters::GetGameplayObj() const;
+  const GVault *GRaceParameters::GetParentVault() const;
+  const GVault *GRaceParameters::GetChildVault() const;
+  uint32 GRaceBin::GetCollectionKey() const;
+  ```
+- **Description**: Decompiled GRaceParameters and GRaceBin vault accessors (`GetGameplayObj`, `GetParentVault`, `GetChildVault`, `GetCollectionKey`) to 100% match.
+
+---
+
 ## 4. World Subsystem (`zWorld`)
 
 ### `CarRenderInfo::UpdateWheelYRenderOffset`
@@ -1519,6 +1575,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `ICEManager::Update` & `LuaMessageDeliveryInfo::GetLuaState`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/ICE/ICEManager.cpp`
+- **Virtual Address**: `0x8019D1F4`
+- **Size**: 36 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void ICEManager::Update();
+  lua_State *LuaMessageDeliveryInfo::GetLuaState() const;
+  ```
+- **Description**: Successfully decompiled ICEManager::Update and LuaMessageDeliveryInfo accessors achieving 100.0% match parity and passing main.dol sha1 verification.
+
+---
+
 ### `Dynamics::Articulation::Joint::Owns`
 - **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
 - **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
@@ -1698,4 +1769,60 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type);
   ```
 - **Description**: Implemented Dynamics::Articulation::Constraint::Constraint and Joint::AddConstraint in Articulation.cpp.
+
+---
+
+### `Dynamics::Articulation::Joint::Joint`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 220 bytes
+- **Matching State**: 46.3% match
+- **Signature**:
+  ```cpp
+  __Q38Dynamics12Articulation5JointPQ28Dynamics7IEntityRCQ25UMath7Vector3T1T2Q38Dynamics12Articulation11eJointFlags
+  ```
+- **Description**: Decompiled and matched Dynamics::Articulation::Joint::Joint constructor.
+
+---
+
+### `Dynamics::Collision::Geometry::Set`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Geometry.cpp`
+- **Virtual Address**: `0x80089398`
+- **Size**: 704 bytes
+- **Matching State**: 11.8% match
+- **Signature**:
+  ```cpp
+  void Geometry::Set(const UMath::Matrix4 &orient, const UMath::Vector3 &position, const UMath::Vector3 &dimension, Shape shape, const UMath::Vector3 &delta);
+  ```
+- **Description**: Implemented Dynamics::Collision::Geometry::Set in Geometry.cpp.
+
+---
+
+### `Dynamics::Collision::Moment::Moment` (Entity Constructor)
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Collision.cpp`
+- **Virtual Address**: `0x80047E5C`
+- **Size**: 668 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Dynamics::Collision::Moment::Moment(const IEntity *entity);
+  ```
+- **Description**: Decompiled Dynamics::Collision::Moment constructors in zDynamics unit with 100% register and byte parity.
+
+---
+
+### `Dynamics::Articulation::Lever::SetFulcrum`
+- **Unit**: `zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80087FB4`
+- **Size**: 968 bytes
+- **Matching State**: 10.6% match
+- **Signature**:
+  ```cpp
+  SetFulcrum__Q38Dynamics12Articulation5LeverRC8UVector3b
+  ```
+- **Description**: Decompiled Dynamics::Articulation::Lever::SetFulcrum in src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp with initial implementation and Doxygen docstring.
 

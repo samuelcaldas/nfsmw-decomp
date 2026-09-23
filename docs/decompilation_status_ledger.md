@@ -93,6 +93,9 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GRaceStatus::GetRacerInfo` (`zGameplay`)**: Decompiled, verified (100.0% match, 16 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceDatabase` Accessors (`GetRaceCount`, `GetBinCount`, `GetBin`, `GetStartupRace`, `GetStartupRaceContext`) (`zGameplay`)**: Decompiled, verified (100.0% match, 56 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceBin` & `GRaceDatabase` Methods (`GetCompletedChallenges`, `GetAwardedRaceWins`, `SetCompletedChallenges`, `SetRacesWon`, `SimulateDDayComplete`) (`zGameplay`)**: Decompiled, verified (100.0% match, 2,073 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GVault::GetName` & Core Accessors (`GetAttribVault`, `GetObjectCount`, `GetFootprint`, `GetDataOffset`, `GetDataSize`, `GetLoadDataOffset`, `GetLoadDataSize`) (`zGameplay`)**: Decompiled, verified (100.0% match, 1,121 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GVault` Status Methods (`IsLoaded`, `IsResident`, `IsTransient`, `IsRaceBin`, `SetRaceBin`) (`zGameplay`)**: Decompiled, verified (100.0% match, 80 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GRaceParameters` & `GRaceBin` Vault Accessors (`GetGameplayObj`, `GetParentVault`, `GetChildVault`, `GetCollectionKey`) (`zGameplay`)**: Decompiled, verified (100.0% match, 64 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Camera Subsystem (`zCamera`)
 - **`CameraAI::Director::JumpStart` (`zCamera`)**: Decompiled, verified (100.0% match, 20 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -108,6 +111,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **CDAction `GetMover` Accessors (`zCamera`)**: Decompiled, verified (99.5% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **CDAction `GetAttachments` Accessors (`zCamera`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CDActionDrive::OnAttached` (`zCamera`)**: Decompiled, verified (100.0% match, 20 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`ICEManager::Update` & `LuaMessageDeliveryInfo::GetLuaState` (`zCamera`)**: Decompiled, verified (100.0% match, 36 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Dynamics Subsystem (`zDynamics`)
 - **`Dynamics::Articulation::Joint::Owns` (`zDynamics`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**

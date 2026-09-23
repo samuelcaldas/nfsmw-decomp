@@ -319,4 +319,17 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Updates loaded tire physics behavior including lateral and longitudinal forces, braking torque application, slip calculation, and normal load integration during vehicle simulation ticks.
 
+---
 
+## 8. Collision Subsystem (`zWorld2`)
+
+### `WCollisionMgr::FindFaceInCInst`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
+- **Source File**: `src/Speed/Indep/Src/World/Common/WCollisionMgr.cpp`
+- **Size**: 1,436 bytes (359 instructions)
+- **Matching State**: 99.9% match
+- **Signature**:
+  ```cpp
+  bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst, WCollisionTri &retFace, float &retDist);
+  ```
+- **Description**: Finds the nearest collision face intersected by a transformed segment against a collision instance. Evaluates strip spheres, orthogonal inverse matrix transformations, ray-strip intersection, and distance thresholds to locate the closest colliding triangle.

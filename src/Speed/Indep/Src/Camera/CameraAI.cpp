@@ -1,9 +1,17 @@
 #include "CameraAI.hpp"
 
+IMPLEMENT_LISTABLE(CameraAI::Director);
+
 CameraAI::Director *FindDirector(unsigned int id);
 
+/**
+ * @brief Resets all camera directors.
+ */
 void CameraAI::Reset() {
-    return;
+    const CameraAI::Director::List &directors = UTL::Collections::Listable<CameraAI::Director, 2>::GetList();
+    for (CameraAI::Director::List::const_iterator iter = directors.begin(); iter != directors.end(); ++iter) {
+        (*iter)->Reset();
+    }
 }
 
 /**
@@ -34,6 +42,57 @@ void CameraAI::Director::EndPursuitStart() {
 }
 
 /**
+ * @brief Releases the camera action.
+ */
+void CameraAI::Director::ReleaseAction() {
+    if (this->mAction != nullptr) {
+        delete this->mAction;
+        this->mAction = nullptr;
+    }
+}
+
+/**
+ * @brief Resets the camera director.
+ */
+void CameraAI::Director::Reset() {
+    ReleaseAction();
+    this->mDesiredMode = Attrib::StringKey();
+    this->mPrepareToEnableIce = false;
+    this->mPursuitStartTime = -1.0f;
+    this->mJumpTime = -1.0f;
+    this->mIsCinematicMomement = false;
+    this->mCinematicSlowdownSeconds = 0.0f;
+}
+
+/**
+ * @brief Starts totaled camera sequence.
+ */
+void CameraAI::Director::TotaledStart() {
+}
+
+/**
+ * @brief Gets the camera mover.
+ */
+CameraMover *CameraAI::Director::GetMover() {
+    if (this->mAction != nullptr) {
+        return this->mAction->GetMover();
+    }
+    return nullptr;
+}
+
+/**
+ * @brief Handles totaled camera logic for the given player.
+ */
+void CameraAI::MaybeDoTotaledCam(IPlayer *iplayer) {
+    const CameraAI::Director::List &directors = UTL::Collections::Listable<CameraAI::Director, 2>::GetList();
+    for (CameraAI::Director::List::const_iterator iter = directors.begin(); iter != directors.end(); ++iter) {
+        Director *director = *iter;
+        if (director != nullptr) {
+        }
+    }
+}
+
+/**
  * @brief Cancels or ends active pursuit start camera sequence for the specified view if director exists.
  *
  * @param id View ID identifying the camera director.
@@ -56,4 +115,3 @@ void CameraAI::MaybeKillJumpCam(unsigned int id) {
         cd->EndJumping();
     }
 }
-

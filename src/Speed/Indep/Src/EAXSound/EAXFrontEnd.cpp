@@ -179,12 +179,16 @@ void EAXCommon::Initialize() {}
 
 void EAXCommon::Stop(eMenuSoundTriggers etrigger) {}
 
-// UNSOLVED
+/**
+ * Plays common menu sound triggers for EAXCommon.
+ * @param etrigger Menu sound trigger enum value.
+ * @return 0 on success, -1 on failure.
+ */
 int EAXCommon::Play(eMenuSoundTriggers etrigger) {
     if (IsSoundEnabled == 0) {
         return -1;
     }
-    if (Debug_Common_FE_OFF) {
+    if (Debug_Common_FE_OFF != 0) {
         return -1;
     }
 

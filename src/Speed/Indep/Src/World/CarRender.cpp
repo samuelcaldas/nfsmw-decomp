@@ -2108,10 +2108,7 @@ void CarRenderInfo::UpdateLightStateTextures() {
     bool lights_always_on = true;
 
     {
-        int left_light_state = 0;
-        if (lights_always_on) {
-            left_light_state = 1;
-        }
+        int left_light_state = lights_always_on ? 1 : 0;
         int right_light_state = 1;
         int left_light_state_hash = this->mUsedTextureInfos.ReplaceHeadlightHash[left_light_state];
         int right_light_state_hash = this->mUsedTextureInfos.ReplaceHeadlightHash[right_light_state];

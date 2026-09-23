@@ -156,7 +156,7 @@ void FEListBox::IncrementCellByColumn() {
 }
 
 /**
- * Scroll selection by column and row offsets.
+ * @brief Scroll selection by column and row offsets.
  * @param lColumnNum Column scroll delta
  * @param lRowNum Row scroll delta
  */

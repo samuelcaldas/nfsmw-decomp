@@ -14,6 +14,10 @@
 class GCharacter : public GRuntimeInstance, public UTL::COM::Object, public IAttachable {
   public:
     GCharacter(const Attrib::Key &triggerKey);
+    virtual bool Attach(UTL::COM::IUnknown *object);
+    virtual bool Detach(UTL::COM::IUnknown *object);
+    virtual bool IsAttached(const UTL::COM::IUnknown *object) const;
+    virtual const List *GetAttachments() const;
 
   private:
     UMath::Vector3 mSpawnPos;       // offset 0x40, size 0xC

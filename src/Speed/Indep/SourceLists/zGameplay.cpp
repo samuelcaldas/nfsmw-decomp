@@ -8,6 +8,7 @@
 #include "Speed/Indep/Src/Gameplay/GVault.cpp"
 #include "Speed/Indep/Src/Gameplay/GRaceDatabase.cpp"
 #include "Speed/Indep/Src/Gameplay/GRuntimeInstance.cpp"
+#include "Speed/Indep/Src/Gameplay/GCharacter.cpp"
 
 /**
  * @brief Reports whether gameplay is currently active.

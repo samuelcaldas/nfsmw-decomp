@@ -247,9 +247,7 @@ bool FEPackageReader::ReadPackageResponseChunk() {
 }
 
 /**
- * Reads and processes the object chunk and its child chunks within a frontend package.
- *
- * @return true on success, false on failure.
+ * @brief Reads and processes the object chunk and its child chunks within a frontend package.
  */
 bool FEPackageReader::ReadObjectChunk() {
     FEChunk *pObjList = FindChild(pChunk, Chunk_FEObjectList);

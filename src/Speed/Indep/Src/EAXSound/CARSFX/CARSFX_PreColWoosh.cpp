@@ -43,6 +43,9 @@ void CARSFX_PreColWoosh::Destroy() {
 }
 
 // UNSOLVED, instruction swap
+/**
+ * @brief Handles the barrier message for pre-collision woosh sound effects.
+ */
 void CARSFX_PreColWoosh::MsgBarrier(const MAudioReflection &message) {
     if (message.GetPlayerNum() != this->GetStateBase()->m_InstNum) {
         return;

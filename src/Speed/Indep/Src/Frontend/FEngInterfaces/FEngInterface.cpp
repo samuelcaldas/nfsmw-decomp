@@ -45,7 +45,8 @@ void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask
         FEPackage *pPackage = mFEng->PushPackage(pPackageName, FE_PACKAGE_PRIORITY_ERROR, ControlMask);
         pPackage->SetErrorScreen(true);
         mFEng->ToggleErrorScreenMode(true);
-        if (!FEManager::IsPaused() || bWasPaused) {
+        bool isPaused = FEManager::IsPaused();
+        if (!isPaused || bWasPaused) {
             bWasPaused = true;
             FEManager::RequestPauseSimulation(pPackageName);
             PauseAllSystems();
@@ -55,7 +56,8 @@ void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask
         FEPackage *pPackage = mFEng->PushPackage(pPackageName, FE_PACKAGE_PRIORITY_ERROR, ControlMask);
         pPackage->SetErrorScreen(true);
         mFEng->ToggleErrorScreenMode(true);
-        if (!FEManager::IsPaused() || bWasPaused) {
+        bool isPaused = FEManager::IsPaused();
+        if (!isPaused || bWasPaused) {
             bWasPaused = true;
             FEManager::RequestPauseSimulation(pPackageName);
             PauseAllSystems();

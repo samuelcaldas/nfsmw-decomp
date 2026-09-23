@@ -17,3 +17,11 @@ void CDActionIce::SetSpecial(float) {
  */
 void CDActionIce::OnAttached(IAttachable *) {
 }
+
+/**
+ * @brief Gets attachments list for CDActionIce.
+ * @return Pointer to attachable list.
+ */
+const IAttachable::List *CDActionIce::GetAttachments() const {
+    return this->mAttachments;
+}

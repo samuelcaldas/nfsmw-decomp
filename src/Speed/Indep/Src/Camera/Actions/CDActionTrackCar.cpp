@@ -17,3 +17,11 @@ void CDActionTrackCar::SetSpecial(float) {
  */
 void CDActionTrackCar::OnAttached(IAttachable *) {
 }
+
+/**
+ * @brief Gets attachments list for track car action.
+ * @return Pointer to attachable list.
+ */
+const IAttachable::List *CDActionTrackCar::GetAttachments() const {
+    return this->mAttachments;
+}

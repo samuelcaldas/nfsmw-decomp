@@ -10,6 +10,10 @@ public:
     virtual void Reset() override;
     virtual void SetSpecial(float) override;
     virtual void OnAttached(IAttachable *) override;
+    virtual const IAttachable::List *GetAttachments() const;
+protected:
+    char _pad_attach[0x24];
+    const IAttachable::List *mAttachments;
 };
 
 #endif

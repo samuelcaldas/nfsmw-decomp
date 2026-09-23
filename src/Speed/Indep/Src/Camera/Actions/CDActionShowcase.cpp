@@ -17,3 +17,11 @@ void CDActionShowcase::SetSpecial(float) {
  */
 void CDActionShowcase::OnAttached(IAttachable *) {
 }
+
+/**
+ * @brief Gets attachments list for showcase action.
+ * @return Pointer to attachable list.
+ */
+const IAttachable::List *CDActionShowcase::GetAttachments() const {
+    return this->mAttachments;
+}

@@ -17,3 +17,11 @@ void CDActionTrackCop::SetSpecial(float) {
  */
 void CDActionTrackCop::OnAttached(IAttachable *) {
 }
+
+/**
+ * @brief Gets attachments list for track cop action.
+ * @return Pointer to attachable list.
+ */
+const IAttachable::List *CDActionTrackCop::GetAttachments() const {
+    return this->mAttachments;
+}

@@ -91,6 +91,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GCharacter::GetAttachments` (`zGameplay`)**: Decompiled, verified (100.0% match, 116 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceStatus::GetRacerInfo` (`zGameplay`)**: Decompiled, verified (100.0% match, 16 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GRaceDatabase` Accessors (`GetRaceCount`, `GetBinCount`, `GetBin`, `GetStartupRace`, `GetStartupRaceContext`) (`zGameplay`)**: Decompiled, verified (100.0% match, 56 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GRaceBin` & `GRaceDatabase` Methods (`GetCompletedChallenges`, `GetAwardedRaceWins`, `SetCompletedChallenges`, `SetRacesWon`, `SimulateDDayComplete`) (`zGameplay`)**: Decompiled, verified (100.0% match, 2,073 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Camera Subsystem (`zCamera`)
 - **`CameraAI::Director::JumpStart` (`zCamera`)**: Decompiled, verified (100.0% match, 20 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -103,6 +104,9 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`CDActionShowcase::Reset & CDActionTrackCar::Reset` (`zCamera`)**: Decompiled, verified (100.0% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CDActionTrackCop` Methods (`Reset`, `SetSpecial`, `OnAttached`) (`zCamera`)**: Decompiled, verified (100.0% match, 12 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CDActionDebug::Reset` (`zCamera`)**: Decompiled, verified (100.0% match, 24 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **CDAction `GetMover` Accessors (`zCamera`)**: Decompiled, verified (99.5% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **CDAction `GetAttachments` Accessors (`zCamera`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CDActionDrive::OnAttached` (`zCamera`)**: Decompiled, verified (100.0% match, 20 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Dynamics Subsystem (`zDynamics`)
 - **`Dynamics::Articulation::Joint::Owns` (`zDynamics`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged]**

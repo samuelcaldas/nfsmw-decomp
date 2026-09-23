@@ -848,6 +848,24 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRaceBin` & `GRaceDatabase` Methods (`GetCompletedChallenges`, `GetAwardedRaceWins`, `SetCompletedChallenges`, `SetRacesWon`, `SimulateDDayComplete`)
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 2,073 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  int GRaceBin::GetCompletedChallenges() const;
+  unsigned short GRaceBin::GetAwardedRaceWins() const;
+  void GRaceBin::SetCompletedChallenges(int challenges);
+  void GRaceBin::SetRacesWon(unsigned short wins);
+  void GRaceDatabase::SimulateDDayComplete();
+  ```
+- **Description**: Decompiled GRaceBin methods (`GetCompletedChallenges`, `GetAwardedRaceWins`, `SetCompletedChallenges`, `SetRacesWon`) and `GRaceDatabase::SimulateDDayComplete` with 100% assembly parity.
+
+---
+
 ## 4. World Subsystem (`zWorld`)
 
 ### `CarRenderInfo::UpdateWheelYRenderOffset`
@@ -1428,6 +1446,48 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void CDActionTrackCar::OnAttached(IAttachable *);
   ```
 - **Description**: Decompiled Reset and OnAttached methods for CDActionShowcase and CDActionTrackCar in zCamera unit with 100% match.
+
+---
+
+### CDAction `GetMover` Accessors across Camera Actions
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/Actions/CDActionTrackCar.cpp`
+- **Virtual Address**: `0x80082AF4`
+- **Size**: 8 bytes
+- **Matching State**: 99.5% match
+- **Signature**:
+  ```cpp
+  CameraMover *GetMover() override;
+  ```
+- **Description**: Decompiled CDAction GetMover accessors across 6 camera action classes (TrackCar, TrackCop, Showcase, Debug, DebugWatchCar, Ice) with padding and Doxygen docstrings.
+
+---
+
+### `CDActionTrackCar::GetAttachments` & Related Accessors
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/Actions/CDActionTrackCar.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 32 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const IAttachable::List *CDActionTrackCar::GetAttachments() const;
+  ```
+- **Description**: Decompiled CDAction GetAttachments accessors for TrackCar, TrackCop, Showcase, and Ice with 100.0% match.
+
+---
+
+### `CDActionDrive::OnAttached`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/Actions/CDActionDrive.cpp`
+- **Virtual Address**: `0x800829C0`
+- **Size**: 20 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CDActionDrive::OnAttached(IAttachable *attachment);
+  ```
+- **Description**: CDActionDrive class implementation (OnAttached, GetMover, GetAttachments) with 100% match.
 
 ---
 

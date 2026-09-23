@@ -691,7 +691,14 @@ void FEngine::ProcessPadsForPackage(FEPackage *pPackage) {
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Updates the mouse state and processes click/hover events for a frontend object.
+ * @param pkg Pointer to the FEPackage.
+ * @param state Pointer to the FEObjectMouseState structure.
+ * @param mx Current mouse X coordinate.
+ * @param my Current mouse Y coordinate.
+ * @return void
+ */
 void FEngine::UpdateMouseState(FEPackage *pkg, FEObjectMouseState *state, float mx, float my) {
     FEObject *obj = state->pObject;
     if (obj && (obj->Flags & (FF_IgnoreButton | FF_IsButton)) == (FF_IgnoreButton | FF_IsButton)) {

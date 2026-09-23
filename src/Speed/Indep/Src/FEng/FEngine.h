@@ -49,8 +49,10 @@ struct FEPackageButtonRec {
 // Decl: 84
 class FEPackageCommand : public FENode {
   public:
+    /**
+     * @brief Constructs an FEPackageCommand instance.
+     */
     FEPackageCommand() {} // Decl: 86
-    ~FEPackageCommand() override {}
 
     i32 iCommand;        // offset 0x14, size 0x4, Decl: 87
     u32 uControlMask;    // offset 0x18, size 0x4, Decl: 88

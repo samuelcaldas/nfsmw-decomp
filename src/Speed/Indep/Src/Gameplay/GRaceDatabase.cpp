@@ -3,10 +3,41 @@
 const char GRaceDatabase::sDDayRaces[5][8] = {"16.1.0", "16.2.2", "16.2.3", "16.1.1", "16.2.1"};
 
 /**
- * @brief Forces instantiation of GRaceBin methods.
+ * @brief Returns the number of completed challenges.
+ * @return Count of completed challenges.
  */
-static unsigned short ForceGRaceBinInstantiation(const GRaceBin *bin) {
-    return bin->GetAwardedRaceWins();
+int GRaceBin::GetCompletedChallenges() const {
+    return this->mStats.mChallengesCompleted;
+}
+
+/**
+ * @brief Returns the number of awarded race wins.
+ * @return Count of awarded race wins.
+ */
+unsigned short GRaceBin::GetAwardedRaceWins() const {
+    return this->mStats.mRacesWon;
+}
+
+/**
+ * @brief Sets the number of completed challenges.
+ * @param numChallenges Number of completed challenges.
+ */
+void GRaceBin::SetCompletedChallenges(int numChallenges) {
+    this->mStats.mChallengesCompleted = numChallenges;
+}
+
+/**
+ * @brief Sets the number of won races.
+ * @param numRaces Number of won races.
+ */
+void GRaceBin::SetRacesWon(int numRaces) {
+    this->mStats.mRacesWon = numRaces;
+}
+
+/**
+ * @brief Simulates completion of D-Day event.
+ */
+void GRaceDatabase::SimulateDDayComplete() {
 }
 
 /**

@@ -340,10 +340,7 @@ class GRaceBin {
 
     int GetCompletedChallenges() const;
 
-    /**
-     * @brief Returns the number of awarded race wins.
-     */
-    unsigned short GetAwardedRaceWins() const { return this->mStats.mRacesWon; }
+    unsigned short GetAwardedRaceWins() const;
 
     void RefreshProgress();
 

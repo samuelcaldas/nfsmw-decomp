@@ -482,7 +482,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 5. AI Subsystem (`zAI`)
+## 6. AI Subsystem (`zAI`)
 
 ### `AICopManager::UpdatePursuits`
 - **Unit**: `main/Speed/Indep/SourceLists/zAI`
@@ -513,7 +513,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 6. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
+## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 
 ### `Physics::Info::ShiftPoints`
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
@@ -556,7 +556,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 7. Track Subsystem (`zTrack`)
+## 8. Track Subsystem (`zTrack`)
 
 ### `RegionQuery::CalculateRegionInfo`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`

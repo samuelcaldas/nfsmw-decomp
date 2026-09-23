@@ -108,32 +108,29 @@ void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float m
  * @brief Constructs a physics joint constraint.
  */
 Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type)
-    : mFemale(&female), mMale(&male), mPost(post), mMinTheta(minTheta), mMaxTheta(maxTheta), mFlag(1), mType(type) {
-    VU0_m4toquat(orient, mOrient);
+    : mFemale(female),
+      mMale(male),
+      mPost(post) {
+    mType = type;
+    mEnabled = true;
+    mOuterA = maxTheta / 360.0f;
+    mInnerA = minTheta / 360.0f;
+
+    VU0_m4toquat(orient, *(UMath::Vector4 *)&mOrientation);
     float len = VU0_sqrt(VU0_v3lengthsquare(post));
-    (void)len;
 
-    mMinTheta = minTheta * 0.017453292f;
-    mMaxTheta = maxTheta * 0.017453292f;
-
-    float cMin = cosf(mMinTheta);
-    float sMin = sinf(mMinTheta);
-    float cMax = cosf(mMaxTheta);
-    float sMax = sinf(mMaxTheta);
-
-    float *fields = reinterpret_cast<float *>(reinterpret_cast<char *>(this) + 0x14);
-    fields[0] = -cMin;
-    fields[1] = sMin;
-    fields[2] = sMin * cMin;
-    fields[3] = sMin;
-    fields[4] = cMin;
-    fields[5] = sMin;
-    fields[6] = cMax;
-    fields[7] = sMax;
-    fields[8] = sMin;
-    fields[9] = cMax;
-    fields[10] = sMax;
-    fields[11] = -sMax;
+    mInnerN.x = -VU0_Cos(mInnerA * 0.5f);
+    mInnerN.y = 1.0f;
+    mInnerN.z = VU0_Sin(mInnerA * 0.5f);
+    mInnerR.x = VU0_Sin(mInnerA * 0.5f) * len;
+    mInnerR.y = 1.0f;
+    mInnerR.z = VU0_Cos(mInnerA * 0.5f) * len;
+    mOuterN.x = VU0_Cos(mOuterA * 0.5f);
+    mOuterN.y = 1.0f;
+    mOuterN.z = VU0_Sin(mOuterA * 0.5f);
+    mOuterR.x = -VU0_Sin(mOuterA * 0.5f) * len;
+    mOuterR.y = 1.0f;
+    mOuterR.z = VU0_Cos(mOuterA * 0.5f) * len;
 }
 
 void Lever::OnDebugDraw() {}

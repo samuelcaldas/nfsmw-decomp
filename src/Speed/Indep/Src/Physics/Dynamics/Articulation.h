@@ -6,6 +6,7 @@
 #include "Speed/Indep/Libs/Support/Utility/UStandard.h"
 #include "Speed/Indep/Libs/Support/Utility/UVector.h"
 #include "Speed/Indep/Src/Physics/Dynamics.h"
+#include "Speed/Indep/Src/Debug/Debugable.h"
 #include "Speed/Indep/bWare/Inc/bList.hpp"
 
 namespace Dynamics {
@@ -17,7 +18,9 @@ struct HJOINT__ {
 typedef HJOINT__ *HJOINT;
 
 enum eConstraint {
-    CONSTRAINT_NONE = 0,
+    PRISMATIC = 0,
+    HYPERBOLIC = 1,
+    CONICAL = 2,
 };
 
 enum eJointFlags {
@@ -48,21 +51,24 @@ class Lever {
     int mImmobile;
 };
 
-class Constraint {
+class Constraint : public Debugable {
   public:
     USE_FASTALLOC(Constraint);
     Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type);
     virtual void OnDebugDraw();
 
   private:
-    Quaternion mOrient;
-    char mPad0[0x30];
-    Lever *mFemale;
-    Lever *mMale;
+    Quaternion mOrientation;
+    UVector3 mInnerN;
+    UVector3 mInnerR;
+    UVector3 mOuterN;
+    UVector3 mOuterR;
+    Lever &mFemale;
+    Lever &mMale;
     UVector3 mPost;
-    float mMinTheta;
-    float mMaxTheta;
-    int mFlag;
+    float mInnerA;
+    float mOuterA;
+    bool mEnabled;
     eConstraint mType;
 };
 

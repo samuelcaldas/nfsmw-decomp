@@ -997,6 +997,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `TrackStreamer::DetermineStreamingSections`
+- **Unit**: `main/Speed/Indep/SourceLists/zTrack`
+- **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 420 bytes
+- **Matching State**: 76.45% match
+- **Signature**:
+  ```cpp
+  void TrackStreamer::DetermineStreamingSections();
+  ```
+- **Description**: Inspected and verified TrackStreamer::DetermineStreamingSections in zTrack unit with 76.45% match.
+
+---
+
 ## 8. Collision Subsystem (`zWorld2`)
 
 ### `WCollisionMgr::FindFaceInCInst`
@@ -1095,6 +1109,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param, int error_status, void *callback_param2);
   ```
 - **Description**: Decompiled and matched eStreamPackLoader::InternalLoadingHeaderPhase2Callback in zEcstasy unit, handling stream package header phase 2 loading callbacks.
+
+---
+
+### `InternalLoadStreamingEntry`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 440 bytes
+- **Matching State**: 95.41% match
+- **Signature**:
+  ```cpp
+  void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack, eStreamingEntry *streaming_entry);
+  ```
+- **Description**: Decompiled eStreamPackLoader::InternalLoadStreamingEntry to 95.41% match.
 
 ---
 

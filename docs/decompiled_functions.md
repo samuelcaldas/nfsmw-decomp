@@ -734,6 +734,49 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRaceDatabase::SimulateDDayComplete`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `unknown`
+- **Size**: 4 bytes
+- **Matching State**: 100% match
+- **Signature**:
+  ```cpp
+  void GRaceDatabase::SimulateDDayComplete();
+  ```
+- **Description**: Successfully decompiled GRaceDatabase::SimulateDDayComplete with 100% match (4 bytes).
+
+---
+
+### `LuaMessageDeliveryInfo::GetActivity`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Lua/LuaPostOffice.h`
+- **Virtual Address**: `0x801BBD2C`
+- **Size**: 8 bytes
+- **Matching State**: 100% match
+- **Signature**:
+  ```cpp
+  virtual struct GActivity *GetActivity() const override;
+  ```
+- **Description**: Decompiled and matched LuaMessageDeliveryInfo::GetActivity method (100.0% match).
+
+---
+
+### `GVault::GetAttribVault & GRaceBin::GetAwardedRaceWins`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.h`
+- **Virtual Address**: `0x801B3F60`
+- **Size**: 16 bytes
+- **Matching State**: 100% match
+- **Signature**:
+  ```cpp
+  Attrib::Vault *GVault::GetAttribVault() const;
+  unsigned short GRaceBin::GetAwardedRaceWins() const;
+  ```
+- **Description**: Implemented GVault::GetAttribVault and GRaceBin::GetAwardedRaceWins with proper documentation and instantiation helpers in zGameplay unit.
+
+---
+
 ## 4. World Subsystem (`zWorld`)
 
 ### `CarRenderInfo::UpdateLightStateTextures`
@@ -1154,4 +1197,18 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void CameraAI::MaybeKillJumpCam(unsigned int id);
   ```
 - **Description**: Cancels or ends active jump camera sequence for the specified view ID by querying `FindDirector(id)` and calling `EndJumping()`.
+
+---
+
+### `CameraAI::Reset`
+- **Unit**: `main/Speed/Indep/SourceLists/zCamera`
+- **Source File**: `src/Speed/Indep/Src/Camera/CameraAI.cpp`
+- **Virtual Address**: `0x8006A2C8`
+- **Size**: 732 bytes
+- **Matching State**: 94.1% match
+- **Signature**:
+  ```cpp
+  void CameraAI::Reset();
+  ```
+- **Description**: Decompiled CameraAI::Director methods & CameraAI::Reset in zCamera unit.
 

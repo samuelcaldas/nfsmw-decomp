@@ -798,9 +798,9 @@ def generate_build_ninja(
     # NGCCC
     ngccc = compiler_path / "ngccc.exe"
     if is_windows():
-        ngccc_cmd = f"{CHAIN}set SN_NGC_PATH={os.path.abspath(compiler_path)}&& {ngccc} $cflags -MMD -c -o $out $in"
+        ngccc_cmd = f"{CHAIN}set SN_NGC_PATH={os.path.abspath(compiler_path)}&& {ngccc} $cflags -MMD -MF $basefile.d -c -o $out $in"
     else:
-        ngccc_cmd = f"env SN_NGC_PATH={os.path.abspath(compiler_path)} {wrapper_cmd}{ngccc} $cflags -MMD -c -o $out $in"
+        ngccc_cmd = f"env SN_NGC_PATH={os.path.abspath(compiler_path)} {wrapper_cmd}{ngccc} $cflags -MMD -MF $basefile.d -c -o $out $in"
     ngccc_implicit: List[Optional[Path]] = [
         compilers_implicit or ngccc,
         wrapper_implicit,

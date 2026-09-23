@@ -33,7 +33,9 @@ cFEng::cFEng() {
     mFEng->SetExecution(true);
 }
 
-// UNSOLVED
+/**
+ * @brief Pushes an error package to the frontend manager.
+ */
 void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask) {
     if (FEDatabase == nullptr) {
         if (!cFEng::Get()->IsPackagePushed(pPackageName)) {

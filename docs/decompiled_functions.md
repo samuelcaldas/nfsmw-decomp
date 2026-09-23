@@ -4,7 +4,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 1. Frontend Subsystem (`zFe`, `zFe2`)
+## 1. Frontend Subsystem (`zFe`, `zFe2`, `zFEng`)
+
+### `FEngine::Update`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
+- **Virtual Address**: `0x80185F38`
+- **Size**: 776 bytes (194 instructions)
+- **Matching State**: 97.98% match
+- **Signature**:
+  ```cpp
+  void FEngine::Update(const i32 tDeltaTicks, uint32 lock);
+  ```
+- **Description**: Successfully decompiled FEngine::Update to 97.98% match with clean compilation and Doxygen docstring, driving frontend UI rendering ticks and input state synchronization.
+
+---
 
 ### `UIOptionsScreen::NotificationMessage`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
@@ -125,7 +139,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-## 2. Audio Subsystem (`zEAXSound2`)
+## 2. Audio Subsystem (`zEAXSound`, `zEAXSound2`)
+
+### `SFXCTL_Physics::UpdateMixerOutputs`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Physics.cpp`
+- **Virtual Address**: `0x800BFFC8`
+- **Size**: 1,212 bytes (303 instructions)
+- **Matching State**: 98.22% match
+- **Signature**:
+  ```cpp
+  void SFXCTL_Physics::UpdateMixerOutputs();
+  ```
+- **Description**: Updates physics mixer outputs for EAX sound based on vehicle speed, RPM, wheels on ground, and POV.
+
+---
 
 ### `NFSMixMapState::CreateMixCtls`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
@@ -272,6 +300,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 4. World Subsystem (`zWorld`)
 
+### `CarLoader::SetMemoryPoolSize`
+- **Unit**: `main/Speed/Indep/SourceLists/zWorld`
+- **Source File**: `src/Speed/Indep/Src/World/CarLoader.cpp`
+- **Virtual Address**: `0x802DD360`
+- **Size**: 304 bytes (76 instructions)
+- **Matching State**: 97.37% match
+- **Signature**:
+  ```cpp
+  void CarLoader::SetMemoryPoolSize(int size);
+  ```
+- **Description**: Configures car loader memory pool size with Doxygen documentation and verified matching state.
+
+---
+
 ### `CarRenderInfo::DrawKeithProjShadow`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld`
 - **Source File**: `src/Speed/Indep/Src/World/CarRender.cpp`
@@ -390,3 +432,19 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void EmitterSystem::UpdateParticles(float dt);
   ```
 - **Description**: Advances all active emitter particles by one simulation step. Handles culling expired particles, updating position, velocity, and acceleration based on drag and gravity attributes, compressing vectors, evaluating particle lifetime and alpha curves, and applying basis rotations and color transformations.
+
+---
+
+## 10. Foundation / Math Subsystem (`zBWare`)
+
+### `bASin`
+- **Unit**: `main/Speed/Indep/SourceLists/zBWare`
+- **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
+- **Virtual Address**: `0x8005D0A0`
+- **Size**: 336 bytes (84 instructions)
+- **Matching State**: 97.08% match
+- **Signature**:
+  ```cpp
+  bAngle bASin(float x);
+  ```
+- **Description**: Decompiled and matched bASin function in zBWare unit computing arcsine for angular calculations.

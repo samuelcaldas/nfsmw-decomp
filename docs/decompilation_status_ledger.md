@@ -13,11 +13,12 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### World & Render Subsystem (`zWorld`)
 - **`CarPartCuller::CullParts`**: Refined, verified (99.35% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CarRenderInfo::DrawKeithProjShadow`**: Decompiled, verified (100.0% match, 1,692 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`CarLoader::SetMemoryPoolSize`**: Decompiled, verified (97.37% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Physics Subsystem (`zPhysicsBehaviors`)
 - **`SuspensionSimple::Tire::UpdateLoaded`**: Refined, verified (98.90% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
-### Frontend Subsystem (`zFe`, `zFeOverlay`)
+### Frontend Subsystem (`zFe`, `zFeOverlay`, `zFEng`)
 - **`UIOptionsScreen::NotificationMessage` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`QuickRaceUnlocker::IsPerfPackageUnlocked` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CareerUnlocker::IsPerfPackageUnlocked` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -26,10 +27,12 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`SplashScreen::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CarCustomizeManager::IsCategoryNew` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIQRCarSelect::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (99.18% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEngine::Update` (`zFEng`)**: Decompiled, verified (97.98% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
-### Audio Subsystem (`zEAXSound2`)
+### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
 - **`NFSMixMapState::CreateMixCtls`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthesis::HandlePacketRelease`**: Decompiled, verified (98.93% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SFXCTL_Physics::UpdateMixerOutputs`**: Decompiled, verified (98.22% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Gameplay Subsystem (`zGameplay`)
 - **`GManager::GetInGameplay`, `GetNumMilestones`, `GetNumSpeedTraps`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

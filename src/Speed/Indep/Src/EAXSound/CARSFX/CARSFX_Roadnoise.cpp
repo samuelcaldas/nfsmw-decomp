@@ -363,24 +363,19 @@ void CARSFX_RoadNoise::PlayTransition(FXROADNOISE_TRANSITION ID, int side) {
     }
 }
 
-// UNSOLVED
-void CARSFX_RoadNoise::GenerateRoadNoise() {
-    float fRightVol;
-    float fLeftVol;
-    float fRightPitch;
-    float fLeftPitch;
-    float speed;
-    float ftemp;
+    /**
+     * @brief Generates road noise volumes and pitches based on vehicle speed, wheel slip, and traction.
+     */
+    void CARSFX_RoadNoise::GenerateRoadNoise() {
+    float speed = this->GetPhysCar()->GetVelocityMagnitudeMPH();
+    float fLeftVol = static_cast<float>(static_cast<int>(RoadNoiseVolGraph.GetValue(speed)) * 0x7FFF >> 15);
 
-    speed = this->GetPhysCar()->GetVelocityMagnitudeMPH();
-    fLeftVol = static_cast<float>(static_cast<int>(RoadNoiseVolGraph.GetValue(speed)) * 0x7FFF >> 15);
-
-    ftemp = bLength(this->m_pWheelCtl->m_bvTotalRightWheelSlip) * 0.01f;
+    float ftemp = bLength(this->m_pWheelCtl->m_bvTotalRightWheelSlip) * 0.01f;
     if (ftemp > 0.15f) {
         ftemp = 0.15f;
     }
 
-    fRightVol = fLeftVol + fLeftVol * ftemp;
+    float fRightVol = fLeftVol + fLeftVol * ftemp;
     fRightVol = fRightVol + fRightVol * 0.1f;
 
     ftemp = bLength(this->m_pWheelCtl->m_bvTotalLeftWheelSlip) * 0.01f;
@@ -405,8 +400,8 @@ void CARSFX_RoadNoise::GenerateRoadNoise() {
         fRightVol = 32000.0f;
     }
 
-    fRightPitch = RoadNoiseSpeedToPitch.GetValue(speed);
-    fLeftPitch = fRightPitch;
+    float fRightPitch = RoadNoiseSpeedToPitch.GetValue(speed);
+    float fLeftPitch = fRightPitch;
 
     ftemp = bLength(this->m_pWheelCtl->m_bvTotalLeftWheelSlip) * 0.01f;
     if (ftemp > 0.2f) {

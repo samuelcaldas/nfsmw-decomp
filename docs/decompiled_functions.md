@@ -6,6 +6,76 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 1. Animation Subsystem (`zAnim`, `zAnim0`)
 
+
+### `GCharacter::GetSpawnedVehicle`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.cpp`
+- **Virtual Address**: `0x801AAA54`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  IVehicle *GCharacter::GetSpawnedVehicle() const;
+  ```
+- **Description**: Retrieves the spawned vehicle instance associated with this character.
+
+---
+
+### `GRaceCustom::SetReversed`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A92C0`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceCustom::SetReversed(bool isReverseDir);
+  ```
+- **Description**: Sets whether the custom race route runs in reverse direction.
+
+---
+
+### `GRaceCustom::SetNumOpponents`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9350`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceCustom::SetNumOpponents(int numOpponents);
+  ```
+- **Description**: Configures the number of opponents for this custom race.
+
+---
+
+### `GMarker::GetType`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMarker.h`
+- **Virtual Address**: `0x801BBC78`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GetType() const override;
+  ```
+- **Description**: Returns runtime instance type identifier for GMarker (3).
+
+---
+
+### `GTrigger::GetType`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GTrigger.cpp`
+- **Virtual Address**: `0x801BBC80`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GetType() const override;
+  ```
+- **Description**: Returns runtime instance type identifier for GTrigger (5).
+
+---
 ### `CAnimPlayer::Init`
 - **Unit**: `main/Speed/Indep/SourceLists/zAnim0`
 - **Source File**: `src/Speed/Indep/Src/Animation/AnimPlayer.cpp`

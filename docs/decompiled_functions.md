@@ -3547,6 +3547,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `EAGL4::DynamicLoader::Release`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/eagl4supportdlopen.cpp`
+- **Virtual Address**: `0x8008e88c`
+- **Size**: 220 bytes (55 instructions)
+- **Matching State**: 94.82% match (improved from 91.09%)
+- **Signature**:
+  ```cpp
+  void EAGL4::DynamicLoader::Release();
+  ```
+- **Description**: Unlinks and deallocates the loaded module and dynamic symbol tables. Invokes `EAGL4Internal::EAGL4Free` directly on `HashPointer` instead of C++ `delete`, eliminating the redundant compiler-generated null check before deallocation and matching the target function's control flow, achieving 94.82% binary assembly parity (56/58 matching instructions).
+
+---
+
 ### `InitChyron`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe2`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feChyron.cpp`

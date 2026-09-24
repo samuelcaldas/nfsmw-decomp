@@ -29,9 +29,7 @@ class GTrigger : public GRuntimeInstance {
      * @brief Gets the gameplay object type for this trigger.
      * @return The trigger gameplay object type (kGameplayObjType_Trigger).
      */
-    GameplayObjType GetType() const override {
-        return kGameplayObjType_Trigger;
-    }
+    GameplayObjType GetType() const override;
 
     void NotifySimableTrigger(ISimable *isim, int triggerStimulus);
 

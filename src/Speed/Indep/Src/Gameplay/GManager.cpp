@@ -18,11 +18,29 @@ unsigned int GManager::GetNumMilestones() {
 }
 
 /**
+ * @brief Retrieves the milestone at the specified index.
+ * @param index Zero-based index of the milestone.
+ * @return Pointer to the milestone record.
+ */
+GMilestone *GManager::GetMilestone(unsigned int index) {
+    return &this->mMilestones[index];
+}
+
+/**
  * @brief Returns the number of configured speed traps.
  * @return The number of speed trap records managed by the gameplay manager.
  */
 unsigned int GManager::GetNumSpeedTraps() {
     return this->mNumSpeedTraps;
+}
+
+/**
+ * @brief Retrieves the speed trap at the specified index.
+ * @param index Zero-based index of the speed trap.
+ * @return Pointer to the speed trap record.
+ */
+GSpeedTrap *GManager::GetSpeedTrap(unsigned int index) {
+    return &this->mSpeedTraps[index];
 }
 
 /**

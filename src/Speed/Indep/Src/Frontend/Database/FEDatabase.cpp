@@ -40,15 +40,31 @@ extern Attrib::Key DriveConfigs[5][2];
 
 cFrontendDatabase *FEDatabase;
 
-// UNSOLVED
+/**
+ * @brief Copies data to a buffer if it does not exceed the maximum pointer boundary.
+ * @param save_to Destination buffer pointer.
+ * @param save_from Source data pointer.
+ * @param bytes Number of bytes to copy.
+ * @param maxptr Maximum buffer boundary pointer.
+ * @return char* Advanced buffer pointer on success, or unchanged pointer on overflow.
+ */
 char *SaveSomeData(void *save_to, void *save_from, int bytes, void *maxptr) {
-    if (reinterpret_cast<uint32>(save_to) + bytes <= reinterpret_cast<uint32>(maxptr)) {
+    char *end = static_cast<char *>(save_to) + bytes;
+    if (end <= static_cast<char *>(maxptr)) {
         bMemCpy(save_to, save_from, bytes);
-        save_to = static_cast<char *>(save_to) + bytes;
+        return end;
     }
     return static_cast<char *>(save_to);
 }
-// UNSOLVED
+
+/**
+ * @brief Reads data from a source buffer into a destination buffer within bounds.
+ * @param load_to Destination buffer pointer.
+ * @param load_from Source buffer pointer.
+ * @param bytes Number of bytes to copy.
+ * @param maxptr Maximum buffer boundary pointer.
+ * @return char* Advanced source buffer pointer.
+ */
 char *LoadSomeData(void *load_to, void *load_from, int bytes, void *maxptr) {
     if (reinterpret_cast<uint32>(load_from) + bytes <= reinterpret_cast<uint32>(maxptr)) {
         bMemCpy(load_to, load_from, bytes);

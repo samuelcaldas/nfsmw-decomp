@@ -3205,6 +3205,132 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Indexes the `mSpeedTraps` array at offset `0xBC` using `mulli r4, r4, 0x14` (`sizeof(GSpeedTrap) == 20`) and returns a pointer to the speed trap record.
 
+---
+
+### `GVault::IsLoaded`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801B3FA8`
+- **Size**: 24 bytes (6 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GVault::IsLoaded() const;
+  ```
+- **Description**: Checks whether the vault pointer `mVault` at offset `0x00` is non-null (`return this->mVault != 0;`).
+
+---
+
+### `GMilestone::GMilestone`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4704`
+- **Size**: 48 bytes (12 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GMilestone::GMilestone();
+  ```
+- **Description**: Default constructor zeroing `mTypeKey`, `mChallengeKey`, `mState`, `mFlags`, `mBinNumber`, `mRequiredValue`, and `mRecordedValue`.
+
+---
+
+### `GMilestone::Init`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B49C4`
+- **Size**: 36 bytes (9 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GMilestone::Init(unsigned int challengeKey);
+  ```
+- **Description**: Sets `mChallengeKey` at offset `0x04` and invokes `Reset()` to reinitialize milestone tracking.
+
+---
+
+### `GMilestone::Unlock`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4B1C`
+- **Size**: 24 bytes (6 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GMilestone::Unlock();
+  ```
+- **Description**: Checks if `mState` equals 1 (`kState_Locked`), transitioning it to 2 (`kState_Available`) if currently locked.
+
+---
+
+### `GMilestone::ValueMeetsGoal`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4B34`
+- **Size**: 56 bytes (14 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GMilestone::ValueMeetsGoal(float value);
+  ```
+- **Description**: Evaluates if the current metric meets the goal threshold, taking into account `mFlags` bit 0 inversion logic.
+
+---
+
+### `GSpeedTrap::GSpeedTrap`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B4D68`
+- **Size**: 48 bytes (12 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GSpeedTrap::GSpeedTrap();
+  ```
+- **Description**: Default constructor zeroing `mFlags`, `mBinNumber`, `mSpeedTrapKey`, `mCameraMarkerKey`, `mRequiredValue`, and `mRecordedValue`.
+
+---
+
+### `GSpeedTrap::Init`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B4F68`
+- **Size**: 36 bytes (9 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GSpeedTrap::Init(Attrib::Key trapKey);
+  ```
+- **Description**: Assigns the speed trap attribute key `mSpeedTrapKey` at offset `0x04` and invokes `Reset()`.
+
+---
+
+### `GSpeedTrap::Unlock`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B50A4`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GSpeedTrap::Unlock();
+  ```
+- **Description**: Sets `kFlag_Unlocked` (bit 0) in 16-bit `mFlags` at offset `0x00`.
+
+---
+
+### `GSpeedTrap::Activate`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B50B4`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GSpeedTrap::Activate();
+  ```
+- **Description**: Sets `kFlag_Active` (bit 1) in 16-bit `mFlags` at offset `0x00`.
+
 
 
 

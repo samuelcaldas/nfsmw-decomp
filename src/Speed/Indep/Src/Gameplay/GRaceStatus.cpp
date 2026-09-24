@@ -4,6 +4,30 @@
 extern void RedoTopologyAndSceneryGroups();
 
 /**
+ * @brief Sets the name for this racer.
+ * @param name Pointer to racer name string.
+ */
+void GRacerInfo::SetName(const char *name) {
+    this->mName = name;
+}
+
+/**
+ * @brief Sets the index for this racer.
+ * @param index Racer index.
+ */
+void GRacerInfo::SetIndex(int index) {
+    this->mIndex = index;
+}
+
+/**
+ * @brief Sets the ranking for this racer.
+ * @param ranking Racer ranking value.
+ */
+void GRacerInfo::SetRanking(int ranking) {
+    this->mRanking = ranking;
+}
+
+/**
  * @brief Handles notification when a vehicle is removed from the cache.
  *
  * @param vehicle Pointer to the vehicle removed from the cache.
@@ -139,5 +163,12 @@ GRacerInfo &GRaceStatus::GetRacerInfo(int index) {
  */
 void GRaceStatus::EnterSuddenDeath() {
     this->mSuddenDeathMode = true;
+}
+
+/**
+ * @brief Marks this racer's challenge as complete.
+ */
+void GRacerInfo::ChallengeComplete() {
+    this->mChallengeComplete = true;
 }
 

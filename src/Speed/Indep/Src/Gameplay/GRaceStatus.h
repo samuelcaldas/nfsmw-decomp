@@ -176,7 +176,7 @@ class GRacerInfo {
     void GetLinearVelocity(UMath::Vector3 &vel) const;
     float CalcAverageSpeed() const;
     void SetSimable(ISimable *simable);
-    void SetName(char *name);
+    void SetName(const char *name);
     void SetIndex(int index);
     void SetRanking(int ranking);
     void AddToPointTotal(float points);

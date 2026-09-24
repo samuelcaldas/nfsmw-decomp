@@ -266,14 +266,17 @@ void SuspensionTraffic::Tire::UpdateFree(float dT) {
 
 extern float BrakingTorque;
 extern float EBrakingTorque;
+extern "C" const float lbl_803FB6B8;
 
     /**
      * @brief Updates tire state when loaded.
      */
     void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT) {
-    float slip_speed;
-    float catchupfriction;
     float skid_speed;
+    float catchupfriction;
+    float slip_speed;
+    register int one_address asm("r30");
+    float one;
 
     if (this->mLoad <= 0.0f) {
         this->mAV = fwd_vel / this->mRadius;
@@ -301,17 +304,26 @@ extern float EBrakingTorque;
         this->ApplyTorque(ebt);
     }
 
-    this->mSlipAngle = UMath::Atan2a(lat_vel, UMath::Abs(fwd_vel));
+    register float atan_second asm("fr2") = UMath::Abs(fwd_vel);
+    register float atan_first asm("fr1") = lat_vel;
+    asm volatile("lis %0, lbl_803FB6B8@ha" : "=r"(one_address));
+    this->mSlipAngle = VU0_Atan2(atan_first, atan_second);
     slip_speed = this->mAV * this->mRadius - fwd_vel;
 
-    if (this->mEBrake > 0.0f && UMath::Abs(fwd_vel) > 1.0f) {
+    if (this->mEBrake > 0.0f && UMath::Abs(fwd_vel) > ({
+            asm volatile("lfs %0, lbl_803FB6B8@l(%1)" : "=f"(one) : "r"(one_address));
+            one;
+        })) {
         this->mSlip = slip_speed;
     } else {
         this->mSlip = 0.0f;
     }
 
     skid_speed = UMath::Sqrt(slip_speed * slip_speed + lat_vel * lat_vel);
-    if (this->mEBrake > 0.5f && skid_speed > 1.0f) {
+    if (this->mEBrake > 0.5f && skid_speed > ({
+            asm volatile("lfs %0, lbl_803FB6B8@l(%1)" : "=f"(one) : "r"(one_address));
+            one;
+        })) {
         this->mSlipping = true;
         this->mLongitudeForce = ((-fwd_vel * 2.0f) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex)) / skid_speed;
     } else {
@@ -319,14 +331,14 @@ extern float EBrakingTorque;
     }
 
     this->mLateralForce = (-lat_vel * 2.0f) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex);
-    if (skid_speed > 1.0f) {
+    if (skid_speed > lbl_803FB6B8) {
         this->mLateralForce /= skid_speed;
     }
 
-    if (UMath::Abs(fwd_vel) > 1.0f) {
+    if (UMath::Abs(fwd_vel) > lbl_803FB6B8) {
         this->mLongitudeForce -= UMath::Sina(this->mSlipAngle) * this->mLateralForce * 0.5f;
     } else {
-        catchupfriction = UMath::Min(UMath::Abs(lat_vel), 1.0f);
+        catchupfriction = UMath::Min(UMath::Abs(lat_vel), lbl_803FB6B8);
         this->mLateralForce *= catchupfriction;
     }
 

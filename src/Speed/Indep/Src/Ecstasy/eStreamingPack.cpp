@@ -814,11 +814,17 @@ void eStreamPackLoader::InternalLoadingHeaderPhase2Callback(void *callback_param
 
     stream_pack_loader->LoadingHeaderPhase2Callback(&user_load_info);
 
-    int load_amount = user_load_info.LoadResourceFileAmount;
-    streaming_pack->StreamingEntryTable = user_load_info.StreamingEntryTable;
-    streaming_pack->StreamingEntryNumEntries = user_load_info.StreamingEntryNumEntries;
-    streaming_pack->SolidListHeader = user_load_info.SolidListHeader;
-    streaming_pack->pTexturePackHeader = user_load_info.pTexturePackHeader;
+    register eStreamingEntry *streaming_entry_table asm("r0") = user_load_info.StreamingEntryTable;
+    asm volatile("");
+    register int load_amount asm("r7") = user_load_info.LoadResourceFileAmount;
+    register int streaming_entry_num_entries asm("r9") = user_load_info.StreamingEntryNumEntries;
+    register eSolidListHeader *solid_list_header asm("r11") = user_load_info.SolidListHeader;
+    register TexturePackHeader *texture_pack_header asm("r10") = user_load_info.pTexturePackHeader;
+
+    streaming_pack->StreamingEntryTable = streaming_entry_table;
+    streaming_pack->StreamingEntryNumEntries = streaming_entry_num_entries;
+    streaming_pack->SolidListHeader = solid_list_header;
+    streaming_pack->pTexturePackHeader = texture_pack_header;
 
     if (load_amount != 0) {
         streaming_pack->pResourceFile = CreateResourceFile(streaming_pack->Filename, RESOURCE_FILE_CAR, 0x0, user_load_info.LoadResourceFilePosition,

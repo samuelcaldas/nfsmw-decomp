@@ -759,6 +759,35 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GMarker::GMarker`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMarker.cpp`
+- **Virtual Address**: `0x8019BE44`
+- **Size**: 528 bytes (132 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GMarker::GMarker(const unsigned int &markerKey);
+  ```
+- **Description**: Constructs a spatial marker in the gameplay world, extracting position and orientation from attributes, rotating facing direction by yaw rotation, and setting world position and direction vectors. 100.0% binary match with SN ProDG 3.9.3.
+
+---
+
+### `GMarker::~GMarker`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMarker.cpp`
+- **Virtual Address**: `0x8019C054`
+- **Size**: 104 bytes (26 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GMarker::~GMarker();
+  ```
+- **Description**: Destructor for GMarker gameplay runtime instance, restoring virtual table pointers and tearing down base runtime instance. 100.0% binary match with SN ProDG 3.9.3.
+
+
+---
+
 ### `CARSFX_RoadNoise::Play`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/CARSFX_Roadnoise.cpp`

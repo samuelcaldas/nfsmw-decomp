@@ -6,6 +6,7 @@
 #endif
 
 namespace Attrib { class Vault; }
+class AttribVaultPackImage;
 
 class GVault {
   public:
@@ -23,6 +24,9 @@ class GVault {
     unsigned int mPad2c; // offset 0x2c
     unsigned int mField_0x30; // offset 0x30
     unsigned int mObjectCount; // offset 0x34
+
+    ~GVault();
+
 
     /**
      * @brief Gets the name of the vault.
@@ -70,6 +74,8 @@ class GVault {
     bool IsRaceBin() const;
     void SetRaceBin();
     void LoadSyncTransient();
+    void LoadResident(AttribVaultPackImage *image);
+    void Unload();
 };
 
 #endif

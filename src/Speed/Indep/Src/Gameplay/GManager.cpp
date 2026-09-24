@@ -177,3 +177,50 @@ unsigned int GManager::SaveSpeedTraps(GSpeedTrap *dest) {
     GMemCpy(dest, this->mSpeedTraps, this->mNumSpeedTraps * sizeof(GSpeedTrap));
     return this->mNumSpeedTraps;
 }
+
+/**
+ * @brief Allocates icon buffer storage.
+ */
+void GManager::AllocateIcons() {
+    this->mNumIcons = 0;
+    this->mNumVisibleIcons = 0;
+    this->mIcons = new GIcon *[200];
+}
+
+/**
+ * @brief Releases the icon buffer storage.
+ */
+void GManager::ReleaseIcons() {
+    delete[] this->mIcons;
+    this->mNumIcons = 0;
+    this->mNumVisibleIcons = 0;
+    this->mIcons = NULL;
+}
+
+/**
+ * @brief Frees all allocated icons.
+ */
+void GManager::FreeAllIcons() {
+    while (this->mNumIcons != 0) {
+        this->FreeIconAt(0);
+    }
+}
+
+/**
+ * @brief Releases milestone storage buffer.
+ */
+void GManager::ReleaseMilestones() {
+    delete[] this->mMilestones;
+    this->mMilestones = NULL;
+    this->mNumMilestones = 0;
+}
+
+/**
+ * @brief Releases speed trap storage buffer.
+ */
+void GManager::ReleaseSpeedTraps() {
+    delete[] this->mSpeedTraps;
+    this->mSpeedTraps = NULL;
+    this->mNumSpeedTraps = 0;
+}
+

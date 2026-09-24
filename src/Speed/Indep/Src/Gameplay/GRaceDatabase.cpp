@@ -50,3 +50,11 @@ void GRaceCustom::SetNumOpponents(int numOpponents) {
 unsigned int GRaceDatabase::GetBinCount() {
     return this->mBinCount;
 }
+
+/**
+ * @brief Retrieves the gameplay attribute object for this race parameter set.
+ * @return Pointer to gameplay attribute object.
+ */
+const Attrib::Gen::gameplay *GRaceParameters::GetGameplayObj() const {
+    return this->mRaceRecord;
+}

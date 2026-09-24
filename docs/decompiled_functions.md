@@ -3868,5 +3868,18 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Destructor for LuaMessageDeliveryInfo. Checks if the message's Lua table was constructed (`mLuaTableBuilt`), restores the Lua stack by popping the table via `lua_settop(mLuaState, -2)`, and notifies the runtime that message delivery has concluded via `LuaRuntime::Get().EndDelivery()`. Achieves 100.0% binary assembly parity (36/36 instructions).
 
+---
+
+### `eStreamPackLoader::InternalLoadStreamingEntry`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/eStreamingPack.cpp`
+- **Virtual Address**: `0x800F4ED4`
+- **Size**: 440 bytes (110 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack, eStreamingEntry *streaming_entry);
+  ```
+- **Description**: Internal loader subroutine for chunk streaming pack entries. Handles reference count incrementing, compressed texture pool checks, memory warning reporting, asynchronous queue submission via `AddQueuedFile2`, and inlined pack accounting via `streaming_pack->RegisterLoadStreamingEntry(streaming_entry)`. Bound callee-saved registers (`r25` through `r31`) and matched instruction scheduling to achieve 100.0% binary assembly parity (110/110 instructions, 440 bytes).
 
 

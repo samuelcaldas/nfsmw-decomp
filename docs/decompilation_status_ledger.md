@@ -199,7 +199,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`epInitViews`**: Decompiled, verified (84.3% match, 516 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::CreateStreamingPack`**: Decompiled, verified (92.31% match, 372 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::InternalLoadingHeaderPhase2Callback`**: Decompiled, verified (94.19% match, 308 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`eStreamPackLoader::InternalLoadStreamingEntry`**: Decompiled, verified (95.41% match, 440 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`eStreamPackLoader::InternalLoadStreamingEntry`**: Decompiled, verified (**100.0% match**, 440 bytes, 110/110 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Dynamics Subsystem (`zDynamics`)
 - **`Dynamics::Collision::Geometry::Set`**: Decompiled, verified (100.0% fuzzy match, 704 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**

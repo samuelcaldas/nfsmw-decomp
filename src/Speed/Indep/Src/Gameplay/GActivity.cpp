@@ -1,4 +1,8 @@
 #include "Speed/Indep/Src/Gameplay/GActivity.h"
+#include "Speed/Indep/Src/Generated/Events/EChangeState.hpp"
+#include "Speed/Indep/Src/Generated/Messages/MStateEnter.h"
+#include "Speed/Indep/Src/Generated/Messages/MStateExit.h"
+#include "Speed/Indep/Src/Lua/LuaRuntime.h"
 #include "Speed/Indep/bWare/Inc/Strings.hpp"
 
 GActivity::GActivity(const Attrib::Key &activityKey)
@@ -16,6 +20,34 @@ GActivity::~GActivity() {
     }
     this->UnregisterMessageHandlers();
     this->mStateHandlers.clear();
+}
+
+void GActivity::EnterState(GState *state) {
+    if (!this->mVarsInLuaVM) {
+        this->DeserializeVars();
+    }
+    if (state == this->mCurrentState) {
+        return;
+    }
+    if (this->mCurrentState != nullptr) {
+        this->HandleLocalMessage(MStateExit::_GetKind());
+    }
+    this->UnregisterMessageHandlers();
+    if (!this->mVarsInLuaVM) {
+        this->DeserializeVars();
+    }
+    this->mCurrentState = state;
+    if (state != nullptr) {
+        this->RegisterMessageHandlers(state);
+        this->HandleLocalMessage(MStateEnter::_GetKind());
+    }
+}
+
+int GActivity::ChangeStateFromScript(lua_State *L) {
+    GActivity *activity = static_cast<GActivity *>(lua_touserdata(L, lua_upvalueindex(1)));
+    GState *state = activity->GetStateByName(lua_tostring(L, 1));
+    new EChangeState(activity->GetCollection(), state->GetCollection());
+    return 0;
 }
 
 void GActivity::GatherStatesAndHandlers() {

@@ -14,6 +14,9 @@ DECLARE_CONTAINER_TYPE(ID_StateToVectors);
 
 typedef UTL::Std::map<GState *, UTL::Std::vector<GHandler *, _type_ID_GHandlerVector>, _type_ID_StateToVectors> StateToHandlers;
 
+class UCrc32;
+struct lua_State;
+
 // total size: 0x48
 class GActivity : public GRuntimeInstance {
   public:
@@ -45,14 +48,18 @@ class GActivity : public GRuntimeInstance {
     void EnterState(GState *state);
     void Run();
     void Suspend();
+    GState *GetStateByName(const char *name);
     void SerializeVars(bool write);
     void DeserializeVars();
+    void RegisterMessageHandlers(GState *state);
     void UnregisterMessageHandlers();
 
     void GatherStatesAndHandlers();
     int StoreHandlers(GState *state, StateToHandlers::mapped_type *handlers);
     bool CollectionIsStateForActivity(GState *state);
     bool CollectionIsHandlerForState(GState *state, GHandler *handler);
+    static int ChangeStateFromScript(lua_State *L);
+    void HandleLocalMessage(UCrc32 messageKind);
 
   private:
     GState *mCurrentState;            // offset 0x28, size 0x4

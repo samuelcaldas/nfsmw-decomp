@@ -1536,13 +1536,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysicsBehaviors`
 - **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionTraffic.cpp`
 - **Virtual Address**: `0x8024B310`
-- **Size**: 856 bytes
-- **Matching State**: 99.79% match
+- **Size**: 856 bytes (214 instructions)
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT);
   ```
-- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded to 99.79% match by preserving register r30 holding `lbl_803FB6B8` across VU0_Atan2, loading float constants through r30, and mapping `fr1`/`fr2` across the slip angle calculation.
+- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded to 100.0% perfect match (214/214 instructions) by binding negated lateral velocity to register fr11 and computing double-lateral velocity via addition, eliminating the floating-point register swap.
 
 ---
 

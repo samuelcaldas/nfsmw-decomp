@@ -821,12 +821,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsusynth.cpp`
 - **Virtual Address**: `0x800EB9F0`
 - **Size**: 1,936 bytes (484 instructions)
-- **Matching State**: 98.93% match
+- **Matching State**: 99.5% match
 - **Signature**:
   ```cpp
-  void GinsuSynthesis::HandlePacketRelease(short *);
+  void GinsuSynthesis::HandlePacketRelease(short *samples);
   ```
-- **Description**: Processes packet audio release and synthesizes granular playback buffers.
+- **Description**: Processes packet audio release and synthesizes granular playback buffers. Reordered blend initialization to reach 99.5% match in commit `35a2f62d`; the full-tree regression check reported no changes.
 
 ---
 

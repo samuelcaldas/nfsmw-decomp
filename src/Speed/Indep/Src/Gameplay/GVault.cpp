@@ -55,3 +55,34 @@ unsigned int GVault::GetLoadDataOffset() const {
 unsigned int GVault::GetLoadDataSize() const {
     return this->mLoadDataSize;
 }
+
+/**
+ * @brief Reports whether the vault is resident.
+ * @return True if resident; otherwise false.
+ */
+bool GVault::IsResident() const {
+    return (this->mFlags & 1) != 0;
+}
+
+/**
+ * @brief Reports whether the vault is transient.
+ * @return True if transient; otherwise false.
+ */
+bool GVault::IsTransient() const {
+    return (this->mFlags & 1) == 0;
+}
+
+/**
+ * @brief Reports whether the vault is a race bin.
+ * @return True if race bin; otherwise false.
+ */
+bool GVault::IsRaceBin() const {
+    return (this->mFlags & 2) != 0;
+}
+
+/**
+ * @brief Sets the race bin flag on the vault.
+ */
+void GVault::SetRaceBin() {
+    this->mFlags |= 2;
+}

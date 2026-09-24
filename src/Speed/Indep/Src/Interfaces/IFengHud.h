@@ -37,7 +37,7 @@ class IGenericMessage : public UTL::COM::IUnknown {
     DECL_INTERFACE(IGenericMessage);
 
     virtual bool RequestGenericMessage(const char *string, bool singleFrame, uint32 fengHash, uint32 iconTextureHash, uint32 iconFengHash,
-                                       GenericMessage_Priority priority);
+                                       GenericMessage_Priority priority) = 0;
     virtual void RequestGenericMessageZoomOut(uint32 fengHash) = 0;
     virtual bool IsGenericMessageShowing() = 0;
     virtual GenericMessage_Priority GetCurrentGenericMessagePriority() = 0;

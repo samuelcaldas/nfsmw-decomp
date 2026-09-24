@@ -24,6 +24,10 @@ class GHandler : public GRuntimeInstance {
         return kGameplayObjType_Handler;
     }
 
+    static GameplayObjType GetTypeStatic() {
+        return kGameplayObjType_Handler;
+    }
+
     void Attach(lua_State *state);
     void Detach(lua_State *state);
     void ExecuteScriptedHandler(LuaMessageDeliveryInfo *info);

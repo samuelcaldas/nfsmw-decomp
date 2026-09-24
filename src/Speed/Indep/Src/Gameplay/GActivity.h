@@ -49,6 +49,11 @@ class GActivity : public GRuntimeInstance {
     void DeserializeVars();
     void UnregisterMessageHandlers();
 
+    void GatherStatesAndHandlers();
+    int StoreHandlers(GState *state, StateToHandlers::mapped_type *handlers);
+    bool CollectionIsStateForActivity(GState *state);
+    bool CollectionIsHandlerForState(GState *state, GHandler *handler);
+
   private:
     GState *mCurrentState;            // offset 0x28, size 0x4
     GState *mRegisteredHandlersState; // offset 0x2C, size 0x4

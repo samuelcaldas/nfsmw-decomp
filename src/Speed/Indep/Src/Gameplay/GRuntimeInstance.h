@@ -49,6 +49,9 @@ class GRuntimeInstance : public Attrib::Gen::gameplay {
     template <class T>
     static T *FindObject(unsigned int key);
 
+    template <class T>
+    friend class GObjectIterator;
+
     static GRuntimeInstance *sRingListHead[kGameplayObjType_Count];
 
   private:
@@ -58,5 +61,56 @@ class GRuntimeInstance : public Attrib::Gen::gameplay {
     GRuntimeInstance *mPrev;              // offset 0x1C, size 0x4
     GRuntimeInstance *mNext;              // offset 0x20, size 0x4
 };
+
+template <class T>
+class GObjectIterator {
+  public:
+    GObjectIterator(unsigned int flags = ~0);
+
+    void Advance();
+
+    GObjectIterator &operator++() {
+        this->Advance();
+        return *this;
+    }
+
+    operator bool() const {
+        return this->mCurrent != nullptr;
+    }
+
+    operator T *() const {
+        return this->mCurrent;
+    }
+
+    T *operator->() const {
+        return this->mCurrent;
+    }
+
+  private:
+    T *mCurrent;
+    unsigned int mFlags;
+};
+
+template <class T>
+GObjectIterator<T>::GObjectIterator(unsigned int flags)
+    : mCurrent(nullptr),
+      mFlags(flags) {
+    this->mCurrent = static_cast<T *>(GRuntimeInstance::sRingListHead[T::GetTypeStatic()]);
+    if (this->mCurrent != nullptr && (this->mCurrent->mFlags & flags) == 0) {
+        this->Advance();
+    }
+}
+
+template <class T>
+void GObjectIterator<T>::Advance() {
+    int type = T::GetTypeStatic();
+    do {
+        this->mCurrent = static_cast<T *>(this->mCurrent->mNext);
+        if (this->mCurrent == GRuntimeInstance::sRingListHead[type]) {
+            this->mCurrent = nullptr;
+            return;
+        }
+    } while ((this->mCurrent->mFlags & this->mFlags) == 0);
+}
 
 #endif

@@ -20,6 +20,10 @@ class GState : public GRuntimeInstance {
     GameplayObjType GetType() const override {
         return kGameplayObjType_State;
     }
+
+    static GameplayObjType GetTypeStatic() {
+        return kGameplayObjType_State;
+    }
 };
 
 #endif

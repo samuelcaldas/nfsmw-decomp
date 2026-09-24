@@ -566,9 +566,7 @@ class GRaceStatus : public UTL::COM::Object, public IVehicleCache {
         return mTaskTime;
     }
 
-    void SetActivelyRacing(bool racing) {
-        mActivelyRacing = racing;
-    }
+    void SetActivelyRacing(bool racing);
 
     bool GetActivelyRacing() const {
         return mActivelyRacing;

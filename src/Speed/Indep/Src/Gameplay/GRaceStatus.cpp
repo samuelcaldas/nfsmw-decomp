@@ -41,6 +41,14 @@ void GRaceStatus::SetTaskTime(float seconds) {
 }
 
 /**
+ * @brief Sets whether the race is actively occurring.
+ * @param racing True if actively racing, false otherwise.
+ */
+void GRaceStatus::SetActivelyRacing(bool racing) {
+    this->mActivelyRacing = racing;
+}
+
+/**
  * @brief Retrieves the count of racers participating in the current event.
  *
  * @return int Total number of racers.

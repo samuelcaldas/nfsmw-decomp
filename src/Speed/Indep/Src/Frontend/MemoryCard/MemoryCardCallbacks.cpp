@@ -9,6 +9,8 @@
 #include "Speed/Indep/bWare/Inc/bWare.hpp"
 
 extern char g_GC_Disk_GameName[];
+extern const char lbl_803DF5C4[];
+
 void DisplayMessage(const wchar_t *msg, unsigned int count, const wchar_t **str);
 
 void DisplayStatus(int i) {}
@@ -256,10 +258,13 @@ void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info) {
         fDefault = 2;
     }
     if (GetMemcard()->IsTypeProfile()) {
-        unsigned int sec = GetMemcard()->m_DataSize;
-        int gs = iGuessSize;
-        int fd = fDefault;
-        GetScreen()->AddItem(info->mName, "", gs, fd);
+        GetMemcard();
+        UIMemcardBase *pScreen = GetScreen();
+        register const char *pName asm("r4") = info->mName;
+        asm volatile("" : : "r"(pName) : "r5");
+        register int sizeArg asm("r6") = iGuessSize;
+        register int defaultArg asm("r7") = fDefault;
+        pScreen->AddItem(pName, lbl_803DF5C4, sizeArg, defaultArg);
     } else {
         if (info->mStatus != RealmcIface::STATUS_OK) {
             return;
@@ -669,6 +674,8 @@ void DisplayUnicode(const wchar_t *str) {
         pWChar++;
     } while (*pWChar != 0);
 }
+
+extern const char lbl_803DF5C4[];
 
 void DisplayMessage(const wchar_t *msg, unsigned int count, const wchar_t **str) {
     DisplayUnicode(msg);

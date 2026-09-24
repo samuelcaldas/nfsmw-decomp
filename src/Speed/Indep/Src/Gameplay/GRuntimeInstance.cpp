@@ -207,10 +207,9 @@ bool GRuntimeInstance::IsDerivedFromTemplate(unsigned int templateKey) const {
  */
 template <class T>
 T *GRuntimeInstance::FindObject(unsigned int key) {
-    int type = T::GetTypeStatic();
-    GRuntimeInstance *head = sRingListHead[type];
-    if (head != nullptr) {
-        GRuntimeInstance *curr = head;
+    GameplayObjType type = T::GetTypeStatic();
+    GRuntimeInstance *curr = sRingListHead[type];
+    if (curr != nullptr) {
         do {
             if (curr->GetCollection() == key) {
                 return static_cast<T *>(curr);

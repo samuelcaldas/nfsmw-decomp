@@ -143,6 +143,7 @@ bool GinsuSynthData::BindToData(void *ptr) {
     this->mMinFrequency = memdata->minFrequency;
     this->mMaxFrequency = memdata->maxFrequency;
 
+    register bool result asm("r3");
     {
         register int segCount asm("r9") = memdata->segCount;
         this->mSegCount = segCount;
@@ -150,28 +151,27 @@ bool GinsuSynthData::BindToData(void *ptr) {
         register int cycleCount asm("r6") = memdata->cycleCount;
         this->mCycleCount = cycleCount;
 
-        register int sampleCount asm("r11") = memdata->sampleCount;
+        register int sampleCount asm("r0") = memdata->sampleCount;
         this->mSampleCount = sampleCount;
+        register int minperiod asm("r7") = sampleCount;
 
-        register int sampleRate asm("r10") = memdata->sampleRate;
+        register int sampleRate asm("r11") = memdata->sampleRate;
         this->mSampleRate = sampleRate;
 
-        register int *freqPos asm("r8") = reinterpret_cast<int *>(memdata->data);
+        register int *freqPos asm("r10") = reinterpret_cast<int *>(memdata->data);
         this->mFreqPos = freqPos;
 
-        int *cyclePos = freqPos + (segCount + 1);
+        register int *cyclePos asm("r8") = freqPos + (segCount + 1);
         this->mCyclePos = cyclePos;
 
-        this->mSampleData = reinterpret_cast<unsigned char *>(cyclePos + (cycleCount + 1));
+        register int *sampleDataPos asm("r9") = cyclePos + (cycleCount + 1);
+        this->mSampleData = reinterpret_cast<unsigned char *>(sampleDataPos);
 
-        register int minperiod asm("r3") = sampleCount;
+        register int i asm("r5") = 0;
+        register int r0_val asm("r0") = -1;
+        this->mCurrentBlock = r0_val;
 
-        {
-            register int r0_val asm("r0") = -1;
-            this->mCurrentBlock = r0_val;
-        }
-
-        for (register int i asm("r5") = 0; i < cycleCount; i++) {
+        for (; i < cycleCount; i++) {
             int period = cyclePos[i + 1] - cyclePos[i];
 
             if (period < minperiod) {
@@ -179,10 +179,12 @@ bool GinsuSynthData::BindToData(void *ptr) {
             }
         }
 
+        result = true;
         this->mMinPeriod = static_cast<float>(minperiod);
+        asm volatile("" : : "r"(minperiod));
     }
 
-    return true;
+    return result;
 }
 
 int GinsuSynthData::FrequencyToSample(float freq) const {

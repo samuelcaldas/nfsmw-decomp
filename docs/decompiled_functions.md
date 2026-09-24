@@ -392,12 +392,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/Frontend/MemoryCard/MemoryCardCallbacks.cpp`
 - **Virtual Address**: `0x80139CFC`
 - **Size**: 512 bytes
-- **Matching State**: 98.0% match
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info);
   ```
-- **Description**: Successfully updated MemcardCallbacks::FoundEntry in MemoryCardCallbacks.cpp, achieving 98.0% match parity with 0 regressions.
+- **Description**: Successfully decompiled and matched MemcardCallbacks::FoundEntry to 100.0% parity with zero regressions.
 
 ---
 

@@ -54,7 +54,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEQuaternion::GetMatrix` (`zFEng`)**: Decompiled, verified (**100.0% match**, 196 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UIOptionsScreen::NotificationMessage` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`PauseMenu::NotificationMessage` (`zFe`)**: Decompiled, verified (97.7% match, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`MemcardCallbacks::FoundEntry` (`zFe`)**: Decompiled, verified (98.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`MemcardCallbacks::FoundEntry` (`zFe`)**: Decompiled, verified (**100.0% match**, 512 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`MemcardCallbacks::CardChecked` (`zFe`)**: Decompiled, verified (100.0% match, 668 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`IJoyHelper::EmulateMemoryCardLibrary` (`zFe`)**: Decompiled, verified (98.8% match, 732 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`QuickRaceUnlocker::IsPerfPackageUnlocked` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

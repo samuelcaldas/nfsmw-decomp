@@ -585,13 +585,16 @@ bool UnlockSystem::IsUnlockableUnlocked(eUnlockFilters filter, eUnlockableEntity
     return answer;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether a car part is unlocked.
+ */
 bool UnlockSystem::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPart *part, int player, bool backroom) {
     if (UnlockAllThings)
         return true;
     bool answer = false;
     if (filter & UNLOCK_QUICK_RACE) {
-        answer = QuickRaceUnlocker::IsCarPartUnlocked(filter, carslot, part, player, backroom) != 0;
+        bool quick_race_answer = QuickRaceUnlocker::IsCarPartUnlocked(filter, carslot, part, player, backroom) != 0;
+        answer = quick_race_answer;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         answer = static_cast<bool>(answer | CareerUnlocker::IsCarPartUnlocked(filter, carslot, part, backroom));

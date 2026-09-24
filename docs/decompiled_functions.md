@@ -1579,13 +1579,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `SuspensionSimple::Tire::UpdateLoaded`
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysicsBehaviors`
 - **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionSimple.cpp`
-- **Size**: 1,972 bytes
-- **Matching State**: 99.28% match
+- **Virtual Address**: `0x8024D320`
+- **Size**: 1,972 bytes (493 instructions)
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   float SuspensionSimple::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float body_speed, float load, float dT, float drag_reduction);
   ```
-- **Description**: Updates loaded tire physics behavior including lateral and longitudinal forces, braking torque application, slip calculation, and normal load integration during vehicle simulation ticks. Reordered the brake-locked longitudinal and lateral force calculations to better match the target instruction sequence, improving the function match to 99.28%.
+- **Description**: Updates loaded tire physics simulation including lateral and longitudinal forces, braking torque application, slip angle calculations, and load integration during vehicle simulation ticks. Evaluates dynamic grip scaled by traction boost and pilot factor before dividing by skid speed, scaling by slip, and constraining via `UMath::Limit(this->mLongitudeForce, groundfriction)`, achieving 100.0% binary matching parity (493/493 instructions).
 
 ---
 

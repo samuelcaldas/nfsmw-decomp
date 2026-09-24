@@ -49,6 +49,14 @@ void GRaceStatus::SetActivelyRacing(bool racing) {
 }
 
 /**
+ * @brief Sets whether this event has been won.
+ * @param won True if the event has been won.
+ */
+void GRaceStatus::SetHasBeenWon(bool won) {
+    this->mHasBeenWon = won;
+}
+
+/**
  * @brief Retrieves the count of racers participating in the current event.
  *
  * @return int Total number of racers.

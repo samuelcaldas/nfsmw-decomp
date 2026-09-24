@@ -7,6 +7,14 @@ GVault *GRaceBin::GetChildVault() const {
 }
 
 /**
+ * @brief Retrieves the number of challenges completed for this race bin.
+ * @return Number of completed challenges.
+ */
+int GRaceBin::GetCompletedChallenges() const {
+    return this->mStats.mChallengesCompleted;
+}
+
+/**
  * @brief Sets whether this race runs in reverse.
  * @param isReverseDir Whether the race direction is reversed.
  */

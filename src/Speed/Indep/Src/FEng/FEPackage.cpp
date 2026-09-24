@@ -278,7 +278,9 @@ uint32 eFrameCounter = 0; // size: 0x4, Decl: 400
 uint32 eFrameCounterOLD;  // size: 0x4, address: 0x80473E0C, Decl: 401
 uint32 objCount;          // size: 0x4, address: 0x80473E10, Decl: 402
 
-// UNSOLVED
+/**
+ * @brief Updates an object's script state and animation tracks.
+ */
 void FEPackage::UpdateObject(FEObject *pObject, const i32 tDeltaTicks) {
     if (eFrameCounterOLD == eFrameCounter) {
         objCount++;
@@ -294,8 +296,8 @@ void FEPackage::UpdateObject(FEObject *pObject, const i32 tDeltaTicks) {
     }
 
     FEScript *pScript = pObject->pCurrentScript;
-    int tPrevTime = pScript->CurTime;
     int ScrLength = pScript->Length;
+    int tPrevTime = pScript->CurTime;
     pScript->CurTime = tPrevTime + iTickIncrement;
     if (pScript->CurTime < 0) {
         pScript->CurTime = 0;
@@ -314,8 +316,8 @@ void FEPackage::UpdateObject(FEObject *pObject, const i32 tDeltaTicks) {
                 pScript = pScript->pChainTo;
                 pObject->SetCurrentScript(pScript);
                 pScript->CurTime = tOverTime;
-                if (pScript->Events.GetCount()) {
-                    goto issueFrom0;
+                if (pScript->Events.GetCount() != 0) {
+                    IssueScriptMessages(pEnginePtr, pObject, pScript, 0, pScript->CurTime);
                 }
             } else {
                 PlayAction = pScript->Flags & 3;
@@ -365,7 +367,6 @@ void FEPackage::UpdateObject(FEObject *pObject, const i32 tDeltaTicks) {
                     case 1:
                         if (pScript->CurTime < tPrevTime) {
                             IssueScriptMessages(pEnginePtr, pObject, pScript, tPrevTime, ScrLength);
-                        issueFrom0:
                             IssueScriptMessages(pEnginePtr, pObject, pScript, 0, pScript->CurTime);
                             break;
                         }
@@ -402,17 +403,17 @@ finalize:
             break;
         case FE_Movie:
             if (bExecuting) {
-                static_cast<FEMovie *>(pObject)->Update(tDeltaTicks);
+                static_cast<FEMovie *>(pObject)->CurTime += tDeltaTicks;
             }
             break;
     }
 
     if (bExecuting == true && tPrevTime == pScript->CurTime && tPrevTime == pScript->Length + 1 && !(pObject->Flags & FF_DirtyCode)) {
-        pObject->Flags &= FEPackage::uHoldDirtyFlags | ~FF_DirtyTransform;
+        pObject->Flags &= FEPackage::uHoldDirtyFlags | ~(FF_DirtyTransform | FF_DirtyColor);
     }
 
     pObject->Flags = pObject->Flags & (FEPackage::uHoldDirtyFlags | ~FF_DirtyCode);
-    if (pObject->Flags & FF_DirtyCode | FF_DirtyColor | FF_DirtyTransform) {
+    if (pObject->Flags & (FF_DirtyCode | FF_DirtyColor | FF_DirtyTransform)) {
         pObject->Flags = pObject->Flags | FF_Dirty;
     }
 }

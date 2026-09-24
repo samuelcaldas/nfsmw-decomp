@@ -1508,14 +1508,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `Physics::Info::ShiftPoints`
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
 - **Source File**: `src/Speed/Indep/Src/Physics/PhysicsInfo.cpp`
-- **Virtual Address**: `0x80224CB8`
-- **Size**: 824 bytes (211 instructions)
-- **Matching State**: 97.63% match
+- **Virtual Address**: `0x80216D20`
+- **Size**: 824 bytes (206 instructions)
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &, const Attrib::Gen::engine &, const Attrib::Gen::induction &, float *, float *, unsigned int);
   ```
-- **Description**: Decompiled and matched Physics::Info::ShiftPoints to 97.63% accuracy (211/214 instructions) by mapping non-volatile registers (trans to r21, ind to r23, su to r26, sd to r24, topgear to r20) and optimizing gear ratio calculation loops.
+- **Description**: Fully decompiled and matched Physics::Info::ShiftPoints to 100.0% binary assembly parity (206/206 instructions, 824 bytes). Mapped non-volatile register pointers (`trans` to `r21`, `ind` to `r23`, `su` to `r26`, `sd` to `r24`, `eng` to `r29`, `np` to `r31`), used unpinned automatic variable for loop flag and topgear, restructured the predicted engine torque iteration to a do-while loop, and performed pointer-offset store for redline.
 
 ---
 

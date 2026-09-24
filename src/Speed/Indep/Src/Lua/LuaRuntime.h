@@ -37,6 +37,9 @@ class LuaRuntime {
         return mState;
     }
 
+    void BeginDelivery();
+    void EndDelivery();
+
   private:
     static LuaRuntime *mObj;
 

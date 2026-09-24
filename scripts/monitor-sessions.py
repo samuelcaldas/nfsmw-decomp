@@ -19,38 +19,38 @@ SESSIONS = [
         "name": "nfs1",
         "pane": "PS2:0",
         "unit": "zFe",
-        "prompt": "Continue o trabalho de decompilação no próximo candidato de zFe. Execute o workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e verifique com ninja changes.",
+        "prompt": "Continue a decompilação no próximo candidato de zFe. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs2",
         "pane": "PS2:1",
         "unit": "zEAXSound",
-        "prompt": "Continue o trabalho de decompilação no próximo candidato de zEAXSound/zEAXSound2. Execute o workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e verifique com ninja changes.",
+        "prompt": "Continue a decompilação no próximo candidato de zEAXSound/zEAXSound2. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs3",
         "pane": "PS2:2",
         "unit": "zTrack",
-        "prompt": "Continue o trabalho de decompilação no próximo candidato de zTrack. Execute o workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e verifique com ninja changes.",
+        "prompt": "Continue a decompilação no próximo candidato de zTrack. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs4",
         "pane": "PS2:3",
         "unit": "zGameplay",
-        "prompt": "Continue o trabalho de decompilação no próximo candidato de zGameplay. Execute o workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e verifique com ninja changes.",
+        "prompt": "Continue a decompilação no próximo candidato de zGameplay. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs5",
         "pane": "PS2:4",
         "unit": "zEcstasy",
-        "prompt": "Continue o trabalho de decompilação no próximo candidato de zEcstasy/zPhysics. Execute o workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e verifique com ninja changes.",
+        "prompt": "Continue a decompilação no próximo candidato de zEcstasy/zPhysics. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
 ]
 
-POLL_INTERVAL_SECONDS = 45
+POLL_INTERVAL_SECONDS = 30
 HEARTBEAT_INTERVAL_SECONDS = 180  # 3 minutes summary
-HEARTBEAT_COOLDOWN_SECONDS = 300  # 5 minutes minimum between reminders to the same session
-CONSECUTIVE_IDLE_THRESHOLD = 2    # Require 2 checks (~90s) idle before sending reminder
+HEARTBEAT_COOLDOWN_SECONDS = 90   # 1.5 minutes cooldown between reminders to the same session
+CONSECUTIVE_IDLE_THRESHOLD = 2    # Require 2 checks (~60s) idle before sending reminder
 
 
 def get_pane_content(target: str, lines: int = 50) -> str:
@@ -72,11 +72,14 @@ def get_pane_content(target: str, lines: int = 50) -> str:
 def send_pane_prompt(target: str, prompt_text: str) -> bool:
     """Send text directly into tmux pane as input prompt."""
     try:
+        subprocess.run(["tmux", "send-keys", "-t", target, "C-u"], timeout=5)
+        time.sleep(0.1)
         res = subprocess.run(
             ["tmux", "send-keys", "-t", target, "-l", prompt_text],
             timeout=5,
         )
         if res.returncode == 0:
+            time.sleep(0.1)
             subprocess.run(["tmux", "send-keys", "-t", target, "Enter"], timeout=5)
             return True
     except Exception:

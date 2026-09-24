@@ -386,37 +386,38 @@ void SFXObj_PFEATrax::Destroy() {
     SNDSYS_service();
 }
 
-// UNSOLVED, let's wait for the merge of zFE
+/**
+ * @brief Initializes the EATrax playback masks from the active user playlist.
+ */
 void InitializeEATrax(bool breset) {
-    // TODO
-    // SFXObj_PFEATrax::m_EATrax[0].PBMode = FEDatabase->GetAudioSettings()->PlayState;
+    SFXObj_PFEATrax::m_EATrax[0].PBMode = FEDatabase->CurrentUserProfiles[0]->GetOptions()->TheAudioSettings.PlayState;
+    SFXObj_PFEATrax::m_EATrax[1].PBMode = FEDatabase->CurrentUserProfiles[0]->GetOptions()->TheAudioSettings.PlayState;
     SFXObj_PFEATrax::m_EATrax[0].TraxMask = 0;
-    // SFXObj_PFEATrax::m_EATrax[1].PBMode = FEDatabase->GetAudioSettings()->PlayState;
-    SFXObj_PFEATrax::m_EATrax[1].NumEnabledSongs = 0;
     SFXObj_PFEATrax::m_EATrax[1].TraxMask = 0;
     SFXObj_PFEATrax::m_EATrax[0].NumEnabledSongs = 0;
+    SFXObj_PFEATrax::m_EATrax[1].NumEnabledSongs = 0;
 
     int songindex;
     int playability;
-    JukeboxEntry *playlist;
-    // TODO
-    // playlist = FEDatabase->GetUserProfile(0)->Playlist;
+    JukeboxEntry *playlist = FEDatabase->CurrentUserProfiles[0]->Playlist;
     for (int n = 0; n < g_MaxSongs; n++) {
         songindex = playlist[n].SongIndex;
         playability = playlist[n].PlayabilityField;
         switch (playability) {
+            case 0:
+                break;
             case 1:
-                SFXObj_PFEATrax::m_EATrax[0].TraxMask |= 1 << (songindex & 0x1F);
+                SFXObj_PFEATrax::m_EATrax[0].TraxMask |= 1 << songindex;
                 SFXObj_PFEATrax::m_EATrax[0].NumEnabledSongs++;
                 break;
             case 2:
-                SFXObj_PFEATrax::m_EATrax[1].TraxMask |= 1 << (songindex & 0x1F);
+                SFXObj_PFEATrax::m_EATrax[1].TraxMask |= 1 << songindex;
                 SFXObj_PFEATrax::m_EATrax[1].NumEnabledSongs++;
                 break;
             case 3:
-                SFXObj_PFEATrax::m_EATrax[0].TraxMask |= 1 << (songindex & 0x1F);
+                SFXObj_PFEATrax::m_EATrax[0].TraxMask |= 1 << songindex;
                 SFXObj_PFEATrax::m_EATrax[0].NumEnabledSongs++;
-                SFXObj_PFEATrax::m_EATrax[1].TraxMask |= 1 << (songindex & 0x1F);
+                SFXObj_PFEATrax::m_EATrax[1].TraxMask |= 1 << songindex;
                 SFXObj_PFEATrax::m_EATrax[1].NumEnabledSongs++;
                 break;
         }
@@ -424,8 +425,8 @@ void InitializeEATrax(bool breset) {
     SFXObj_PFEATrax::m_EATrax[0].PlayBits = SFXObj_PFEATrax::m_EATrax[0].TraxMask;
     SFXObj_PFEATrax::m_EATrax[1].PlayBits = SFXObj_PFEATrax::m_EATrax[1].TraxMask;
     if (breset) {
-        SFXObj_PFEATrax::m_EATrax[1].LastPlaylistSong = -1;
         SFXObj_PFEATrax::m_EATrax[0].LastPlaylistSong = -1;
+        SFXObj_PFEATrax::m_EATrax[1].LastPlaylistSong = -1;
     }
 }
 

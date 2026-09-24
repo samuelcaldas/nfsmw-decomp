@@ -341,15 +341,19 @@ bAngle bATan(float x, float y) {
     bAngle a;
     if (x > y) {
         float r = y;
-        int i = static_cast<int>((r / x) * 65536.0f);
-        register const bAngle *table asm("6") = &bFastATanTable[i >> 8];
-        a = (table[0] + (((table[1] - table[0]) * (i & 0xFF)) >> 8));
+        register int i asm("11") = static_cast<int>((r / x) * 65536.0f);
+        register const bAngle *base asm("8") = bFastATanTable;
+        register const bAngle *table asm("10") = &base[i >> 8];
+        register bAngle low asm("3") = table[0];
+        a = low + (((table[1] - low) * (i & 0xFF)) >> 8);
     } else {
         if (y > x) {
             float r = y;
-            int i = static_cast<int>((x / r) * 65536.0f);
-            register const bAngle *table asm("6") = &bFastATanTable[i >> 8];
-            bAngle calc = (table[0] + (((table[1] - table[0]) * (i & 0xFF)) >> 8));
+            register int i asm("11") = static_cast<int>((x / r) * 65536.0f);
+            register const bAngle *base asm("8") = bFastATanTable;
+            register const bAngle *table asm("10") = &base[i >> 8];
+            register bAngle low asm("3") = table[0];
+            bAngle calc = low + (((table[1] - low) * (i & 0xFF)) >> 8);
             a = bDegToAng(90.0f) - calc;
         } else if (y == 0.0f) {
             a = 0;

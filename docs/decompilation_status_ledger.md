@@ -80,6 +80,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEPackageCommand::~FEPackageCommand` (`zFEng`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEGroup::~FEGroup(void)` (`zFEng`)**: Decompiled, verified (100.0% match, 76 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEObjectSorter<1024>::SortObjects` (`zFEng`)**: Decompiled, verified (**100.0% match**, 316 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`FEngine::Update(long, unsigned int)` (`zFEng`)**: Decompiled, verified (**100.0% match**, 776 bytes, 194/194 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UISafehouseRaceSheet::RefreshHeader` (`zFe`)**: Decompiled, verified (97.9% match, 1,776 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::AddCops` (`zFe`)**: Decompiled, verified (97.0% match, 968 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::SnapCursor` (`zFe`)**: Decompiled, verified (100.0% match, 436 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged 100.0%]**

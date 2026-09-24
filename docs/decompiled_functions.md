@@ -3755,3 +3755,17 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Returns the cache client identifier string `"GManager"` for IVehicleCache interface implementation.
 
+---
+
+### `FEngine::Update`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
+- **Virtual Address**: `0x80185F38`
+- **Size**: 776 bytes (194 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void FEngine::Update(const i32 tDeltaTicks, uint32 lock);
+  ```
+- **Description**: Updates the front-end engine state, polling and updating mouse input, joypad masks, active packages, joypad hold decrement counters, and package message queues. Declaring `PadIndex` before the input loops ensures GCC 2.95.3 allocates `r31` consistently across both joypad update and hold decrement loops, achieving 100.0% binary assembly parity.
+

@@ -1665,14 +1665,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `TrackStreamer::DetermineStreamingSections`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
 - **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
-- **Virtual Address**: `unknown`
+- **Virtual Address**: `0x802BADCC`
 - **Size**: 420 bytes
-- **Matching State**: 76.45% match
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void TrackStreamer::DetermineStreamingSections();
   ```
-- **Description**: Inspected and verified TrackStreamer::DetermineStreamingSections in zTrack unit with 76.45% match.
+- **Description**: Determines active streaming sections to load based on current player position and visible sections. Achieved 100.0% binary matching parity (105/105 instructions, +420B) by using sequential post-increment writes to a stack-allocated buffer generating PowerPC `sthu` (store halfword with update) and indexed `sthx` stores, mapping all non-volatile GPRs `r24..r31` perfectly with zero register shifts.
 
 ---
 

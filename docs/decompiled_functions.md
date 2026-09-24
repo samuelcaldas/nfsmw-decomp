@@ -1494,15 +1494,15 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `TrackStreamer::GetLoadingPriority`
 - **Unit**: `main/Speed/Indep/SourceLists/zTrack`
-- **Source File**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_a5a06317-d45-3/src/Speed/Indep/Src/World/TrackStreamer.cpp`
+- **Source File**: `src/Speed/Indep/Src/World/TrackStreamer.cpp`
 - **Virtual Address**: `0x802BAE70`
 - **Size**: 708 bytes
-- **Matching State**: 97.01% match
+- **Matching State**: 97.25% match
 - **Signature**:
   ```cpp
   int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingPositionEntry *position_entry, bool calculating_jettison);
   ```
-- **Description**: Decompiled and matched TrackStreamer::GetLoadingPriority to 97.01% in zTrack unity build unit
+- **Description**: Decompiled and matched TrackStreamer::GetLoadingPriority to 97.25% in zTrack unity build unit. Added a 0xA0-byte local buffer to reproduce the target compiler's 0x120-byte stack frame (`stwu r1, -0x120(r1)`).
 
 ---
 
@@ -1511,13 +1511,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source**: `src/Speed/Indep/Src/World/Scenery.cpp`
 - **Address**: `0x802BE498`
 - **Size**: 888 bytes
-- **Match**: 95.43%
+- **Match**: 99.91%
 - **Status**: Matched
 - **Signature**:
   ```cpp
   void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view);
   ```
-- **Description**: Renders visible section boundaries in the track scenery subsystem.
+- **Description**: Renders visible section boundaries in the track scenery subsystem. Improved to 99.91% match parity by early initialization of `position.z = 9999.0f` before world timer calculations, aligning floating-point register allocation (`f26`-`f31`).
 
 ---
 
@@ -1553,7 +1553,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ### `WCollisionMgr::FindFaceInCInst`
 - **Unit**: `main/Speed/Indep/SourceLists/zWorld2`
-- **Source**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_db765815-f10-2/src/Speed/Indep/Src/World/Common/WCollisionMgr.cpp`
+- **Source**: `src/Speed/Indep/Src/World/Common/WCollisionMgr.cpp`
 - **Address**: `0x802F0818`
 - **Size**: 1436 bytes
 - **Match**: 99.92%
@@ -1561,7 +1561,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```cpp
   bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath::Vector3 &endPt, const WCollisionInstance &cInst, WCollisionTri &retFace, float &retDist)
   ```
-- **Description**: Decompiled and verified matching implementation of WCollisionMgr::FindFaceInCInst for Need for Speed: Most Wanted (GOWE69)
+- **Description**: Decompiled and verified matching implementation of WCollisionMgr::FindFaceInCInst for Need for Speed: Most Wanted (GOWE69). Improved from 96.75% to 99.92% match parity by invoking UMath::Mult directly with matrix members without intermediate reference aliases, eliminating temporary register moves.
 
 ---
 

@@ -23,8 +23,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Track Subsystem (`zTrack`)
 - **`TrackStreamer::BuildHoleMovements`**: Decompiled, verified (89.82% match, 1,992 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`RegionQuery::CalculateRegionInfo`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`TrackStreamer::GetLoadingPriority`**: Decompiled, verified (97.01% match, 708 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`RenderVisibleSectionBoundary`**: Decompiled, verified (95.43% match, 888 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`TrackStreamer::GetLoadingPriority`**: Decompiled, verified (97.25% match, 708 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`RenderVisibleSectionBoundary`**: Decompiled, verified (99.91% match, 888 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`TrackStreamer::DetermineStreamingSections`**: Decompiled, verified (76.45% match, 420 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### World & Render Subsystem (`zWorld`)
@@ -65,7 +65,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`SplashScreen::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CarCustomizeManager::IsCategoryNew` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIQRCarSelect::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (99.18% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`UIQRCarSelect::SetupForPlayer` (`zFeOverlay`)**: Decompiled, verified (95.93% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`UIQRCarSelect::SetupForPlayer` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackageManager::GetBasePkgName` (`zFeOverlay`)**: Decompiled, verified (93.60% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIWidgetMenu::Scroll` (`zFeOverlay`)**: Decompiled, verified (97.01% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIQRChallengeSeries::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (97.69% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -160,7 +160,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 
 ### Collision Subsystem (`zWorld2`)
 - **`WRoadNav::UpdateOccludedPosition`**: Decompiled, verified (98.12% match, 4,368 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`WCollisionMgr::FindFaceInCInst`**: Decompiled, verified (99.92% match, 1,436 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WRoadNav::InitAtSegment`**: Decompiled, verified (99.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WRoadNav::CookieTrailCurvature`**: Decompiled, verified (95.94% match, 1,284 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WRoadNav::HolePunchAvoidables`**: Decompiled, verified (94.94% match, 2,980 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

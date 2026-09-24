@@ -7,6 +7,14 @@ GVault *GRaceBin::GetChildVault() const {
 }
 
 /**
+ * @brief Retrieves the child vault associated with these race parameters.
+ * @return Pointer to the child vault.
+ */
+GVault *GRaceParameters::GetChildVault() const {
+    return this->mChildVault;
+}
+
+/**
  * @brief Retrieves the number of challenges completed for this race bin.
  * @return Number of completed challenges.
  */

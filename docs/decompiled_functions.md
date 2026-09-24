@@ -3331,6 +3331,62 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Sets `kFlag_Active` (bit 1) in 16-bit `mFlags` at offset `0x00`.
 
+---
+
+### `SNDCTRL_getprogvol`
+- **Unit**: `main/Speed/Indep/Libs/snd/9/source/library/cmn/sgetpvol`
+- **Source File**: `src/Speed/Indep/Libs/snd/9/source/library/cmn/sgetpvol.c`
+- **Virtual Address**: `0x803A3190`
+- **Size**: 148 bytes (37 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```c
+  int SNDCTRL_getprogvol(int shandle);
+  ```
+- **Description**: Retrieves the programmed MIDI volume for the voice associated with a sound handle, scaling normalized float volume by `127.0f` before conversion with `SNDI_ftoifast`.
+
+---
+
+### `SNDSTRM_getprogvol`
+- **Unit**: `main/Speed/Indep/Libs/snd/9/source/library/cmn/sstgetpv`
+- **Source File**: `src/Speed/Indep/Libs/snd/9/source/library/cmn/sstgetpv.c`
+- **Virtual Address**: `0x803A3224`
+- **Size**: 152 bytes (38 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```c
+  int SNDSTRM_getprogvol(int sndstreamhandle);
+  ```
+- **Description**: Returns the programmed stream volume for a sound stream handle, falling back to `SNDCTRL_getprogvol` or converting channel state volume scaled by `127.0f` using `SNDI_ftoifast`.
+
+---
+
+### `eInitTextures`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/Texture.cpp`
+- **Virtual Address**: `0x800FBB2C`
+- **Size**: 76 bytes (19 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void eInitTextures(void);
+  ```
+- **Description**: Initializes the texture pack slot pool by allocating `TexturePackSlotPool` with slot size evaluated against the minimum boundary.
+
+---
+
+### `FEMessageResponse::FindConditionBranchTarget`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEMessageResponse.cpp`
+- **Virtual Address**: `0x8018A4F4`
+- **Size**: 144 bytes (36 instructions)
+- **Matching State**: 98.47% match (improved from 63.06%)
+- **Signature**:
+  ```cpp
+  u32 FEMessageResponse::FindConditionBranchTarget(u32 Index) const;
+  ```
+- **Description**: Scans through the response list from a conditional branch, tracking nested conditional blocks to find the matching `MR_Else` or `MR_EndIf` target index.
+
 
 
 

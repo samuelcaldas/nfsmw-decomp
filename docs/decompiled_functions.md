@@ -319,14 +319,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `cFEng::FindPackage`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/FEngInterfaces/FEngInterface.cpp`
-- **Virtual Address**: `unknown`
-- **Size**: 156 bytes
-- **Matching State**: 91.79% match
+- **Virtual Address**: `0x80134170`
+- **Size**: 156 bytes (39 instructions)
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
-  FindPackage__5cFEngPCc
+  FEPackage *cFEng::FindPackage(const char *pPackageName);
   ```
-- **Description**: Decompiled cFEng::FindPackage achieving 91.79% match parity.
+- **Description**: Validates that `pPackageName` is non-null and non-empty. If `FEPackageData::IsInScreenConstructor()` is true, delegates to `FEPackageManager::Get()->FindPackage(pPackageName)`. Otherwise searches active packages via `FindPackageActive(pPackageName)` and idle packages via `FindPackageIdle(pPackageName)`. Restructured using early returns to eliminate `else` blocks and match GCC 2.95 Haifa scheduler branch layout and DWARF line ordering.
 
 ---
 

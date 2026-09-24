@@ -56,6 +56,8 @@ class GSpeedTrap {
     void DebugForceComplete();
     bool operator<(const struct GSpeedTrap &rhs) const {}
 
+    friend class GManager;
+
   private:
     void SetFlag(unsigned int mask) {
         mFlags |= mask;
@@ -65,10 +67,10 @@ class GSpeedTrap {
     }
     bool IsFlagSet(unsigned int mask) const {
         return (mFlags & mask) != 0;
-    };
+    }
     bool IsFlagClear(unsigned int mask) const {
         return (mFlags & mask) == 0;
-    };
+    }
 
     void Init(Attrib::Key trapKey);
     void Reset();

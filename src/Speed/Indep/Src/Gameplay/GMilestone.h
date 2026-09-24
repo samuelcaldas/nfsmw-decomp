@@ -55,6 +55,8 @@ class GMilestone {
     void NotifyProgress(float value);
     void NotifyPursuitOver(bool escaped);
 
+    friend class GManager;
+
   private:
     unsigned int mTypeKey;      // offset 0x0, size 0x4
     unsigned int mChallengeKey; // offset 0x4, size 0x4

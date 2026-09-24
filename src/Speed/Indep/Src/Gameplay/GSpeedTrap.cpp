@@ -10,6 +10,18 @@ GSpeedTrap::GSpeedTrap()
 }
 
 /**
+ * @brief Retrieves the trigger associated with the speed trap.
+ * @return Pointer to GTrigger, or NULL if not found.
+ */
+GTrigger *GSpeedTrap::GetTrapTrigger() const {
+    GRuntimeInstance *instance = GManager::Get().FindInstance(this->mSpeedTrapKey);
+    if (instance != NULL) {
+        return (GTrigger *)instance;
+    }
+    return NULL;
+}
+
+/**
  * @brief Initializes the speed trap with the specified trap key.
  * @param trapKey Attribute key for the speed trap.
  */

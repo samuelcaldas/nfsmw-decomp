@@ -11,6 +11,14 @@ GMilestone::GMilestone()
 }
 
 /**
+ * @brief Gets the current value of the milestone metric from GManager.
+ * @return Current floating-point value of the milestone metric.
+ */
+float GMilestone::GetCurrentValue() const {
+    return GManager::Get().GetValue(this->mTypeKey);
+}
+
+/**
  * @brief Initializes the milestone with the given challenge key and resets state.
  * @param challengeKey Challenge key identifier.
  */

@@ -114,20 +114,27 @@ Target Details:
 
 Operating Rules:
 1. You are running in an isolated git worktree with your own branch.
-2. Read the source file around ${cand.demangled} and examine the current implementation.
-3. Check the objdiff diff using:
+2. Initialize worktree symlinks and baseline if missing:
+   ln -sfn /home/samuelcaldas/source/repos/nfsmw/orig orig
+   mkdir -p build && ln -sfn /home/samuelcaldas/source/repos/nfsmw/build/tools build/tools
+   ln -sfn /home/samuelcaldas/source/repos/nfsmw/build/compilers build/compilers
+   ln -sfn /home/samuelcaldas/source/repos/nfsmw/build/ppc_binutils build/ppc_binutils
+   mkdir -p build/GOWE69 && cp /home/samuelcaldas/source/repos/nfsmw/build/GOWE69/baseline.json build/GOWE69/baseline.json 2>/dev/null || true
+   python3 configure.py
+3. Read the source file around ${cand.demangled} and examine the current implementation.
+4. Check the objdiff diff using:
    python3 tools/decomp-diff.py -u ${cand.unit} -d ${cand.symbol}
-4. Apply the hint and refine the code in ${cand.source_file}.
-5. Compile and verify using:
+5. Apply the hint and refine the code in ${cand.source_file}.
+6. Compile and verify using:
    ninja build/GOWE69/${cand.unit}.o
    python3 tools/decomp-diff.py -u ${cand.unit} -d ${cand.symbol}
-6. Ensure the entire build passes without regression:
+7. Ensure the entire build passes without regression:
    ninja
    ninja changes
-7. Ensure clean Doxygen docstrings (brief, param, return).
-8. If matched or improved, commit your changes in this worktree:
+8. Ensure clean Doxygen docstrings (brief, param, return).
+9. If matched or improved, commit your changes in this worktree:
    git add ${cand.source_file} && git commit -m "match(${cand.unit.split('/').pop()}): decompile ${cand.demangled}"
-9. Return the structured output with your final match percentage and branch name.`
+10. Return the structured output with your final match percentage and branch name.`
 }
 
 phase('Decomp-P1')

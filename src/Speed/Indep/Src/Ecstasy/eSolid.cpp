@@ -87,16 +87,16 @@ void EmptySolidTextureFixupInfo(eSolidListHeader *list_header) {
 
 void eSolidNotifyTextureMoving(TexturePack *texture_pack /* r29 */, TextureInfo *texture_info /* r28 */) {}
 
-// UNSOLVED https://decomp.me/scratch/sdOFh
 bool eSolid::NotifyTextureLoading(TexturePack *texture_pack /* r27 */) {
     bool textures_changed = false;
 
     for (int n = 0; n < this->NumTextureTableEntries; n++) {
         eTextureEntry *texture_entry = &this->pTextureTable[n];
+        uint32 name_hash = texture_entry->NameHash;
         TextureInfo *texture_info = texture_entry->pTextureInfo;
 
         if (texture_info == DefaultTextureInfo) {
-            texture_info = FixupTextureInfoLoading(texture_info, texture_entry->NameHash, texture_pack);
+            texture_info = FixupTextureInfoLoading(texture_info, name_hash, texture_pack);
         }
         if (texture_info != texture_entry->pTextureInfo) {
             texture_entry->pTextureInfo = texture_info;
@@ -106,16 +106,16 @@ bool eSolid::NotifyTextureLoading(TexturePack *texture_pack /* r27 */) {
     return textures_changed;
 }
 
-// UNSOLVED
 bool eSolid::NotifyTextureUnloading(TexturePack *texture_pack) {
     bool textures_changed = false;
 
     for (int n = 0; n < this->NumTextureTableEntries; n++) {
         eTextureEntry *texture_entry = &this->pTextureTable[n];
+        uint32 name_hash = texture_entry->NameHash;
         TextureInfo *texture_info = texture_entry->pTextureInfo;
 
         if (texture_info->pTexturePack == texture_pack) {
-            texture_info = FixupTextureInfoUnloading(texture_info, texture_entry->NameHash, texture_pack);
+            texture_info = FixupTextureInfoUnloading(texture_info, name_hash, texture_pack);
         }
         if (texture_info != texture_entry->pTextureInfo) {
             texture_entry->pTextureInfo = texture_info;

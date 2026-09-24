@@ -208,6 +208,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`eStreamPackLoader::CreateStreamingPack`**: Decompiled, verified (**100.0% match**, 372 bytes, 93 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Verified 100.0%]**
 - **`eStreamPackLoader::InternalLoadingHeaderPhase2Callback`**: Decompiled, verified (94.19% match, 308 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`eStreamPackLoader::InternalLoadStreamingEntry`**: Decompiled, verified (**100.0% match**, 440 bytes, 110/110 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`eSolid::NotifyTextureLoading`**: Decompiled, verified (**100.0% match**, 160 bytes, 40/40 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Verified 100.0%]**
+- **`eSolid::NotifyTextureUnloading`**: Decompiled, verified (**100.0% match**, 156 bytes, 39/39 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Verified 100.0%]**
 
 ### Dynamics Subsystem (`zDynamics`)
 - **`Dynamics::Collision::Geometry::Set`**: Decompiled, verified (100.0% fuzzy match, 704 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**

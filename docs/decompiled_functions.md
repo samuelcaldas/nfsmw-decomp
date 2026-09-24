@@ -1848,6 +1848,34 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `eSolid::NotifyTextureLoading`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/eSolid.cpp`
+- **Virtual Address**: `0x800F74C0`
+- **Size**: 160 bytes (40 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool eSolid::NotifyTextureLoading(TexturePack *texture_pack);
+  ```
+- **Description**: Iterates through solid texture table entries upon texture pack loading. Hoists `uint32 name_hash = texture_entry->NameHash;` before checking `texture_info == DefaultTextureInfo` to fix up loaded texture info via `FixupTextureInfoLoading` and update entries when changed, achieving 100.0% binary matching parity (40/40 instructions).
+
+---
+
+### `eSolid::NotifyTextureUnloading`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/Indep/Src/Ecstasy/eSolid.cpp`
+- **Virtual Address**: `0x800F7560`
+- **Size**: 156 bytes (39 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool eSolid::NotifyTextureUnloading(TexturePack *texture_pack);
+  ```
+- **Description**: Iterates through solid texture table entries upon texture pack unloading. Hoists `uint32 name_hash = texture_entry->NameHash;` before evaluating `texture_info->pTexturePack == texture_pack` to fix up unloaded texture info via `FixupTextureInfoUnloading` and assign updated references, achieving 100.0% binary matching parity (39/39 instructions).
+
+---
+
 ## 10. Foundation Subsystem (`zBWare`)
 
 ### `fDeterminant`

@@ -595,6 +595,8 @@ void IJoyHelper::EmulateMemoryCardLibrary(int aJoyOp) {
     RealmcIface::EntryInfo lEntryInfo;
     lEntryInfo.mName = pBuf;
     switch (aJoyOp) {
+        case 0:
+            break;
         case 1:
             gMemcardCallbacks.ShowMessage(reinterpret_cast<const wchar_t *>(pBuf), 0, pOptions);
             break;

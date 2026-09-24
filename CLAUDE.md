@@ -178,6 +178,7 @@ The distributed decompilation team is organized across dedicated peer sessions:
 Coordination between sessions must occur via inter-session messaging (`SendMessage`). Before and after completing work in any worktree, sessions must rebase onto `origin/main` to incorporate peer commits.
 
 ### Ultracode Workflows & Fast Model Mandate
+- **Mandatory Workflow Usage for Idempotency:** The use of workflow scripts is strictly mandatory for all multi-agent decompilation tasks. Workflows enforce idempotency across concurrent sessions by guaranteeing deterministic phase sequencing, structured schemas (`DECOMP_SCHEMA`), reproducible worktree environments, and clean commit boundaries, preventing race conditions, redundant operations, or state corruption.
 - **Keyword Activation:** Workflows are activated whenever the keyword `ultracode` is used.
 - **Model Mandate:** All subagents and workflow tasks must strictly use `gemini-3.5-flash-lite` (via `agentType: 'decomp-worker'` or `model: gemini-3.5-flash-lite`).
 - **Rationale:** `gemini-3.5-flash-lite` is exceptionally fast, lightweight, and cost-efficient for parallel instruction matching, iterative assembly diffing, and compile loops across concurrent worktrees.

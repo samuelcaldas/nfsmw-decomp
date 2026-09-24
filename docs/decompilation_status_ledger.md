@@ -44,6 +44,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Decompiled, verified (**100.0% match**, 856 bytes, 214 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Frontend Subsystem (`zFe`, `zFeOverlay`, `zFEng`)
+- **`FEMessageResponse::FindConditionBranchTarget` (`zFEng`)**: Decompiled, verified (98.47% match, 144 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackage::UpdateObject` (`zFEng`)**: Decompiled, verified (**100.0% match**, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (**99.02% match**, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**96.58% match**, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -82,7 +83,9 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`WorldMap::SnapCursor` (`zFe`)**: Decompiled, verified (95.7% match, 436 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::ClampToMapBounds` (`zFe`)**: Decompiled, verified (100.0% match, 216 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
-### Audio Subsystem (`zEAXSound`, `zEAXSound2`)
+### Audio Subsystem (`zEAXSound`, `zEAXSound2`, `snd`)
+- **`SNDCTRL_getprogvol` (`sgetpvol`)**: Decompiled, verified (**100.0% match**, 148 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`SNDSTRM_getprogvol` (`sstgetpv`)**: Decompiled, verified (**100.0% match**, 152 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`EAXSound::GetCurMusicVolume` (`zEAXSound`)**: Decompiled, verified (100.0% match, 52 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`AssignAudioStreamHandle` (`zEAXSound`)**: Decompiled, verified (100.0% match, 16 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`EAXTunerCar::UpdateRotation` (`zEAXSound`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -173,6 +176,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`WRoadNav::HolePunchAvoidables`**: Decompiled, verified (94.94% match, 2,980 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Particle Subsystem (`zEcstasy`)
+- **`eInitTextures`**: Decompiled, verified (**100.0% match**, 76 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`EmitterSystem::UpdateParticles`**: Decompiled, verified (99.1% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`EmitterSystem::Render`**: Decompiled, verified (94.54% match, 696 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`__InitMatrices`**: Decompiled, verified (97.95% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

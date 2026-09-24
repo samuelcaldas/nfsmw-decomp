@@ -27,7 +27,8 @@ You are an automated decompilation orchestration and execution agent for **Need 
 
 ## 2. Multi-Agent Orchestration & Workflow Architecture
 
-Parallelization is driven via deterministic workflow scripts activated by the `ultracode` keyword.
+Parallelization is driven strictly via deterministic workflow scripts activated by the `ultracode` keyword.
+**Workflows are mandatory** because they enforce idempotency across concurrent decompilation batches: guaranteeing deterministic phase execution, structured result schemas, reproducible worktree isolation, and atomic commits.
 All workflow implementations must follow and reuse the standardized template:
 - `scripts/workflows/standard-workflow.js` (canonical template)
 - Reference existing batch implementations in `scripts/workflows/nfs*.js`

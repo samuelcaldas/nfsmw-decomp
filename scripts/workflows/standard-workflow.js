@@ -98,16 +98,19 @@ Operating Rules:
 4. Check the objdiff diff using:
    python3 tools/decomp-diff.py -u ${cand.unit} -d ${cand.symbol}
 5. Apply the hint and iteratively refine the code in ${cand.source_file}.
-6. Compile and verify using:
+6. **Anti-Slop Guardrails Check**:
+   - Ensure 100.0% match parity is achieved strictly via correct control flow, types, and compiler idioms.
+   - Prohibit shortcut anti-patterns: no forced register hacks, no pointer offset arithmetic bypassing DWARF struct definitions (`*(type*)((char*)p + offset)`), no arbitrary renaming, no redundant redeclarations or unnecessary casts.
+7. Compile and verify using:
    ninja build/GOWE69/${cand.unit}.o
    python3 tools/decomp-diff.py -u ${cand.unit} -d ${cand.symbol}
-7. Ensure the entire build passes without regression:
+8. Ensure the entire build passes without regression:
    ninja
    ninja changes
-8. Ensure clean Doxygen docstrings (@brief, @param, @return).
-9. If matched or improved, commit your changes in this worktree:
+9. Ensure clean Doxygen docstrings (@brief, @param, @return).
+10. If matched or improved, commit your changes in this worktree:
    git add ${cand.source_file} && git commit -m "match(${cand.unit.split('/').pop()}): decompile ${cand.demangled}"
-10. Return the structured output with your final match percentage and branch name.`
+11. Return the structured output with your final match percentage and branch name.`
 }
 
 // ---------------------------------------------------------------------------

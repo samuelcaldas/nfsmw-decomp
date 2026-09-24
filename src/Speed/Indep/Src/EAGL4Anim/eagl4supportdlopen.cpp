@@ -78,9 +78,8 @@ static HashPointer *hashhead;
  * @brief Unlinks and frees the loaded module, then marks it unresolved.
  */
 void DynamicLoader::Release() {
-    if (handle) {
-        HashPointer *h = reinterpret_cast<HashPointer *>(handle);
-
+    HashPointer *h = (HashPointer *)handle;
+    if (h) {
         if (h->prev) {
             h->prev->next = h->next;
         } else {
@@ -91,15 +90,8 @@ void DynamicLoader::Release() {
             h->next->prev = h->prev;
         }
 
-        if (h->chain) {
-            EAGL4Internal::EAGL4Free(h->chain, h->symbols_num * sizeof(uintptr_t));
-        }
-
-        if (h->isOriginal) {
-            EAGL4Internal::EAGL4Free(h->isOriginal, h->symbols_num * sizeof(uintptr_t));
-        }
-
-        EAGL4Internal::EAGL4Free(h, sizeof(HashPointer));
+        h->~HashPointer();
+        HashPointer::operator delete(h, sizeof(HashPointer));
         handle = nullptr;
     }
     mIsResolved = false;

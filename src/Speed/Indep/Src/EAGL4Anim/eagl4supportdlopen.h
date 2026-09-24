@@ -281,7 +281,14 @@ struct HashPointer {
         mpDynamicLoader = pDL;
     }
 
-    ~HashPointer() {}
+    ~HashPointer() {
+        if (chain) {
+            EAGL4Internal::EAGL4Free(chain, symbols_num * sizeof(uintptr_t));
+        }
+        if (isOriginal) {
+            EAGL4Internal::EAGL4Free(isOriginal, symbols_num * sizeof(uintptr_t));
+        }
+    }
 
     HashPointer *next;                   // offset 0x0, size 0x4
     HashPointer *prev;                   // offset 0x4, size 0x4

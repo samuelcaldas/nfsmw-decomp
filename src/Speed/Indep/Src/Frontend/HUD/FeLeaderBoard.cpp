@@ -149,24 +149,24 @@ void LeaderBoard::Update(IPlayer *player) {
 }
 
 void LeaderBoard::SetRacerName(int pos, const char *name) {
-    if (pos > 3)
+    if (pos >= 4)
         return;
     bStrCpy(mTopRacers[pos].mRacerName, name);
 }
 void LeaderBoard::SetRacerNum(int pos, int num) {
-    if (pos > 3)
+    if (pos >= 4)
         return;
     mTopRacers[pos].mRacerNum = num;
 }
 
 void LeaderBoard::SetRacerTotalPoints(int pos, float points) {
-    if (pos > 3)
+    if (pos >= 4)
         return;
     mTopRacers[pos].mTotalPoints = points;
 }
 
 void LeaderBoard::SetRacerNumLapsCompleted(int pos, int numLaps, float time, IPlayer *player) {
-    if (pos > 3)
+    if (pos >= 4)
         return;
     if (numLaps > 0 && numLaps < mNumLaps && numLaps > mTopRacers[pos].mNumLapsCompleted && pos == mPlayerIndex) {
         ShowLapTime(player);
@@ -176,7 +176,7 @@ void LeaderBoard::SetRacerNumLapsCompleted(int pos, int numLaps, float time, IPl
 }
 
 void LeaderBoard::SetRacerPercentComplete(int pos, float percent, float time, IPlayer *player) {
-    if (pos > 3)
+    if (pos >= 4)
         return;
     if (percent > 0.0f && percent < 100.0f) {
         int ipercent = static_cast<int>(percent * mNumLaps);
@@ -186,14 +186,14 @@ void LeaderBoard::SetRacerPercentComplete(int pos, float percent, float time, IP
             switch (GRaceStatus::Get().GetRaceType()) {
                 case GRace::kRaceType_Circuit:
                 case GRace::kRaceType_Knockout:
-                    if (ipercent == ipercent / 50 * 50) {
+                    if (ipercent % 50 == 0) {
                         showSplitTime = true;
                         index = ipercent / 50;
                     }
                     break;
                 case GRace::kRaceType_P2P:
                 case GRace::kRaceType_Tollbooth:
-                    if (ipercent == ipercent / 25 * 25) {
+                    if (ipercent % 25 == 0) {
                         showSplitTime = true;
                         index = ipercent / 25;
                     }
@@ -219,7 +219,7 @@ void LeaderBoard::SetRacerPercentComplete(int pos, float percent, float time, IP
 }
 
 void LeaderBoard::SetRacerHasHeadset(int pos, bool racerHasHeadset) {
-    if (pos > 3)
+    if (pos >= 4)
         return;
     mTopRacers[pos].mHasHeadset = racerHasHeadset;
 }

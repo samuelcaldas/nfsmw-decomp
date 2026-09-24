@@ -372,9 +372,7 @@ void FEListBox::InitializeCell(FEListBoxCell *pstCells, u32 ulNumCells) {
 
 void FEListBox::CleanupColumns() {
     if (mulNumColumns != 0) {
-        if (mpstColumnData != nullptr) {
-            delete[] mpstColumnData;
-        }
+        delete[] mpstColumnData;
         mpstColumnData = nullptr;
         mulNumColumns = 0;
     }
@@ -382,9 +380,7 @@ void FEListBox::CleanupColumns() {
 
 void FEListBox::CleanupRows() {
     if (mulNumRows != 0) {
-        if (mpstRowData != nullptr) {
-            delete[] mpstRowData;
-        }
+        delete[] mpstRowData;
         mpstRowData = nullptr;
         mulNumRows = 0;
     }
@@ -399,9 +395,8 @@ void FEListBox::CleanupCells() {
                 mpstCells[i].u.string.pStr = nullptr;
             }
         }
-        if (mpstCells != nullptr) {
-            delete[] mpstCells;
-        }
+
+        delete[] mpstCells;
         mpstCells = nullptr;
     }
 }

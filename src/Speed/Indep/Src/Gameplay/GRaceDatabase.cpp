@@ -42,3 +42,11 @@ void GRaceCustom::SetReversed(bool isReverseDir) {
 void GRaceCustom::SetNumOpponents(int numOpponents) {
     this->mNumOpponents = numOpponents;
 }
+
+/**
+ * @brief Retrieves the number of race bins in the database.
+ * @return Number of race bins.
+ */
+unsigned int GRaceDatabase::GetBinCount() {
+    return this->mBinCount;
+}

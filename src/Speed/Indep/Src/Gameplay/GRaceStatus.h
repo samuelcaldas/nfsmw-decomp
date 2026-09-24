@@ -518,9 +518,7 @@ class GRaceStatus : public UTL::COM::Object, public IVehicleCache {
 
     void SetRaceActivity(GActivity *activity);
 
-    void EnterSuddenDeath() {
-        mSuddenDeathMode = true;
-    }
+    void EnterSuddenDeath();
 
     bool GetIsSuddenDeath() const {
         return mSuddenDeathMode;

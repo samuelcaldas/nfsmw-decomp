@@ -100,3 +100,11 @@ GRacerInfo &GRaceStatus::GetRacerInfo(int index) {
     return this->mRacerInfo[index];
 }
 
+/**
+ * @brief Enters sudden death mode.
+ * @return void
+ */
+void GRaceStatus::EnterSuddenDeath() {
+    this->mSuddenDeathMode = true;
+}
+

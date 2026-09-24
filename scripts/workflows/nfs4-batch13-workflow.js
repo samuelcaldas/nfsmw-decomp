@@ -145,6 +145,7 @@ function makeDecompPrompt(candidate) {
     `   ln -sfn /home/samuelcaldas/repos/nfsmw/build/compilers build/compilers\n` +
     `   ln -sfn /home/samuelcaldas/repos/nfsmw/build/ppc_binutils build/ppc_binutils\n` +
     `   python3 configure.py\n` +
+    `   mkdir -p build/GOWE69 && cp /home/samuelcaldas/source/repos/nfsmw/build/GOWE69/baseline.json build/GOWE69/baseline.json 2>/dev/null || true\n` +
     `   ninja\n\n` +
     `TDD CYCLE:\n` +
     `2. RED PHASE: Verify current diff:\n` +

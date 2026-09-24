@@ -24,6 +24,8 @@ class GVault {
     unsigned int mPad2c; // offset 0x2c
     unsigned int mField_0x30; // offset 0x30
     unsigned int mObjectCount; // offset 0x34
+    unsigned int mPad38; // offset 0x38
+    unsigned int mPad3c; // offset 0x3c
 
     ~GVault();
 

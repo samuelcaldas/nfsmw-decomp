@@ -1,6 +1,7 @@
 #include "Speed/Indep/Src/Gameplay/GManager.h"
 #include "Speed/Indep/Src/Gameplay/GUserIncludes.h"
 #include "Speed/Indep/Src/Generated/AttribSys/Classes/gameplay.h"
+#include "Speed/Indep/bWare/Inc/bMemory.hpp"
 
 /**
  * @brief Reports whether gameplay is currently active.
@@ -223,4 +224,96 @@ void GManager::ReleaseSpeedTraps() {
     this->mSpeedTraps = NULL;
     this->mNumSpeedTraps = 0;
 }
+
+/**
+ * @brief Finds an available slot for a binary vault, unloading current if necessary.
+ * @return Index of the available binary vault slot (always 0).
+ */
+unsigned int GManager::GetAvailableBinSlot() {
+    if (this->mBinVaultInSlot[0] != NULL) {
+        this->mBinVaultInSlot[0]->Unload();
+        this->mBinVaultInSlot[0] = NULL;
+    }
+    return 0;
+}
+
+/**
+ * @brief Finds an available slot for a race vault, unloading current if necessary.
+ * @return Index of the available race vault slot (always 0).
+ */
+unsigned int GManager::GetAvailableRaceSlot() {
+    if (this->mRaceVaultInSlot[0] != NULL) {
+        this->mRaceVaultInSlot[0]->Unload();
+        this->mRaceVaultInSlot[0] = NULL;
+    }
+    return 0;
+}
+
+/**
+ * @brief Loads the core gameplay vault into resident memory.
+ * @param packImage Pointer to the vault pack image.
+ */
+void GManager::LoadCoreVault(AttribVaultPackImage *packImage) {
+    this->FindVault(GMANAGER_COREVAULT)->LoadResident(packImage);
+}
+
+/**
+ * @brief Unloads the core gameplay vault.
+ */
+void GManager::UnloadCoreVault() {
+    this->FindVault(GMANAGER_COREVAULT)->Unload();
+}
+
+/**
+ * @brief Releases allocated streaming slot buffers and temporary load data.
+ */
+void GManager::ReleaseStreamingBuffers() {
+    if (this->mStreamedBinSlots != NULL) {
+        delete[] this->mStreamedBinSlots;
+        this->mStreamedBinSlots = NULL;
+    }
+    if (this->mStreamedRaceSlots != NULL) {
+        delete[] this->mStreamedRaceSlots;
+        this->mStreamedRaceSlots = NULL;
+    }
+    if (this->mTempLoadData != NULL) {
+        delete[] this->mTempLoadData;
+        this->mTempLoadData = NULL;
+    }
+}
+
+/**
+ * @brief Unloads all transient vaults and frees the transient memory pool.
+ */
+void GManager::UnloadTransientVaults() {
+    for (unsigned int i = 0; i < this->mVaultCount; ++i) {
+        GVault *vault = &this->mVaults[i];
+        if (vault->IsTransient()) {
+            vault->Unload();
+        }
+    }
+    bCloseMemoryPool(this->mTransientPoolNumber);
+    bFree(this->mTransientPoolMemory);
+    this->mTransientPoolMemory = NULL;
+    this->mTransientPoolNumber = 0;
+}
+
+/**
+ * @brief Destroys all gameplay vaults and releases associated buffers.
+ */
+void GManager::DestroyVaults() {
+    if (this->mVaults != NULL) {
+        for (unsigned int i = 0; i < this->mVaultCount; ++i) {
+            this->mVaults[i].~GVault();
+        }
+        this->mVaultCount = 0;
+        bFree(this->mVaults);
+        this->mVaults = NULL;
+    }
+    if (this->mVaultNameStrings != NULL) {
+        delete[] this->mVaultNameStrings;
+        this->mVaultNameStrings = NULL;
+    }
+}
+
 

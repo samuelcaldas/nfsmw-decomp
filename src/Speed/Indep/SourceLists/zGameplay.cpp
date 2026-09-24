@@ -10,6 +10,7 @@
 #include "Speed/Indep/Src/Gameplay/GRaceDatabase.cpp"
 #include "Speed/Indep/Src/Gameplay/GRuntimeInstance.cpp"
 #include "Speed/Indep/Src/Gameplay/GMarker.cpp"
+#include "Speed/Indep/Src/Gameplay/GActivity.cpp"
 #include "Speed/Indep/Src/Gameplay/GObjectBlock.cpp"
 #include "Speed/Indep/Src/Gameplay/GCharacter.cpp"
 #include "Speed/Indep/Src/Gameplay/GTrigger.cpp"

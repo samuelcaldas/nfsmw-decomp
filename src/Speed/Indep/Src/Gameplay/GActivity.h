@@ -17,6 +17,8 @@ typedef UTL::Std::map<GState *, UTL::Std::vector<GHandler *, _type_ID_GHandlerVe
 // total size: 0x48
 class GActivity : public GRuntimeInstance {
   public:
+    USE_FASTALLOC(GActivity);
+
     friend class GManager;
     // total size: 0x8
     struct SerializedHeader {
@@ -26,6 +28,7 @@ class GActivity : public GRuntimeInstance {
     };
 
     GActivity(const Attrib::Key &activityKey);
+    virtual ~GActivity();
 
     /**
      * @brief Gets the gameplay object type for this activity.
@@ -39,6 +42,8 @@ class GActivity : public GRuntimeInstance {
     void Run();
     void Suspend();
     void SerializeVars(bool write);
+    void DeserializeVars();
+    void UnregisterMessageHandlers();
 
   private:
     GState *mCurrentState;            // offset 0x28, size 0x4

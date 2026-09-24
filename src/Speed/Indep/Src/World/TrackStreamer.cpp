@@ -1583,50 +1583,43 @@ void TrackStreamer::AddCurrentStreamingSections(short *sections_to_load, int num
  * @return None.
  */
 void TrackStreamer::DetermineStreamingSections() {
+    this->RemoveCurrentStreamingSections();
     const int max_sections_to_load = 0x180;
     short sections_to_load[384];
-    short *sections_ptr = sections_to_load;
-    int num_sections_to_load = 3;
-
-    this->RemoveCurrentStreamingSections();
-    short *p = sections_to_load;
-    *p++ = GetScenerySectionNumber('Y', 0);
-    *p++ = GetScenerySectionNumber('X', 0);
-    *p = GetScenerySectionNumber('Z', 0);
+    int num_sections_to_load = 0;
+    sections_to_load[num_sections_to_load++] = GetScenerySectionNumber('Y', 0);
+    sections_to_load[num_sections_to_load++] = GetScenerySectionNumber('X', 0);
+    sections_to_load[num_sections_to_load++] = GetScenerySectionNumber('Z', 0);
 
     if (SeeulatorToolActive && ScenerySectionToBlink != 0) {
-        num_sections_to_load = 4;
-        sections_to_load[3] = static_cast<short>(ScenerySectionToBlink);
+        sections_to_load[num_sections_to_load++] = static_cast<short>(ScenerySectionToBlink);
     }
 
-    short section_number;
     for (int n = 0; n < 4; n++) {
-        section_number = this->KeepSectionTable[n];
-        if (section_number != 0) {
-            sections_to_load[num_sections_to_load] = section_number;
-            num_sections_to_load++;
+        if (this->KeepSectionTable[n] != 0) {
+            sections_to_load[num_sections_to_load++] = this->KeepSectionTable[n];
         }
     }
 
-    this->AddCurrentStreamingSections(sections_ptr, num_sections_to_load, 0);
-    this->AddCurrentStreamingSections(sections_ptr, num_sections_to_load, 1);
+    this->AddCurrentStreamingSections(sections_to_load, num_sections_to_load, 0);
+    this->AddCurrentStreamingSections(sections_to_load, num_sections_to_load, 1);
+    num_sections_to_load = 0;
+    short *sections = sections_to_load;
     for (int position_number = 0; position_number < 2; position_number++) {
         StreamingPositionEntry *position_entry = &this->StreamingPositionEntries[position_number];
         if (position_entry->CurrentZone > 0) {
             LoadingSection *loading_section = TheVisibleSectionManager.FindLoadingSection(position_entry->CurrentZone);
             if (!loading_section) {
                 DrivableScenerySection *drivable_section = TheVisibleSectionManager.FindDrivableSection(position_entry->CurrentZone);
-                num_sections_to_load = 0;
                 for (int i = 0; i < drivable_section->GetNumVisibleSections(); i++) {
-                    int section_number = drivable_section->GetVisibleSection(i);
-                    sections_to_load[num_sections_to_load] = section_number;
-                    num_sections_to_load++;
+                    sections_to_load[num_sections_to_load++] = drivable_section->GetVisibleSection(i);
                 }
             } else {
-                num_sections_to_load = TheVisibleSectionManager.GetSectionsToLoad(loading_section, sections_ptr, max_sections_to_load);
+                num_sections_to_load = TheVisibleSectionManager.GetSectionsToLoad(loading_section, sections, max_sections_to_load);
             }
 
-            this->AddCurrentStreamingSections(sections_ptr, num_sections_to_load, position_number);
+            this->AddCurrentStreamingSections(sections_to_load, num_sections_to_load, position_number);
+            num_sections_to_load = 0;
         }
     }
 }

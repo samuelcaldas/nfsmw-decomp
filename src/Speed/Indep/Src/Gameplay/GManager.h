@@ -208,9 +208,7 @@ class GManager : public UTL::COM::Object, public IVehicleCache {
     bool GetIsIconVisible(GIcon *icon);
 
 #ifndef EA_BUILD_A124
-    const char *GetCacheName() const override {
-        return "GManager";
-    }
+    const char *GetCacheName() const override;
     void SetRestartEvent(uint32 eventHash) {
         mRestartEventHash = eventHash;
     }

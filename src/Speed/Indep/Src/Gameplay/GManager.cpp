@@ -525,6 +525,115 @@ void GManager::UnspawnAllIcons() {
     }
 }
 
+/**
+ * @brief Loads milestone state records from source array.
+ * @param src Source milestone array.
+ * @param count Number of milestone records to load.
+ */
+void GManager::LoadMilestones(GMilestone *src, unsigned int count) {
+    for (unsigned int i = 0; i < count; ++i) {
+        GMilestone *milestone = &src[i];
+        for (unsigned int j = 0; j < this->mNumMilestones; ++j) {
+            GMilestone *dest = &this->mMilestones[j];
+            if (dest->mChallengeKey == milestone->mChallengeKey) {
+                *dest = *milestone;
+                break;
+            }
+        }
+    }
+}
 
+/**
+ * @brief Loads speed trap state records from source array.
+ * @param src Source speed trap array.
+ * @param count Number of speed trap records to load.
+ */
+void GManager::LoadSpeedTraps(GSpeedTrap *src, unsigned int count) {
+    for (unsigned int i = 0; i < count; ++i) {
+        GSpeedTrap *speedTrap = &src[i];
+        for (unsigned int j = 0; j < this->mNumSpeedTraps; ++j) {
+            GSpeedTrap *dest = &this->mSpeedTraps[j];
+            if (dest->mSpeedTrapKey == speedTrap->mSpeedTrapKey) {
+                *dest = *speedTrap;
+                break;
+            }
+        }
+    }
+}
 
+/**
+ * @brief Saves milestone tracking statistics into destination array.
+ * @param dest Destination buffer for milestone type information.
+ * @return Number of milestone type records saved.
+ */
+unsigned int GManager::SaveMilestoneInfo(MilestoneTypeInfo *dest) {
+    for (MilestoneInfoMap::iterator it = this->mMilestoneTypeInfo.begin(); it != this->mMilestoneTypeInfo.end(); ++it) {
+        *dest = it->second;
+        ++dest;
+    }
+    return this->mMilestoneTypeInfo.size();
+}
 
+/**
+ * @brief Loads milestone tracking statistics from source array.
+ * @param src Source buffer of milestone type information.
+ * @param count Number of milestone type records to load.
+ */
+void GManager::LoadMilestoneInfo(MilestoneTypeInfo *src, unsigned int count) {
+    this->ResetMilestoneTrackingInfo();
+    for (unsigned int i = 0; i < count; ++i) {
+        MilestoneTypeInfo *info = &src[i];
+        MilestoneInfoMap::iterator it = this->mMilestoneTypeInfo.find(info->mTypeKey);
+        if (it != this->mMilestoneTypeInfo.end()) {
+            MilestoneTypeInfo &typeInfo = it->second;
+            typeInfo.mBestValue = info->mBestValue;
+            typeInfo.mLastKnownValue = info->mLastKnownValue;
+        }
+    }
+}
+
+/**
+ * @brief Saves pending SMS message identifiers into destination buffer.
+ * @param saveInfo Destination buffer for SMS IDs.
+ * @return Number of pending SMS records saved.
+ */
+unsigned int GManager::SaveSMSInfo(int *saveInfo) {
+    int count = this->mPendingSMS.size();
+    PendingSMSList::iterator it = this->mPendingSMS.begin();
+    for (int i = 0; i < count; i += 2) {
+        saveInfo[i] = *it;
+        it++;
+    }
+    return count;
+}
+
+/**
+ * @brief Loads pending SMS message identifiers from source buffer.
+ * @param saveInfo Source buffer containing SMS IDs.
+ * @param count Number of pending SMS records to load.
+ */
+void GManager::LoadSMSInfo(int *saveInfo, unsigned int count) {
+    this->mPendingSMS.clear();
+    for (unsigned int i = 0; i < count; ++i) {
+        this->mPendingSMS.push_back(saveInfo[i]);
+    }
+}
+
+/**
+ * @brief Checks if there are any pending SMS messages eligible to play.
+ * @return True if pending SMS messages can be played; otherwise false.
+ */
+bool GManager::GetHasPendingSMS() const {
+    if (this->mPendingSMS.size() != 0) {
+        return this->CanPlaySMS();
+    }
+    return false;
+}
+
+/**
+ * @brief Gets the name identifier for this vehicle cache client.
+ * @return String identifier "GManager".
+ */
+const char *GManager::GetCacheName() const {
+    return "GManager";
+}

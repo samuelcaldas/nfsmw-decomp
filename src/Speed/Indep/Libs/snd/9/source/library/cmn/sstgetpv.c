@@ -1,5 +1,8 @@
 #include "./sndcmn.h"
 
+/**
+ * @brief Returns the programmed volume for a sound stream.
+ */
 int SNDSTRM_getprogvol(int sndstreamhandle) {
     SNDSTREAMCHANNEL *pssc = SNDSTRMI_getstreamptr(sndstreamhandle);
 
@@ -13,5 +16,5 @@ int SNDSTRM_getprogvol(int sndstreamhandle) {
         return vol;
     }
 
-    return SNDI_ftoifast(pssc->sourceChannelState[0].vol);
+    return SNDI_ftoifast(pssc->sourceChannelState[0].vol * 127.0f);
 }

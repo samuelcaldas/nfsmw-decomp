@@ -1,5 +1,8 @@
 #include "sndcmn.h"
 
+/**
+ * @brief Gets the programmed MIDI volume for a sound handle.
+ */
 int SNDCTRL_getprogvol(int shandle) {
     int voice = SNDVOICEI_get(shandle);
     int vol;
@@ -7,7 +10,7 @@ int SNDCTRL_getprogvol(int shandle) {
     if (voice < 0)
         return -8;
 
-    vol = SNDI_ftoifast(sndgs.chan[voice].programmedVol);
+    vol = SNDI_ftoifast(sndgs.chan[voice].programmedVol * 127.0f);
 
     return vol;
 }

@@ -91,29 +91,30 @@ u32 FEMessageResponse::FindResponse(u32 CommandID) const {
     return 0xFFFFFFFF;
 }
 
-// UNSOLVED
+/**
+ * @brief Finds the target response for a conditional branch.
+ */
 u32 FEMessageResponse::FindConditionBranchTarget(u32 Index) const {
-    u32 Nest = 1;
-    u32 Result = Count;
-    if (Index != Result - 1) {
-        do {
-            Index++;
-            switch (pResponseList[Index].ResponseID) {
-                case MR_IfScriptEquals:
-                case MR_IfScriptNotEquals:
-                    Nest++;
-                    break;
-                case MR_Else:
-                    if (Nest == 1) {
-                        Nest = 0;
-                    }
-                    break;
-                case MR_EndIf:
-                    Nest--;
-                    break;
-            }
-        } while (Index < Result && Nest != 0);
-        return Index;
+    if (Index == Count - 1) {
+        return Count;
     }
-    return Result;
+    int Nest = 1;
+    do {
+        Index++;
+        switch (pResponseList[Index].ResponseID) {
+            case MR_IfScriptEquals:
+            case MR_IfScriptNotEquals:
+                Nest++;
+                break;
+            case MR_Else:
+                if (Nest == 1) {
+                    Nest = 0;
+                }
+                break;
+            case MR_EndIf:
+                Nest--;
+                break;
+        }
+    } while (Index < Count && Nest != 0);
+    return Index;
 }

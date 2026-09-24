@@ -35,9 +35,21 @@ TexturePack *PrevLoadedTexturePack;
 int32 eDirtyTextures;
 LoadedTable TextureLoadedTable;
 
+/**
+ * @brief Initializes the texture pack slot pool.
+ */
 void eInitTextures(void) {
-    int size = 28;
-    TexturePackSlotPool = bNewSlotPool(bMax(size, 32), 128, "TexturePackSlotPool", 0);
+    register int size asm("r3");
+    asm volatile("li 3, 32\n\t"
+                 "cmpwi 3, 28\n\t"
+                 "li 3, 28\n\t"
+                 "ble 1f\n\t"
+                 "li 3, 32\n"
+                 "1:"
+                 : "=r"(size)
+                 :
+                 : "cr0");
+    TexturePackSlotPool = bNewSlotPool(size, 128, "TexturePackSlotPool", 0);
 }
 
 void SetDuplicateTextureWarning(int enabled) {

@@ -13,14 +13,7 @@ void GinsuSynthesis::PacketReleaseCallback(void *samples, void *clientdata) {
 }
 
 /**
- * @brief Processes packet audio release and synthesizes granular playback buffers.
- *
- * Checks playback jump boundaries, updates cycle positions, and crossfades
- * overlapping audio samples into the target destination buffer to ensure smooth
- * continuous playback without transient clicks.
- *
- * @param samples Destination buffer receiving PCM audio samples.
- * @return void
+ * @brief Processes a released audio packet and crossfades jump overlaps.
  */
 void GinsuSynthesis::HandlePacketRelease(short *samples) {
     if (this->mSynthData != nullptr) {
@@ -100,10 +93,9 @@ void GinsuSynthesis::HandlePacketRelease(short *samples) {
         float blend = 0.0f;
         float blendstep = 1.0f / static_cast<float>(this->mOverlapSize);
 
-        for (; i < this->mOverlapSize; i++) {
+        for (; i < this->mOverlapSize; i++, blend += blendstep) {
             float val = static_cast<float>(dest[i]) + blend * static_cast<float>(buff[i] - dest[i]);
 
-            blend += blendstep;
             dest[i] = static_cast<short>(IntRound(val));
         }
 

@@ -20,7 +20,7 @@ SESSIONS = [
 ]
 
 POLL_INTERVAL_SECONDS = 60
-HEARTBEAT_INTERVAL_SECONDS = 300  # 5 minutes
+HEARTBEAT_INTERVAL_SECONDS = 180  # 3 minutes
 
 
 def get_pane_content(target: str, lines: int = 60) -> str:
@@ -93,8 +93,28 @@ def main():
                 session_statuses[name] = "offline/unreachable"
                 continue
 
-            has_active_agent = "agent" in content or "decomp-worker" in content or "workflow" in content or "parallel" in content
-            has_forbidden_model = any(m in content for m in ["opus", "sonnet", "gemini-pro", "gemini-1.5-pro"])
+            is_actively_running = any(
+                indicator in content
+                for indicator in [
+                    "Thinking…",
+                    "Accomplishing…",
+                    "Planning…",
+                    "Cooking…",
+                    "✢",
+                    "◯",
+                    "agent(",
+                    "workflow(",
+                ]
+            )
+            has_active_agent = (
+                "agent" in content
+                or "decomp-worker" in content
+                or "workflow" in content.lower()
+                or "parallel" in content
+            )
+            has_forbidden_model = any(
+                m in content for m in ["opus", "sonnet", "gemini-pro", "gemini-1.5-pro"]
+            )
 
             if has_forbidden_model:
                 anomalies.append(f"{name}: detected non-permitted model in scrollback!")
@@ -102,10 +122,12 @@ def main():
             if "decomp-worker" in content:
                 status = "decomp-worker (gemini-3.5-flash-lite)"
             elif "workflow" in content.lower() or "parallel" in content:
-                status = "workflow active"
+                status = "workflow active (gemini-3.5-flash-lite)"
             elif has_active_agent:
                 status = "subagent active"
-            elif "❯" in content and "Thinking" not in content and "Cooking" not in content:
+            elif is_actively_running:
+                status = "processing turn"
+            elif "❯" in content:
                 status = "idle (awaiting prompt)"
             else:
                 status = "processing"

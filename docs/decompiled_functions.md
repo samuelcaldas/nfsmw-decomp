@@ -3812,3 +3812,18 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Updates the front-end engine state, polling and updating mouse input, joypad masks, active packages, joypad hold decrement counters, and package message queues. Declaring `PadIndex` before the input loops ensures GCC 2.95.3 allocates `r31` consistently across both joypad update and hold decrement loops, achieving 100.0% binary assembly parity.
 
+---
+
+### `__InitMatrices`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/GameCube/Src/Ecstasy/EcstasyE.cpp`
+- **Virtual Address**: `0x801026D0`
+- **Size**: 508 bytes (127 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void __InitMatrices(void);
+  ```
+- **Description**: Initializes orthographic projection and view matrices for GameCube hardware rendering. Preserves aspect ratio across PAL50 and NTSC modes by computing frontend scaling and centering offsets. Factoring subexpressions as `scale_y = gcn_scale * (1.0f / 448.0f)` and parenthesizing `((float)_rmode->xfbHeight * (1.0f / 448.0f))` matches GCC 2.95.3 instruction scheduling and register allocation to achieve 100.0% binary assembly parity (127/127 instructions).
+
+

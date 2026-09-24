@@ -117,17 +117,18 @@ void ArrayScroller::SetSelection(ArrayDatum *newDatum, int newStartDatum) {
     }
 }
 
-// UNSOLVED
 int ArrayScroller::ForceSelectionOnScreen(int new_datum, int start) {
-    int w = GetWidth();
     int h = GetHeight();
-    int ret = start;
+    int w = GetWidth();
     if (new_datum < start) {
-        ret = (new_datum / w) * w;
+        start = new_datum / w;
+        start *= w;
     } else if (new_datum > start + w * h) {
-        ret = (new_datum / w - (h - 1)) * w;
+        h = h - 1;
+        start = new_datum / w - h;
+        start *= w;
     }
-    return ret;
+    return start;
 }
 
 void ArrayScroller::ScrollHor(eScrollDir dir) {

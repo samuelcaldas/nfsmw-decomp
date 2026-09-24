@@ -51,7 +51,7 @@ void CARSFX_PreColWoosh::MsgBarrier(const MAudioReflection &message) {
     }
 
     this->bBarrierDetected = true;
-    if (!this->bGoingToCollide && !this->bBailOnAll && this->mResetTime == 0.0f) {
+    if (!this->bGoingToCollide && !this->bBailOnAll && 0.0f == this->mResetTime) {
         this->bGoingToCollide = true;
         this->mDurationActive = 0.0f;
         this->WooshFadeOut.Initialize(1.0f, 1.0f, 1, LINEAR);

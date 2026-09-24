@@ -185,15 +185,17 @@ void EAXCommon::Stop(eMenuSoundTriggers etrigger) {}
  * @return 0 on success, -1 on failure.
  */
 int EAXCommon::Play(eMenuSoundTriggers etrigger) {
-    if (IsSoundEnabled == 0 || Debug_Common_FE_OFF != 0) {
+    if (IsSoundEnabled == 0) {
+        return -1;
+    }
+
+    if (Debug_Common_FE_OFF != 0) {
         return -1;
     }
 
     if (this->m_pSFXOBJ_FEHUD == nullptr) {
         return -1;
-    }
-
-    if (this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr() == nullptr) {
+    } else if (this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr() == nullptr) {
         return 0;
     }
 

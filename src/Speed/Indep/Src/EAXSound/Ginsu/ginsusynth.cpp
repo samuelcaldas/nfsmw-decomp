@@ -91,9 +91,8 @@ void GinsuSynthesis::HandlePacketRelease(short *samples) {
 
         int i = 0;
         float blendstep = 1.0f / static_cast<float>(this->mOverlapSize);
-        float blend = 0.0f;
 
-        for (; i < this->mOverlapSize; i++, blend += blendstep) {
+        for (float blend = 0.0f; i < this->mOverlapSize; i++, blend += blendstep) {
             float val = static_cast<float>(dest[i]) + blend * static_cast<float>(buff[i] - dest[i]);
 
             dest[i] = static_cast<short>(IntRound(val));

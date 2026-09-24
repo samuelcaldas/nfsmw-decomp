@@ -3037,5 +3037,89 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Determines whether an unlockable entity is new in Career Mode or Quick Race filters with 100% control-flow and branch matching parity.
 
+---
+
+### `GRaceDatabase::GetBin`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A43DC`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GRaceBin *GRaceDatabase::GetBin(unsigned int index);
+  ```
+- **Description**: Retrieves a pointer to the indexed race bin from the internal bins array using scaled indexing (`sizeof(GRaceBin) = 0x1c`).
+
+---
+
+### `GRaceStatus::GetCacheName`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801BC0F0`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual const char *GRaceStatus::GetCacheName() const;
+  ```
+- **Description**: Returns the static string literal `"GRaceStatus"` for IVehicleCache identification with exact `.rodata` pointer resolution.
+
+---
+
+### `GRacerInfo::ChallengeComplete`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801A25B8`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRacerInfo::ChallengeComplete();
+  ```
+- **Description**: Sets the racer challenge completion boolean flag (`mChallengeComplete = true`) at offset `0x2C`.
+
+---
+
+### `GRacerInfo::SetName`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801A26C8`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRacerInfo::SetName(const char *name);
+  ```
+- **Description**: Stores pointer to racer name string in `mName` at offset `0x08`.
+
+---
+
+### `GRacerInfo::SetRanking`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801A26D0`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRacerInfo::SetRanking(int ranking);
+  ```
+- **Description**: Sets racer ranking integer in `mRanking` at offset `0x10`.
+
+---
+
+### `GRacerInfo::SetIndex`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801A2708`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRacerInfo::SetIndex(int index);
+  ```
+- **Description**: Sets racer index integer in `mIndex` at offset `0x0C`.
+
 
 

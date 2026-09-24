@@ -3840,4 +3840,19 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Initializes orthographic projection and view matrices for GameCube hardware rendering. Preserves aspect ratio across PAL50 and NTSC modes by computing frontend scaling and centering offsets. Factoring subexpressions as `scale_y = gcn_scale * (1.0f / 448.0f)` and parenthesizing `((float)_rmode->xfbHeight * (1.0f / 448.0f))` matches GCC 2.95.3 instruction scheduling and register allocation to achieve 100.0% binary assembly parity (127/127 instructions).
 
+---
+
+### `LuaMessageDeliveryInfo::~LuaMessageDeliveryInfo`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Lua/LuaPostOffice.h`
+- **Virtual Address**: `0x801BBC94`
+- **Size**: 144 bytes (36 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual LuaMessageDeliveryInfo::~LuaMessageDeliveryInfo();
+  ```
+- **Description**: Destructor for LuaMessageDeliveryInfo. Checks if the message's Lua table was constructed (`mLuaTableBuilt`), restores the Lua stack by popping the table via `lua_settop(mLuaState, -2)`, and notifies the runtime that message delivery has concluded via `LuaRuntime::Get().EndDelivery()`. Achieves 100.0% binary assembly parity (36/36 instructions).
+
+
 

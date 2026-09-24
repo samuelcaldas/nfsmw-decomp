@@ -68,6 +68,14 @@ void GRaceCustom::SetNumOpponents(int numOpponents) {
 }
 
 /**
+ * @brief Retrieves the race activity associated with this custom race.
+ * @return Pointer to race activity.
+ */
+GActivity *GRaceCustom::GetRaceActivity() const {
+    return this->mRaceActivity;
+}
+
+/**
  * @brief Retrieves the number of race bins in the database.
  * @return Number of race bins.
  */

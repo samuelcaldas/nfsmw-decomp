@@ -29,6 +29,10 @@ class GMarker : public GRuntimeInstance {
         return kGameplayObjType_Marker;
     }
 
+    static GameplayObjType GetTypeStatic() {
+        return kGameplayObjType_Marker;
+    }
+
     /**
      * @brief Gets the world position vector.
      * @return Const reference to the marker position.

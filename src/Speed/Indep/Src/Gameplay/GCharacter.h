@@ -32,6 +32,10 @@ class GCharacter : public GRuntimeInstance, public UTL::COM::Object, public IAtt
         return kGameplayObjType_Character;
     }
 
+    static GameplayObjType GetTypeStatic() {
+        return kGameplayObjType_Character;
+    }
+
     /**
      * @brief Callback invoked when another attachable object is attached.
      * @param pOther The attachable object being attached.

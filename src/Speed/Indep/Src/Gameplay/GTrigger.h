@@ -30,6 +30,7 @@ class GTrigger : public GRuntimeInstance {
      * @return The trigger gameplay object type (kGameplayObjType_Trigger).
      */
     GameplayObjType GetType() const override;
+    static GameplayObjType GetTypeStatic() { return kGameplayObjType_Trigger; }
 
     void NotifySimableTrigger(ISimable *isim, int triggerStimulus);
 
@@ -57,7 +58,9 @@ class GTrigger : public GRuntimeInstance {
 
     void RefreshParticleEffects();
 
-    // const UMath::Vector3 &GetDirection() const {} // Decl: 57
+    const UMath::Vector3 &GetDirection() const {
+        return mDirection;
+    }
 
     float GetRadius();
 

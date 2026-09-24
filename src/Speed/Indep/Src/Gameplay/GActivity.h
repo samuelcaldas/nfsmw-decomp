@@ -38,6 +38,10 @@ class GActivity : public GRuntimeInstance {
         return kGameplayObjType_Activity;
     }
 
+    static GameplayObjType GetTypeStatic() {
+        return kGameplayObjType_Activity;
+    }
+
     void EnterState(GState *state);
     void Run();
     void Suspend();

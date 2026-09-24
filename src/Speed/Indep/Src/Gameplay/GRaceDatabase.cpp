@@ -76,6 +76,14 @@ unsigned int GRaceDatabase::GetBinCount() {
 }
 
 /**
+ * @brief Retrieves the startup race context.
+ * @return Race context identifier.
+ */
+GRace::Context GRaceDatabase::GetStartupRaceContext() {
+    return this->mStartupRaceContext;
+}
+
+/**
  * @brief Retrieves the gameplay attribute object for this race parameter set.
  * @return Pointer to gameplay attribute object.
  */

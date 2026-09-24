@@ -60,72 +60,106 @@ eMenuSoundTriggers UIQRChallengeSeries::NotifySoundMessage(u32 msg, eMenuSoundTr
  */
 void UIQRChallengeSeries::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2) {
     ArrayScrollerMenu::NotificationMessage(msg, obj, param1, param2);
-    switch (msg) {
-        case FEMSG_SCREEN_TICK:
-            TrackMapStreamer.UpdateAnimation();
-            break;
-        case __BUTTON_PRESSED__:
-            if (theChallengeRace == nullptr) {
-                extern EAXSound *g_pEAXSound;
-                g_pEAXSound->PlayUISoundFX(UISND_COMMON_WRONG);
-                return;
-            }
-            DialogInterface::ShowTwoButtons(GetPackageName(), "", dialog_alert, LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, dialog_message_yes,
-                                            dialog_message_no, dialog_message_no, first_dialog_button2, LANGUAGE_REP_SHEET_RACE_CONFIRM);
-            break;
-        case __PAD_BUTTON4__: {
-            GRaceParameters *race = static_cast<ChallengeDatum *>(GetCurrentDatum())->race;
-            if (race->GetChallengeType() == 0) {
-                const u32 FEObj_MASTERBLASTER = 0x99344537;
-                const u32 FEObj_HIDE = FEHASH_HIDE;
-                extern const char *gTUTORIAL_MOVIE_TOLLBOOTH;
-
-                FEngSetScript(GetPackageName(), FEObj_MASTERBLASTER, FEObj_HIDE, true);
-                FEAnyTutorialScreen::LaunchMovie(gTUTORIAL_MOVIE_TOLLBOOTH, GetPackageName());
-            }
-            break;
-        }
-        case 0x1a2826e1: {
-            FEDatabase->GetPlayerSettings(0)->Transmission = 0;
-            GRaceCustom *race = GRaceDatabase::Get().AllocCustomRace(theChallengeRace);
-            GRaceDatabase::Get().SetStartupRace(race, GRace::kRaceContext_QuickRace);
-            GRaceDatabase::Get().FreeCustomRace(race);
-            RaceStarter::StartRace();
-            break;
-        }
-        case 0x5f5e3886: {
-            FEDatabase->GetPlayerSettings(0)->Transmission = 1;
-            GRaceCustom *race = GRaceDatabase::Get().AllocCustomRace(theChallengeRace);
-            GRaceDatabase::Get().SetStartupRace(race, GRace::kRaceContext_QuickRace);
-            GRaceDatabase::Get().FreeCustomRace(race);
-            RaceStarter::StartRace();
-            break;
-        }
-        case dialog_message_yes: {
-            int joyPort = FEngMapJoyParamToJoyport(param1);
-            FEDatabase->SetPlayersJoystickPort(0, joyPort);
-            if (FEDatabase->GetPlayerSettings(0)->TransmissionPromptOn) {
-                ChooseTransmission();
-            } else {
-                GRaceCustom *race = GRaceDatabase::Get().AllocCustomRace(theChallengeRace);
-                GRaceDatabase::Get().SetStartupRace(race, GRace::kRaceContext_QuickRace);
-                GRaceDatabase::Get().FreeCustomRace(race);
-                RaceStarter::StartRace();
-            }
-            break;
-        }
-
-        case __PAD_BACK__:
-            cFEng::Get()->QueuePackageSwitch("FeQrPkg", 0, 0, false);
-            break;
-        case 0xc3960eb9: {
-            const u32 FEObj_MASTERBLASTER = 0x99344537;
-            const u32 FEObj_Init = FEHASH_INIT;
-
-            FEngSetScript(GetPackageName(), FEObj_MASTERBLASTER, FEObj_Init, true);
-            break;
-        }
+    if (msg == 0x5f5e3886) {
+        goto transmission_on;
     }
+    if (msg <= 0x5f5e3886) {
+        if (msg == 0x1a2826e1) {
+            goto transmission_off;
+        }
+        if (msg <= 0x1a2826e1) {
+            if (msg == __BUTTON_PRESSED__) {
+                goto button_pressed;
+            }
+            goto notification_end;
+        }
+        goto notification_end;
+    }
+    if (msg == __PAD_BUTTON4__) {
+        goto pad_button4_pressed;
+    }
+    if (msg <= __PAD_BUTTON4__) {
+        if (msg == __PAD_BACK__) {
+            goto pad_back_pressed;
+        }
+        if (msg == 0xc3960eb9) {
+            goto init_message;
+        }
+        goto notification_end;
+    }
+    if (msg == FEMSG_SCREEN_TICK) {
+        goto screen_tick;
+    }
+    if (msg == dialog_message_yes) {
+        goto dialog_yes;
+    }
+    goto notification_end;
+
+screen_tick:
+    TrackMapStreamer.UpdateAnimation();
+    goto notification_end;
+button_pressed:
+    if (theChallengeRace == nullptr) {
+        extern EAXSound *g_pEAXSound;
+        g_pEAXSound->PlayUISoundFX(UISND_COMMON_WRONG);
+        return;
+    }
+    DialogInterface::ShowTwoButtons(GetPackageName(), "", dialog_alert, LANGUAGE_COMMON_YES, LANGUAGE_COMMON_NO, dialog_message_yes,
+                                    dialog_message_no, dialog_message_no, first_dialog_button2, LANGUAGE_REP_SHEET_RACE_CONFIRM);
+    goto notification_end;
+pad_button4_pressed: {
+    GRaceParameters *race = static_cast<ChallengeDatum *>(GetCurrentDatum())->race;
+    if (race->GetChallengeType() == 0) {
+        const u32 FEObj_MASTERBLASTER = 0x99344537;
+        const u32 FEObj_HIDE = FEHASH_HIDE;
+        extern const char *gTUTORIAL_MOVIE_TOLLBOOTH;
+
+        FEngSetScript(GetPackageName(), FEObj_MASTERBLASTER, FEObj_HIDE, true);
+        FEAnyTutorialScreen::LaunchMovie(gTUTORIAL_MOVIE_TOLLBOOTH, GetPackageName());
+    }
+    goto notification_end;
+}
+transmission_off: {
+    FEDatabase->GetPlayerSettings(0)->Transmission = 0;
+    GRaceCustom *race = GRaceDatabase::Get().AllocCustomRace(theChallengeRace);
+    GRaceDatabase::Get().SetStartupRace(race, GRace::kRaceContext_QuickRace);
+    GRaceDatabase::Get().FreeCustomRace(race);
+    RaceStarter::StartRace();
+    goto notification_end;
+}
+transmission_on: {
+    FEDatabase->GetPlayerSettings(0)->Transmission = 1;
+    GRaceCustom *race = GRaceDatabase::Get().AllocCustomRace(theChallengeRace);
+    GRaceDatabase::Get().SetStartupRace(race, GRace::kRaceContext_QuickRace);
+    GRaceDatabase::Get().FreeCustomRace(race);
+    RaceStarter::StartRace();
+    goto notification_end;
+}
+dialog_yes: {
+    int joyPort = FEngMapJoyParamToJoyport(param1);
+    FEDatabase->SetPlayersJoystickPort(0, joyPort);
+    if (FEDatabase->GetPlayerSettings(0)->TransmissionPromptOn) {
+        ChooseTransmission();
+    } else {
+        GRaceCustom *race = GRaceDatabase::Get().AllocCustomRace(theChallengeRace);
+        GRaceDatabase::Get().SetStartupRace(race, GRace::kRaceContext_QuickRace);
+        GRaceDatabase::Get().FreeCustomRace(race);
+        RaceStarter::StartRace();
+    }
+    goto notification_end;
+}
+pad_back_pressed:
+    cFEng::Get()->QueuePackageSwitch("FeQrPkg", 0, 0, false);
+    goto notification_end;
+init_message: {
+    const u32 FEObj_MASTERBLASTER = 0x99344537;
+    const u32 FEObj_Init = FEHASH_INIT;
+
+    FEngSetScript(GetPackageName(), FEObj_MASTERBLASTER, FEObj_Init, true);
+    goto notification_end;
+}
+notification_end:
+    return;
 }
 
 void UIQRChallengeSeries::ChooseTransmission() {

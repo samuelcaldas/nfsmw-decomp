@@ -262,17 +262,17 @@ bool FEPackageReader::ReadObjectChunk() {
         return true;
     }
 
+    u32 objectChunkID = Chunk_FEObject;
+    u32 buttonCountChunkID = Chunk_FEButtonCount;
     while (true) {
         u32 objID = pObjChunk->GetID();
-        if (objID != Chunk_FEObject) {
+        if (objID != objectChunkID) {
             if (pObjChunk >= pLast) {
                 return true;
             }
-            switch (objID) {
-                case Chunk_FEButtonCount:
-                    ButtonCount = FEngGetu32(*reinterpret_cast<u32 *>(pObjChunk->GetData()));
-                    pPack->ButtonMap.SetCount(ButtonCount);
-                    break;
+            if (objID == buttonCountChunkID) {
+                ButtonCount = FEngGetu32(*reinterpret_cast<u32 *>(pObjChunk->GetData()));
+                pPack->ButtonMap.SetCount(ButtonCount);
             }
             pObjChunk = pObjChunk->GetNext();
             continue;

@@ -685,9 +685,10 @@ void __InitMatrices(void) {
 
     // Calculate GameCube frontend scale and translation
     gcn_scale = IsPal50Mode ? 0.81f : 0.84f;
+    float scale_y = gcn_scale * (1.0f / 448.0f);
     transx = ((float)_rmode->fbWidth - (float)_rmode->fbWidth * gcn_scale * (448.f / 378.f)) * 0.5f;
-    transy = ((float)_rmode->efbHeight - gcn_scale * (1.0f / 448.0f) * (float)_rmode->efbHeight * (float)_rmode->xfbHeight) * 0.5f;
-    MTXScale(fe_scale, gcn_scale * (448.f / 378.f), gcn_scale * (1.0f / 448.0f) * (float)_rmode->xfbHeight, 1.0f);
+    transy = ((float)_rmode->efbHeight - (float)_rmode->efbHeight * gcn_scale * ((float)_rmode->xfbHeight * (1.0f / 448.0f))) * 0.5f;
+    MTXScale(fe_scale, gcn_scale * (448.f / 378.f), scale_y * (float)_rmode->xfbHeight, 1.0f);
     MTXTransApply(fe_scale, viewMOrthographic, transx, transy, 10.0f);
     MTXOrtho(projMOrthographic, 0.0f, _rmode->efbHeight, 0.0f, _rmode->fbWidth, 0.0f, -100000.0f);
     MTXIdentity(viewMOrthographicScreenQuad);

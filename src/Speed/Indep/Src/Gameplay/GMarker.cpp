@@ -11,7 +11,7 @@ GMarker::GMarker(const unsigned int &markerKey)
 
     UMath::Matrix4 mat = UMath::Matrix4::kIdentity;
     UMath::Vector3 dir = {0.0f, 0.0f, 1.0f};
-    UMath::Init(mat);
+    VU0_MATRIX4Init(mat, 1.0f, 1.0f, 1.0f);
 
     MATRIX4_multyrot(&mat, -this->Rotation() * (1.0f / 360.0f), &mat);
     VU0_MATRIX3x4_vect3mult(dir, mat, dir);

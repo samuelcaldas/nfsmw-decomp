@@ -34,3 +34,12 @@ You are a specialized, ultra-fast matching decompilation worker agent for Need f
 9. Commit matched function atomically:
    `git add <source_file> && git commit -m "match(<unit>): decompile <function_name>"`
 10. Return structured output reporting final match percentage and branch status.
+
+## Anti-Slop Guardrails & Non-Negotiable Rules
+To maintain 100% binary parity and prevent AI-generated "slop" (fake matches, hardcoded offsets, random renaming, and shortcut anti-patterns):
+1. **No Forced Register Hacks**: Do not use inline assembly hacks or compiler-specific pragmas to force register allocation unless structurally required by the compiler output; match via correct control flow, types, and statement ordering.
+2. **No Pointer Offset Bypassing**: Always use proper DWARF struct/class types and member access (`obj->field`) rather than raw pointer arithmetic or magic byte offsets (`*(int*)((char*)p + 16)`).
+3. **No Arbitrary Renaming / Substitution**: Preserve original DWARF symbol names, function signatures, and variable names exactly as extracted from debug symbols. Never invent placeholder names or rename variables arbitrarily.
+4. **No Redundant Redeclarations**: Do not duplicate function headers, create redundant include guards, or add unnecessary forward declarations that violate original structure.
+5. **No Unnecessary Type Casts**: Use exact types matching DWARF type definitions. Avoid casting pointers or integers indiscriminately to silence compiler warnings.
+6. **Strict Verification**: Every change must be verified against `ninja build/GOWE69/<unit>.o` and `ninja changes` to ensure zero regressions across the codebase.

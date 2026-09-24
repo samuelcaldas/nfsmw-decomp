@@ -330,7 +330,8 @@ extern "C" const float lbl_803FB6B8;
         this->mLongitudeForce = this->mAppliedTorque / this->mRadius;
     }
 
-    this->mLateralForce = (-lat_vel * 2.0f) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex);
+    register float negative_lateral_velocity asm("fr11") = -lat_vel;
+    this->mLateralForce = (negative_lateral_velocity + negative_lateral_velocity) * this->mLoad * this->mSpecs->GRIP_SCALE().At(this->mAxleIndex);
     if (skid_speed > lbl_803FB6B8) {
         this->mLateralForce /= skid_speed;
     }

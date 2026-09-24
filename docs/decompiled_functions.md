@@ -3924,4 +3924,102 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Returns `kGameplayObjType_Activity` (0) for gameplay object type classification. Achieves 100.0% binary assembly parity (2/2 instructions).
 
+---
+
+### `GMilestone::GetBounty`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4760`
+- **Size**: 252 bytes (63 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  float GMilestone::GetBounty() const;
+  ```
+- **Description**: Retrieves the bounty awarded for completing this milestone by creating an `Attrib::Gen::gameplay` instance from `mChallengeKey`. If valid, extracts the bounty value via `challengeRecord.Bounty()` and converts the integer bounty into a single-precision float; otherwise returns 0.0f. Achieves 100.0% binary assembly parity (63/63 instructions).
+
+---
+
+### `GMilestone::GetLocalizationTag`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B485C`
+- **Size**: 204 bytes (51 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  int GMilestone::GetLocalizationTag() const;
+  ```
+- **Description**: Resolves the localization string tag for this milestone by querying the `Attrib::Gen::milestonetypes` record corresponding to `mTypeKey`. If the record is valid, retrieves the integer tag via `milestoneTypeRecord.LocalizationTag()`; otherwise returns 0. Achieves 100.0% binary assembly parity (51/51 instructions).
+
+---
+
+### `GMilestone::GetJumpMarkerKey`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4928`
+- **Size**: 156 bytes (39 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Attrib::Key GMilestone::GetJumpMarkerKey() const;
+  ```
+- **Description**: Retrieves the spawn point attribute key for the jump marker associated with this milestone by constructing an `Attrib::Gen::gameplay` instance and extracting `challengeRecord.SpawnPoint().mCollectionKey`. Achieves 100.0% binary assembly parity (39/39 instructions).
+
+---
+
+### `GMilestone::Reset`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B49E8`
+- **Size**: 308 bytes (77 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GMilestone::Reset();
+  ```
+- **Description**: Resets the milestone state by inspecting `Attrib::Gen::gameplay` for `mChallengeKey`. Resolves `mTypeKey` via `Attrib::StringToKey(challengeRecord.MilestoneName())`, sets `mState` to 1 (locked), updates `mBinNumber` and `mRequiredValue` (from `GoalEasy()`), resets `mRecordedValue` to 0.0f, and sets flag bit 1 if `GManager::Get().GetIsBiggerValueBetter(mTypeKey)` is true. Achieves 100.0% binary assembly parity (77/77 instructions).
+
+---
+
+### `GMilestone::NotifyProgress`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4B6C`
+- **Size**: 88 bytes (22 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GMilestone::NotifyProgress(float value);
+  ```
+- **Description**: Evaluates progress against the milestone goal when in state 2 (available). If `ValueMeetsGoal(value)` succeeds, allocates and constructs an `EReportMilestoneAtStake` heap event and advances `mState` to 3 (done pending escape). Achieves 100.0% binary assembly parity (22/22 instructions).
+
+---
+
+### `GMilestone::NotifyPursuitOver`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4BC4`
+- **Size**: 420 bytes (105 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GMilestone::NotifyPursuitOver(bool escaped);
+  ```
+- **Description**: Processes the outcome of a pursuit for this milestone. If `mState == 3`: on busted/failed escape (`escaped == false`), reverts `mState` to 2; on successful escape (`escaped == true`), updates `mRecordedValue`, transitions `mState` to 4 (awarded), posts an `MNotifyMilestoneReached` message to the Gameplay message queue (`0x20d60dbf`), refreshes progress on the parent race bin (`bin->RefreshProgress()`), awards player bounty via `Game_AwardPlayerBounty(challengeRecord.Bounty())`, and signals `Game_ChallengeCompleted()`. Achieves 100.0% binary assembly parity (105/105 instructions).
+
+---
+
+### `Attrib::Gen::milestonetypes::ClassKey`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Generated/AttribSys/Classes/milestonetypes.h`
+- **Virtual Address**: `0x801BB898`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  static Attrib::Key Attrib::Gen::milestonetypes::ClassKey();
+  ```
+- **Description**: Returns the 32-bit class key `0xe4c3d904` identifying the `milestonetypes` attribute schema in the attribute system. Emitted out-of-line when instantiated in `zGameplay`. Achieves 100.0% binary assembly parity (3/3 instructions).
+
 

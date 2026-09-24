@@ -575,7 +575,6 @@ class Attribute {
     unsigned int GetLength() const;
     bool SetLength(unsigned int);
     void SendChangeMsg() const;
-    // TODO
     template <typename T> const T &Get(unsigned int index) const;
 
     void operator delete(void *ptr, std::size_t bytes) {
@@ -614,6 +613,16 @@ class Attribute {
     Node *mInternal;               // offset 0x8, size 0x4
     void *mDataPointer;            // offset 0xC, size 0x4
 };
+
+/**
+ * @brief Returns the indexed value or its default data.
+ * @param index Attribute element index.
+ * @return A reference to the indexed value or its default data.
+ */
+template <typename T> const T &Attribute::Get(unsigned int index) const {
+    const T *resultptr = reinterpret_cast<const T *>(GetElementPointer(index));
+    return (resultptr != NULL) ? *resultptr : *static_cast<const T *>(Attrib::DefaultDataArea(sizeof(T)));
+}
 
 namespace Gen {
 class GenericAccessor;

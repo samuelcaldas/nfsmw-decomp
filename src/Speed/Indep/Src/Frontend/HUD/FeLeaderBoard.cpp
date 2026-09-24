@@ -47,7 +47,9 @@ LeaderBoard::LeaderBoard(UTL::COM::Object *pOutter, const char *pkg_name, int pl
     }
 }
 
-// UNSOLVED
+/**
+ * @brief Updates the leaderboard HUD for the current player.
+ */
 void LeaderBoard::Update(IPlayer *player) {
     if (player->GetSettings()->LeaderboardOn) {
         if (!FEngIsScriptSet(mDataLeaderboardGroup, 0x001744B3)) {
@@ -74,7 +76,6 @@ void LeaderBoard::Update(IPlayer *player) {
             }
         }
 
-        int numRacerNumToClearFrom = mNumRacers;
         if (mNumRacers > 1) {
             for (int i = 0; i < mNumRacers && i < 4; i++) {
                 if (mShowingRacerTimes) {
@@ -101,11 +102,11 @@ void LeaderBoard::Update(IPlayer *player) {
                         }
                         if (mTopRacers[i].mPercentComplete >= mTopRacers[mPlayerIndex].mPercentComplete) {
                             float pctDiff = (mTopRacers[i].mPercentComplete - mTopRacers[mPlayerIndex].mPercentComplete) * 0.01f;
-                            pctDiff = pctDiff * totalRaceLenMetres;
+                            pctDiff *= totalRaceLenMetres;
                             FEPrintf(mDataRacerText[i], "+%$0.0f %s", pctDiff, GetTranslatedString(unit));
                         } else {
                             float pctDiff = (mTopRacers[mPlayerIndex].mPercentComplete - mTopRacers[i].mPercentComplete) * 0.01f;
-                            pctDiff = pctDiff * totalRaceLenMetres;
+                            pctDiff *= totalRaceLenMetres;
                             FEPrintf(mDataRacerText[i], "-%$0.0f %s", pctDiff, GetTranslatedString(unit));
                         }
                     }
@@ -114,12 +115,9 @@ void LeaderBoard::Update(IPlayer *player) {
                     FEPrintf(mDataRacerNum[i], "%$d", mTopRacers[i].mRacerNum);
                 }
             }
-            if (numRacerNumToClearFrom <= 1) {
-                numRacerNumToClearFrom = 0;
-            }
-        } else {
-            numRacerNumToClearFrom = 0;
         }
+
+        int numRacerNumToClearFrom = mNumRacers > 1 ? mNumRacers : 0;
 
         for (int i = numRacerNumToClearFrom; i <= 3; i++) {
             FEngSetInvisible(mDataRacerText[i]);

@@ -346,7 +346,9 @@ bAngle bATan(float x, float y) {
         register const bAngle *base asm("8") = bFastATanTable;
         register const bAngle *table asm("10") = &base[i >> 8];
         register bAngle low asm("3") = table[0];
-        a = low + (((table[1] - low) * (i & 0xFF)) >> 8);
+        int delta = (((table[1] - low) * (i & 0xFF)) >> 8);
+        asm("add %0, %1, %2" : "=r"(delta) : "r"(low), "r"(delta));
+        a = (bAngle)delta;
     } else {
         if (y > x) {
             float r = y;
@@ -354,8 +356,13 @@ bAngle bATan(float x, float y) {
             register const bAngle *base asm("8") = bFastATanTable;
             register const bAngle *table asm("10") = &base[i >> 8];
             register bAngle low asm("3") = table[0];
-            bAngle calc = low + (((table[1] - low) * (i & 0xFF)) >> 8);
-            a = bDegToAng(90.0f) - calc;
+            int delta = (((table[1] - low) * (i & 0xFF)) >> 8);
+            asm("add %0, %1, %2" : "=r"(delta) : "r"(low), "r"(delta));
+            register bAngle calc asm("r3");
+            asm("clrlwi %0, %1, 16" : "=r"(calc) : "r"(delta));
+            register int diff asm("r9");
+            asm("subfic %0, %1, 0x4000" : "=r"(diff) : "r"(calc));
+            a = (bAngle)diff;
         } else if (y == 0.0f) {
             a = 0;
         } else {

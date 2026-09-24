@@ -125,7 +125,14 @@ CustomTuningScreen::CustomTuningScreen(ScreenConstructorData *sd)
     Setup();
 }
 
-// UNSOLVED
+/**
+ * @brief Handles frontend notification messages for the custom tuning screen.
+ * @param msg Notification message hash.
+ * @param pobj Object associated with the notification.
+ * @param param1 First notification parameter.
+ * @param param2 Second notification parameter.
+ * @return Nothing.
+ */
 void CustomTuningScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 param2) {
     if (HelpVisible) {
         HelpTextScroller->HandleNotificationMessage(msg);
@@ -138,7 +145,7 @@ void CustomTuningScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 param1
         }
     }
 
-    if (!HelpVisible || (msg != __PAD_LEFT__ && msg != __PAD_RIGHT__ && msg != __PAD_UP__ && msg != __PAD_DOWN__)) {
+    if ((msg != __PAD_LEFT__ && msg != __PAD_RIGHT__ && msg != __PAD_UP__ && msg != __PAD_DOWN__) || !HelpVisible) {
         UIWidgetMenu::NotificationMessage(msg, pobj, param1, param2);
     }
 

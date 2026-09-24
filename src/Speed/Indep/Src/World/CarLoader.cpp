@@ -540,15 +540,11 @@ void CarLoader::SetMemoryPoolSize(int size) {
 
             this->MemoryPoolMem = bMalloc(size, "CarLoaderPool", 0, 7);
             this->MemoryPoolSize = size;
-            int pool = bGetFreeMemoryPoolNum();
-            bInitMemoryPool(CarLoaderMemoryPoolNumber = pool, this->MemoryPoolMem, this->MemoryPoolSize, "Cars");
+            CarLoaderMemoryPoolNumber = bGetFreeMemoryPoolNum();
+            bInitMemoryPool(CarLoaderMemoryPoolNumber, this->MemoryPoolMem, this->MemoryPoolSize, "Cars");
             bSetMemoryPoolDebugFill(CarLoaderMemoryPoolNumber, false);
             bSetMemoryPoolTopDirection(CarLoaderMemoryPoolNumber, true);
             this->NumSpongeAllocations = 0;
-
-            for (int n = 0; n < this->NumSpongeAllocations; n++) {
-                this->SpongeAllocations[n] = bMalloc(0, "CarLoaderSponge", 0, CarLoaderMemoryPoolNumber);
-            }
         }
     }
 }

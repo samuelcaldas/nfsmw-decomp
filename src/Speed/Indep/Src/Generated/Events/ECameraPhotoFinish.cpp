@@ -6,6 +6,8 @@
 #include "Speed/Indep/Src/Main/EventSequencer.h"
 #include "Speed/Indep/Src/World/VisualTreatment.h"
 
+void SetSoundControlState(bool bON, eSNDCTLSTATE esndstate, const char *Reason);
+
 struct UGroup;
 
 ECameraPhotoFinish::ECameraPhotoFinish()

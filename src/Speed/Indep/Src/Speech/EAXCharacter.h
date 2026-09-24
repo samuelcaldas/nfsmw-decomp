@@ -64,6 +64,8 @@ class HistoryPair {
 
 }; // namespace Speech
 
+#ifndef MISC_SPEECH_DECLARED
+#define MISC_SPEECH_DECLARED
 // total size: 0x1
 // Decl: 68
 class MiscSpeech {
@@ -98,6 +100,7 @@ class MiscSpeech {
     static bool IsSMSValid(int SMS_ID);
     static bool IsVehicleTypeOK();
 };
+#endif
 
 // total size: 0x40
 // Decl: 100

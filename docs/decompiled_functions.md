@@ -1814,13 +1814,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zBWare`
 - **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
 - **Virtual Address**: `0x8005D0A0`
-- **Size**: 336 bytes
-- **Matching State**: 92.32% match
+- **Size**: 336 bytes (84 instructions)
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   bAngle bASin(float x);
   ```
-- **Description**: Decompiled and analyzed bASin function in bMath.cpp for GOWE69 target
+- **Description**: Decompiled bASin function in bMath.cpp with 100.0% byte, instruction, and register parity. Implemented loop entry guard optimization (`if (fix_x >= table_size) do { ... } while(...)`) aligning compiler register allocation (`r8`, `r10`, `r0`) and DWARF debug line ordering without assembly hacks.
 
 ---
 
@@ -2798,3 +2798,74 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   unsigned int GRaceDatabase::GetRaceCount();
   ```
 - **Description**: Computes and returns the total race count by summing `mRaceCountStatic` (offset `0x0`) and `mRaceCountDynamic` (offset `0x4`) with 100% assembly parity.
+
+---
+
+### `UnlockSystem::IsUnlockableUnlocked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x8017AFB8`
+- **Size**: 260 bytes (65 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsUnlockableUnlocked(eUnlockFilters filter, eUnlockableEntity thing, int level, int player, bool backroom);
+  ```
+- **Description**: Dispatches unlockable entity availability checks across Quick Race, Career, and Online modes with early cheat check (`UnlockAllThings`) and bitwise filter composition to 100% register and instruction parity.
+
+---
+
+### `UnlockSystem::IsPerfPackageUnlocked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x8017B1C0`
+- **Size**: 260 bytes (65 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, int player, bool backroom);
+  ```
+- **Description**: Evaluates performance package upgrade unlocks across Quick Race, Career, and Online game modes with 100% register and instruction parity.
+
+---
+
+### `UnlockSystem::IsTrackUnlocked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x8017B2C4`
+- **Size**: 228 bytes (57 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsTrackUnlocked(eUnlockFilters filter, int event_hash, int player);
+  ```
+- **Description**: Evaluates race track event unlocks by querying Quick Race, Career, and Online mode databases with 100% register and instruction parity.
+
+---
+
+### `UnlockSystem::IsCarUnlocked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x8017B3A8`
+- **Size**: 276 bytes (69 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsCarUnlocked(eUnlockFilters filter, unsigned int handle, int player);
+  ```
+- **Description**: Queries car unlocks across modes and combines with Collector's Edition exclusive bonus vehicle validation (`GetIsCollectorsEdition() && IsBonusCarCEOnly(handle)`) with 100% register and instruction parity.
+
+---
+
+### `UnlockSystem::IsBackroomAvailable`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x8017B4BC`
+- **Size**: 212 bytes (53 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsBackroomAvailable(eUnlockFilters filter, eUnlockableEntity ent, int level);
+  ```
+- **Description**: Checks whether the backroom tuning shop is available for an entity across Quick Race, Career, and Online modes with 100% register and instruction parity.
+

@@ -185,13 +185,18 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`Dynamics::Articulation::Constraint::Constraint`**: Decompiled, verified (**90.83% fuzzy match**, 416 bytes), documented in `docs/decompiled_functions.md`. **Status: [In Progress - Improved]**
 
 ### Foundation / Math Subsystem (`zBWare`)
-- **`bASin`**: Decompiled, verified (92.32% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`bASin`**: Decompiled, verified (100.0% match, 336 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`bATan`**: Decompiled, verified (99.63% match, 328 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Frontend UI & Menu Subsystem (`zFe2`)
 - **`FEPackageManager::GetBasePkgName`**: Decompiled, verified (100.0% match, 100 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`feDialogScreen::NotifySoundMessage`**: Decompiled, verified (100.0% match, 184 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UnlockSystem::IsCarPartUnlocked`**: Decompiled, verified (100.0% match, 260 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`UnlockSystem::IsUnlockableUnlocked`**: Decompiled, verified (100.0% match, 260 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`UnlockSystem::IsPerfPackageUnlocked`**: Decompiled, verified (100.0% match, 260 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`UnlockSystem::IsTrackUnlocked`**: Decompiled, verified (100.0% match, 228 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`UnlockSystem::IsCarUnlocked`**: Decompiled, verified (100.0% match, 276 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`UnlockSystem::IsBackroomAvailable`**: Decompiled, verified (100.0% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`LeaderBoard::Update`**: Decompiled, verified (99.94% match, 1,360 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ## 2. Remaining Binary Chunks and Subsystems

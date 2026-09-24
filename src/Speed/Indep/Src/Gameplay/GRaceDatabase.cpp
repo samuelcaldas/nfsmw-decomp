@@ -44,6 +44,14 @@ unsigned short GRaceBin::GetAwardedRaceWins() const {
 void GRaceDatabase::SimulateDDayComplete() {}
 
 /**
+ * @brief Retrieves the startup race configuration.
+ * @return Pointer to startup race custom instance.
+ */
+GRaceCustom *GRaceDatabase::GetStartupRace() {
+    return this->mStartupRace;
+}
+
+/**
  * @brief Sets whether this race runs in reverse.
  * @param isReverseDir Whether the race direction is reversed.
  */

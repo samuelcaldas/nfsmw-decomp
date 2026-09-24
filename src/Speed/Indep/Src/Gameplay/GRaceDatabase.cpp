@@ -23,6 +23,11 @@ unsigned short GRaceBin::GetAwardedRaceWins() const {
 }
 
 /**
+ * @brief Simulates D-Day completion in the database.
+ */
+void GRaceDatabase::SimulateDDayComplete() {}
+
+/**
  * @brief Sets whether this race runs in reverse.
  * @param isReverseDir Whether the race direction is reversed.
  */

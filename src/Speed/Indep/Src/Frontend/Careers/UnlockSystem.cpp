@@ -694,19 +694,11 @@ bool UnlockSystem::IsBackroomAvailable(eUnlockFilters filter, eUnlockableEntity 
 bool UnlockSystem::IsUnlockableNew(eUnlockFilters filter, eUnlockableEntity ent, int level) {
     if (level == UNLOCK_LEVEL_ANY) {
         if (filter & UNLOCK_QUICK_RACE) {
-            if ((filter & UNLOCK_CAREER_MODE) == 0) {
-                return TheUnlockData[ent].QuickRaceIsNewPart == level;
-            }
-            if (TheUnlockData[ent].QuickRaceIsNewPart != UNLOCK_IS_OLD) {
-                return true;
-            }
+            return TheUnlockData[ent].QuickRaceIsNewPart != UNLOCK_IS_OLD;
         }
         if (filter & UNLOCK_CAREER_MODE) {
-            if (TheUnlockData[ent].CareerIsNewPart != UNLOCK_IS_OLD) {
-                return true;
-            }
+            return TheUnlockData[ent].CareerIsNewPart != UNLOCK_IS_OLD;
         }
-        return false;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         return TheUnlockData[ent].CareerIsNewPart == level;

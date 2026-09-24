@@ -1213,12 +1213,13 @@ void EmitterSystem::Render(eView *view) {
                 PlatGetViewVectors(view, rightVec, upVec, fwdVec);
                 bool submitParticles = PlatStartParticleRender(view, this->mCurrentTexture, em->GetNumParticles());
                 if (submitParticles) {
-                    EmitterDataAttribWrapper *last_emitter_data = nullptr;
+                    const EmitterDataAttribWrapper *last_emitter_data = nullptr;
                     const Attrib::Gen::emitterdata *last_emitter_data_atr = nullptr;
                     for (EmitterParticle *particle = plist->GetHead(); particle != plist->EndOfList(); particle = particle->GetNext()) {
                         unsigned int sprite_hack_flags = 0;
-                        EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
-                        if (this_emitter_data != last_emitter_data) {
+                        const EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
+                        bool emitter_data_switch = this_emitter_data != last_emitter_data;
+                        if (emitter_data_switch) {
                             last_emitter_data = this_emitter_data;
                             last_emitter_data_atr = &this_emitter_data->GetAttributes();
                         }

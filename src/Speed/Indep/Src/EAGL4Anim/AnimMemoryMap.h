@@ -36,6 +36,7 @@ class AnimMemoryMap {
     const AttributeBlock *GetAttributes() const;
 
     static void InitAnimMemoryMap() {}
+    static void InitAnimMemoryMap(AnimMemoryMap *anim) {}
 
   protected:
     AnimTypeId mAnimTypeId;         // offset 0x0, size 0x2

@@ -228,60 +228,58 @@ void MemoryPoolManager::InitAnimMemoryMapAux(AnimMemoryMap *memMap) {
             RawPoseChannel::InitAnimMemoryMap(memMap);
             break;
         case AnimTypeId::ANIM_RAWEVENT:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
             break;
         case AnimTypeId::ANIM_RAWLINEAR:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
             break;
-        case AnimTypeId::ANIM_CYCLE:
+        case AnimTypeId::ANIM_DELTALERP:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
             break;
-        // case AnimTypeId::ANIM_EVENTBLENDER:
-        //     break;
-        // case AnimTypeId::ANIM_GRAFT:
-        //     break;
-        // case AnimTypeId::ANIM_POSEBLENDER:
-        //     break;
-        // case AnimTypeId::ANIM_POSEMIRROR:
-        //     break;
-        // case AnimTypeId::ANIM_RUNBLENDER:
-        //     break;
-        // case AnimTypeId::ANIM_TURNBLENDER:
-        //     break;
-        // case AnimTypeId::ANIM_DELTALERP:
-        //     break;
-        // case AnimTypeId::ANIM_DELTAQUAT:
-        //     break;
-        // case AnimTypeId::ANIM_KEYLERP:
-        //     break;
-        // case AnimTypeId::ANIM_KEYQUAT:
-        //     break;
-        // case AnimTypeId::ANIM_PHASE:
-        //     break;
+        case AnimTypeId::ANIM_DELTAQUAT:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_KEYLERP:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_KEYQUAT:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_PHASE:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
         case AnimTypeId::ANIM_COMPOUND:
             CompoundChannel::InitAnimMemoryMap(memMap);
             break;
-        // case AnimTypeId::ANIM_RAWSTATE:
-        //     break;
-        // case AnimTypeId::ANIM_DELTAQ:
-        //     break;
-        // case AnimTypeId::ANIM_DELTAQFAST:
-        //     break;
-        // case AnimTypeId::ANIM_DELTASINGLEQ:
-        //     break;
-        // case AnimTypeId::ANIM_DELTAF3:
-        //     break;
-        // case AnimTypeId::ANIM_DELTAF1:
-        //     break;
+        case AnimTypeId::ANIM_RAWSTATE:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_DELTAQ:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_DELTAQFAST:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_DELTASINGLEQ:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_DELTAF3:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
+        case AnimTypeId::ANIM_DELTAF1:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
         case AnimTypeId::ANIM_STATELESSQ:
             StatelessQ::InitAnimMemoryMap(memMap);
             break;
         case AnimTypeId::ANIM_STATELESSF3:
             StatelessF3::InitAnimMemoryMap(memMap);
             break;
-        // case AnimTypeId::ANIM_CSISEVENT:
-        //     break;
+        case AnimTypeId::ANIM_CSISEVENT:
+            AnimMemoryMap::InitAnimMemoryMap(memMap);
+            break;
         case AnimTypeId::ANIM_POSEANIM:
             PoseAnim::InitAnimMemoryMap(memMap);
-            break;
-        default:
             break;
     }
 }

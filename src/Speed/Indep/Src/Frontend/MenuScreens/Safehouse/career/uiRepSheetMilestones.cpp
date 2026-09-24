@@ -66,7 +66,7 @@ eMenuSoundTriggers uiRepSheetMilestones::NotifySoundMessage(u32 msg, eMenuSoundT
 }
 
 void uiRepSheetMilestones::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2) {
-    int currentIndex = GetNumDatum() - 1;
+    int currentIndex = GetCurrentDatumNum();
     ArrayScrollerMenu::NotificationMessage(msg, obj, param1, param2);
 
     // UNSOLVED

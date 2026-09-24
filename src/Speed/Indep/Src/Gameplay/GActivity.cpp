@@ -162,7 +162,8 @@ void GActivity::ActivateReferencedTriggers(bool activate, GRuntimeInstance *inst
         }
     }
     for (unsigned int i = 0; i < instance->Num_Children(); i++) {
-        GRuntimeInstance *child = GManager::Get().FindInstance(instance->Children(i).mCollectionKey);
+        Attrib::Key childKey = instance->Children(i).mCollectionKey;
+        GRuntimeInstance *child = GManager::Get().FindInstance(childKey);
         if (child != nullptr) {
             this->ActivateReferencedTriggers(activate, child);
         }

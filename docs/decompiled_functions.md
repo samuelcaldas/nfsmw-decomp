@@ -901,6 +901,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `InitializeEATrax(bool)`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/SFXObj_Pathfinder.cpp`
+- **Virtual Address**: `0x800E3F18`
+- **Size**: 344 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void InitializeEATrax(bool breset);
+  ```
+- **Description**: Configures EA Trax jukebox playback modes, song masks, enabled song counts, and play bits from current user profile options and playlist entries. Adding an explicit `case 0: break;` in the playability switch allows GCC 2.95.3 to fold case 0 into the default exit block and emit a linear comparison sequence matching original assembly at 100.0% parity.
+
+---
+
 ## 3. Gameplay Subsystem (`zGameplay`)
 
 ### `GetNumBountySpawnMarkers`, `GetBountySpawnMarker` & `GetBountySpawnMarkerTag`

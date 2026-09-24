@@ -109,7 +109,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`GinsuSynthData::BindToData` (`zEAXSound2`)**: Decompiled, verified (96.8% match, 340 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CARSFX_RoadNoise::GenerateRoadNoise` (`zEAXSound2`)**: Decompiled, verified (93.0% match, 1,240 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthData::SampleToCycle` (`zEAXSound2`)**: Improved from 86.0% to 86.23% match by pinning the lower-bound search variable to r3 (876 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`SFXCTL_Physics::UpdateMixerOutputs`**: Decompiled, verified (98.22% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SFXCTL_Physics::UpdateMixerOutputs`**: Decompiled, verified (98.65% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`InitializeEATrax(bool)` (`zEAXSound2`)**: Decompiled, verified (**100.0% match**, 344 bytes, 86/86 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Gameplay Subsystem (`zGameplay`)
 - **`GetNumBountySpawnMarkers`, `GetBountySpawnMarker`, & `GetBountySpawnMarkerTag` (`zGameplay`)**: Decompiled, verified (100.0% match, 204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

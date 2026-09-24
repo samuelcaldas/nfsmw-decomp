@@ -1,4 +1,12 @@
 /**
+ * @brief Retrieves the parent vault associated with these race parameters.
+ * @return Pointer to the parent vault.
+ */
+GVault *GRaceParameters::GetParentVault() const {
+    return this->mParentVault;
+}
+
+/**
  * @brief Gets the child vault of this race bin.
  * @return Pointer to the child vault.
  */

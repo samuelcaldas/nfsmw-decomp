@@ -100,6 +100,15 @@ unsigned int GRaceDatabase::GetBinCount() {
 }
 
 /**
+ * @brief Retrieves the race bin at the specified index.
+ * @param index Zero-based index of the race bin.
+ * @return Pointer to the race bin.
+ */
+GRaceBin *GRaceDatabase::GetBin(unsigned int index) {
+    return &this->mBins[index];
+}
+
+/**
  * @brief Retrieves the startup race context.
  * @return Race context identifier.
  */

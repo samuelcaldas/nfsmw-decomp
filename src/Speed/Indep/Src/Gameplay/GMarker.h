@@ -12,7 +12,7 @@ class GMarker : public GRuntimeInstance {
      * @return The marker gameplay object type (kGameplayObjType_Marker).
      */
     GameplayObjType GetType() const override {
-        return kGameplayObjType_Marker;
+        return static_cast<GameplayObjType>(3);
     }
 
     const UMath::Vector3 &GetPosition() const {

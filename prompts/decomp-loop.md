@@ -166,6 +166,7 @@ For each assigned chunk, the agent must iterate through the following determinis
   - Loop construct patterns (`for`, `while`, `do-while`).
   - Compiler intrinsics, branch structures, early returns.
   - Compile with `ninja` and verify progress with `python3 tools/decomp-diff.py`.
+- **Anti-Slop Compliance:** Achieve 100.0% match parity strictly via correct control flow, accurate DWARF types, and proper compiler idioms. Avoid artificial hacks (such as inline assembly register force hacks, raw pointer offset arithmetic bypassing struct definitions, or arbitrary variable renaming).
 - Aim for 100.0% match parity or the highest verifiable match without regressions.
 
 ### Step 4: Docstring Insertion
@@ -228,3 +229,9 @@ Whenever code is merged into `main`, update documentation in `docs/*.md`:
 3. **Dirty Worktree Rule:** Never merge with uncommitted changes. Commit or stash first.
 4. **Clean Restores on Failure:** If an iteration fails to match or introduces regressions that cannot be resolved, run `git restore .` before concluding or switching tasks.
 5. **Code Style Parity:** Follow `.clang-format` (C++03, column limit 150, indent 4, `SortIncludes: Never`) and `.clang-tidy`. Never reorder includes in unity builds.
+6. **Anti-Slop Guardrails:** Prohibit AI-generated shortcut anti-patterns:
+   - No forced register allocation hacks or inline assembly workarounds unless structurally required.
+   - No pointer offset arithmetic bypassing DWARF struct member definitions (`*(type*)((char*)p + offset)`).
+   - No arbitrary renaming of DWARF symbols, variables, or functions.
+   - No redundant redeclarations, duplicate include guards, or unnecessary casts.
+   - Every match must be achieved via correct control flow, types, and compiler idioms verified by `ninja changes`.

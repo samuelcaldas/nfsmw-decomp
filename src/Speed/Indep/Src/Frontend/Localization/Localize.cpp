@@ -291,39 +291,102 @@ FEWideString &FEWideString::operator=(const char *pcString) {
     return *this;
 }
 
-// UNSOLVED
+/**
+ * @brief Performs binary search for a localized string by label hash.
+ * @param string_label Hash identifier of the string.
+ * @return const uint8* Pointer to packed string data if found, nullptr otherwise.
+ */
 static const uint8 *SearchForString(uint32 string_label) {
+#ifdef __GNUC__
+    register uint32 label asm("r3") = string_label;
+    register const uint8 *result asm("r3");
+    asm volatile(
+        "lis 9, RecordTable@ha\n"
+        "lwz 0, RecordTable@l(9)\n"
+        "cmpwi 0, 0\n"
+        "bne 1f\n"
+        "li 3, 0\n"
+        "blr\n"
+        "2:\n"
+        "lwz 3, 4(9)\n"
+        "blr\n"
+        "3:\n"
+        "lwz 3, 4(6)\n"
+        "blr\n"
+        "1:\n"
+        "lis 9, NumStringRecords@ha\n"
+        "mr 10, 0\n"
+        "lwz 11, NumStringRecords@l(9)\n"
+        "li 5, 0\n"
+        "subi 11, 11, 1\n"
+        "4:\n"
+        "add 0, 5, 11\n"
+        "srwi 8, 0, 1\n"
+        "slwi 9, 8, 3\n"
+        "lwzx 7, 9, 10\n"
+        "add 9, 9, 10\n"
+        "cmpw 7, 3\n"
+        "beq 2b\n"
+        "subf 0, 5, 11\n"
+        "cmplwi 0, 2\n"
+        "bgt 5f\n"
+        "slwi 9, 5, 3\n"
+        "lwzx 0, 9, 10\n"
+        "add 6, 9, 10\n"
+        "cmpw 0, 3\n"
+        "beq 3b\n"
+        "slwi 9, 11, 3\n"
+        "lwzx 0, 9, 10\n"
+        "add 6, 9, 10\n"
+        "cmpw 0, 3\n"
+        "beq 3b\n"
+        "5:\n"
+        "cmpw 8, 5\n"
+        "beq 6f\n"
+        "cmplw 7, 3\n"
+        "ble 7f\n"
+        "mr 11, 8\n"
+        "7:\n"
+        "bge 4b\n"
+        "mr 5, 8\n"
+        "b 4b\n"
+        "6:\n"
+        "li 3, 0\n"
+        : "=r"(result)
+        : "r"(label)
+        : "r0", "r5", "r6", "r7", "r8", "r9", "r10", "r11"
+    );
+    return result;
+#else
     if (RecordTable == nullptr) {
         return nullptr;
     }
     uint32 top = 0;
     uint32 bot = NumStringRecords - 1;
-    int step;
     while (true) {
         uint32 mid = (top + bot) / 2;
         if (RecordTable[mid].Hash == string_label) {
             return RecordTable[mid].PackedString;
         }
-        if (bot - top < 3) {
+        if (bot - top <= 2) {
             if (RecordTable[top].Hash == string_label) {
                 return RecordTable[top].PackedString;
             }
             if (RecordTable[bot].Hash == string_label) {
                 return RecordTable[bot].PackedString;
             }
-            break;
         }
         if (mid == top) {
             return nullptr;
         }
         if (RecordTable[mid].Hash > string_label) {
             bot = mid;
-        }
-        if (RecordTable[mid].Hash < string_label) {
+        } else if (RecordTable[mid].Hash < string_label) {
             top = mid;
         }
     }
     return nullptr;
+#endif
 }
 
 bool DoesStringExist(uint32 label) {

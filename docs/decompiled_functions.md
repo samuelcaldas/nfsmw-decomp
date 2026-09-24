@@ -1072,6 +1072,90 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRaceStatus::SetIsLoading`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801BC0C4`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::SetIsLoading(bool loading);
+  ```
+- **Description**: Sets the loading status flag (`mIsLoading`) on the race status controller with 100% assembly parity.
+
+---
+
+### `GRaceStatus::EnterSuddenDeath`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801BC0CC`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::EnterSuddenDeath();
+  ```
+- **Description**: Enters sudden death mode by setting `mSuddenDeathMode = true` on the race status state with 100% instruction parity.
+
+---
+
+### `GRaceStatus::SetTaskTime`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801BC0D8`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::SetTaskTime(float seconds);
+  ```
+- **Description**: Configures the task elapsed time (`mTaskTime`) for the race status instance with 100% assembly parity.
+
+---
+
+### `GRaceStatus::SetActivelyRacing`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801BC0E0`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::SetActivelyRacing(bool racing);
+  ```
+- **Description**: Sets the active racing state flag (`mActivelyRacing`) on the race status manager with 100% assembly parity.
+
+---
+
+### `GRaceBin::GetCompletedChallenges`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9AE0`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  int GRaceBin::GetCompletedChallenges() const;
+  ```
+- **Description**: Retrieves the count of completed challenges (`mStats.mChallengesCompleted`) recorded for the race bin with 100% assembly parity.
+
+---
+
+### `GRaceBin::GetAwardedRaceWins`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9AE8`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned short GRaceBin::GetAwardedRaceWins() const;
+  ```
+- **Description**: Retrieves the count of awarded race wins (`mStats.mRacesWon`) recorded for the race bin with 100% assembly parity.
+
+---
+
 ### `GRaceDatabase::SimulateDDayComplete`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`

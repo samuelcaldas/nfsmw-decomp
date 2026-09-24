@@ -3121,5 +3121,90 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Sets racer index integer in `mIndex` at offset `0x0C`.
 
+---
+
+### `GVault::IsResident`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801B3FC0`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GVault::IsResident() const;
+  ```
+- **Description**: Checks bit 0 of `mFlags` (`(this->mFlags & 1) != 0`) using `clrlwi r3, r3, 31` to determine if the vault is resident in memory.
+
+---
+
+### `GVault::IsTransient`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801B3FCC`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GVault::IsTransient() const;
+  ```
+- **Description**: Tests the inverse of the resident flag (`(this->mFlags & 1) == 0`) using `xori r3, r3, 1` and `clrlwi r3, r3, 31` to determine if the vault is transient.
+
+---
+
+### `GVault::IsRaceBin`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801B3FDC`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GVault::IsRaceBin() const;
+  ```
+- **Description**: Extracts bit 1 of `mFlags` (`(this->mFlags & 2) != 0`) using `extrwi r3, r3, 1, 30` to check if the vault represents a race bin.
+
+---
+
+### `GVault::SetRaceBin`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801B3FE8`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GVault::SetRaceBin();
+  ```
+- **Description**: Sets bit 1 in `mFlags` (`this->mFlags |= 2;`) using `ori r0, r0, 2` to mark the vault as a race bin.
+
+---
+
+### `GManager::GetMilestone`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801AFE84`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GMilestone *GManager::GetMilestone(unsigned int index);
+  ```
+- **Description**: Indexes the `mMilestones` array at offset `0xB4` using `mulli r4, r4, 0x14` (`sizeof(GMilestone) == 20`) and returns a pointer to the milestone record.
+
+---
+
+### `GManager::GetSpeedTrap`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B00B4`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GSpeedTrap *GManager::GetSpeedTrap(unsigned int index);
+  ```
+- **Description**: Indexes the `mSpeedTraps` array at offset `0xBC` using `mulli r4, r4, 0x14` (`sizeof(GSpeedTrap) == 20`) and returns a pointer to the speed trap record.
+
+
 
 

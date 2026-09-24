@@ -8,6 +8,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`fDeterminant` (`zBWare`)**: Decompiled, verified (**100.0% match**, 448 bytes, 112/112 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Animation Subsystem (`zAnim`, `zAnim0`, `zEagl4Anim`)
+- **`EAGL4Anim::MemoryPoolManager::InitAnimMemoryMapAux` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 156 bytes, 39/39 instructions), fully reconstructed switch tree covering all 19 `AnimMemoryMap` subclasses with canonical `AnimMemoryMap::InitAnimMemoryMap(memMap)` inline invocation, documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`EAGL4::DynamicLoader::Release` (`zEagl4Anim`)**: Decompiled, verified (**94.82% match**, 220 bytes, 56/58 instructions), eliminated redundant delete null check, documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Improved & Merged 94.82%]**
 - **`EAGL4Anim::MemoryPoolManager::NewBlockAux` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 84 bytes, 21/21 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`CAnimPlayer::Init`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

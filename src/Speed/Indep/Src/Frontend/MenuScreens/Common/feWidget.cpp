@@ -894,16 +894,17 @@ int CTextScroller::WordWrapAddLines(int16 *pTextStart, int16 *pTextEnd, bool bCo
     return NumLines;
 }
 
-// UNSOLVED
 int16 *CTextScroller::FindCR(int16 *pText) {
+    uint16 *text = reinterpret_cast<uint16 *>(pText);
+    uint16 c = *text;
     int16 *pRet = nullptr;
-    if (*pText != 0) {
+    if (c != 0) {
         do {
-            if (IsNewlineChar(*pText)) {
-                pRet = pText;
+            if (IsNewlineChar(c)) {
+                pRet = reinterpret_cast<int16 *>(text);
             }
-            pText++;
-        } while (*pText != 0 && pRet == nullptr);
+            c = *++text;
+        } while (c != 0 && pRet == nullptr);
     }
 
     return pRet;

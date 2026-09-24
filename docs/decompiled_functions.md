@@ -4134,5 +4134,19 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Compiler-synthesized virtual destructor for `FnKeyQuatChan`. Inherits from `FnKeyDeltaChan` without explicit user-defined destructor body, allowing GCC 2.95 to elide the redundant vtable store and directly invoke `FnKeyDeltaChan::~FnKeyDeltaChan` and deallocation. Achieves 100.0% binary assembly parity (21/21 instructions).
 
+---
+
+### `EAGL4::DynamicLoader::GetSymbol`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/eagl4supportdlopen.cpp`
+- **Virtual Address**: `0x8008F9E4`
+- **Size**: 372 bytes (93 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  DynamicLoader::Symbol DynamicLoader::GetSymbol(int i) const;
+  ```
+- **Description**: Resolves symbol information by index from the loaded dynamic module. Validates module handle and symbol index bounds, computes symbol name and typed descriptor offsets from string table `strtab`, adjusts for `0x7F` type-length prefix bytes, checks internal reference flags via `(unsigned int)(s[i].st_other - 2) > 3`, and calculates section-relative or absolute symbol data addresses with full 100.0% binary assembly parity (93/93 instructions).
+
 
 

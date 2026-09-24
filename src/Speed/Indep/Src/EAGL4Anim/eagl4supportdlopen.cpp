@@ -161,34 +161,28 @@ int DynamicLoader::GetCount() const {
     return h->symbols_num;
 }
 
-// TODO
 DynamicLoader::Symbol DynamicLoader::GetSymbol(int i) const {
     DynamicLoader::Symbol r;
+    r.name = nullptr;
+    r.data = nullptr;
     HashPointer *h = reinterpret_cast<HashPointer *>(handle);
     if (!h) {
-        // r.name = nullptr;
-        r.type = nullptr;
-        // r.data = nullptr;
-        r.isInternalRef = false;
         return r;
     }
     ELF32_Sym *s = h->symtab;
     if (i < 0 || i >= h->symbols_num) {
-        // r.name = nullptr;
-        r.type = nullptr;
-        // r.data = nullptr;
-        r.isInternalRef = false;
         return r;
     }
     r.name = &h->strtab[s[i].st_name];
-    r.type = &r.name[strlen(&h->strtab[s[i].st_name])];
+    const char *str = &h->strtab[s[i].st_name];
+    r.type = &str[strlen(r.name)];
     r.type++;
-    if (r.type[1] == 0x7F) {
+    if (*r.type == 0x7F) {
         r.type++;
     } else {
         r.type--;
     }
-    r.isInternalRef = (s[i].st_other - 2) > 3;
+    r.isInternalRef = (unsigned int)(s[i].st_other - 2) > 3;
 
     int iIndex = s[i].st_shndx;
     if (s[i].st_other == 1) {

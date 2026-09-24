@@ -8,6 +8,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`fDeterminant` (`zBWare`)**: Decompiled, verified (**100.0% match**, 448 bytes, 112/112 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Animation Subsystem (`zAnim`, `zAnim0`, `zEagl4Anim`)
+- **`EAGL4::DynamicLoader::GetSymbol` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 372 bytes, 93/93 instructions), accurately mapped ELF string/symbol indexing and type prefix handling, documented in `docs/decompiled_functions.md`. **Status: [Completed & Verified 100.0%]**
 - **`EAGL4Anim::FnDeltaLerpChan::~FnDeltaLerpChan` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 84 bytes, 21/21 instructions), synthesized compiler destructor optimization, documented in `docs/decompiled_functions.md`. **Status: [Completed & Verified 100.0%]**
 - **`EAGL4Anim::FnDeltaQuatChan::~FnDeltaQuatChan` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 84 bytes, 21/21 instructions), synthesized compiler destructor optimization, documented in `docs/decompiled_functions.md`. **Status: [Completed & Verified 100.0%]**
 - **`EAGL4Anim::FnKeyLerpChan::~FnKeyLerpChan` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 84 bytes, 21/21 instructions), synthesized compiler destructor optimization, documented in `docs/decompiled_functions.md`. **Status: [Completed & Verified 100.0%]**

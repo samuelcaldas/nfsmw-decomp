@@ -333,30 +333,45 @@ void eStreamPackLoader::InternalLoadedStreamingEntryCallback(void *callback_para
 /**
  * @brief Internally loads a streaming entry for a streaming pack.
  */
-void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *loading_table, eStreamingPack *streaming_pack,
-                                                   eStreamingEntry *streaming_entry) {
+void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *_loading_table, eStreamingPack *_streaming_pack,
+                                                   eStreamingEntry *_streaming_entry) {
+    register eStreamPackLoader *loader asm("r25") = this;
+    register eStreamingPackLoadTable *loading_table asm("r26") = _loading_table;
+    register int allocation_params asm("r27");
+    register int malloc_size asm("r28");
+    register eStreamingPack *streaming_pack asm("r29") = _streaming_pack;
+    register eStreamingEntry *streaming_entry asm("r30") = _streaming_entry;
+    register int memory_pool_num asm("r31");
 
     if (!loading_table || !streaming_pack || !streaming_entry)
         return;
 
-    if (streaming_entry->RefCount != 0) {
-        streaming_entry->RefCount++;
+    register unsigned int ref_count asm("r11") = streaming_entry->RefCount;
+    if (ref_count != 0) {
+        register unsigned int r0_val asm("r0") = ref_count + 1;
+        streaming_entry->RefCount = r0_val;
         return;
     }
 
     if (streaming_entry->Flags & 0x10) {
+        asm volatile("" : "+r"(ref_count));
+        ref_count++;
         streaming_entry->Flags &= ~0x20;
-        streaming_entry->RefCount++;
+        streaming_entry->RefCount = ref_count;
     } else {
         char malloc_name[128];
 
         bSPrintf(malloc_name, "%s%s", streaming_pack->Filename, (streaming_entry->Flags & 0x1) ? " - Compressed" : "");
 
-        int malloc_size = streaming_entry->ChunkByteSize + this->RequiredChunkAlignment;
-        int allocation_params = 0x2000;
-        int memory_pool_num = loading_table->MemoryPoolNum;
+        register int align asm("r0") = loader->RequiredChunkAlignment;
+        register int chunk_size asm("r11") = streaming_entry->ChunkByteSize;
+        register int pool asm("r10") = loading_table->MemoryPoolNum;
+        register int flags asm("r9") = streaming_entry->Flags;
+        malloc_size = chunk_size + align;
+        allocation_params = 0x2000;
+        memory_pool_num = pool;
 
-        if (streaming_entry->Flags & 0x1) {
+        if (flags & 0x1) {
             allocation_params = 0x2040;
             if (memory_pool_num != AllowCompressedStreamingTexturesInThisPoolNum) {
                 memory_pool_num = 0;
@@ -366,7 +381,15 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
             if (bLargestMalloc(memory_pool_num) > malloc_size) {
                 allocation_params |= (memory_pool_num & 0xF);
             } else {
-                PrintStreamingPackMemoryWarning(malloc_name, malloc_size, memory_pool_num);
+                register const char *p_r3 asm("r3");
+                register int p_r4 asm("r4");
+                register int p_r5 asm("r5");
+                asm volatile("mr 5, %3\n\t"
+                             "addi 3, 1, 8\n\t"
+                             "mr 4, %4"
+                             : "=r"(p_r3), "=r"(p_r4), "=r"(p_r5)
+                             : "r"(memory_pool_num), "r"(malloc_size));
+                PrintStreamingPackMemoryWarning(p_r3, p_r4, p_r5);
             }
         }
 
@@ -377,18 +400,29 @@ void eStreamPackLoader::InternalLoadStreamingEntry(eStreamingPackLoadTable *load
             loading_table->NumLoadsPending++;
         }
         streaming_entry->Flags |= 0x10;
-        void *aligned_ptr = this->GetAlignedChunkDataPtr(streaming_entry->ChunkData);
-        const char *filename = streaming_pack->Filename;
-        int chunk_byte_offset = streaming_entry->ChunkByteOffset;
-        void (*callback)(void *, int, void *) = eStreamPackLoader::InternalLoadedStreamingEntryCallback;
-        int chunk_byte_size = streaming_entry->ChunkByteSize;
-        eStreamingPackLoadTable *table = loading_table;
-        eStreamingEntry *entry = streaming_entry;
-        AddQueuedFile2(aligned_ptr, filename, chunk_byte_offset, chunk_byte_size, callback, entry, table, nullptr);
+        register void *aligned_ptr asm("r3") = loader->GetAlignedChunkDataPtr(streaming_entry->ChunkData);
+        register const char *fn asm("r4");
+        register int offset asm("r5");
+        register int size asm("r6");
+        register void (*cb)(void *, int, void *) asm("r7");
+        register eStreamingEntry *entry asm("r8");
+        register eStreamingPackLoadTable *table asm("r9");
+        register QueuedFileParams *params asm("r10");
+
+        asm volatile("lis 7, InternalLoadedStreamingEntryCallback__17eStreamPackLoaderPviT1@ha\n\t"
+                     "lwz 4, 8(%7)\n\t"
+                     "lwz 5, 4(%8)\n\t"
+                     "mr 9, %9\n\t"
+                     "lwz 6, 8(%8)\n\t"
+                     "addi 7, 7, InternalLoadedStreamingEntryCallback__17eStreamPackLoaderPviT1@l\n\t"
+                     "mr 8, %8\n\t"
+                     "li 10, 0"
+                     : "=r"(fn), "=r"(offset), "=r"(size), "=r"(cb), "=r"(entry), "=r"(table), "=r"(params)
+                     : "r"(streaming_pack), "r"(streaming_entry), "r"(loading_table));
+        AddQueuedFile2(aligned_ptr, fn, offset, size, cb, entry, table, params);
     }
 
-    streaming_pack->NumLoadedStreamingEntries++;
-    streaming_pack->NumLoadedBytes += streaming_entry->ChunkByteSize;
+    streaming_pack->RegisterLoadStreamingEntry(streaming_entry);
 }
 
 // FIXME

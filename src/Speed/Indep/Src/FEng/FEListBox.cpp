@@ -223,9 +223,8 @@ void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
         float fNewWidth = 0.0f;
         if (i < mulNumColumns) {
             do {
-                i32 idx = i * 0xC;
+                fNewWidth = fNewWidth + mpstColumnData[i].fValue;
                 i = i + 1;
-                fNewWidth = fNewWidth + *reinterpret_cast<float *>(reinterpret_cast<char *>(mpstColumnData) + idx);
             } while (i < mulNumColumns);
         }
 
@@ -293,9 +292,8 @@ void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
         float fNewHeight = 0.0f;
         if (i < mulNumRows) {
             do {
-                long idx = i * 0xC;
+                fNewHeight = fNewHeight + mpstRowData[i].fValue;
                 i = i + 1;
-                fNewHeight = fNewHeight + *reinterpret_cast<float *>(reinterpret_cast<char *>(mpstRowData) + idx);
             } while (i < mulNumRows);
         }
 

@@ -560,9 +560,7 @@ class GRaceStatus : public UTL::COM::Object, public IVehicleCache {
 
     void AwardBonusTime(float seconds);
 
-    void SetTaskTime(float seconds) {
-        mTaskTime = seconds;
-    }
+    void SetTaskTime(float seconds);
 
     float GetTaskTime() const {
         return mTaskTime;

@@ -32,6 +32,15 @@ void GRaceStatus::SetIsLoading(bool loading) {
 }
 
 /**
+ * @brief Sets the task time for the race status.
+ * @param seconds Duration in seconds.
+ * @return void
+ */
+void GRaceStatus::SetTaskTime(float seconds) {
+    this->mTaskTime = seconds;
+}
+
+/**
  * @brief Retrieves the count of racers participating in the current event.
  *
  * @return int Total number of racers.

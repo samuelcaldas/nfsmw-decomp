@@ -156,16 +156,15 @@ void UIWidgetMenu::Scroll(eScrollDir dir) {
                 new_option = nullptr;
                 FEngSetCurrentButton(GetPackageName(), pDone);
             } else {
-                if (new_option != Options.GetTail()) {
+                if (pCurrentOption != Options.GetTail()) {
                     int min = iIndexToAdd - 1;
                     do {
                         new_option = new_option->GetNext();
                         iLastSelectedIndex = bMin(min, static_cast<int>(iLastSelectedIndex + 1));
                     } while ((new_option != nullptr) && !new_option->IsEnabled() && new_option != Options.GetTail());
-
-                    if (GetWidgetIndex(new_option) >= static_cast<unsigned int>(GetWidgetIndex(pViewTop) + iMaxWidgetsOnScreen)) {
-                        new_view = pViewTop->GetNext();
-                    }
+                }
+                if (GetWidgetIndex(new_option) >= static_cast<unsigned int>(GetWidgetIndex(pViewTop) + iMaxWidgetsOnScreen)) {
+                    new_view = pViewTop->GetNext();
                 }
             }
         } else {

@@ -978,8 +978,8 @@ void EmitterSystem::UpdateParticles(float dt) {
         return;
     }
     int32 time_step = static_cast<int>(dt * 1024.0f);            // r19
-    float ed_drag = 0.0f;                                        // f26
     float ed_gravity = 0.0f;                                     // f27
+    float ed_drag = 0.0f;                                        // f26
     float ed_life = 0.0f;                                        // f24
     const bMatrix4 *ExtraBasis = nullptr;                        // r14
     const bMatrix4 *ColourBasis = nullptr;                       // 15
@@ -1028,21 +1028,28 @@ void EmitterSystem::UpdateParticles(float dt) {
                     float tlife;
                     UMath::Vector4 t;
                     UMath::Vector4 extra_params;
+                    uint16 pangle;
+                    uint16 adelta;
                     UMath::Vector4 col;
+                    uint32 r;
+                    uint32 g;
+                    uint32 b;
+                    uint32 a;
+                    bool ignore_programmer_badness;
+                    uint32 alpha_value_to_kill_at;
                     if (particle->mLife > time_step) {
                         if (texture_animation) {
                             const uint32 i_num_frames = ((uint32)anim_type * (uint32)anim_type);
                             const float f_num_frames = dt * fAnimFPS;
-                            uint32 frame_index = (int32)((f_num_frames / i_num_frames) * 65535.0f);
-                            const float f_max_frame_index = (i_num_frames - 1.0f);
+                            const float f_max_frame_index = (float)i_num_frames - 1.0f;
                             uint32 cur_frame = particle->mAnimFrame;
-                            cur_frame += frame_index;
-                            uint32 delta_frames = cur_frame + frame_index;
-                            if (delta_frames > 65535) {
+                            uint32 delta_frames = (int32)((f_num_frames / (float)i_num_frames) * 65535.0f);
+                            cur_frame += delta_frames;
+                            if (cur_frame + delta_frames > 65535) {
                                 cur_frame -= 65535;
                             }
                             cur_frame = (uint16)cur_frame;
-                            frame_index = (int32)((float)cur_frame / 65535.0f * f_max_frame_index);
+                            int frame_index = (int32)((float)cur_frame / 65535.0f * f_max_frame_index);
                             em->GetStandardUVs(&particle->mUVStart, &particle->mUVEnd);
                             GetAnimatedUVs(anim_type, frame_index, &particle->mUVStart, &particle->mUVEnd);
                             particle->mAnimFrame = cur_frame;
@@ -1077,8 +1084,9 @@ void EmitterSystem::UpdateParticles(float dt) {
                         t.x = t.z * t.y;
                         RotateTranslate(t, *reinterpret_cast<const UMath::Matrix4 *>(ExtraBasis), extra_params);
                         particle->mSize = extra_params.x;
-                        bAngle pangle = static_cast<uint32>(particle->mInitialAngle) * 257.0f;
-                        bAngle adelta = extra_params.y + static_cast<float>(particle->mRotOffset) / 255.0f * extra_params.y;
+                        float factor = extra_params.y * (1.0f / 255.0f);
+                        pangle = static_cast<uint32>(particle->mInitialAngle) * 257.0f;
+                        adelta = factor * static_cast<float>(particle->mRotOffset) + extra_params.y;
                         if (pangle % 2 == 0) {
                             pangle += adelta;
                         } else {
@@ -1087,13 +1095,13 @@ void EmitterSystem::UpdateParticles(float dt) {
                         particle->mAngle = pangle;
                         RotateTranslate(t, *reinterpret_cast<const UMath::Matrix4 *>(ColourBasis), col);
                         Scale(col, 255.0f, col);
-                        uint32 r = bClamp(static_cast<int>(col.x), 0, 255);
-                        uint32 g = bClamp(static_cast<int>(col.y), 0, 255);
-                        uint32 b = bClamp(static_cast<int>(col.z), 0, 255);
-                        uint32 a = bClamp(static_cast<int>(col.w), 0, 255);
+                        r = bClamp(static_cast<int>(col.x), 0, 255);
+                        g = bClamp(static_cast<int>(col.y), 0, 255);
+                        b = bClamp(static_cast<int>(col.z), 0, 255);
+                        a = bClamp(static_cast<int>(col.w), 0, 255);
                         particle->mColour = r << 24 | g << 16 | b << 8 | a;
-                        bool ignore_programmer_badness = em->GetAttributes().NoKillAtAlpha();
-                        uint32 alpha_value_to_kill_at = em->GetAttributes().AlphaToKillAt();
+                        ignore_programmer_badness = em->GetAttributes().NoKillAtAlpha();
+                        alpha_value_to_kill_at = em->GetAttributes().AlphaToKillAt();
                         if (ignore_programmer_badness || (a > alpha_value_to_kill_at)) {
                             particle = particle->GetNext();
                             continue;

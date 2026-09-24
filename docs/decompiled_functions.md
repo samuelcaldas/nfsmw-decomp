@@ -2433,6 +2433,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GMarker::GetType`
+- **Unit**: `zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMarker.cpp`
+- **Virtual Address**: `0x801BBC78`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GameplayObjType GMarker::GetType() const;
+  ```
+- **Description**: Returns gameplay object type 3 for marker runtime instances.
+
+---
+
 ### `GCharacter::GCharacter`
 - **Unit**: `zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GCharacter.cpp`

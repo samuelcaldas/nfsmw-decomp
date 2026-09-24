@@ -11,9 +11,7 @@ class GMarker : public GRuntimeInstance {
      * @brief Gets the gameplay object type for this marker.
      * @return The marker gameplay object type (kGameplayObjType_Marker).
      */
-    GameplayObjType GetType() const override {
-        return static_cast<GameplayObjType>(3);
-    }
+    GameplayObjType GetType() const override;
 
     const UMath::Vector3 &GetPosition() const {
         return mPosition;

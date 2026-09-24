@@ -3390,3 +3390,143 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 
 
+
+---
+
+### `GMilestone::GetCurrentValue`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GMilestone.cpp`
+- **Virtual Address**: `0x801B4734`
+- **Size**: 44 bytes (11 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  float GMilestone::GetCurrentValue(void) const;
+  ```
+- **Description**: Retrieves the current milestone metric value from GManager for the milestone's type key.
+
+---
+
+### `GSpeedTrap::GetTrapTrigger`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B4E94`
+- **Size**: 56 bytes (14 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GTrigger *GSpeedTrap::GetTrapTrigger(void) const;
+  ```
+- **Description**: Queries GManager for the runtime instance associated with `mSpeedTrapKey` and returns it downcast to `GTrigger*`, or NULL if not found.
+
+---
+
+### `GManager::GetFirstMilestone`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801AFE94`
+- **Size**: 48 bytes (12 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GMilestone *GManager::GetFirstMilestone(bool availOnly, unsigned int binNumber);
+  ```
+- **Description**: Retrieves the first milestone matching the availability filter and bin number by delegating to `GetNextMilestone(mMilestones - 1, availOnly, binNumber)`.
+
+---
+
+### `GManager::GetNextMilestone`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801AFEC4`
+- **Size**: 104 bytes (26 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GMilestone *GManager::GetNextMilestone(GMilestone *current, bool availOnly, unsigned int binNumber);
+  ```
+- **Description**: Iterates through the milestone array using pre-increment pointer arithmetic, filtering by state bounds (state in `[2, 3]`) if `availOnly` is true and matching `binNumber` when non-zero.
+
+---
+
+### `GManager::EnableBinMilestones`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801AFF2C`
+- **Size**: 100 bytes (25 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GManager::EnableBinMilestones(unsigned int binNumber);
+  ```
+- **Description**: Traverses all milestones belonging to `binNumber` using `GetFirstMilestone` and `GetNextMilestone`, unlocking each milestone.
+
+---
+
+### `GManager::GetFirstSpeedTrap`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B00C4`
+- **Size**: 48 bytes (12 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GSpeedTrap *GManager::GetFirstSpeedTrap(bool activeOnly, unsigned int binNumber);
+  ```
+- **Description**: Retrieves the first speed trap matching the active filter and bin number by delegating to `GetNextSpeedTrap(mSpeedTraps - 1, activeOnly, binNumber)`.
+
+---
+
+### `GManager::GetNextSpeedTrap`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B00F4`
+- **Size**: 176 bytes (44 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GSpeedTrap *GManager::GetNextSpeedTrap(GSpeedTrap *current, bool activeOnly, unsigned int binNumber);
+  ```
+- **Description**: Iterates through the speed trap array using pre-increment pointer traversal, checking `GetIsActive()` if `activeOnly` is set and matching `binNumber` when non-zero.
+
+---
+
+### `GManager::EnableBinSpeedTraps`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B01A4`
+- **Size**: 108 bytes (27 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GManager::EnableBinSpeedTraps(unsigned int binNumber);
+  ```
+- **Description**: Traverses all speed traps in `binNumber`, invoking `Unlock()` and `Activate()` on each.
+
+---
+
+### `GManager::SaveMilestones`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B157C`
+- **Size**: 64 bytes (16 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GManager::SaveMilestones(GMilestone *dest);
+  ```
+- **Description**: Copies all managed milestone records to `dest` via `GMemCpy` and returns `mNumMilestones`.
+
+---
+
+### `GManager::SaveSpeedTraps`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B1984`
+- **Size**: 64 bytes (16 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GManager::SaveSpeedTraps(GSpeedTrap *dest);
+  ```
+- **Description**: Copies all managed speed trap records to `dest` via `GMemCpy` and returns `mNumSpeedTraps`.

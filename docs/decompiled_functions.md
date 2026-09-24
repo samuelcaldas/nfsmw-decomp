@@ -2602,3 +2602,73 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   bool GCharacter::IsFlagSet(unsigned short flag) const;
   ```
 - **Description**: Inlined attachment management and state query methods for `GCharacter`.
+
+---
+
+### `FEPackageManager::GetBasePkgName`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/FEPackageManager.cpp`
+- **Virtual Address**: `0x8015E978`
+- **Size**: 100 bytes (25 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const char *FEPackageManager::GetBasePkgName(const char *pkg_name);
+  ```
+- **Description**: Strips leading path segments (`/` and `\\`) by scanning backwards with bottom-tested pointer loops, returning a pointer to the package base filename.
+
+---
+
+### `feDialogScreen::NotifySoundMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feDialogBox.cpp`
+- **Virtual Address**: `0x8015D2C4`
+- **Size**: 184 bytes (46 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  eMenuSoundTriggers feDialogScreen::NotifySoundMessage(u32 msg, eMenuSoundTriggers maybe);
+  ```
+- **Description**: Evaluates front-end dialog button state changes and dismissability to return the appropriate UI menu audio cue trigger.
+
+---
+
+### `UnlockSystem::IsCarPartUnlocked`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x8017B0BC`
+- **Size**: 260 bytes (65 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPart *part, int player, bool backroom);
+  ```
+- **Description**: Queries `UnlockAllThings` cheat flag and bitwise filter flags to evaluate car part unlock availability across Quick Race, Career, and Online game modes.
+
+---
+
+### `LeaderBoard::Update`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/HUD/FeLeaderBoard.cpp`
+- **Virtual Address**: `0x8014E7B4`
+- **Size**: 1,360 bytes (340/342 instructions)
+- **Matching State**: 99.94% match
+- **Signature**:
+  ```cpp
+  void LeaderBoard::Update(IPlayer *player);
+  ```
+- **Description**: Updates in-race HUD leaderboard entries, racer names, car numbers, split times, speed trap totals, and formatting based on player distance and position.
+
+---
+
+### `bATan`
+- **Unit**: `main/Speed/Indep/SourceLists/zBWare`
+- **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
+- **Virtual Address**: `0x8005D1F0`
+- **Size**: 328 bytes (82 instructions)
+- **Matching State**: 99.63% match
+- **Signature**:
+  ```cpp
+  bAngle bATan(float x, float y);
+  ```
+- **Description**: Fast binary angle arctangent lookup and linear interpolation using quadrant symmetry and table interpolation in bWare math foundation.

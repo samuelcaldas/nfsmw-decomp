@@ -595,7 +595,7 @@ void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view)
 
     bVector3 position;
     TopologyCoordinate topology_coordinate;
-    position.z = 9999.0f;
+    position.z = 0.0f;
     float pos = static_cast<float>((static_cast<int>(WorldTimer.GetSeconds() * 262144.0f) & 0xffff)) * 6.103515625e-05f;
 
     int point_number;

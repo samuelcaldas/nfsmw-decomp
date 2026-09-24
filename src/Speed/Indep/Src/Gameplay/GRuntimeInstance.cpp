@@ -207,7 +207,8 @@ bool GRuntimeInstance::IsDerivedFromTemplate(unsigned int templateKey) const {
  */
 template <class T>
 T *GRuntimeInstance::FindObject(unsigned int key) {
-    GRuntimeInstance *head = sRingListHead[T::GetTypeStatic()];
+    int type = T::GetTypeStatic();
+    GRuntimeInstance *head = sRingListHead[type];
     if (head != nullptr) {
         GRuntimeInstance *curr = head;
         do {
@@ -215,7 +216,7 @@ T *GRuntimeInstance::FindObject(unsigned int key) {
                 return static_cast<T *>(curr);
             }
             curr = curr->mNext;
-        } while (curr != head);
+        } while (curr != sRingListHead[type]);
     }
     return nullptr;
 }

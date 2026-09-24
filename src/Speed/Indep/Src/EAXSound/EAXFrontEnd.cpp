@@ -193,8 +193,7 @@ int EAXCommon::Play(eMenuSoundTriggers etrigger) {
         return -1;
     }
 
-    int *pout = this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr();
-    if (pout == nullptr) {
+    if (this->m_pSFXOBJ_FEHUD->GetOutputBlockPtr() == nullptr) {
         return 0;
     }
 

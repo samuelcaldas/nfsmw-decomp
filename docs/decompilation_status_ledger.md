@@ -48,7 +48,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (**99.02% match**, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**96.58% match**, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEQuaternion::operator*` (`zFEng`)**: Decompiled, verified (89.1% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`FEQuaternion::GetMatrix` (`zFEng`)**: Decompiled, verified (88.6% match, 196 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEQuaternion::GetMatrix` (`zFEng`)**: Decompiled, verified (**100.0% match**, 196 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UIOptionsScreen::NotificationMessage` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`PauseMenu::NotificationMessage` (`zFe`)**: Decompiled, verified (97.7% match, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`MemcardCallbacks::FoundEntry` (`zFe`)**: Decompiled, verified (98.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -76,7 +76,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackageCommand::~FEPackageCommand` (`zFEng`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEGroup::~FEGroup(void)` (`zFEng`)**: Decompiled, verified (100.0% match, 76 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`FEObjectSorter<1024>::SortObjects` (`zFEng`)**: Decompiled, verified (94.7% match, 316 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEObjectSorter<1024>::SortObjects` (`zFEng`)**: Decompiled, verified (**100.0% match**, 316 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UISafehouseRaceSheet::RefreshHeader` (`zFe`)**: Decompiled, verified (97.9% match, 1,776 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::AddCops` (`zFe`)**: Decompiled, verified (97.0% match, 968 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::SnapCursor` (`zFe`)**: Decompiled, verified (95.7% match, 436 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -181,7 +181,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`Dynamics::Collision::Geometry::SphereVsSphere`**: Decompiled, verified (100.0% fuzzy match, 332 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
 - **`Dynamics::Articulation::Joint::Joint`**: Decompiled, verified (100.0% fuzzy match, 220 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
 - **`Dynamics::Articulation::Joint::AddConstraint`**: Decompiled, verified (100.0% fuzzy match, 272 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Validated]**
-- **`Dynamics::Articulation::Constraint::Constraint`**: Decompiled, verified (90.18% fuzzy match, 416 bytes), documented in `docs/decompiled_functions.md`. **Status: [In Progress]**
+- **`Dynamics::Articulation::Constraint::Constraint`**: Decompiled, verified (**90.83% fuzzy match**, 416 bytes), documented in `docs/decompiled_functions.md`. **Status: [In Progress - Improved]**
 
 ### Foundation / Math Subsystem (`zBWare`)
 - **`bASin`**: Decompiled, verified (92.32% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

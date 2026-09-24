@@ -2672,3 +2672,45 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   bAngle bATan(float x, float y);
   ```
 - **Description**: Fast binary angle arctangent lookup and linear interpolation using quadrant symmetry and table interpolation in bWare math foundation.
+
+---
+
+### `FEQuaternion::GetMatrix`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEMath.cpp`
+- **Virtual Address**: `0x80184A10`
+- **Size**: 196 bytes (49 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void FEQuaternion::GetMatrix(FEMatrix4 *rotmat);
+  ```
+- **Description**: Converts frontend quaternion rotation representation into a 4x4 affine transformation matrix with 100.0% instruction alignment.
+
+---
+
+### `FEObjectSorter<1024>::SortObjects`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEObjectSorter.h`
+- **Virtual Address**: `0x80190570`
+- **Size**: 316 bytes (79 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  template <int N> void FEObjectSorter<N>::SortObjects();
+  ```
+- **Description**: Fast 4-pass radix sort algorithm operating on 64-bit radix keys (`SFERadixKey`) for frontend UI depth sorting and rendering priority.
+
+---
+
+### `Dynamics::Articulation::Constraint::Constraint`
+- **Unit**: `main/Speed/Indep/SourceLists/zDynamics`
+- **Source File**: `src/Speed/Indep/Src/Physics/Dynamics/Articulation.cpp`
+- **Virtual Address**: `0x80242850`
+- **Size**: 416 bytes (109 instructions)
+- **Matching State**: 90.83% match
+- **Signature**:
+  ```cpp
+  Dynamics::Articulation::Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type);
+  ```
+- **Description**: Constructs physics articulation constraints connecting rigid levers with orientation quaternion conversions and post-vector initialization.

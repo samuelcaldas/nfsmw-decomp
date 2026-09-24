@@ -1509,13 +1509,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zPhysics`
 - **Source File**: `src/Speed/Indep/Src/Physics/PhysicsInfo.cpp`
 - **Virtual Address**: `0x80224CB8`
-- **Size**: 824 bytes
-- **Matching State**: 90.41% match
+- **Size**: 824 bytes (211 instructions)
+- **Matching State**: 97.63% match
 - **Signature**:
   ```cpp
   bool Physics::Info::ShiftPoints(const Attrib::Gen::transmission &, const Attrib::Gen::engine &, const Attrib::Gen::induction &, float *, float *, unsigned int);
   ```
-- **Description**: Decompiled and matched Physics::Info::ShiftPoints to 90.41% accuracy with precise expression grouping and conditional structure for vehicle transmission shifting point calculations.
+- **Description**: Decompiled and matched Physics::Info::ShiftPoints to 97.63% accuracy (211/214 instructions) by mapping non-volatile registers (trans to r21, ind to r23, su to r26, sd to r24, topgear to r20) and optimizing gear ratio calculation loops.
 
 ---
 

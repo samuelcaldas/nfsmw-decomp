@@ -39,7 +39,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`PhysicsObject::GetEntity` (`zPhysics`)**: Decompiled, verified (99.5% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`PhysicsObject::GetPlayer` (`zPhysics`)**: Decompiled, verified (100.0% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`VehicleSystem::Init` (`zPhysics`)**: Decompiled, verified (100.0% match, 36 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`Physics::Info::ShiftPoints` (`zPhysics`)**: Decompiled, verified (90.41% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`Physics::Info::ShiftPoints` (`zPhysics`)**: Decompiled, verified (**97.63% match**, 824 bytes, 211/214 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SuspensionSimple::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Refined, verified (98.90% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Decompiled, verified (**100.0% match**, 856 bytes, 214 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 

@@ -95,18 +95,21 @@ Operating Rules:
    mkdir -p build/GOWE69 && cp /home/samuelcaldas/source/repos/nfsmw/build/GOWE69/baseline.json build/GOWE69/baseline.json 2>/dev/null || true
    python3 configure.py
 3. Read the source file around ${cand.demangled} and examine the current implementation.
-4. Check the objdiff diff using:
-   python3 tools/decomp-diff.py -u ${cand.unit} -d ${cand.symbol}
+4. Check the diff using objdiff:
+   python3 tools/decomp-diff.py -u ${cand.unit} -d "${cand.symbol}"
+   (Note: tools/decomp-diff.py is the agent-optimized CLI wrapper for build/tools/objdiff-cli diff)
+   To inspect all symbols in the unit:
+   python3 tools/decomp-diff.py -u ${cand.unit} -s nonmatching
 5. Apply the hint and iteratively refine the code in ${cand.source_file}.
 6. **Anti-Slop Guardrails Check**:
    - Ensure 100.0% match parity is achieved strictly via correct control flow, types, and compiler idioms.
    - Prohibit shortcut anti-patterns: no forced register hacks, no pointer offset arithmetic bypassing DWARF struct definitions (`*(type*)((char*)p + offset)`), no arbitrary renaming, no redundant redeclarations or unnecessary casts.
-7. Compile and verify using:
+7. Compile and verify objdiff match percentage:
    ninja build/GOWE69/${cand.unit}.o
-   python3 tools/decomp-diff.py -u ${cand.unit} -d ${cand.symbol}
-8. Ensure the entire build passes without regression:
+   python3 tools/decomp-diff.py -u ${cand.unit} -d "${cand.symbol}"
+8. Ensure the entire build passes without regression using objdiff changes check:
    ninja
-   ninja changes
+   ninja changes  # Runs objdiff-cli report changes against baseline.json
 9. Ensure clean Doxygen docstrings (@brief, @param, @return).
 10. If matched or improved, commit your changes in this worktree:
    git add ${cand.source_file} && git commit -m "match(${cand.unit.split('/').pop()}): decompile ${cand.demangled}"

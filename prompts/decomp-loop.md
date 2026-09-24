@@ -154,9 +154,13 @@ For each assigned chunk, the agent must iterate through the following determinis
 
 ### Step 3: Implementation & Diff Refinement Loop
 - Locate source file under `src/Speed/Indep/Src/...`.
-- Inspect assembly differences:
+- Inspect assembly differences using objdiff (via decomp-diff CLI wrapper):
   ```bash
   python3 tools/decomp-diff.py -u <unit> -d <symbol>
+  ```
+  Or inspect all non-matching symbols in unit:
+  ```bash
+  python3 tools/decomp-diff.py -u <unit> -s nonmatching
   ```
 - Iterate on C++ implementation (up to 8 refinement rounds):
   - Order of local variable declarations (stack frame layout and register assignment).
@@ -181,7 +185,7 @@ Add a concise Doxygen docstring to every newly decompiled or materially modified
 ```bash
 ninja changes
 ```
-- **Expected Standards:** The chunk builds cleanly, passes all repository checks, matches the required decomp target, and causes **0 regressions**.
+- **Expected Standards:** `ninja changes` invokes `build/tools/objdiff-cli report changes` against `baseline.json`. The chunk must build cleanly, pass all checks, and cause **0 regressions**.
 - If any regression occurs in touched or surrounding code, revert problematic edits immediately.
 
 ### Step 6: Atomic Commit

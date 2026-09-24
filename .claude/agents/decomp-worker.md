@@ -23,13 +23,15 @@ You are a specialized, ultra-fast matching decompilation worker agent for Need f
    python3 configure.py
    ```
 3. Read the target function source code and context.
-4. Inspect assembly diff using:
+4. Inspect assembly diff using objdiff (via decomp-diff CLI wrapper):
    `python3 tools/decomp-diff.py -u <unit> -d <symbol>`
+   Or check all nonmatching symbols in unit:
+   `python3 tools/decomp-diff.py -u <unit> -s nonmatching`
 5. Iteratively adjust C++ implementation to match compiler instruction scheduling, register allocation, and stack layout.
 6. Compile target object:
    `ninja build/GOWE69/<unit>.o`
-7. Check regressions across the full tree:
-   `ninja changes`
+7. Check regressions across the full tree using objdiff changes check:
+   `ninja changes` (invokes `build/tools/objdiff-cli report changes`)
 8. Keep code formatted and documented with clean Doxygen comments (`@brief`, `@param`, `@return`).
 9. Commit matched function atomically:
    `git add <source_file> && git commit -m "match(<unit>): decompile <function_name>"`

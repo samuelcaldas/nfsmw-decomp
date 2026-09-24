@@ -98,7 +98,7 @@ u32 FEMessageResponse::FindConditionBranchTarget(u32 Index) const {
     if (Index == Count - 1) {
         return Count;
     }
-    int Nest = 1;
+    register int Nest asm("r10") = 1;
     do {
         Index++;
         switch (pResponseList[Index].ResponseID) {

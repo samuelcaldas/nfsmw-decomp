@@ -1134,6 +1134,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRaceCustom::GetRaceActivity`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9130`
+- **Size**: 8 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GActivity *GRaceCustom::GetRaceActivity() const;
+  ```
+- **Description**: Returns the activity associated with this custom race.
+
+---
+
 ### `GetPaddedObjectSize<T>`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GObjectBlock.cpp`

@@ -106,6 +106,14 @@ GVault *GRaceParameters::GetChildVault() const {
 }
 
 /**
+ * @brief Gets the activity associated with this custom race.
+ * @return Pointer to the race activity.
+ */
+GActivity *GRaceCustom::GetRaceActivity() const {
+    return this->mRaceActivity;
+}
+
+/**
  * @brief Gets the collection key of this race bin.
  * @return Collection key identifier.
  */

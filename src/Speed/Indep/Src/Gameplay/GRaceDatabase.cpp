@@ -31,6 +31,14 @@ int GRaceBin::GetCompletedChallenges() const {
 }
 
 /**
+ * @brief Sets the number of challenges completed for this race bin.
+ * @param numChallenges Number of challenges completed.
+ */
+void GRaceBin::SetCompletedChallenges(int numChallenges) {
+    this->mStats.mChallengesCompleted = numChallenges;
+}
+
+/**
  * @brief Retrieves the number of race wins awarded for this race bin.
  * @return Number of awarded race wins.
  */

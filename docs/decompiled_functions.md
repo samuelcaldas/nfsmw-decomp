@@ -1595,13 +1595,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source**: `src/Speed/Indep/Src/World/Scenery.cpp`
 - **Address**: `0x802BE498`
 - **Size**: 888 bytes
-- **Match**: 99.91%
+- **Match**: 100.0%
 - **Status**: Matched
 - **Signature**:
   ```cpp
   void RenderVisibleSectionBoundary(VisibleSectionBoundary *boundary, eView *view);
   ```
-- **Description**: Renders visible section boundaries in the track scenery subsystem. Improved to 99.91% match parity by early initialization of `position.z = 9999.0f` before world timer calculations, aligning floating-point register allocation (`f26`-`f31`).
+- **Description**: Renders visible section boundaries in the track scenery subsystem. Achieved 100.0% binary matching parity (222/222 instructions) by initializing `position.z = 0.0f;` prior to the world timer calculation and point iteration loop, aligning constant pool loading of `0.0f` (`f11`) and callee-saved register allocation (`r14` for `9999.0f`, `r15` for `1.0f`).
 
 ---
 

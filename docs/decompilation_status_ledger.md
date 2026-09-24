@@ -26,7 +26,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`TrackStreamer::BuildHoleMovements`**: Decompiled, verified (89.82% match, 1,992 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`RegionQuery::CalculateRegionInfo`**: Decompiled, verified (99.92% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`TrackStreamer::GetLoadingPriority`**: Decompiled, verified (97.25% match, 708 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`RenderVisibleSectionBoundary`**: Decompiled, verified (99.91% match, 888 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`RenderVisibleSectionBoundary`**: Decompiled, verified (**100.0% match**, 888 bytes, 222/222 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`TrackStreamer::DetermineStreamingSections`**: Decompiled, verified (76.45% match, 420 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### World & Render Subsystem (`zWorld`)

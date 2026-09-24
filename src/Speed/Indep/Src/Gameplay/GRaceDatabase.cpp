@@ -15,6 +15,14 @@ int GRaceBin::GetCompletedChallenges() const {
 }
 
 /**
+ * @brief Retrieves the number of race wins awarded for this race bin.
+ * @return Number of awarded race wins.
+ */
+unsigned short GRaceBin::GetAwardedRaceWins() const {
+    return this->mStats.mRacesWon;
+}
+
+/**
  * @brief Sets whether this race runs in reverse.
  * @param isReverseDir Whether the race direction is reversed.
  */

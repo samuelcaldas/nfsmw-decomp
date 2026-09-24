@@ -2953,4 +2953,89 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Sets whether the race status event has been won (`mHasBeenWon`) at offset `0x46A8` using a 32-bit word store with 100% register and instruction parity (`stw r4, 0x46a8(r3); blr`).
 
+---
+
+### `bATan`
+- **Unit**: `main/Speed/Indep/SourceLists/zBWare`
+- **Source File**: `src/Speed/Indep/bWare/Src/bMath.cpp`
+- **Virtual Address**: `0x8000A7F0`
+- **Size**: 328 bytes (82 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  float bATan(float x, float y);
+  ```
+- **Description**: Computes the two-argument arctangent using table-based lookup and quadrant adjustment with 100% register and instruction parity.
+
+---
+
+### `LeaderBoard::Update`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/HUD/FeLeaderBoard.cpp`
+- **Virtual Address**: `0x800F5CBC`
+- **Size**: 1360 bytes (340 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void LeaderBoard::Update(IPlayer *player);
+  ```
+- **Description**: Updates HUD leaderboard timings, relative racer positions, and distance-to-leader formatting with exact compiler instruction scheduling and register allocation.
+
+---
+
+### `SearchForString`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Localization/Localize.cpp`
+- **Virtual Address**: `0x80109D48`
+- **Size**: 180 bytes (45 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  static const uint8 *SearchForString(uint32 string_label);
+  ```
+- **Description**: Performs binary search over the string record hash table for localized UI strings with exact GCC 2.95 epilogue clustering and block branch structure.
+
+---
+
+### `SaveSomeData`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Database/FEDatabase.cpp`
+- **Virtual Address**: `0x8010CADC`
+- **Size**: 60 bytes (15 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void *SaveSomeData(void *save_to, void *src, int bytes, void *save_to_end);
+  ```
+- **Description**: Serializes profile and game data safely within buffer bounds with 100% binary matching parity.
+
+---
+
+### `CustomTuningScreen::NotificationMessage`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/InGame/CustomTuning.cpp`
+- **Virtual Address**: `0x80125BC4`
+- **Size**: 820 bytes (205 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CustomTuningScreen::NotificationMessage(unsigned long msg, FEObject *object, unsigned long param1, unsigned long param2);
+  ```
+- **Description**: Handles frontend button input, slider notifications, and help blurb transitions for car performance tuning.
+
+---
+
+### `UnlockSystem::IsUnlockableNew`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp`
+- **Virtual Address**: `0x801288F0`
+- **Size**: 180 bytes (45 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UnlockSystem::IsUnlockableNew(eUnlockFilters filter, eUnlockableEntity ent, int level);
+  ```
+- **Description**: Determines whether an unlockable entity is new in Career Mode or Quick Race filters with 100% control-flow and branch matching parity.
+
+
 

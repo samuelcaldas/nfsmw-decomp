@@ -187,7 +187,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 
 ### Foundation / Math Subsystem (`zBWare`)
 - **`bASin`**: Decompiled, verified (100.0% match, 336 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
-- **`bATan`**: Decompiled, verified (99.63% match, 328 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`bATan`**: Decompiled, verified (100.0% match, 328 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Frontend UI & Menu Subsystem (`zFe2`)
 - **`FEPackageManager::GetBasePkgName`**: Decompiled, verified (100.0% match, 100 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -198,7 +198,11 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`UnlockSystem::IsTrackUnlocked`**: Decompiled, verified (100.0% match, 228 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UnlockSystem::IsCarUnlocked`**: Decompiled, verified (100.0% match, 276 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UnlockSystem::IsBackroomAvailable`**: Decompiled, verified (100.0% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
-- **`LeaderBoard::Update`**: Decompiled, verified (99.94% match, 1,360 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`LeaderBoard::Update`**: Decompiled, verified (100.0% match, 1,360 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`SearchForString`**: Decompiled, verified (100.0% match, 180 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`SaveSomeData`**: Decompiled, verified (100.0% match, 60 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`CustomTuningScreen::NotificationMessage`**: Decompiled, verified (100.0% match, 820 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`UnlockSystem::IsUnlockableNew`**: Decompiled, verified (100.0% match, 180 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ## 2. Remaining Binary Chunks and Subsystems
 - **Remaining 6,920 Candidate Functions across Unity Units (`zAI`, `zWorld`, `zTrack`, `zPhysics`, `zFe`, `zSim`, `zCamera`, etc.)**:

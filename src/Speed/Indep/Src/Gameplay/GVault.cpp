@@ -57,6 +57,14 @@ unsigned int GVault::GetLoadDataSize() const {
 }
 
 /**
+ * @brief Reports whether the vault is loaded.
+ * @return True if loaded; otherwise false.
+ */
+bool GVault::IsLoaded() const {
+    return this->mVault != 0;
+}
+
+/**
  * @brief Reports whether the vault is resident.
  * @return True if resident; otherwise false.
  */

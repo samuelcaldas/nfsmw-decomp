@@ -16,3 +16,5 @@
 #include "Speed/Indep/Src/Gameplay/GState.cpp"
 #include "Speed/Indep/Src/Gameplay/GHandler.cpp"
 #include "Speed/Indep/Src/Gameplay/GManager.cpp"
+#include "Speed/Indep/Src/Gameplay/GMilestone.cpp"
+#include "Speed/Indep/Src/Gameplay/GSpeedTrap.cpp"

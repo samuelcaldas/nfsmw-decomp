@@ -2869,3 +2869,88 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Checks whether the backroom tuning shop is available for an entity across Quick Race, Career, and Online modes with 100% register and instruction parity.
 
+---
+
+### `GRaceDatabase::GetStartupRace`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A466C`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GRaceCustom *GRaceDatabase::GetStartupRace();
+  ```
+- **Description**: Retrieves the startup race custom configuration pointer (`mStartupRace`) from offset `0x2C` with 100% register and instruction parity (`lwz r3, 0x2c(r3); blr`).
+
+---
+
+### `GRaceDatabase::GetStartupRaceContext`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A4674`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GRace::Context GRaceDatabase::GetStartupRaceContext();
+  ```
+- **Description**: Retrieves the startup race context enum (`mStartupRaceContext`) from offset `0x30` with 100% register and instruction parity (`lwz r3, 0x30(r3); blr`).
+
+---
+
+### `GRaceCustom::GetRaceActivity`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9130`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GActivity *GRaceCustom::GetRaceActivity() const;
+  ```
+- **Description**: Retrieves the pointer to the race activity associated with this custom race instance (`mRaceActivity`) from offset `0x14` with 100% register and instruction parity (`lwz r3, 0x14(r3); blr`).
+
+---
+
+### `GRaceBin::SetCompletedChallenges`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9B50`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceBin::SetCompletedChallenges(int numChallenges);
+  ```
+- **Description**: Updates the completed challenges counter in the bin's statistics struct (`mStats.mChallengesCompleted`) at offset `0x18` using a halfword store with 100% register and instruction parity (`sth r4, 0x18(r3); blr`).
+
+---
+
+### `GRaceBin::SetRacesWon`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9B58`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceBin::SetRacesWon(int numRaces);
+  ```
+- **Description**: Updates the races won counter in the bin's statistics struct (`mStats.mRacesWon`) at offset `0x1A` using a halfword store with 100% register and instruction parity (`sth r4, 0x1a(r3); blr`).
+
+---
+
+### `GRaceStatus::SetHasBeenWon`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801BC0E8`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceStatus::SetHasBeenWon(bool won);
+  ```
+- **Description**: Sets whether the race status event has been won (`mHasBeenWon`) at offset `0x46A8` using a 32-bit word store with 100% register and instruction parity (`stw r4, 0x46a8(r3); blr`).
+
+

@@ -74,18 +74,20 @@ void *MemoryPoolManager::NewBlockByIdxAux(unsigned short idx) {
     return r;
 }
 
+/**
+ * @brief Allocates a block from the size-based free list or memory pool.
+ */
 void *MemoryPoolManager::NewBlockAux(size_t size) {
     unsigned char idx = static_cast<unsigned char>(size / 16);
     char *r = gSizeFreeList[idx];
-    if (!r) {
+    if (r) {
+        gSizeFreeList[idx] = *reinterpret_cast<char **>(r);
+    } else {
         *reinterpret_cast<unsigned int *>(gMemoryPoolFree) = idx;
         r = gMemoryPoolFree + 4;
         gMemoryPoolFree += (idx + 1) * 0x10 + 4;
-        return r;
-    } else {
-        gSizeFreeList[idx] = *reinterpret_cast<char **>(r);
-        return r;
     }
+    return r;
 }
 
 void MemoryPoolManager::ResetPoolAux() {

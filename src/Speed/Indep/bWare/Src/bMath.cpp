@@ -272,7 +272,7 @@ unsigned short bFixATanTableHigh[129] = {
  * @return Computed bAngle representing the arcsine.
  */
 bAngle bASin(float x) {
-    int negative = 0;
+    bFix negative = 0;
     if (x < 0.0f) {
         x = -x;
         negative = 1;
@@ -285,25 +285,26 @@ bAngle bASin(float x) {
         }
     }
 
+    bFix fix_x = static_cast<int>(x * 65536.0f);
+    int table_number = 0;
     bFix table_size = 0x8000;
     bFix table_top = 0x8000;
-    int table_number = 0;
-    bFix fix_x = static_cast<int>(x * 65536.0f);
 
-    while (fix_x >= table_top && table_number < 11) {
-        table_size >>= 1;
-        table_number++;
-        table_top += table_size;
+    if (fix_x >= table_size) {
+        do {
+            table_size >>= 1;
+            table_number++;
+            table_top += table_size;
+        } while (fix_x >= table_top && table_number < 11);
     }
 
     bFix table_bottom = table_top - table_size;
-    bFix table_spacing;
     int table_index = (fix_x - table_bottom) >> (11 - table_number);
-    table_spacing = table_number * 16 + table_index;
-    float table_x = (table_bottom + table_index * (table_size >> 4)) / 65536.0f; // f0
-    float remainder_x = x - table_x;                                             // f0
+    float table_x = (table_bottom + table_index * (table_size >> 4)) / 65536.0f;
+    float remainder_x = x - table_x;
+    bFix table_spacing = table_number * 16 + table_index;
     bAngle table_a = bASinTable[table_spacing].Angle;
-    float slope = bASinTable[table_spacing].Slope; // f11
+    float slope = bASinTable[table_spacing].Slope;
     bAngle a = table_a + static_cast<int>(remainder_x * slope * 65536.0f);
 
     if (negative) {

@@ -568,13 +568,16 @@ marker_check:
     return static_cast<bool>(answer) | static_cast<bool>(TheFEMarkerManager.IsMarkerAvailable(marker, 0));
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether an unlockable entity is unlocked for the specified filter mode.
+ */
 bool UnlockSystem::IsUnlockableUnlocked(eUnlockFilters filter, eUnlockableEntity thing, int level, int player, bool backroom) {
     if (UnlockAllThings)
         return true;
     bool answer = false;
     if (filter & UNLOCK_QUICK_RACE) {
-        answer = QuickRaceUnlocker::IsUnlockableUnlocked(filter, thing, level, player, backroom) != 0;
+        bool quick_race_answer = QuickRaceUnlocker::IsUnlockableUnlocked(filter, thing, level, player, backroom) != 0;
+        answer = quick_race_answer;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         answer = static_cast<bool>(answer | CareerUnlocker::IsUnlockableUnlocked(filter, thing, level, backroom));
@@ -605,13 +608,16 @@ bool UnlockSystem::IsCarPartUnlocked(eUnlockFilters filter, int carslot, CarPart
     return answer;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether a performance upgrade package is unlocked.
+ */
 bool UnlockSystem::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrades::Type pkg_type, int level, int player, bool backroom) {
     if (UnlockAllThings)
         return true;
     bool answer = false;
     if (filter & UNLOCK_QUICK_RACE) {
-        answer = QuickRaceUnlocker::IsPerfPackageUnlocked(filter, pkg_type, level, player, backroom) != 0;
+        bool quick_race_answer = QuickRaceUnlocker::IsPerfPackageUnlocked(filter, pkg_type, level, player, backroom) != 0;
+        answer = quick_race_answer;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         answer = static_cast<bool>(answer | CareerUnlocker::IsPerfPackageUnlocked(filter, pkg_type, level, backroom));
@@ -622,13 +628,16 @@ bool UnlockSystem::IsPerfPackageUnlocked(eUnlockFilters filter, Physics::Upgrade
     return answer;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether a race track event is unlocked.
+ */
 bool UnlockSystem::IsTrackUnlocked(eUnlockFilters filter, int event_hash, int player) {
     if (UnlockAllThings)
         return true;
     bool answer = false;
     if (filter & UNLOCK_QUICK_RACE) {
-        answer = QuickRaceUnlocker::IsTrackUnlocked(filter, event_hash, player) != 0;
+        bool quick_race_answer = QuickRaceUnlocker::IsTrackUnlocked(filter, event_hash, player) != 0;
+        answer = quick_race_answer;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         answer = static_cast<bool>(answer | CareerUnlocker::IsTrackUnlocked(filter, event_hash));
@@ -639,13 +648,16 @@ bool UnlockSystem::IsTrackUnlocked(eUnlockFilters filter, int event_hash, int pl
     return answer;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether a vehicle is unlocked.
+ */
 bool UnlockSystem::IsCarUnlocked(eUnlockFilters filter, unsigned int handle, int player) {
     if (UnlockAllThings)
         return true;
     bool answer = false;
     if (filter & UNLOCK_QUICK_RACE) {
-        answer = QuickRaceUnlocker::IsCarUnlocked(filter, handle, player);
+        bool quick_race_answer = QuickRaceUnlocker::IsCarUnlocked(filter, handle, player) != 0;
+        answer = quick_race_answer;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         answer = static_cast<bool>(answer | CareerUnlocker::IsCarUnlocked(filter, handle));
@@ -653,17 +665,21 @@ bool UnlockSystem::IsCarUnlocked(eUnlockFilters filter, unsigned int handle, int
     if (filter & UNLOCK_ONLINE) {
         answer = static_cast<bool>(answer | OnlineUnlocker::IsCarUnlocked(filter, handle));
     }
+    int ce_bonus = 0;
     if (GetIsCollectorsEdition() && UnlockSystem::IsBonusCarCEOnly(handle)) {
-        answer = true;
+        ce_bonus = 1;
     }
-    return answer;
+    return answer | ce_bonus;
 }
 
-// UNSOLVED
+/**
+ * @brief Checks whether the backroom is available for an unlockable entity.
+ */
 bool UnlockSystem::IsBackroomAvailable(eUnlockFilters filter, eUnlockableEntity ent, int level) {
     bool answer = false;
     if (filter & UNLOCK_QUICK_RACE) {
-        answer = QuickRaceUnlocker::IsBackroomAvailable(filter, ent, level, 0);
+        bool quick_race_answer = QuickRaceUnlocker::IsBackroomAvailable(filter, ent, level, 0) != 0;
+        answer = quick_race_answer;
     }
     if (filter & UNLOCK_CAREER_MODE) {
         answer = static_cast<bool>(answer | CareerUnlocker::IsBackroomAvailable(filter, ent, level));

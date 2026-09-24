@@ -129,3 +129,11 @@ GVault *GRaceBin::GetChildVault() const {
     return this->mChildVault;
 }
 
+/**
+ * @brief Sets whether this race runs in reverse.
+ * @param isReverseDir Whether the race direction is reversed.
+ */
+void GRaceCustom::SetReversed(bool isReverseDir) {
+    this->mReversed = isReverseDir;
+}
+

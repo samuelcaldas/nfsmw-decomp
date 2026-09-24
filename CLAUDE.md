@@ -163,3 +163,30 @@ The original game was compiled using unity compilation units ("SourceLists") loc
   - `decompctx.py`, `decompctx2.py`: Header preprocessors for generating decomp.me contexts.
   - `attrib_generator.py`, `event_class_generator.py`: Code generators for attributes and event classes.
 - `orig/<version>/`: Target original game binaries (e.g. `orig/GOWE69/NFSMWRELEASE.ELF`, `orig/SLES-53558-A124/NFS.ELF`). Never committed to git.
+
+## Multi-Agent Orchestration & Ultracode Standards
+
+### Active Peer Sessions Pool
+The distributed decompilation team is organized across dedicated peer sessions:
+- `@nfs1`: Unit focus (e.g., `zFe`, Frontend UI)
+- `@nfs2`: Unit focus (e.g., `zEAXSound2`, Audio subsystems)
+- `@nfs3`: Unit focus (e.g., `zWorld`, World and Collision)
+- `@nfs4`: Unit focus (e.g., `zGameplay`, Game rules and Vault)
+- `@nfs5`: Unit focus (e.g., `zPhysics`, Vehicle dynamics and Math)
+- Orchestrator session (`nfs6` / `main`): Upstream integration, conflict resolution, global synchronization.
+
+Coordination between sessions must occur via inter-session messaging (`SendMessage`). Before and after completing work in any worktree, sessions must rebase onto `origin/main` to incorporate peer commits.
+
+### Ultracode Workflows & Fast Model Mandate
+- **Keyword Activation:** Workflows are activated whenever the keyword `ultracode` is used.
+- **Model Mandate:** All subagents and workflow tasks must strictly use `gemini-3.5-flash-lite` (via `agentType: 'decomp-worker'` or `model: gemini-3.5-flash-lite`).
+- **Rationale:** `gemini-3.5-flash-lite` is exceptionally fast, lightweight, and cost-efficient for parallel instruction matching, iterative assembly diffing, and compile loops across concurrent worktrees.
+- **Workflow Standardization:** Standardized workflow scripts reside in `scripts/workflows/` and must follow and reuse `scripts/workflows/standard-workflow.js`.
+- **Operating Guidelines for Decomp Workers:**
+  1. Always run in isolated git worktrees (`isolation: 'worktree'`).
+  2. Verify toolchain symlinks (`orig`, `build/tools`, `build/compilers`, `build/ppc_binutils`).
+  3. Inspect diff with `python3 tools/decomp-diff.py -u <unit> -d <symbol>`.
+  4. Compile target object with `ninja build/GOWE69/<unit>.o`.
+  5. Check for regressions with `ninja changes` before committing.
+  6. Commit matching progress atomically: `git commit -m "match(<unit>): decompile <symbol>"`.
+  7. Return structured results conforming to `DECOMP_SCHEMA`.

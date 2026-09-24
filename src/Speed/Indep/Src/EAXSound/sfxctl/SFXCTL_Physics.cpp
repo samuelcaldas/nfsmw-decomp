@@ -141,6 +141,47 @@ void SFXCTL_Physics::InitSFX() {
 static const int Smoother_CameraStateChange = 60; // size: 0x4, Decl: 213
 static const int Smoother_PlayerPosion = 2000;    // size: 0x4, Decl: 214
 
+#if defined(EA_PLATFORM_GAMECUBE)
+static const float MixerSqrtZero = 0.0f;
+
+static inline float MixerSqrt(float x, const float *zero) {
+    const float bSqrtEPS = 5e-11f;
+    float y0;
+    float y1;
+    float t0;
+    float t1;
+    float t2;
+    float half = 0.5f;
+    float one = 1.0f;
+
+    if (x > bSqrtEPS) {
+        asm("frsqrte %0, %1" : "=f"(y0) : "f"(x));
+        t0 = y0 * y0;
+        asm("fmuls %0, %1, %2" : "=f"(t1) : "f"(y0), "f"(half));
+        asm("fnmsubs %0, %1, %2, %3" : "=f"(t2) : "f"(x), "f"(t0), "f"(one));
+        y0 += (t2 * t1);
+        t0 = y0 * y0;
+        asm("fmuls %0, %1, %2" : "=f"(t1) : "f"(y0), "f"(half));
+        asm("fnmsubs %0, %1, %2, %3" : "=f"(t2) : "f"(x), "f"(t0), "f"(one));
+        y0 += (t2 * t1);
+        y0 *= x;
+    } else {
+        y0 = *zero;
+    }
+
+    return y0;
+}
+
+static inline float MixerVelocityMagnitudeMPH(EAX_CarState *car) {
+    const bVector3 *velocity = car->GetVelocity();
+    return MPS2MPH(MixerSqrt(bDot(velocity, velocity), &MixerSqrtZero));
+}
+#else
+static inline float MixerVelocityMagnitudeMPH(EAX_CarState *car) {
+    return car->GetVelocityMagnitudeMPH();
+}
+#endif
+
 /**
  * Updates physics mixer outputs for EAX sound based on vehicle speed, RPM, wheels on ground, and POV.
  */
@@ -148,25 +189,25 @@ void SFXCTL_Physics::UpdateMixerOutputs() {
     int TargeVal;
 
     {
-        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        const float vel = bAbs(MixerVelocityMagnitudeMPH(this->GetPhysCar()));
         TargeVal = bClamp(static_cast<int>(vel * 1092.2334f), 0, 0x7FFF);
         this->SetDMIX_Input(0, TargeVal);
     }
 
     {
-        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        const float vel = bAbs(MixerVelocityMagnitudeMPH(this->GetPhysCar()));
         TargeVal = bClamp(static_cast<int>(vel * 546.1167f), 0, 0x7FFF);
         this->SetDMIX_Input(1, TargeVal);
     }
 
     {
-        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        const float vel = bAbs(MixerVelocityMagnitudeMPH(this->GetPhysCar()));
         TargeVal = bClamp(static_cast<int>(vel * 327.66998f), 0, 0x7FFF);
         this->SetDMIX_Input(2, TargeVal);
     }
 
     {
-        const float vel = bAbs(this->GetPhysCar()->GetVelocityMagnitudeMPH());
+        const float vel = bAbs(MixerVelocityMagnitudeMPH(this->GetPhysCar()));
         TargeVal = bClamp(static_cast<int>(vel * 234.05f), 0, 0x7FFF);
         this->SetDMIX_Input(3, TargeVal);
     }

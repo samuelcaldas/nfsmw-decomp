@@ -1763,12 +1763,12 @@ class FX_UVES {
     }
 
     FX_UVES(int iD, int volume, int width, int pitch_Offset, int intensity, int stop) {
+        this->SetID(iD);
         this->SetVolume(volume);
-        this->SetWidth(width);
+        this->SetStop(stop);
         this->SetPitch_Offset(pitch_Offset);
         this->SetIntensity(intensity);
-        this->SetID(iD);
-        this->SetStop(stop);
+        this->SetWidth(width);
 
         Result result = Class::CreateInstance(&gFX_UVESHandle, &this->mData, &this->mpClass);
         if (result < RESULT_OK) {

@@ -4078,5 +4078,61 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Handles speed trap trigger event. If both `kFlag_Unlocked` and `kFlag_Active` are set (tested via `!IsFlagClear`), sets `kFlag_Completed`, clears `kFlag_Active`, records pass speed `value`, refreshes the progress of the associated `GRaceBin`, and notifies `GManager::Get().RefreshSpeedTrapIcons()`. Achieves 100.0% binary assembly parity (30/30 instructions).
 
+---
+
+### `EAGL4Anim::FnDeltaLerpChan::~FnDeltaLerpChan`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/DeltaChan.h`
+- **Virtual Address**: `0x800A63B0`
+- **Size**: 84 bytes (21 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  EAGL4Anim::FnDeltaLerpChan::~FnDeltaLerpChan(void);
+  ```
+- **Description**: Compiler-synthesized virtual destructor for `FnDeltaLerpChan`. Inherits from `FnDeltaChan` without explicit user-defined destructor body, allowing GCC 2.95 to elide the redundant vtable store and directly invoke `FnDeltaChan::~FnDeltaChan` and deallocation. Achieves 100.0% binary assembly parity (21/21 instructions).
+
+---
+
+### `EAGL4Anim::FnDeltaQuatChan::~FnDeltaQuatChan`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/DeltaChan.h`
+- **Virtual Address**: `0x800A6404`
+- **Size**: 84 bytes (21 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  EAGL4Anim::FnDeltaQuatChan::~FnDeltaQuatChan(void);
+  ```
+- **Description**: Compiler-synthesized virtual destructor for `FnDeltaQuatChan`. Inherits from `FnDeltaChan` without explicit user-defined destructor body, allowing GCC 2.95 to elide the redundant vtable store and directly invoke `FnDeltaChan::~FnDeltaChan` and deallocation. Achieves 100.0% binary assembly parity (21/21 instructions).
+
+---
+
+### `EAGL4Anim::FnKeyLerpChan::~FnKeyLerpChan`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/DeltaChan.h`
+- **Virtual Address**: `0x800A6458`
+- **Size**: 84 bytes (21 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  EAGL4Anim::FnKeyLerpChan::~FnKeyLerpChan(void);
+  ```
+- **Description**: Compiler-synthesized virtual destructor for `FnKeyLerpChan`. Inherits from `FnKeyDeltaChan` without explicit user-defined destructor body, allowing GCC 2.95 to elide the redundant vtable store and directly invoke `FnKeyDeltaChan::~FnKeyDeltaChan` and deallocation. Achieves 100.0% binary assembly parity (21/21 instructions).
+
+---
+
+### `EAGL4Anim::FnKeyQuatChan::~FnKeyQuatChan`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/DeltaChan.h`
+- **Virtual Address**: `0x800A64AC`
+- **Size**: 84 bytes (21 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  EAGL4Anim::FnKeyQuatChan::~FnKeyQuatChan(void);
+  ```
+- **Description**: Compiler-synthesized virtual destructor for `FnKeyQuatChan`. Inherits from `FnKeyDeltaChan` without explicit user-defined destructor body, allowing GCC 2.95 to elide the redundant vtable store and directly invoke `FnKeyDeltaChan::~FnKeyDeltaChan` and deallocation. Achieves 100.0% binary assembly parity (21/21 instructions).
+
 
 

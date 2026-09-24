@@ -334,13 +334,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/FEngInterfaces/FEngInterface.cpp`
 - **Virtual Address**: `0x80133910`
-- **Size**: 332 bytes
-- **Matching State**: 96.9% match
+- **Size**: 332 bytes (83 instructions)
+- **Matching State**: **100.0% match**
 - **Signature**:
   ```cpp
   void cFEng::PushErrorPackage(const char *pPackageName, int pArg, u32 ControlMask);
   ```
-- **Description**: Matched cFEng::PushErrorPackage to 96.9% with clean compilation and zero regressions.
+- **Description**: Reached 100.0% binary matching parity (83/83 instructions). Pushes error package to FEngine, sets error screen mode, tests pause status, and pauses simulation and subsystems when needed. Resolved register allocation discrepancy on `bWasPaused` by binding assignment to register `r0` (`register int one asm("r0") = 1;`), accurately matching target instruction scheduling and register allocation.
 
 ---
 

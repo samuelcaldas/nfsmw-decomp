@@ -7,7 +7,8 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ### Foundation Subsystem (`zBWare`)
 - **`fDeterminant` (`zBWare`)**: Decompiled, verified (69.04% match, 448 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
-### Animation Subsystem (`zAnim`, `zAnim0`)
+### Animation Subsystem (`zAnim`, `zAnim0`, `zEagl4Anim`)
+- **`EAGL4Anim::MemoryPoolManager::NewBlockAux` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 84 bytes, 21/21 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`CAnimPlayer::Init`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CAnimPlayer::GetWorldAnimScene`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GetType__13CAnimProperty`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -44,7 +45,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Decompiled, verified (**100.0% match**, 856 bytes, 214 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Frontend Subsystem (`zFe`, `zFeOverlay`, `zFEng`)
-- **`FEMessageResponse::FindConditionBranchTarget` (`zFEng`)**: Decompiled, verified (98.47% match, 144 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEMessageResponse::FindConditionBranchTarget` (`zFEng`)**: Decompiled, verified (**99.58% match**, 144 bytes, 36 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 99.58%]**
 - **`FEPackage::UpdateObject` (`zFEng`)**: Decompiled, verified (**100.0% match**, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (**99.02% match**, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**96.58% match**, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

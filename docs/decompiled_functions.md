@@ -3380,12 +3380,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/FEng/FEMessageResponse.cpp`
 - **Virtual Address**: `0x8018A4F4`
 - **Size**: 144 bytes (36 instructions)
-- **Matching State**: 98.47% match (improved from 63.06%)
+- **Matching State**: 99.58% match (improved from 98.47%)
 - **Signature**:
   ```cpp
   u32 FEMessageResponse::FindConditionBranchTarget(u32 Index) const;
   ```
-- **Description**: Scans through the response list from a conditional branch, tracking nested conditional blocks to find the matching `MR_Else` or `MR_EndIf` target index.
+- **Description**: Scans through the response list from a conditional branch, tracking nested conditional blocks to find the matching `MR_Else` or `MR_EndIf` target index. Improved to 99.58% by pinning register `Nest` to `r10` (`register int Nest asm("r10") = 1;`).
 
 
 
@@ -3530,3 +3530,18 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   unsigned int GManager::SaveSpeedTraps(GSpeedTrap *dest);
   ```
 - **Description**: Copies all managed speed trap records to `dest` via `GMemCpy` and returns `mNumSpeedTraps`.
+
+---
+
+### `EAGL4Anim::MemoryPoolManager::NewBlockAux`
+- **Unit**: `main/Speed/Indep/SourceLists/zEagl4Anim`
+- **Source File**: `src/Speed/Indep/Src/EAGL4Anim/MemoryPoolManager.cpp`
+- **Virtual Address**: `0x80231534` (`2148146404`)
+- **Size**: 84 bytes (21 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void *EAGL4Anim::MemoryPoolManager::NewBlockAux(size_t size);
+  ```
+- **Description**: Allocates a block from the size-based free list or memory pool. Restructured free-list conditional handling so that the free list case (`if (r)`) is evaluated first, enabling the allocation fallback path to compute the return pointer in `r3` and update `gMemoryPoolFree` in the exact assembly register and store sequence of the original DOL, achieving 100.0% binary match (21/21 instructions).
+

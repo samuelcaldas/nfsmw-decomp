@@ -281,7 +281,7 @@ float GinsuSynthData::SampleToCycle(int sample) const {
         return static_cast<float>(self->mCycleCount);
     }
 
-    int low = 0;
+    register int low asm("r3") = 0;
     int high = self->mCycleCount;
     int guess;
     while (true) {

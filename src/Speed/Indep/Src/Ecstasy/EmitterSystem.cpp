@@ -1045,7 +1045,7 @@ void EmitterSystem::UpdateParticles(float dt) {
                             uint32 cur_frame = particle->mAnimFrame;
                             uint32 delta_frames = (int32)((f_num_frames / (float)i_num_frames) * 65535.0f);
                             cur_frame += delta_frames;
-                            if (cur_frame > 65535) {
+                            if (cur_frame + delta_frames > 65535) {
                                 cur_frame -= 65535;
                             }
                             cur_frame = (uint16)cur_frame;

@@ -43,23 +43,27 @@ feDialogConfig::feDialogConfig() {
     fCountdown = 0.0f;
 }
 
-// UNSOLVED
+/**
+ * @brief Returns the appropriate menu sound for a dialog message.
+ */
 eMenuSoundTriggers feDialogScreen::NotifySoundMessage(u32 msg, eMenuSoundTriggers maybe) {
+    eMenuSoundTriggers result = maybe;
     switch (msg) {
         case FEHASH_SOUND_RIGHT:
         case FEHASH_SOUND_LEFT:
             if ((FEngGetCurrentButton(GetPackageName()) != nullptr) && FEngGetCurrentButton(GetPackageName())->NameHash != mLastButtonHash) {
                 mLastButtonHash = FEngGetCurrentButton(GetPackageName())->NameHash;
-                return maybe;
+            } else {
+                result = UISND_NONE;
             }
-            return UISND_NONE;
+            break;
         case FEHASH_SOUND_BACK:
-            if (Config.bIsDismissable) {
-                return maybe;
+            if (!Config.bIsDismissable) {
+                result = UISND_NONE;
             }
-            return UISND_NONE;
+            break;
     }
-    return maybe;
+    return result;
 }
 
 void feDialogScreen::NotificationMessage(u32 msg, FEObject *obj, u32 param1, u32 param2) {

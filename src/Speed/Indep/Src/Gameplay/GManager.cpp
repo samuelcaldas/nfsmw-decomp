@@ -316,4 +316,49 @@ void GManager::DestroyVaults() {
     }
 }
 
+/**
+ * @brief Allocates storage buffer for persistent and session object state.
+ */
+void GManager::AllocateObjectStateStorage() {
+    int flags = GetVirtualMemoryAllocParams();
+    void *buffer = bMalloc(0x4000, flags);
+    this->mObjectStateBuffer = (uint8 *)buffer;
+    this->mObjectStateBufferSize = 0x4000;
+    this->mObjectStateBufferFree = (uint8 *)buffer;
+}
+
+/**
+ * @brief Releases storage buffer for object state.
+ */
+void GManager::ReleaseObjectStateStorage() {
+    this->mPersistentStateBlocks.clear();
+    this->mSessionStateBlocks.clear();
+    if (this->mObjectStateBuffer != NULL) {
+        bFree(this->mObjectStateBuffer);
+    }
+    this->mObjectStateBufferFree = NULL;
+    this->mObjectStateBufferSize = 0;
+}
+
+/**
+ * @brief Clears all session state blocks and defragments storage.
+ */
+void GManager::ClearAllSessionData() {
+    this->mSessionStateBlocks.clear();
+    this->DefragObjectStateStorage();
+}
+
+/**
+ * @brief Releases the key-to-instance hash map and resets table properties.
+ */
+void GManager::ReleaseInstanceMap() {
+    if (this->mKeyToInstanceMap != NULL) {
+        bFree(this->mKeyToInstanceMap);
+        this->mKeyToInstanceMap = NULL;
+    }
+    this->mInstanceHashTableSize = 0;
+    this->mInstanceHashTableMask = 0;
+}
+
+
 

@@ -47,6 +47,14 @@ unsigned short GRaceBin::GetAwardedRaceWins() const {
 }
 
 /**
+ * @brief Sets the number of races won for this race bin.
+ * @param numRaces Number of races won.
+ */
+void GRaceBin::SetRacesWon(int numRaces) {
+    this->mStats.mRacesWon = numRaces;
+}
+
+/**
  * @brief Simulates D-Day completion in the database.
  */
 void GRaceDatabase::SimulateDDayComplete() {}

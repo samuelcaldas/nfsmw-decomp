@@ -174,7 +174,9 @@ bool cFEngJoyInput::CheckUnplugged() {
     return unplugged;
 }
 
-// UNSOLVED
+/**
+ * @brief Processes queued joystick actions and updates frontend pad state.
+ */
 void cFEngJoyInput::HandleJoy() {
     for (int port = 0; port < 2; port++) {
         if (mActionQ[port] != nullptr) {
@@ -182,25 +184,25 @@ void cFEngJoyInput::HandleJoy() {
                 ActionRef aRef = mActionQ[port]->GetAction();
                 if (aRef.ID() == ACTION_PLUGGED) {
                     bool is_splitscreen = FEDatabase->IsSplitScreenMode();
-
+                    bool bIsSplit;
                     if (Sim::GetUserMode() == Sim::USER_SPLIT_SCREEN) {
-                        is_splitscreen = true;
-                    } else if (is_splitscreen) {
-                        is_splitscreen = false;
+                        bIsSplit = true;
+                    } else if (!is_splitscreen) {
+                        bIsSplit = false;
                     } else {
-                        is_splitscreen = true;
+                        bIsSplit = true;
                     }
 
                     JoystickPort player_port1 = static_cast<JoystickPort>(FEDatabase->GetPlayersJoystickPort(0));
                     JoystickPort player_port2 = JOYSTICK_PORT_NONE;
-                    if (is_splitscreen) {
+                    if (bIsSplit) {
                         player_port2 = static_cast<JoystickPort>(FEDatabase->GetPlayersJoystickPort(1));
                     }
                     if (port == player_port1) {
-                        if (is_splitscreen && player_port2 != JOYSTICK_PORT_NONE) {
+                        if (bIsSplit && player_port2 != JOYSTICK_PORT_NONE) {
                             JoyEnable(player_port2, false);
                         }
-                    } else if (port == player_port2 && is_splitscreen && player_port1 != JOYSTICK_PORT_NONE) {
+                    } else if (port == player_port2 && bIsSplit && player_port1 != JOYSTICK_PORT_NONE) {
                         JoyEnable(player_port1, false);
                     }
                     JoyEnable(static_cast<JoystickPort>(port), false);
@@ -210,7 +212,6 @@ void cFEngJoyInput::HandleJoy() {
                     for (int j = 0; j < 16; j++) {
                         if (mActionQ[port]->IsConnected()) {
                             if (MapJoyEventToFEPad[j].Event == aRef.ID()) {
-                                aRef.Data();
                                 MapJoyEventToFEPad[j].State[port] = static_cast<int>(aRef.Data() + 0.5f);
                                 if (!gKeyboardManager.IsCapturing()) {
                                     if (aRef.ID() == FRONTENDACTION_BUTTON2) {

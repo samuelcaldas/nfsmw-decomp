@@ -178,6 +178,8 @@ void CustomTuningScreen::NotificationMessage(u32 msg, FEObject *pobj, u32 param1
         case __PAD_BUTTON5__:
             if (!HelpVisible) {
                 ShowHelpBlurb();
+            } else {
+                HideHelpBlurb();
             }
             break;
         case __PAD_BACK__:

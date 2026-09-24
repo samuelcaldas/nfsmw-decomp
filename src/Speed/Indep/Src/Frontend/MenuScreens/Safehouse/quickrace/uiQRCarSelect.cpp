@@ -930,23 +930,23 @@ void UIQRCarSelect::SetupForPlayer(int player) {
     SelectableCar *car = nullptr;
 
     for (SelectableCar *sc = FilteredCarsList.GetHead(); sc != FilteredCarsList.EndOfList(); sc = sc->GetNext()) {
-        car = sc;
         if (ForceCar != INVALID_CAR_HANDLE) {
-            if (sc->mHandle == ForceCar) {
-                break;
+            if (sc->mHandle != ForceCar) {
+                continue;
             }
         } else {
-            if (sc->mHandle == ListHandles[GetFilterType()]) {
-                break;
-            }
-            if (FEDatabase->IsCareerMode()) {
-                if (sc->mHandle == FEDatabase->GetCareerSettings()->GetCurrentCar()) {
-                    break;
+            if (sc->mHandle != ListHandles[GetFilterType()]) {
+                if (FEDatabase->IsCareerMode()) {
+                    if (sc->mHandle != FEDatabase->GetCareerSettings()->GetCurrentCar()) {
+                        continue;
+                    }
+                } else if (sc->mHandle != FEDatabase->GetQuickRaceSettings(GRace::kRaceType_NumTypes)->GetSelectedCar(iPlayerNum)) {
+                    continue;
                 }
-            } else if (sc->mHandle == FEDatabase->GetQuickRaceSettings(GRace::kRaceType_NumTypes)->GetSelectedCar(iPlayerNum)) {
-                break;
             }
         }
+        car = sc;
+        break;
     }
 
     if (FEDatabase->IsCarLotMode() && ForceCar == INVALID_CAR_HANDLE) {

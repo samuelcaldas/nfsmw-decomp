@@ -12,30 +12,30 @@ void FEQuaternion::GetMatrix(FEMatrix4 *rotmat) {
     float z2 = z + z;
 
     float xx = x * x2;
+    float yy = y * y2;
+    float zz = z * z2;
     float xy = x * y2;
     float xz = x * z2;
-    float yy = y * y2;
     float yz = y * z2;
-    float zz = z * z2;
     float wx = w * x2;
     float wy = w * y2;
     float wz = w * z2;
 
-    rotmat->m11 = 1.0f - (yy + zz);
-    rotmat->m12 = xy + wz;
-    rotmat->m13 = xz - wy;
-    rotmat->m14 = 0.0f;
     rotmat->m21 = xy - wz;
-    rotmat->m22 = 1.0f - (xx + zz);
-    rotmat->m23 = yz + wx;
-    rotmat->m24 = 0.0f;
     rotmat->m31 = xz + wy;
     rotmat->m32 = yz - wx;
+    rotmat->m11 = 1.0f - (yy + zz);
+    rotmat->m22 = 1.0f - (xx + zz);
     rotmat->m33 = 1.0f - (xx + yy);
-    rotmat->m34 = 0.0f;
+    rotmat->m12 = xy + wz;
+    rotmat->m13 = xz - wy;
+    rotmat->m23 = yz + wx;
     rotmat->m41 = 0.0f;
     rotmat->m42 = 0.0f;
     rotmat->m43 = 0.0f;
+    rotmat->m14 = 0.0f;
+    rotmat->m24 = 0.0f;
+    rotmat->m34 = 0.0f;
     rotmat->m44 = 1.0f;
 }
 

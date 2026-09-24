@@ -3882,4 +3882,46 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Internal loader subroutine for chunk streaming pack entries. Handles reference count incrementing, compressed texture pool checks, memory warning reporting, asynchronous queue submission via `AddQueuedFile2`, and inlined pack accounting via `streaming_pack->RegisterLoadStreamingEntry(streaming_entry)`. Bound callee-saved registers (`r25` through `r31`) and matched instruction scheduling to achieve 100.0% binary assembly parity (110/110 instructions, 440 bytes).
 
+---
+
+### `GActivity::GActivity`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GActivity.cpp`
+- **Virtual Address**: `0x8019C0BC`
+- **Size**: 100 bytes (25 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GActivity::GActivity(const Attrib::Key &activityKey);
+  ```
+- **Description**: Constructs a new GActivity instance from an attribute key. Initializes base `GRuntimeInstance` with object type 0, zeroes out `mCurrentState` and `mRegisteredHandlersState`, sets `mRunning` and `mVarsInLuaVM` to false, and calls `DeserializeVars()`. Achieves 100.0% binary assembly parity (25/25 instructions).
+
+---
+
+### `GActivity::~GActivity`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GActivity.cpp`
+- **Virtual Address**: `0x8019C120`
+- **Size**: 328 bytes (82 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GActivity::~GActivity();
+  ```
+- **Description**: Virtual destructor for GActivity. Evaluates `Persistent()` via reflection attribute `0xE4542E9B` on `Attrib::Gen::gameplay`, conditionally serializing variables via `SerializeVars(true)`, invokes `UnregisterMessageHandlers()`, and clears `mStateHandlers` map. Automatically cleans up base classes and fast memory allocation (`gFastMem.Free(this, 72)`). Achieves 100.0% binary assembly parity (82/82 instructions).
+
+---
+
+### `GActivity::GetType`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GActivity.h`
+- **Virtual Address**: `0x801BBEE4`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  virtual GameplayObjType GActivity::GetType() const override;
+  ```
+- **Description**: Returns `kGameplayObjType_Activity` (0) for gameplay object type classification. Achieves 100.0% binary assembly parity (2/2 instructions).
+
 

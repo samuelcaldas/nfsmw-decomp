@@ -4022,4 +4022,61 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Returns the 32-bit class key `0xe4c3d904` identifying the `milestonetypes` attribute schema in the attribute system. Emitted out-of-line when instantiated in `zGameplay`. Achieves 100.0% binary assembly parity (3/3 instructions).
 
+---
+
+### `GSpeedTrap::GetBounty`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B4D98`
+- **Size**: 252 bytes (63 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  float GSpeedTrap::GetBounty(void) const;
+  ```
+- **Description**: Instantiates `Attrib::Gen::gameplay` with `mSpeedTrapKey` and returns `challengeRecord.Bounty()` if valid, or 0.0f otherwise. Achieves 100.0% binary assembly parity (63/63 instructions).
+
+---
+
+### `GSpeedTrap::GetJumpMarkerKey`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B4ECC`
+- **Size**: 156 bytes (39 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Attrib::Key GSpeedTrap::GetJumpMarkerKey(void) const;
+  ```
+- **Description**: Instantiates `Attrib::Gen::gameplay` with `mSpeedTrapKey` and returns the `mCollectionKey` of `challengeRecord.SpawnPoint()`. Achieves 100.0% binary assembly parity (39/39 instructions).
+
+---
+
+### `GSpeedTrap::Reset`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B4F8C`
+- **Size**: 280 bytes (70 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GSpeedTrap::Reset(void);
+  ```
+- **Description**: Resets speed trap state from the challenge attributes: retrieves `mCameraMarkerKey` from `CameraModelMarker()`, clears `mFlags` to 0, sets `mBinNumber` from `BinIndex()`, calculates `mRequiredValue` as `ThreshholdSpeed() * 0.27778f` (converting km/h to m/s), and sets `mRecordedValue` to 0.0f. Achieves 100.0% binary assembly parity (70/70 instructions).
+
+---
+
+### `GSpeedTrap::NotifyTriggered`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GSpeedTrap.cpp`
+- **Virtual Address**: `0x801B50C4`
+- **Size**: 120 bytes (30 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GSpeedTrap::NotifyTriggered(float value);
+  ```
+- **Description**: Handles speed trap trigger event. If both `kFlag_Unlocked` and `kFlag_Active` are set (tested via `!IsFlagClear`), sets `kFlag_Completed`, clears `kFlag_Active`, records pass speed `value`, refreshes the progress of the associated `GRaceBin`, and notifies `GManager::Get().RefreshSpeedTrapIcons()`. Achieves 100.0% binary assembly parity (30/30 instructions).
+
+
 

@@ -208,13 +208,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEngine.cpp`
 - **Virtual Address**: `0x80185F38`
-- **Size**: 776 bytes (194 instructions)
-- **Matching State**: 97.98% match
+- **Size**: 776 bytes (195 instructions)
+- **Matching State**: 99.77% match
 - **Signature**:
   ```cpp
   void FEngine::Update(const i32 tDeltaTicks, uint32 lock);
   ```
-- **Description**: Successfully decompiled FEngine::Update to 97.98% match with clean compilation and Doxygen docstring, driving frontend UI rendering ticks and input state synchronization.
+- **Description**: Decompiled FEngine::Update to 99.77% match (195/198 instructions) by mapping `this` pointer register to r29, aligning package dirty flag processing loops and tick iterations.
 
 ---
 

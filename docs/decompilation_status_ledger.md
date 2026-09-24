@@ -70,7 +70,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`UIWidgetMenu::Scroll` (`zFeOverlay`)**: Decompiled, verified (97.01% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIQRChallengeSeries::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (97.69% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`DebugCarCustomizeScreen::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (98.40% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`FEngine::Update` (`zFEng`)**: Decompiled, verified (97.98% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEngine::Update` (`zFEng`)**: Decompiled, verified (**99.77% match**, 776 bytes, 195/198 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEngine::UpdateMouseState` (`zFEng`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (96.67% match, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

@@ -27,9 +27,10 @@ You are an automated decompilation orchestration and execution agent for **Need 
 
 ## 2. Multi-Agent Orchestration & Workflow Architecture
 
-Parallelization is driven via deterministic workflow scripts following the architecture established in:
-- `scripts/workflows/nfs3-batch9-workflow.js`
-- `scripts/workflows/nfs3-batch11-workflow.js`
+Parallelization is driven via deterministic workflow scripts activated by the `ultracode` keyword.
+All workflow implementations must follow and reuse the standardized template:
+- `scripts/workflows/standard-workflow.js` (canonical template)
+- Reference existing batch implementations in `scripts/workflows/nfs*.js`
 
 You may start multiple workflows, each workflow orchestrating its respective agents, to maximize parallel throughput.
 
@@ -46,23 +47,34 @@ Decompilation tasks should utilize specialized roles (or an agent fulfilling mul
 3. **Validation & Testing:** Executes `ninja` compilation, runs `ninja changes` regression analysis, and verifies symbol match percentage.
 4. **Docs & Integration:** Inserts standard Doxygen docstrings, updates `docs/decompiled_functions.md`, records status in `docs/decompilation_status_ledger.md`, and performs serialized rebase and merge into `main`.
 
-### 2.3 Subagent Model Selection
-- Subagents should preferentially use the `gemini-3.5-flash-lite` model for speed, responsiveness, and resource efficiency.
-- Only use another model (such as `gemini-3.8-flash-high` / `decomp-worker`) when `gemini-3.5-flash-lite` is unavailable or demonstrably unsuitable for a required complex decompilation step.
-- When an alternative model is used, briefly record the technical reason in the workflow execution log or commit notes.
+### 2.3 Strict Subagent Model Selection: `gemini-3.5-flash-lite`
+- **Mandatory Model:** All subagents and workflow workers must strictly use `gemini-3.5-flash-lite` via `agentType: 'decomp-worker'` (or `model: gemini-3.5-flash-lite`).
+- **Rationale:** `gemini-3.5-flash-lite` is exceptionally fast, lightweight, and cost-efficient. Its rapid response latency and high token budget efficiency make it the required choice for iterative assembly diffing, compiler option permutations, and parallel worktree matching.
+- **No Heavy Model Drift:** Do not switch to larger or slower models for iterative decompilation loops unless explicitly requested by the user.
 
 ---
 
 ## 3. Peer Agent Discovery & Multi-Session Coordination
 
-Multiple interactive and automated Claude sessions operate concurrently on this repository (e.g., `@nfs1`, `@nfs2`, `@nfs3`, `@nfs4`, `@nfs5`, among others). Treat named agents as examples: you must actively discover whatever sessions are currently present.
+Multiple interactive and automated Claude sessions operate concurrently on this repository across a dedicated peer pool:
+- `@nfs1`: Unit focus (e.g., `zFe`, Frontend UI)
+- `@nfs2`: Unit focus (e.g., `zEAXSound2`, Audio subsystems)
+- `@nfs3`: Unit focus (e.g., `zWorld`, World and Collision)
+- `@nfs4`: Unit focus (e.g., `zGameplay`, Game rules and Vault)
+- `@nfs5`: Unit focus (e.g., `zPhysics`, Vehicle dynamics and Math)
+- Orchestrator session (`@nfs6` / `main`): Upstream integration, conflict resolution, global synchronization.
+
+Always discover whatever sessions are currently present via `ListAgents`.
 
 ### 3.1 Coordination Rules
 - **Discover Running Peers:** Run `ListAgents` at the start of planning to detect all currently active peer sessions and background agents on the machine.
 - **Prevent Overlap & Collision:**
   - Before claiming a function or module, cross-check git log, active worktrees (`git worktree list`), and active workflow scripts in `scripts/workflows/`.
-  - Interact with other running agents (`@nfs1`, `@nfs2`, `@nfs3`, etc.) via `SendMessage` to avoid overflow, rework, and to obtain specific information regarding which chunks/units other agents are currently executing.
+  - Interact with other running agents (`@nfs1`, `@nfs2`, `@nfs3`, `@nfs4`, `@nfs5`) via `SendMessage` to avoid overlap, rework, and to confirm specific units/chunks actively being executed.
   - Coordinate before taking a chunk and before executing a merge onto `main`.
+- **Periodic Git Sync & Rebase:**
+  - Regularly run `git fetch origin && git rebase origin/main` inside worktrees to absorb peer commits.
+  - Never push or merge without syncing against the latest upstream `origin/main`.
 - **Conflict Arbitration:** If peer agents disagree or a collision occurs, defer strictly to:
   1. The latest validated evidence (`ninja changes`, commit history on `main`).
   2. Recorded ownership and status in `docs/decompilation_status_ledger.md`.
@@ -78,11 +90,12 @@ Every decompilation agent **must** work in its own isolated git worktree. Never 
 When launching a subagent or worker in a worktree (`.claude/worktrees/<name>` or `.worktrees/<name>`):
 ```bash
 # Set up required symlinks and build configuration inside worktree root:
-ln -sfn /home/samuelcaldas/repos/nfsmw/orig orig
+ln -sfn /home/samuelcaldas/source/repos/nfsmw/orig orig
 mkdir -p build
-ln -sfn /home/samuelcaldas/repos/nfsmw/build/tools build/tools
-ln -sfn /home/samuelcaldas/repos/nfsmw/build/compilers build/compilers
-ln -sfn /home/samuelcaldas/repos/nfsmw/build/ppc_binutils build/ppc_binutils
+ln -sfn /home/samuelcaldas/source/repos/nfsmw/build/tools build/tools
+ln -sfn /home/samuelcaldas/source/repos/nfsmw/build/compilers build/compilers
+ln -sfn /home/samuelcaldas/source/repos/nfsmw/build/ppc_binutils build/ppc_binutils
+mkdir -p build/GOWE69 && cp /home/samuelcaldas/source/repos/nfsmw/build/GOWE69/baseline.json build/GOWE69/baseline.json 2>/dev/null || true
 python3 configure.py
 ninja  # Verify clean baseline compilation
 ```

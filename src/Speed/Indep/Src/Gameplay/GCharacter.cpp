@@ -66,3 +66,11 @@ void GCharacter::OnAttached(IAttachable *pOther) {
         this->mVehicle = vehicle;
     }
 }
+
+/**
+ * @brief Gets the vehicle spawned for this character.
+ * @return The spawned vehicle, or NULL if this character has none.
+ */
+IVehicle *GCharacter::GetSpawnedVehicle() const {
+    return this->mVehicle;
+}

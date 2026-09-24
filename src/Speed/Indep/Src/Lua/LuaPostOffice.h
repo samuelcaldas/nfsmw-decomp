@@ -99,8 +99,13 @@ class LuaPostOffice {
         return *fObj;
     }
 
-  private:
+    void RouteMessage(LuaMessageDeliveryInfo *info);
+    void RegisterHandler(unsigned int messageId, GActivity *activity);
+    void UnregisterHandler(unsigned int messageId, GActivity *activity);
+
     static LuaPostOffice *fObj;
+
+  private:
 
     UTL::Std::map<unsigned int, UTL::Std::vector<GActivity *, _type_ID_LuaActivityList>, _type_ID_LuaMessageSubscriberMap>
         mSubscribers;                                                                          // offset 0x0, size 0x10

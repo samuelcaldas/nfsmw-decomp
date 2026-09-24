@@ -1,7 +1,10 @@
 #include "Speed/Indep/Src/Gameplay/GActivity.h"
+#include "Speed/Indep/Src/Gameplay/GManager.h"
+#include "Speed/Indep/Src/Gameplay/GTrigger.h"
 #include "Speed/Indep/Src/Generated/Events/EChangeState.hpp"
 #include "Speed/Indep/Src/Generated/Messages/MStateEnter.h"
 #include "Speed/Indep/Src/Generated/Messages/MStateExit.h"
+#include "Speed/Indep/Src/Lua/LuaPostOffice.h"
 #include "Speed/Indep/Src/Lua/LuaRuntime.h"
 #include "Speed/Indep/bWare/Inc/Strings.hpp"
 
@@ -117,4 +120,95 @@ bool GActivity::CollectionIsHandlerForState(GState *state, GHandler *handler) {
         key = parentRecord.GetParent();
     }
     return false;
+}
+
+void GActivity::RegisterMessageHandlers(GState *state) {
+    if (this->mRegisteredHandlersState == state) {
+        return;
+    }
+    if (this->mRegisteredHandlersState != nullptr) {
+        this->UnregisterMessageHandlers();
+    }
+    StateToHandlers::mapped_type &handlers = this->mStateHandlers.find(state)->second;
+    for (StateToHandlers::mapped_type::iterator itH = handlers.begin(); itH != handlers.end(); ++itH) {
+        GHandler *handler = *itH;
+        LuaPostOffice::fObj->RegisterHandler(handler->message_id(), this);
+    }
+    this->mRegisteredHandlersState = state;
+}
+
+void GActivity::UnregisterMessageHandlers() {
+    if (this->mRegisteredHandlersState == nullptr) {
+        return;
+    }
+    StateToHandlers::mapped_type &handlers = this->mStateHandlers.find(this->mRegisteredHandlersState)->second;
+    for (StateToHandlers::mapped_type::iterator itH = handlers.begin(); itH != handlers.end(); ++itH) {
+        GHandler *handler = *itH;
+        LuaPostOffice::fObj->UnregisterHandler(handler->message_id(), this);
+    }
+    this->mRegisteredHandlersState = nullptr;
+}
+
+void GActivity::ActivateReferencedTriggers(bool activate, GRuntimeInstance *instance) {
+    for (unsigned int i = 0; i < instance->GetConnectionCount(); i++) {
+        GRuntimeInstance *conn = instance->GetConnectionAt(i);
+        GTrigger *trigger = GRuntimeInstance::FindObject<GTrigger>(conn->GetCollection());
+        if (trigger != nullptr) {
+            if (activate) {
+                trigger->AddActivationReference();
+            } else {
+                trigger->RemoveActivationReference();
+            }
+        }
+    }
+    for (unsigned int i = 0; i < instance->Num_Children(); i++) {
+        GRuntimeInstance *child = GManager::Get().FindInstance(instance->Children(i).mCollectionKey);
+        if (child != nullptr) {
+            this->ActivateReferencedTriggers(activate, child);
+        }
+    }
+}
+
+void GActivity::Run() {
+    if (this->mRunning) {
+        return;
+    }
+    if (this->mStateHandlers.size() == 0) {
+        this->GatherStatesAndHandlers();
+    }
+    this->mRunning = true;
+    this->ActivateReferencedTriggers(true, this);
+    if (this->mCurrentState == nullptr) {
+        GState *state = this->GetStateByName("initial");
+        new EChangeState(this->GetCollection(), state->GetCollection());
+    } else {
+        this->RegisterMessageHandlers(this->mCurrentState);
+    }
+}
+
+void GActivity::Suspend() {
+    if (!this->mRunning) {
+        return;
+    }
+    this->mRunning = false;
+    this->ActivateReferencedTriggers(false, this);
+    this->UnregisterMessageHandlers();
+    this->mStateHandlers.clear();
+}
+
+void GActivity::Reset() {
+    this->Suspend();
+    this->ClearActivityVars(LuaRuntime::Get().GetState());
+    GManager::Get().ClearObjectStateBlock(this->GetCollection());
+    this->mCurrentState = nullptr;
+}
+
+GState *GActivity::GetStateByName(const char *name) {
+    for (StateToHandlers::iterator it = this->mStateHandlers.begin(); it != this->mStateHandlers.end(); ++it) {
+        GState *state = it->first;
+        if (bStrCmp(state->Name(), name) == 0) {
+            return state;
+        }
+    }
+    return nullptr;
 }

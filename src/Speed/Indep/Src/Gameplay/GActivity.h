@@ -16,6 +16,7 @@ typedef UTL::Std::map<GState *, UTL::Std::vector<GHandler *, _type_ID_GHandlerVe
 
 class UCrc32;
 struct lua_State;
+struct LuaMessageDeliveryInfo;
 
 // total size: 0x48
 class GActivity : public GRuntimeInstance {
@@ -48,11 +49,13 @@ class GActivity : public GRuntimeInstance {
     void EnterState(GState *state);
     void Run();
     void Suspend();
+    void Reset();
     GState *GetStateByName(const char *name);
     void SerializeVars(bool write);
     void DeserializeVars();
     void RegisterMessageHandlers(GState *state);
     void UnregisterMessageHandlers();
+    void ActivateReferencedTriggers(bool activate, GRuntimeInstance *instance);
 
     void GatherStatesAndHandlers();
     int StoreHandlers(GState *state, StateToHandlers::mapped_type *handlers);
@@ -60,6 +63,10 @@ class GActivity : public GRuntimeInstance {
     bool CollectionIsHandlerForState(GState *state, GHandler *handler);
     static int ChangeStateFromScript(lua_State *L);
     void HandleLocalMessage(UCrc32 messageKind);
+    void PushActivityVars(lua_State *L);
+    void ClearActivityVars(lua_State *L);
+    void BuildActivityTables(lua_State *L);
+    void HandleMessage(LuaMessageDeliveryInfo *info);
 
   private:
     GState *mCurrentState;            // offset 0x28, size 0x4

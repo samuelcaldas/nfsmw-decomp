@@ -286,7 +286,8 @@ void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
             pInterface->GetMouseInfo(Info);
             Mouse.Update(Info, tDeltaTicks);
         }
-        for (u8 PadIndex = 0; PadIndex < NumJoyPads; PadIndex++) {
+        u8 PadIndex;
+        for (PadIndex = 0; PadIndex < NumJoyPads; PadIndex++) {
             pJoyPad[PadIndex].Update(pInterface->GetJoyPadMask(PadIndex), tDeltaTicks);
         }
         for (pPackage = PackList.GetFirstPackage(); pPackage != nullptr; pPackage = pPackage->GetNext()) {
@@ -299,8 +300,8 @@ void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
         }
         for (u32 i = 0, MaskBit = 1; i < 19; i++, MaskBit <<= 1) {
             if ((PadHoldRegistered & MaskBit) != 0) {
-                for (u8 PadIdx = 0; PadIdx < NumJoyPads; PadIdx++) {
-                    pJoyPad[PadIdx].DecrementHold(MaskBit, HoldDecrement[i]);
+                for (PadIndex = 0; PadIndex < NumJoyPads; PadIndex++) {
+                    pJoyPad[PadIndex].DecrementHold(MaskBit, HoldDecrement[i]);
                 }
             }
             HoldDecrement[i] = 0;

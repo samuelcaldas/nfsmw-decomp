@@ -163,7 +163,7 @@ static inline float MixerSqrt(float x, const float *zero) {
         asm("fmuls %0, %1, %2" : "=f"(t1) : "f"(y0), "f"(half));
         asm("fnmsubs %0, %1, %2, %3" : "=f"(t2) : "f"(x), "f"(t0), "f"(one));
         y0 += (t2 * t1);
-        y0 *= x;
+        y0 = y0 * x;
     } else {
         y0 = *zero;
     }

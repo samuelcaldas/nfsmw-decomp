@@ -798,15 +798,15 @@ bool WorldMap::SnapCursor() {
         SelectedItem = snap_to;
         const uint32 _SNAP = 0x1cbf71;
         FEngSetScript(Cursor, _SNAP, true);
-    } else {
-        if (SelectedItem == nullptr) {
-            return false;
-        }
+        return true;
+    }
+    if (SelectedItem != nullptr) {
         const uint32 _UNSNAP = 0x7efe8ff4;
         FEngSetScript(Cursor, _UNSNAP, true);
-        SelectedItem = nullptr;
+        SelectedItem = snap_to;
+        return true;
     }
-    return true;
+    return false;
 }
 
 void WorldMap::PanToCursor(float to_zoom) {

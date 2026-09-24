@@ -3643,3 +3643,115 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Clamps selection within current grid view bounds for array menu scrollers (14/16 instructions matching, 98.31% parity).
 
+---
+
+### `GManager::LoadMilestones`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B4B5C`
+- **Size**: 156 bytes (39 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GManager::LoadMilestones(GMilestone *src, unsigned int count);
+  ```
+- **Description**: Iterates through the source milestone array and updates corresponding managed milestone records matching `mChallengeKey`.
+
+---
+
+### `GManager::LoadSpeedTraps`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B4F64`
+- **Size**: 156 bytes (39 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GManager::LoadSpeedTraps(GSpeedTrap *src, unsigned int count);
+  ```
+- **Description**: Iterates through the source speed trap array and updates corresponding managed speed trap records matching `mSpeedTrapKey`.
+
+---
+
+### `GManager::SaveMilestoneInfo`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B2B88`
+- **Size**: 152 bytes (38 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GManager::SaveMilestoneInfo(MilestoneTypeInfo *dest);
+  ```
+- **Description**: Serializes milestone tracking records from the `mMilestoneTypeInfo` map into the destination buffer and returns the total entry count.
+
+---
+
+### `GManager::LoadMilestoneInfo`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B2AA0`
+- **Size**: 232 bytes (58 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GManager::LoadMilestoneInfo(MilestoneTypeInfo *src, unsigned int count);
+  ```
+- **Description**: Resets milestone tracking state and deserializes `mBestValue` and `mLastKnownValue` records from the source array into the `mMilestoneTypeInfo` map.
+
+---
+
+### `GManager::SaveSMSInfo`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B5F70`
+- **Size**: 144 bytes (36 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GManager::SaveSMSInfo(int *saveInfo);
+  ```
+- **Description**: Serializes pending SMS identifier entries from the `mPendingSMS` list into the destination array with a stride of two.
+
+---
+
+### `GManager::LoadSMSInfo`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B6000`
+- **Size**: 160 bytes (40 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GManager::LoadSMSInfo(int *saveInfo, unsigned int count);
+  ```
+- **Description**: Clears pending SMS list and repopulates it with identifiers loaded from the source buffer.
+
+---
+
+### `GManager::GetHasPendingSMS`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801B60A0`
+- **Size**: 112 bytes (28 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool GManager::GetHasPendingSMS(void) const;
+  ```
+- **Description**: Checks whether pending SMS messages exist and can currently be played via `CanPlaySMS()`.
+
+---
+
+### `GManager::GetCacheName`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`
+- **Virtual Address**: `0x801BBC6C`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const char *GManager::GetCacheName(void) const;
+  ```
+- **Description**: Returns the cache client identifier string `"GManager"` for IVehicleCache interface implementation.
+

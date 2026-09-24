@@ -113,6 +113,7 @@ void CARSFX_PreColWoosh::UpdateParams(float t) {
             sndparams.Az = 0;
             sndparams.Pitch = 0;
             sndparams.Vol = 0;
+
             this->m_pWoosh = new cStichWrapper(*stitchdata);
             this->m_pWoosh->Play(&sndparams);
         }
@@ -139,7 +140,6 @@ void CARSFX_PreColWoosh::ProcessUpdate() {
             this->m_pWoosh = nullptr;
         } else {
             SND_Params params;
-
             params.ID = 0;
             params.Az = 0;
             params.Mag = 0;

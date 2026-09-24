@@ -107,11 +107,15 @@ void cFEng::PauseAllSystems() {
         UTL::Collections::Singleton<INIS>::Get()->Pause();
     }
     SoundPause(true, ePAUSE_ERROR);
+
+    void SetSoundControlState(bool bON, eSNDCTLSTATE esndstate, const char *Reason);
     SetSoundControlState(true, SNDSTATE_ERROR, "PauseAllSystems");
 }
 
 void cFEng::ResumeAllSystems(bool flushActions) {
     SoundPause(false, ePAUSE_ERROR);
+
+    void SetSoundControlState(bool bON, eSNDCTLSTATE esndstate, const char *Reason);
     SetSoundControlState(false, SNDSTATE_ERROR, "PauseAllSystems");
     if (UTL::Collections::Singleton<INIS>::Get()) {
         UTL::Collections::Singleton<INIS>::Get()->UnPause();
@@ -330,5 +334,16 @@ void cFEng::QueuePopChildPackages(const char *pPackageName) {
             mInstance->QueuePackagePop(1);
         }
         pPkg = pNextPkg;
+    }
+}
+
+static int UNK_RENDERSINGLE = 1;
+// Decl: 569
+// UNSOLVED
+void cFEng::RenderSinglePackage(const char *pkg_name) {
+    if (UNK_RENDERSINGLE) {
+        const char *FEngPleaseRenderSinglePackage = pkg_name;
+        // TODO
+        FEngPleaseRenderSinglePackage = nullptr;
     }
 }

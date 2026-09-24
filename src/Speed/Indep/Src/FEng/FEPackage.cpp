@@ -603,8 +603,8 @@ void FEPackage::ConnectObjectResources() {
 
 FEObjectMouseState::FEObjectMouseState() {
     pObject = nullptr;
-    Offset.h = 0.0f;
     Offset.v = 0.0f;
+    Offset.h = 0.0f;
     Flags = 0;
 }
 

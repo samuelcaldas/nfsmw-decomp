@@ -2148,6 +2148,7 @@ int TrackStreamer::GetLoadingPriority(TrackStreamingSection *section, StreamingP
 #ifdef EA_BUILD_A124
     return 0; // this entire function is different in A124
 #else
+    char stack_buffer[0xA0];
     if (!section->pBoundary) {
         return 0;
     }

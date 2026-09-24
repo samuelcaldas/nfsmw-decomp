@@ -102,12 +102,12 @@ void LeaderBoard::Update(IPlayer *player) {
                         }
                         if (mTopRacers[i].mPercentComplete >= mTopRacers[mPlayerIndex].mPercentComplete) {
                             float pctDiff = (mTopRacers[i].mPercentComplete - mTopRacers[mPlayerIndex].mPercentComplete) * 0.01f;
-                            pctDiff *= totalRaceLenMetres;
-                            FEPrintf(mDataRacerText[i], "+%$0.0f %s", pctDiff, GetTranslatedString(unit));
+                            float dist = totalRaceLenMetres * pctDiff;
+                            FEPrintf(mDataRacerText[i], "+%$0.0f %s", dist, GetTranslatedString(unit));
                         } else {
                             float pctDiff = (mTopRacers[mPlayerIndex].mPercentComplete - mTopRacers[i].mPercentComplete) * 0.01f;
-                            pctDiff *= totalRaceLenMetres;
-                            FEPrintf(mDataRacerText[i], "-%$0.0f %s", pctDiff, GetTranslatedString(unit));
+                            float dist = totalRaceLenMetres * pctDiff;
+                            FEPrintf(mDataRacerText[i], "-%$0.0f %s", dist, GetTranslatedString(unit));
                         }
                     }
                 } else {

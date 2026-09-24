@@ -11,26 +11,30 @@ void bInvertMatrix(bMatrix4 *dest, const bMatrix4 *src) {
      * @brief Calculates the determinant of a 4x4 matrix.
      */
 float fDeterminant(bMatrix4 *m) {
-    float value =
-        m->v0.x * m->v1.y * m->v2.z * m->v3.w +
-        (((m->v0.z * m->v1.x * m->v2.y * m->v3.w + m->v0.y * m->v1.z * m->v2.x * m->v3.w +
-           (((m->v0.y * m->v1.x * m->v2.w * m->v3.z + m->v0.x * m->v1.w * m->v2.y * m->v3.z +
-              (((m->v0.w * m->v1.y * m->v2.x * m->v3.z + m->v0.x * m->v1.z * m->v2.w * m->v3.y +
-                 (((m->v0.w * m->v1.x * m->v2.z * m->v3.y + m->v0.z * m->v1.w * m->v2.x * m->v3.y +
-                    (((m->v0.z * m->v1.y * m->v2.w * m->v3.x + m->v0.y * m->v1.w * m->v2.z * m->v3.x +
-                       ((m->v0.w * m->v1.z * m->v2.y * m->v3.x - m->v0.z * m->v1.w * m->v2.y * m->v3.x) - m->v0.w * m->v1.y * m->v2.z * m->v3.x)) -
-                      m->v0.y * m->v1.z * m->v2.w * m->v3.x) -
-                     m->v0.w * m->v1.z * m->v2.x * m->v3.y)) -
-                   m->v0.x * m->v1.w * m->v2.z * m->v3.y) -
-                  m->v0.z * m->v1.x * m->v2.w * m->v3.y)) -
-                m->v0.y * m->v1.w * m->v2.x * m->v3.z) -
-               m->v0.w * m->v1.x * m->v2.y * m->v3.z)) -
-             m->v0.x * m->v1.y * m->v2.w * m->v3.z) -
-            m->v0.z * m->v1.y * m->v2.x * m->v3.w)) -
-          m->v0.x * m->v1.z * m->v2.y * m->v3.w) -
-         m->v0.y * m->v1.x * m->v2.z * m->v3.w);
-
-    return value;
+    return (m->v0.w * m->v1.z * m->v2.y * m->v3.x
+        - m->v0.z * m->v1.w * m->v2.y * m->v3.x
+        - m->v0.w * m->v1.y * m->v2.z * m->v3.x
+        + m->v0.y * m->v1.w * m->v2.z * m->v3.x
+        + m->v0.z * m->v1.y * m->v2.w * m->v3.x
+        - m->v0.y * m->v1.z * m->v2.w * m->v3.x
+        - m->v0.w * m->v1.z * m->v2.x * m->v3.y
+        + m->v0.z * m->v1.w * m->v2.x * m->v3.y
+        + m->v0.w * m->v1.x * m->v2.z * m->v3.y
+        - m->v0.x * m->v1.w * m->v2.z * m->v3.y
+        - m->v0.z * m->v1.x * m->v2.w * m->v3.y
+        + m->v0.x * m->v1.z * m->v2.w * m->v3.y
+        + m->v0.w * m->v1.y * m->v2.x * m->v3.z
+        - m->v0.y * m->v1.w * m->v2.x * m->v3.z
+        - m->v0.w * m->v1.x * m->v2.y * m->v3.z
+        + m->v0.x * m->v1.w * m->v2.y * m->v3.z
+        + m->v0.y * m->v1.x * m->v2.w * m->v3.z
+        - m->v0.x * m->v1.y * m->v2.w * m->v3.z
+        - m->v0.z * m->v1.y * m->v2.x * m->v3.w
+        + m->v0.y * m->v1.z * m->v2.x * m->v3.w
+        + m->v0.z * m->v1.x * m->v2.y * m->v3.w
+        - m->v0.x * m->v1.z * m->v2.y * m->v3.w
+        - m->v0.y * m->v1.x * m->v2.z * m->v3.w
+        + m->v0.x * m->v1.y * m->v2.z * m->v3.w);
 }
 
 void fInvertMatrix(bMatrix4 *d, bMatrix4 *s) {

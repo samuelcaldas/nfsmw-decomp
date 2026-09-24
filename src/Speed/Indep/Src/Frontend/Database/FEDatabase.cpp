@@ -502,7 +502,7 @@ char *CareerSettings::SaveRaceData(void *save_to, void *maxptr) {
     }
     char *buf = static_cast<char *>(save_to);
     unsigned int nEntries = GRaceDatabase::Get().GetScoreInfoCount();
-    nEntries = bMin(300, nEntries);
+    nEntries = bMin(nEntries, 300);
     buf = SaveSomeData(buf, &nEntries, sizeof(nEntries), maxptr);
     GRaceSaveInfo *current = GRaceDatabase::Get().GetScoreInfo();
     for (unsigned int index = 0; index < nEntries; index++) {

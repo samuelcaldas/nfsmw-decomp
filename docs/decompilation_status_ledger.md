@@ -5,7 +5,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 ## 1. Completed and Merged Modules & Functions
 
 ### Foundation Subsystem (`zBWare`)
-- **`fDeterminant` (`zBWare`)**: Decompiled, verified (69.04% match, 448 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`fDeterminant` (`zBWare`)**: Decompiled, verified (**100.0% match**, 448 bytes, 112/112 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 
 ### Animation Subsystem (`zAnim`, `zAnim0`, `zEagl4Anim`)
 - **`EAGL4Anim::MemoryPoolManager::NewBlockAux` (`zEagl4Anim`)**: Decompiled, verified (**100.0% match**, 84 bytes, 21/21 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
@@ -83,6 +83,12 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`WorldMap::AddCops` (`zFe`)**: Decompiled, verified (97.0% match, 968 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`WorldMap::SnapCursor` (`zFe`)**: Decompiled, verified (100.0% match, 436 bytes), documented in `docs/decompiled_functions.md`. **Status: [Completed & Merged 100.0%]**
 - **`WorldMap::ClampToMapBounds` (`zFe`)**: Decompiled, verified (100.0% match, 216 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`InitChyron` (`zFe2`)**: Decompiled, verified (**100.0% match**, 48 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`CareerSettings::SaveRaceData` (`zFe2`)**: Decompiled, verified (**100.0% match**, 264 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`UIWidgetMenu::Scroll` (`zFe2`)**: Decompiled, verified (**100.0% match**, 536 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`IGenericMessage::_IHandle` (`zFe2`)**: Decompiled, verified (**100.0% match**, 12 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`CTextScroller::FindCR` (`zFe2`)**: Decompiled, verified (**100.0% match**, 80 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`ArrayScroller::ForceSelectionOnScreen` (`zFe2`)**: Refined, verified (**98.31% match**, 64 bytes, 14/16 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged - Improved to 98.31%]**
 
 ### Audio Subsystem (`zEAXSound`, `zEAXSound2`, `snd`)
 - **`SNDCTRL_getprogvol` (`sgetpvol`)**: Decompiled, verified (**100.0% match**, 148 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**

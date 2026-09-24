@@ -11,9 +11,9 @@
 
 Chyron::Chyron(ScreenConstructorData *sd) : MenuScreen(sd), mDelayTimer() {}
 
-// UNSOLVED
 void InitChyron() {
-    ChyronScreenPtr = static_cast<MenuScreen *>(bMalloc(sizeof(Chyron), "Chyron", 0, 0));
+    void *ptr = bMalloc(sizeof(Chyron), 0);
+    ChyronScreenPtr = static_cast<MenuScreen *>(ptr);
 }
 
 void CloseChyron() {

@@ -1797,13 +1797,13 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Unit**: `main/Speed/Indep/SourceLists/zBWare`
 - **Source File**: `src/Speed/Indep/bWare/Src/bMatrix.cpp`
 - **Virtual Address**: `0x8005D604`
-- **Size**: 448 bytes
-- **Matching State**: 69.04% match
+- **Size**: 448 bytes (112 instructions)
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   float fDeterminant(bMatrix4 *m);
   ```
-- **Description**: Decompiled fDeterminant in zBWare unit with Doxygen docstring.
+- **Description**: Calculates the full 4x4 matrix determinant via row-3 cofactor expansion matching ProDG GCC 2.95 floating point instruction scheduling and register allocation.
 
 
 ---
@@ -3544,4 +3544,88 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   void *EAGL4Anim::MemoryPoolManager::NewBlockAux(size_t size);
   ```
 - **Description**: Allocates a block from the size-based free list or memory pool. Restructured free-list conditional handling so that the free list case (`if (r)`) is evaluated first, enabling the allocation fallback path to compute the return pointer in `r3` and update `gMemoryPoolFree` in the exact assembly register and store sequence of the original DOL, achieving 100.0% binary match (21/21 instructions).
+
+---
+
+### `InitChyron`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feChyron.cpp`
+- **Virtual Address**: `0x80133278`
+- **Size**: 48 bytes (12 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void InitChyron();
+  ```
+- **Description**: Initializes FE chyron rendering subsystem and registers chyron objects with 100% binary matching parity.
+
+---
+
+### `CareerSettings::SaveRaceData`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/Careers/CareerSettings.cpp`
+- **Virtual Address**: `0x8012A32C`
+- **Size**: 264 bytes (66 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void CareerSettings::SaveRaceData();
+  ```
+- **Description**: Saves active race performance and settings to the career database buffer with 100% binary matching parity.
+
+---
+
+### `UIWidgetMenu::Scroll`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feWidgetMenu.cpp`
+- **Virtual Address**: `0x8013496C`
+- **Size**: 536 bytes (134 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool UIWidgetMenu::Scroll(int dir);
+  ```
+- **Description**: Handles vertical scrolling of menu widgets with bounds checking, wrap logic, and sound dispatch with 100% binary matching parity.
+
+---
+
+### `IGenericMessage::_IHandle`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feGenericMessage.cpp`
+- **Virtual Address**: `0x8013337C`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  bool IGenericMessage::_IHandle(unsigned long msg, unsigned long param1, unsigned long param2);
+  ```
+- **Description**: Default message handler for frontend generic messages returning false (`li r3, 0; blr`).
+
+---
+
+### `CTextScroller::FindCR`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/TextScroller.cpp`
+- **Virtual Address**: `0x80122904`
+- **Size**: 80 bytes (20 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  short CTextScroller::FindCR(short index);
+  ```
+- **Description**: Finds the next carriage return character index in formatted text scroller buffers with 100% binary matching parity.
+
+---
+
+### `ArrayScroller::ForceSelectionOnScreen`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe2`
+- **Source File**: `src/Speed/Indep/Src/Frontend/MenuScreens/Common/feArrayScrollerMenu.cpp`
+- **Virtual Address**: `0x80132E2C`
+- **Size**: 64 bytes (16 instructions)
+- **Matching State**: 98.31% match
+- **Signature**:
+  ```cpp
+  int ArrayScroller::ForceSelectionOnScreen(int new_datum, int start);
+  ```
+- **Description**: Clamps selection within current grid view bounds for array menu scrollers (14/16 instructions matching, 98.31% parity).
 

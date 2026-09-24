@@ -104,8 +104,8 @@ void Joint::AddConstraint(IEntity *entity, const UMath::Matrix4 &orient, float m
  */
 Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type)
     : mFemale(female),
-      mMale(male),
-      mPost(post) {
+      mMale(male) {
+    mPost = post;
     mType = type;
     mEnabled = true;
     mOuterA = maxTheta / 360.0f;

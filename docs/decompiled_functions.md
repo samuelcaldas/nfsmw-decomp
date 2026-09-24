@@ -727,7 +727,7 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```cpp
   int EAXCommon::Play(eMenuSoundTriggers etrigger);
   ```
-- **Description**: Decompiled and refined EAXCommon::Play with 96.8% match parity in zEAXSound unit.
+- **Description**: Simplified the output-block null check by removing its temporary pointer; the unit compiled successfully and full-tree baseline metrics were unchanged.
 
 ---
 
@@ -807,12 +807,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/SFXObj_Pathfinder.cpp`
 - **Virtual Address**: `0x800E410C`
 - **Size**: 244 bytes
-- **Matching State**: 57.1% match
+- **Matching State**: 80.0% match
 - **Signature**:
   ```cpp
   eMUSIC_TYPE SFXObj_PFEATrax::GenMusicType();
   ```
-- **Description**: Decompiled SFXObj_PFEATrax::GenMusicType in zEAXSound2, determining music type based on vehicle audio tracking and pathfinder state.
+- **Description**: Improved the match from 57.13% to 80.0% by aligning volume, flag, and EATrax-state control flow.
 
 ---
 
@@ -861,14 +861,14 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 ### `GinsuSynthData::SampleToCycle`
 - **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
 - **Source File**: `src/Speed/Indep/Src/EAXSound/Ginsu/ginsudata.cpp`
-- **Virtual Address**: `0x800ED4C8`
+- **Virtual Address**: `0x800EB564`
 - **Size**: 876 bytes
-- **Matching State**: 86.0% match
+- **Matching State**: 86.23% match
 - **Signature**:
   ```cpp
   float GinsuSynthData::SampleToCycle(int sample) const;
   ```
-- **Description**: Decompiled GinsuSynthData::SampleToCycle with improved register allocation and exact Doxygen documentation.
+- **Description**: Improved from 86.0% to 86.23% match by pinning the lower-bound search variable to r3 in the binary interpolation loop.
 
 ---
 

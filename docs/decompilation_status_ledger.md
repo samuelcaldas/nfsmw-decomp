@@ -99,15 +99,15 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`AssignAudioStreamHandle` (`zEAXSound`)**: Decompiled, verified (100.0% match, 16 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`EAXTunerCar::UpdateRotation` (`zEAXSound`)**: Decompiled, verified (100.0% match, 40 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`NFSMixMapState::CreateMixCtls`**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`EAXCommon::Play`**: Decompiled, verified (96.8% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`EAXCommon::Play`**: Refined the output-block null check by removing its temporary pointer; verified (96.8% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CARSFX_PreColWoosh::MsgBarrier` (`zEAXSound2`)**: Decompiled, verified (94.29% match, 140 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CARSFX_RoadNoise::Play` (`zEAXSound2`)**: Decompiled, verified (94.94% match, 392 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SFX_Common::MsgPlayMiscSound` (`zEAXSound2`)**: Decompiled, verified (**100.0% match**, 780 bytes, 195/195 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
-- **`SFXObj_PFEATrax::GenMusicType` (`zEAXSound2`)**: Decompiled, verified (57.1% match, 244 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SFXObj_PFEATrax::GenMusicType` (`zEAXSound2`)**: Improved from 57.13% to 80.0% match by aligning volume, flag, and EATrax-state control flow (244 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthesis::HandlePacketRelease`**: Decompiled, verified (99.5% match, 1,936 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`GinsuSynthData::BindToData` (`zEAXSound2`)**: Decompiled, verified (96.8% match, 340 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`CARSFX_RoadNoise::GenerateRoadNoise` (`zEAXSound2`)**: Decompiled, verified (93.0% match, 1,240 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`GinsuSynthData::SampleToCycle` (`zEAXSound2`)**: Decompiled, verified (86.0% match, 876 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`GinsuSynthData::SampleToCycle` (`zEAXSound2`)**: Improved from 86.0% to 86.23% match by pinning the lower-bound search variable to r3 (876 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SFXCTL_Physics::UpdateMixerOutputs`**: Decompiled, verified (98.22% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Gameplay Subsystem (`zGameplay`)

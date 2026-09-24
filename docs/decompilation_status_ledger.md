@@ -41,9 +41,12 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`VehicleSystem::Init` (`zPhysics`)**: Decompiled, verified (100.0% match, 36 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`Physics::Info::ShiftPoints` (`zPhysics`)**: Decompiled, verified (90.41% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SuspensionSimple::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Refined, verified (98.90% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Decompiled, verified (97.6% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`SuspensionTraffic::Tire::UpdateLoaded` (`zPhysicsBehaviors`)**: Refined, verified (**99.79% match**, 856 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 
 ### Frontend Subsystem (`zFe`, `zFeOverlay`, `zFEng`)
+- **`FEPackage::UpdateObject` (`zFEng`)**: Decompiled, verified (**100.0% match**, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (**99.02% match**, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**96.58% match**, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEQuaternion::operator*` (`zFEng`)**: Decompiled, verified (89.1% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEQuaternion::GetMatrix` (`zFEng`)**: Decompiled, verified (88.6% match, 196 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`UIOptionsScreen::NotificationMessage` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

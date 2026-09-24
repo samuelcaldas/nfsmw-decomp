@@ -218,17 +218,31 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `FEPackage::UpdateObject`
+- **Unit**: `main/Speed/Indep/SourceLists/zFEng`
+- **Source File**: `src/Speed/Indep/Src/FEng/FEPackage.cpp`
+- **Virtual Address**: `0x8018A5CC`
+- **Size**: 1204 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void FEPackage::UpdateObject(FEObject *pObject, const i32 tDeltaTicks);
+  ```
+- **Description**: 100.0% matching decompilation of FEPackage::UpdateObject. Corrected local declaration order, script-event message dispatch parameters, movie timer increment accumulation, and bitwise dirty-flag masks.
+
+---
+
 ### `FEPackageReader::ReadObjectChunk`
 - **Unit**: `main/Speed/Indep/SourceLists/zFEng`
 - **Source File**: `src/Speed/Indep/Src/FEng/FEPackageReader.cpp`
 - **Virtual Address**: `0x8018C1B0`
 - **Size**: 964 bytes
-- **Matching State**: 96.67% match
+- **Matching State**: 99.02% match
 - **Signature**:
   ```cpp
   bool FEPackageReader::ReadObjectChunk();
   ```
-- **Description**: Verified FEPackageReader::ReadObjectChunk decompilation matching at 96.67% in main/Speed/Indep/SourceLists/zFEng unit
+- **Description**: Refined FEPackageReader::ReadObjectChunk to 99.02% match in zFEng by preserving object and button count chunk IDs across loop iterations and optimizing chunk dispatch branches.
 
 ---
 
@@ -237,12 +251,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/FEng/FEListBox.cpp`
 - **Virtual Address**: `0x80184188`
 - **Size**: 1104 bytes
-- **Matching State**: 96.5% match
+- **Matching State**: 96.58% match
 - **Signature**:
   ```cpp
   void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum);
   ```
-- **Description**: Decompiled and matched FEListBox::ScrollSelection to 96.5% with Doxygen documentation added, managing list box item selection scrolling.
+- **Description**: Refined FEListBox::ScrollSelection to 96.58% match with clean struct member access for column/row entry data, managing list box item selection scrolling.
 
 ---
 
@@ -1439,12 +1453,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/Physics/Behaviors/SuspensionTraffic.cpp`
 - **Virtual Address**: `0x8024B310`
 - **Size**: 856 bytes
-- **Matching State**: 97.6% match
+- **Matching State**: 99.79% match
 - **Signature**:
   ```cpp
   void SuspensionTraffic::Tire::UpdateLoaded(float lat_vel, float fwd_vel, float load, float dT);
   ```
-- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded to 97.6% match using register r30 for constant addressing across VU0_Atan2 calls.
+- **Description**: Decompiled SuspensionTraffic::Tire::UpdateLoaded to 99.79% match by preserving register r30 holding `lbl_803FB6B8` across VU0_Atan2, loading float constants through r30, and mapping `fr1`/`fr2` across the slip angle calculation.
 
 ---
 

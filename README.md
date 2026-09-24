@@ -2,11 +2,11 @@ Need for Speed: Most Wanted Decompilation
 [![Build Status]][actions] [![Code Progress]][progress] [![Data Progress]][progress] [![Discord Badge]][discord]
 =============
 
-[Build Status]: https://github.com/dbalatoni13/nfsmw/actions/workflows/build.yml/badge.svg
-[actions]: https://github.com/dbalatoni13/nfsmw/actions/workflows/build.yml
-[Code Progress]: https://decomp.dev/dbalatoni13/nfsmw.svg?mode=shield&measure=code&label=Code
-[Data Progress]: https://decomp.dev/dbalatoni13/nfsmw.svg?mode=shield&measure=data&label=Data
-[progress]: https://decomp.dev/dbalatoni13/nfsmw
+[Build Status]: https://github.com/samuelcaldas/nfsmw-decomp/actions/workflows/build.yml/badge.svg
+[actions]: https://github.com/samuelcaldas/nfsmw-decomp/actions/workflows/build.yml
+[Code Progress]: https://img.shields.io/badge/Code-63.79%25-brightgreen
+[Data Progress]: https://img.shields.io/badge/Data-12.99%25-blue
+[progress]: https://github.com/samuelcaldas/nfsmw-decomp
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 

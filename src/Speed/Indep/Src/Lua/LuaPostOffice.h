@@ -9,6 +9,7 @@
 #include "Speed/Indep/Libs/Support/Utility/UCOM.h"
 #include "Speed/Indep/Src/Gameplay/GActivity.h"
 #include "Speed/Indep/Src/Misc/Hermes.h"
+#include "Speed/Indep/Src/Lua/LuaRuntime.h"
 
 struct lua_State;
 struct GHandler;
@@ -39,7 +40,7 @@ struct LuaMessageDeliveryInfo : public UTL::COM::Object, public IMessageFilterCo
     struct GHandler *mHandlerContext;          // offset 0x20, size 0x4
 
     LuaMessageDeliveryInfo() : UTL::COM::Object(1), IMessageFilterContext(this) {}
-    virtual ~LuaMessageDeliveryInfo() {}
+    virtual ~LuaMessageDeliveryInfo();
 
     /**
      * @brief Gets the Lua state.
@@ -76,6 +77,13 @@ struct GHandler *LuaMessageDeliveryInfo::GetHandler() const {
 
 const struct Message *LuaMessageDeliveryInfo::GetMessage() const {
     return this->mMessageBase;
+}
+
+inline LuaMessageDeliveryInfo::~LuaMessageDeliveryInfo() {
+    if (this->mLuaTableBuilt) {
+        lua_settop(this->mLuaState, -2);
+    }
+    LuaRuntime::Get().EndDelivery();
 }
 
 DECLARE_CONTAINER_TYPE(ID_LuaActivityList);

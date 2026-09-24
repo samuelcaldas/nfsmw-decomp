@@ -74,3 +74,11 @@ unsigned int GRaceDatabase::GetBinCount() {
 const Attrib::Gen::gameplay *GRaceParameters::GetGameplayObj() const {
     return this->mRaceRecord;
 }
+
+/**
+ * @brief Retrieves the total count of races across static and dynamic records.
+ * @return Total count of races.
+ */
+unsigned int GRaceDatabase::GetRaceCount() {
+    return this->mRaceCountStatic + this->mRaceCountDynamic;
+}

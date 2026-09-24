@@ -793,12 +793,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/EAXSound/SFX_Common.cpp`
 - **Virtual Address**: `0x800D36C4`
 - **Size**: 780 bytes
-- **Matching State**: 99.4% match
+- **Matching State**: 100.0% match (195/195 instructions)
 - **Signature**:
   ```cpp
   void SFX_Common::MsgPlayMiscSound(const MMiscSound &message);
   ```
-- **Description**: Decompiled SFX_Common::MsgPlayMiscSound with 99.4% match and Doxygen docstring, processing miscellaneous sound event messages for audio playback.
+- **Description**: Decompiled SFX_Common::MsgPlayMiscSound with 100.0% match (195/195 instructions) and Doxygen docstring, processing miscellaneous sound event messages for audio playback.
 
 ---
 

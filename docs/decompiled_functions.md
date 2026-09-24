@@ -344,6 +344,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `cFEngJoyInput::HandleJoy`
+- **Unit**: `main/Speed/Indep/SourceLists/zFe`
+- **Source File**: `src/Speed/Indep/Src/Frontend/FEJoyInput.cpp`
+- **Virtual Address**: `0x801307E0`
+- **Size**: 768 bytes (192 instructions)
+- **Matching State**: **100.0% match**
+- **Signature**:
+  ```cpp
+  void cFEngJoyInput::HandleJoy();
+  ```
+- **Description**: Reached 100.0% binary matching parity (192/192 instructions). Processes queued joystick actions, maps joypad events to frontend pad state (handling split screen enable/disable toggles), and routes button states to keyboard and EATrax systems. Matched GCC 2.95 ternary/branch scheduling by structuring split-screen condition via `bool bIsSplit; if (Sim::GetUserMode() == Sim::USER_SPLIT_SCREEN) { bIsSplit = true; } else if (!is_splitscreen) { bIsSplit = false; } else { bIsSplit = true; }` and removing redundant subexpression evaluation.
+
+---
+
 ### `MoviePlayer_Play`
 - **Unit**: `main/Speed/Indep/SourceLists/zFe`
 - **Source File**: `src/Speed/Indep/Src/Frontend/MoviePlayer/MoviePlayer.cpp`

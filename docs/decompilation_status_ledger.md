@@ -64,6 +64,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEGameInterface::UnloadUnreferencedLibrary` (`zFe`)**: Decompiled, verified (100.0% match, 8 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`cFEng::FindPackage` (`zFe`)**: Decompiled, verified (100.0% match, 156 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`cFEng::PushErrorPackage` (`zFe`)**: Decompiled, verified (**100.0% match**, 332 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
+- **`cFEngJoyInput::HandleJoy` (`zFe`)**: Decompiled, verified (**100.0% match**, 768 bytes, 192 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`MoviePlayer_Play` (`zFe`)**: Decompiled, verified (100.0% match, 72 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`Minimap::Update` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`SplashScreen::NotificationMessage` (`zFeOverlay`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**

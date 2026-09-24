@@ -57,6 +57,14 @@ void GRaceStatus::SetHasBeenWon(bool won) {
 }
 
 /**
+ * @brief Retrieves the cache name for vehicle caching.
+ * @return String literal "GRaceStatus".
+ */
+const char *GRaceStatus::GetCacheName() const {
+    return "GRaceStatus";
+}
+
+/**
  * @brief Retrieves the count of racers participating in the current event.
  *
  * @return int Total number of racers.

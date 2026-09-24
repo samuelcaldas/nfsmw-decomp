@@ -609,6 +609,9 @@ class GRaceStatus : public UTL::COM::Object, public IVehicleCache {
     void FinalizeRaceStats();
 
     // Overrides: IVehicleCache
+    const char *GetCacheName() const override;
+
+    // Overrides: IVehicleCache
     enum eVehicleCacheResult OnQueryVehicleCache(const IVehicle *removethis, const IVehicleCache *whosasking) const override;
 
     // Overrides: IVehicleCache

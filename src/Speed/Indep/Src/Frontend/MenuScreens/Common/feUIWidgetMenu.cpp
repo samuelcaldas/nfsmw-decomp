@@ -148,8 +148,8 @@ void UIWidgetMenu::Scroll(eScrollDir dir) {
         SyncViewToSelection();
     } else {
 
-        FEWidget *new_option = pCurrentOption;
         FEWidget *new_view = pViewTop;
+        FEWidget *new_option = pCurrentOption;
 
         if (dir == eSD_NEXT) {
             if ((new_option != nullptr) && new_option == Options.GetTail() && (pDone != nullptr)) {

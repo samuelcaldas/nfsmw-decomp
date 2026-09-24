@@ -38,6 +38,7 @@ struct SavedTimerInfo {
 // total size: 0x24
 class GEventTimer {
   public:
+    friend class GManager;
     GEventTimer();
     ~GEventTimer();
     void Start();

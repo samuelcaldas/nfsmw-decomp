@@ -17,6 +17,7 @@ typedef UTL::Std::map<GState *, UTL::Std::vector<GHandler *, _type_ID_GHandlerVe
 // total size: 0x48
 class GActivity : public GRuntimeInstance {
   public:
+    friend class GManager;
     // total size: 0x8
     struct SerializedHeader {
         unsigned int mStateNameHash; // offset 0x0, size 0x4
@@ -35,6 +36,9 @@ class GActivity : public GRuntimeInstance {
     }
 
     void EnterState(GState *state);
+    void Run();
+    void Suspend();
+    void SerializeVars(bool write);
 
   private:
     GState *mCurrentState;            // offset 0x28, size 0x4

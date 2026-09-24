@@ -164,8 +164,7 @@ void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
     if ((mulFlags & FELISTBOX_FLAGS_SCROLLH) && (mulFlags & FELISTBOX_FLAGS_SCROLLV)) {
         return;
     }
-    u32 colDisabled = mulFlags & 0x20;
-    if (colDisabled) {
+    if (mulFlags & 0x20) {
         lColumnNum = 0;
     }
     if ((mulFlags & 0x40) != 0) {
@@ -175,49 +174,45 @@ void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
         if (lRowNum == 0) {
             return;
         }
-    } else if (!colDisabled) {
-        u32 ulCurrentColumn = mulCurrentColumn;
-        u32 ulNewColumn = ulCurrentColumn + lColumnNum;
+    } else if ((mulFlags & 0x20) == 0) {
+        int lColumn = mulCurrentColumn + lColumnNum;
         if (mulFlags & 4) {
-            if (static_cast<i32>(ulNewColumn) >= static_cast<i32>(mulNumColumns)) {
-                ulNewColumn = mulNumColumns - 1;
+            if (lColumn >= static_cast<i32>(mulNumColumns)) {
+                lColumn = mulNumColumns - 1;
             }
-            if (static_cast<i32>(ulNewColumn) < 0) {
-                ulNewColumn = 0;
+            if (lColumn < 0) {
+                lColumn = 0;
             }
-            goto set_column;
+            mulCurrentColumn = lColumn;
+            mstTargetLocation.h = GetCurrentColumnData()->fCummulativeValue;
         } else {
-            if (static_cast<i32>(ulNewColumn) < 0) {
-                u32 numCols = mulNumColumns;
-                u32 i = numCols + ulNewColumn;
-                float fCummulativeValue = mpstColumnData[i].fCummulativeValue;
+            if (lColumn < 0) {
+                int i = mulNumColumns + lColumn;
+                float fCummulativeValue = GetColumnData(i)->fCummulativeValue;
                 mstTargetLocation.h = fCummulativeValue;
                 mstCurrentLocation.h = fCummulativeValue;
                 do {
-                    mstCurrentLocation.h = mstCurrentLocation.h + mpstColumnData[i].fValue;
-                    u32 next = i + 1;
-                    i = next - (next / numCols) * numCols;
-                } while (i != ulCurrentColumn);
-            } else {
-                u32 numCols = mulNumColumns;
-                if (static_cast<i32>(ulNewColumn) < static_cast<i32>(numCols)) {
-                    goto set_column;
-                }
+                    mstCurrentLocation.h = mstCurrentLocation.h + GetColumnData(i)->fValue;
+                    int next = i + 1;
+                    i = next - (next / mulNumColumns) * mulNumColumns;
+                } while (i != mulCurrentColumn);
+                mulFlags = mulFlags | FELISTBOX_FLAGS_WRAPH;
+                mulCurrentColumn = static_cast<u32>(lColumn) - (static_cast<u32>(lColumn) / mulNumColumns) * mulNumColumns;
+            } else if (lColumn >= static_cast<i32>(mulNumColumns)) {
                 mstTargetLocation.h = mstCurrentLocation.h;
+                int i = mulCurrentColumn;
                 do {
-                    i32 idx = ulCurrentColumn - (ulCurrentColumn / numCols) * numCols;
-                    ulCurrentColumn = ulCurrentColumn + 1;
-                    mstTargetLocation.h = mstTargetLocation.h + mpstColumnData[idx].fValue;
-                } while (ulCurrentColumn != ulNewColumn);
+                    int idx = i - (i / mulNumColumns) * mulNumColumns;
+                    i = i + 1;
+                    mstTargetLocation.h = mstTargetLocation.h + GetColumnData(idx)->fValue;
+                } while (i != lColumn);
+                mulFlags = mulFlags | FELISTBOX_FLAGS_WRAPH;
+                mulCurrentColumn = static_cast<u32>(lColumn) - (static_cast<u32>(lColumn) / mulNumColumns) * mulNumColumns;
+            } else {
+                mulCurrentColumn = lColumn;
+                mstTargetLocation.h = GetCurrentColumnData()->fCummulativeValue;
             }
-            mulFlags = mulFlags | FELISTBOX_FLAGS_WRAPH;
-            mulCurrentColumn = ulNewColumn - (ulNewColumn / mulNumColumns) * mulNumColumns;
-            goto end_column;
         }
-    set_column:
-        mulCurrentColumn = ulNewColumn;
-        mstTargetLocation.h = mpstColumnData[ulNewColumn].fCummulativeValue;
-    end_column:
 
         u32 i = mulCurrentColumn;
         float fNewWidth = 0.0f;
@@ -240,53 +235,45 @@ void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
         mulFlags = mulFlags | 0x20;
     }
 
-    if (lRowNum == 0 || (mulFlags & 0x40) != 0) {
-        goto compute_direction;
-    }
-
-    {
-        u32 ulCurrentRow = mulCurrentRow;
-        u32 ulNewRow = ulCurrentRow + lRowNum;
+    if (lRowNum != 0 && (mulFlags & 0x40) == 0) {
+        int lRow = mulCurrentRow + lRowNum;
         if (mulFlags & 4) {
-            if (static_cast<i32>(ulNewRow) >= static_cast<i32>(mulNumRows)) {
-                ulNewRow = mulNumRows - 1;
+            if (lRow >= static_cast<i32>(mulNumRows)) {
+                lRow = mulNumRows - 1;
             }
-            if (static_cast<i32>(ulNewRow) < 0) {
-                ulNewRow = 0;
+            if (lRow < 0) {
+                lRow = 0;
             }
-            goto set_row;
+            mulCurrentRow = lRow;
+            mstTargetLocation.v = GetCurrentRowData()->fCummulativeValue;
         } else {
-            if (static_cast<i32>(ulNewRow) < 0) {
-                u32 numRows = mulNumRows;
-                u32 i = numRows + ulNewRow;
-                float fCummulativeValue = mpstRowData[i].fCummulativeValue;
+            if (lRow < 0) {
+                int i = mulNumRows + lRow;
+                float fCummulativeValue = GetRowData(i)->fCummulativeValue;
                 mstTargetLocation.v = fCummulativeValue;
                 mstCurrentLocation.v = fCummulativeValue;
                 do {
-                    mstCurrentLocation.v = mstCurrentLocation.v + mpstRowData[i].fValue;
-                    u32 next = i + 1;
-                    i = next - (next / numRows) * numRows;
-                } while (i != ulCurrentRow);
-            } else {
-                u32 numRows = mulNumRows;
-                if (static_cast<long>(ulNewRow) < static_cast<long>(numRows)) {
-                    goto set_row;
-                }
+                    mstCurrentLocation.v = mstCurrentLocation.v + GetRowData(i)->fValue;
+                    int next = i + 1;
+                    i = next - (next / mulNumRows) * mulNumRows;
+                } while (i != mulCurrentRow);
+                mulFlags = mulFlags | FELISTBOX_FLAGS_WRAPH;
+                mulCurrentRow = static_cast<u32>(lRow) - (static_cast<u32>(lRow) / mulNumRows) * mulNumRows;
+            } else if (lRow >= static_cast<long>(mulNumRows)) {
                 mstTargetLocation.v = mstCurrentLocation.v;
+                int i = mulCurrentRow;
                 do {
-                    long idx = ulCurrentRow - (ulCurrentRow / numRows) * numRows;
-                    ulCurrentRow = ulCurrentRow + 1;
-                    mstTargetLocation.v = mstTargetLocation.v + mpstRowData[idx].fValue;
-                } while (ulCurrentRow != ulNewRow);
+                    int idx = i - (i / mulNumRows) * mulNumRows;
+                    i = i + 1;
+                    mstTargetLocation.v = mstTargetLocation.v + GetRowData(idx)->fValue;
+                } while (i != lRow);
+                mulFlags = mulFlags | FELISTBOX_FLAGS_WRAPH;
+                mulCurrentRow = static_cast<u32>(lRow) - (static_cast<u32>(lRow) / mulNumRows) * mulNumRows;
+            } else {
+                mulCurrentRow = lRow;
+                mstTargetLocation.v = GetCurrentRowData()->fCummulativeValue;
             }
-            mulFlags = mulFlags | FELISTBOX_FLAGS_WRAPH;
-            mulCurrentRow = ulNewRow - (ulNewRow / mulNumRows) * mulNumRows;
-            goto end_row;
         }
-    set_row:
-        mulCurrentRow = ulNewRow;
-        mstTargetLocation.v = mpstRowData[ulNewRow].fCummulativeValue;
-    end_row:
 
         u32 i = mulCurrentRow;
         float fNewHeight = 0.0f;
@@ -309,7 +296,6 @@ void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum) {
         mulFlags = mulFlags | 0x40;
     }
 
-compute_direction:
     FEVector2 &obDirection = reinterpret_cast<FEVector2 &>(mstDirection);
     obDirection = reinterpret_cast<FEVector2 &>(mstTargetLocation) - reinterpret_cast<FEVector2 &>(mstCurrentLocation);
     mulFlags = mulFlags | FELISTBOX_FLAGS_SCROLL;

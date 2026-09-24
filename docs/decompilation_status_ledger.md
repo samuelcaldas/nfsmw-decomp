@@ -50,7 +50,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEMessageResponse::FindConditionBranchTarget` (`zFEng`)**: Decompiled, verified (**99.58% match**, 144 bytes, 36 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 99.58%]**
 - **`FEPackage::UpdateObject` (`zFEng`)**: Decompiled, verified (**100.0% match**, 1,204 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (**99.02% match**, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**96.58% match**, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**100.0% match**, 1,104 bytes, 276 instructions), documented in `docs/decompiled_functions.md`. **Status: [Completed & Verified 100.0%]**
 - **`FEQuaternion::operator*` (`zFEng`)**: Decompiled, verified (89.1% match, 212 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEQuaternion::GetMatrix` (`zFEng`)**: Decompiled, verified (**100.0% match**, 196 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**
 - **`UIOptionsScreen::NotificationMessage` (`zFe`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
@@ -78,7 +78,7 @@ This ledger tracks the completion and blockage status of all code chunks, module
 - **`FEngine::Update` (`zFEng`)**: Decompiled, verified (**99.77% match**, 776 bytes, 195/198 instructions), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEngine::UpdateMouseState` (`zFEng`)**: Decompiled, verified (100.0% match), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEPackageReader::ReadObjectChunk` (`zFEng`)**: Decompiled, verified (96.67% match, 964 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
-- **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (96.5% match, 1,104 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
+- **`FEListBox::ScrollSelection` (`zFEng`)**: Decompiled, verified (**100.0% match**, 1,104 bytes, 276 instructions), documented in `docs/decompiled_functions.md`. **Status: [Completed & Verified 100.0%]**
 - **`FEPackageCommand::~FEPackageCommand` (`zFEng`)**: Decompiled, verified (100.0% match, 32 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEGroup::~FEGroup(void)` (`zFEng`)**: Decompiled, verified (100.0% match, 76 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged]**
 - **`FEObjectSorter<1024>::SortObjects` (`zFEng`)**: Decompiled, verified (**100.0% match**, 316 bytes), documented in `docs/decompiled_functions.md`, and merged into `main`. **Status: [Completed & Merged 100.0%]**

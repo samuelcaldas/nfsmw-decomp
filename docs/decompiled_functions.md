@@ -251,12 +251,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/FEng/FEListBox.cpp`
 - **Virtual Address**: `0x80184188`
 - **Size**: 1104 bytes
-- **Matching State**: 96.58% match
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void FEListBox::ScrollSelection(i32 lColumnNum, i32 lRowNum);
   ```
-- **Description**: Refined FEListBox::ScrollSelection to 96.58% match with clean struct member access for column/row entry data, managing list box item selection scrolling.
+- **Description**: Decompiled and matched FEListBox::ScrollSelection (1104 bytes, 276 instructions) to 100.0% binary assembly parity in zFEng, matching DWARF inlined calls to GetCurrentColumnData and GetCurrentRowData across column/row scroll branches.
 
 ---
 

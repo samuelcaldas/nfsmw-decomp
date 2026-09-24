@@ -9,7 +9,6 @@
 #include "Speed/Indep/bWare/Inc/bWare.hpp"
 
 extern char g_GC_Disk_GameName[];
-
 void DisplayMessage(const wchar_t *msg, unsigned int count, const wchar_t **str);
 
 void DisplayStatus(int i) {}
@@ -251,8 +250,8 @@ void MemcardCallbacks::FoundEntry(const RealmcIface::EntryInfo *info) {
         return;
     }
     unsigned int iSize = GetMemcard()->GetSize();
-    unsigned int fDefault = 0;
     int iGuessSize = info->mUserDataSize;
+    unsigned int fDefault = 0;
     if (info->mStatus != RealmcIface::STATUS_OK) {
         fDefault = 2;
     }
@@ -414,7 +413,7 @@ void MemcardCallbacks::CardChecked(const RealmcIface::CardInfo *info) {
     if (GetMemcard()->IsCheckingCardForAutoSave()) {
         GetMemcard()->m_MemOp = MemoryCard::MO_NONE;
         GetMemcard()->m_LastError = *reinterpret_cast<const unsigned short *>(reinterpret_cast<const char *>(info) + 6);
-        int cardStatus = info->mStatus;
+        unsigned int cardStatus = info->mStatus;
         switch (cardStatus) {
             case RealmcIface::STATUS_CARD_CHANGED:
             case RealmcIface::STATUS_CARD_DAMAGED:

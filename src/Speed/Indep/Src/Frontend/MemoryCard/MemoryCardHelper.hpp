@@ -182,7 +182,9 @@ class IJoyHelper {
         value = Joylog::AddOrGetData(value, 0x20, JOYLOG_CHANNEL_MEMORY_CARD);
     }
 
-    void JLog(RealmcIface::CardId &id) {}
+    void JLog(RealmcIface::CardId &id) {
+        id = static_cast<RealmcIface::CardId>(Joylog::AddOrGetData(static_cast<unsigned int>(id), 0x20, JOYLOG_CHANNEL_MEMORY_CARD));
+    }
 
     void JLog(RealmcIface::CardStatus &status) {
         unsigned int value = static_cast<unsigned int>(status);

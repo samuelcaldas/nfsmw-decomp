@@ -736,12 +736,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Physics.cpp`
 - **Virtual Address**: `0x800BFFC8`
 - **Size**: 1212 bytes
-- **Matching State**: 98.22% match
+- **Matching State**: 98.65% match
 - **Signature**:
   ```cpp
   void SFXCTL_Physics::UpdateMixerOutputs();
   ```
-- **Description**: Decompiled SFXCTL_Physics::UpdateMixerOutputs in zEAXSound unit with 98.22% match.
+- **Description**: Removed the unused `y1` local temporary from `MixerSqrt`; verified SFXCTL_Physics::UpdateMixerOutputs remains at 98.65% match, with no regressions reported by `ninja changes`.
 
 ---
 

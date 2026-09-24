@@ -22,16 +22,25 @@ enum GCAnimationImageLoop {
 };
 
 struct GCIconDataInfo {
-    // TODO probably in realmemcard
     int numIconFrames;
     char *imageData;
+    char pad[0x20];
     GCAnimationImageLoop animationLoop;
+    int pad2;
+
+    GCIconDataInfo() {
+        numIconFrames = 0;
+        imageData = nullptr;
+    }
 };
 
-// TODO probably in realmemcard
 struct GCBannerDataInfo {
-    char *imageData;
     GCImageFormat imageFormat;
+    char *imageData;
+
+    GCBannerDataInfo() {
+        imageData = nullptr;
+    }
 };
 
 class MemoryCardMessage {

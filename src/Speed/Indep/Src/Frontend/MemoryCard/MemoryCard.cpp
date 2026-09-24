@@ -93,7 +93,6 @@ MemoryCard::MemoryCard() {
     m_bAutoSave = false;
     m_bInAutoSave = false;
     m_bCheckingCardForAutoSave = false;
-    m_bFoundAutoSaveFile = false;
     m_bCheckingCardForOverwrite = false;
     m_bAutoSaveRequested = false;
     m_bAutoSaveCardPulled = false;
@@ -104,6 +103,7 @@ MemoryCard::MemoryCard() {
     m_bAutoSaveCardPulledDuringSave = false;
     m_bOldSaveFileExists = false;
     m_bListingOldSaveFiles = false;
+    m_bFoundAutoSaveFile = false;
     m_bMemcardScreenShowing = false;
     m_bCardRemoved = false;
     m_bRetryAutoSave = false;
@@ -124,13 +124,10 @@ MemoryCard::MemoryCard() {
     char *pIcon = static_cast<char *>(bGetFile("memcard/icon1.raw", nullptr, 0));
     char *pBanner = static_cast<char *>(bGetFile("memcard/banner.raw", nullptr, 0));
     m_pRMIcon = new ("GCIconDataInfo", 0) GCIconDataInfo();
-    m_pRMIcon->numIconFrames = 0;
-    m_pRMIcon->imageData = nullptr;
     m_pRMBanner = new ("GCBannerDataInfo", 0) GCBannerDataInfo();
     m_pRMIcon->numIconFrames = 1;
     m_pRMIcon->imageData = pIcon;
     m_pRMIcon->animationLoop = GC_ANIMATION_LOOP_NONE;
-    m_pRMBanner->imageData = nullptr;
     m_pRMBanner->imageData = pBanner;
     m_pRMBanner->imageFormat = GC_IMAGE_FORMAT_CI8;
 #endif

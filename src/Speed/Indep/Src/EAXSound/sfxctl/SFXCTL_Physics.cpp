@@ -147,7 +147,6 @@ static const float MixerSqrtZero = 0.0f;
 static inline float MixerSqrt(float x, const float *zero) {
     const float bSqrtEPS = 5e-11f;
     float y0;
-    float y1;
     float t0;
     float t1;
     float t2;

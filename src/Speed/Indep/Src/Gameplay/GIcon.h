@@ -9,6 +9,7 @@ struct WorldModel;
 
 class GIcon {
   public:
+    friend class GManager;
     enum Type {
         kType_Invalid = 0,
         kType_RaceSprint = 1,

@@ -360,5 +360,171 @@ void GManager::ReleaseInstanceMap() {
     this->mInstanceHashTableMask = 0;
 }
 
+/**
+ * @brief Resets all event timers.
+ */
+void GManager::ResetTimers() {
+    for (unsigned int i = 0; i < 8; ++i) {
+        this->mTimers[i].Reset();
+    }
+}
+
+/**
+ * @brief Updates all event timers by the elapsed delta time.
+ * @param dT Delta time in seconds.
+ */
+void GManager::UpdateTimers(float dT) {
+    for (unsigned int i = 0; i < 8; ++i) {
+        this->mTimers[i].Update(dT);
+    }
+}
+
+/**
+ * @brief Serializes timer information into the destination array.
+ * @param dest Destination array of saved timer info structures.
+ * @return Number of timers serialized (8).
+ */
+unsigned int GManager::SaveTimerInfo(SavedTimerInfo *dest) {
+    for (unsigned int i = 0; i < 8; ++i) {
+        this->mTimers[i].Serialize(&dest[i]);
+    }
+    return 8;
+}
+
+/**
+ * @brief Deserializes timer information from the source array.
+ * @param src Source array of saved timer info structures.
+ * @param count Number of timers to load.
+ */
+void GManager::LoadTimerInfo(SavedTimerInfo *src, unsigned int count) {
+    for (unsigned int i = 0; i < count; ++i) {
+        this->mTimers[i].Deserialize(&src[i]);
+    }
+}
+
+/**
+ * @brief Stops the timer matching the specified name.
+ * @param timerName Name of the timer to kill.
+ */
+void GManager::KillTimer(const char *timerName) {
+    uint32 hash = bStringHash(timerName);
+    for (unsigned int i = 0; i < 8; ++i) {
+        GEventTimer *timer = &this->mTimers[i];
+        if (hash == timer->GetNameHash()) {
+            timer->Stop();
+            break;
+        }
+    }
+}
+
+/**
+ * @brief Configures and starts a timer with the given name and interval.
+ * @param timerName Name of the timer to set.
+ * @param interval Timer duration in seconds.
+ * @return True if a timer slot was configured and started; otherwise false.
+ */
+bool GManager::SetTimer(const char *timerName, float interval) {
+    uint32 hash = bStringHash(timerName);
+    for (int i = 0; i < 8; ++i) {
+        GEventTimer *timer = &this->mTimers[i];
+        if (hash == timer->GetNameHash()) {
+            timer->Stop();
+            timer->SetInterval(interval);
+            timer->Start();
+            return true;
+        }
+    }
+    for (int i = 0; i < 8; ++i) {
+        GEventTimer *timer = &this->mTimers[i];
+        if (!timer->IsRunning()) {
+            timer->SetName(timerName);
+            timer->SetInterval(interval);
+            timer->Start();
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * @brief Starts the activity associated with the given race bin if not already running.
+ * @param bin Pointer to the race bin.
+ */
+void GManager::StartBinActivity(GRaceBin *bin) {
+    if (bin != NULL) {
+        GActivity *activity = (GActivity *)GManager::mObj->FindInstance(bin->GetCollectionKey());
+        if (!activity->mRunning) {
+            activity->Run();
+        }
+    }
+}
+
+/**
+ * @brief Suspends all active race bin activities and serializes their state.
+ */
+void GManager::SuspendAllBinActivities() {
+    for (unsigned int i = 0; ; ++i) {
+        if (i >= GRaceDatabase::mObj->GetBinCount()) {
+            break;
+        }
+        GRaceBin *bin = GRaceDatabase::mObj->GetBin(i);
+        if (bin != NULL) {
+            GActivity *activity = (GActivity *)GManager::mObj->FindInstance(bin->GetCollectionKey());
+            if (activity != NULL && activity->mRunning) {
+                activity->SerializeVars(false);
+                activity->Suspend();
+            }
+        }
+    }
+}
+
+/**
+ * @brief Prepares gameplay by initializing the startup race if a restart event is set.
+ */
+void GManager::PreBeginGameplay() {
+    if (this->mRestartEventHash != 0) {
+        GRaceParameters *raceParams = GRaceDatabase::mObj->GetRaceFromHash(this->mRestartEventHash);
+        GRaceCustom *customRace = GRaceDatabase::mObj->AllocCustomRace(raceParams);
+        GRaceDatabase::mObj->SetStartupRace(customRace, GRace::kRaceContext_Career);
+        GRaceDatabase::mObj->FreeCustomRace(customRace);
+        this->mRestartEventHash = 0;
+    }
+}
+
+/**
+ * @brief Notification hook called when collision packs are loaded or unloaded.
+ * @param sectionNumber Section identifier.
+ * @param isLoaded True if the pack was loaded; false if unloaded.
+ */
+void GManager::NotifyCollisionPackLoaded(int sectionNumber, bool isLoaded) {
+    if (Exists()) {
+        if (isLoaded) {
+            mObj->SpawnSectionIcons(sectionNumber);
+        } else {
+            mObj->UnspawnSectionIcons(sectionNumber);
+        }
+    }
+}
+
+/**
+ * @brief Unspawns all active gameplay characters.
+ */
+void GManager::UnspawnAllCharacters() {
+    while (this->mActiveCharacters.size() != 0) {
+        this->mActiveCharacters.front()->Unspawn();
+    }
+    this->mActiveCharacters.clear();
+}
+
+/**
+ * @brief Unspawns all registered gameplay icons.
+ */
+void GManager::UnspawnAllIcons() {
+    for (unsigned int i = 0; i < this->mNumIcons; ++i) {
+        this->mIcons[i]->Unspawn();
+    }
+}
+
+
 
 

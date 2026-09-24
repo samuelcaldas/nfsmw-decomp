@@ -286,9 +286,7 @@ bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath
     UMath::OrthoInverse(vecMatInv.fTransform);
 
     UMath::Matrix4 combinedMat;
-    UMath::Matrix4 &matTransform = mat.fTransform;
-    UMath::Matrix4 &vecMatTransform = vecMatInv.fTransform;
-    UMath::Mult(matTransform, vecMatTransform, combinedMat);
+    UMath::Mult(mat.fTransform, vecMatInv.fTransform, combinedMat);
 
     const WCollisionArticle *cArt = cInst.fCollisionArticle;
     if (cArt == nullptr) {

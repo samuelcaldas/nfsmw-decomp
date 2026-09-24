@@ -367,7 +367,7 @@ class GRaceStatus : public UTL::COM::Object, public IVehicleCache {
     float GetRaceTimeElapsed() const;
 
     bool GetIsTimeLimited() const {
-        return (mRaceParms != nullptr) && mRaceParms->GetTimeLimit() > 0.0f;
+        return (mRaceParms != nullptr) ? (mRaceParms->GetTimeLimit() > 0.0f) : false;
     }
 
     float GetRaceTimeRemaining() const;

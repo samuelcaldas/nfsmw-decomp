@@ -135,7 +135,6 @@ const char *FEManager::GetGaragePrefixFromType(eGarageType pGarageType) {
     }
 }
 
-// UNSOLVED
 bool FEManager::IsOkayToRequestPauseSimulation(int playerIndex, bool useControllerErrors, bool okIfAutoSaveActive) {
     if (TheGameFlowManager.GetState() != GAMEFLOW_STATE_RACING) {
         return false;
@@ -167,14 +166,20 @@ bool FEManager::IsOkayToRequestPauseSimulation(int playerIndex, bool useControll
         }
 
         if (GRaceStatus::Get().GetPlayMode() == GRaceStatus::kPlayMode_Racing) {
-            if (!GRaceStatus::Get().GetIsTimeLimited() || GRaceStatus::Get().GetRaceTimeRemaining() > 0.0f) {
-                if ((racerInfo == nullptr) || (!racerInfo->GetIsEngineBlown() && !racerInfo->GetIsTotalled() && !racerInfo->GetIsKnockedOut() &&
-                                               !racerInfo->IsFinishedRacing())) {
-                    return !ShouldPauseSimulation(useControllerErrors);
+            if (GRaceStatus::Get().GetIsTimeLimited()) {
+                if (GRaceStatus::Get().GetRaceTimeRemaining() <= 0.0f) {
+                    return false;
                 }
+            }
 
-                if (Sim::GetUserMode() == Sim::USER_SPLIT_SCREEN) {
-                    int other_player = static_cast<int>(playerIndex != 1);
+            if (racerInfo != nullptr) {
+                if (racerInfo->GetIsEngineBlown() || racerInfo->GetIsTotalled() || racerInfo->GetIsKnockedOut() ||
+                    racerInfo->IsFinishedRacing()) {
+                    if (Sim::GetUserMode() != Sim::USER_SPLIT_SCREEN) {
+                        return false;
+                    }
+
+                    int other_player = (playerIndex != 1);
                     ISimable *other_simable = IPlayer::GetList(PLAYER_LOCAL)[other_player]->GetSimable();
                     GRacerInfo *other_racerInfo;
                     if (other_simable != nullptr) {
@@ -182,16 +187,16 @@ bool FEManager::IsOkayToRequestPauseSimulation(int playerIndex, bool useControll
                     } else {
                         other_racerInfo = nullptr;
                     }
-                    if ((other_racerInfo == nullptr) || (!other_racerInfo->GetIsEngineBlown() && !other_racerInfo->GetIsTotalled() &&
-                                                         !other_racerInfo->GetIsKnockedOut() && !other_racerInfo->IsFinishedRacing())) {
-                        return !ShouldPauseSimulation(useControllerErrors);
+
+                    if (other_racerInfo != nullptr) {
+                        if (other_racerInfo->GetIsEngineBlown() || other_racerInfo->GetIsTotalled() ||
+                            other_racerInfo->GetIsKnockedOut() || other_racerInfo->IsFinishedRacing()) {
+                            return false;
+                        }
                     }
                 }
             }
-            return false;
-        }
-
-        if (simable != nullptr) {
+        } else if (simable != nullptr) {
             IVehicle *vehicle;
             if (simable->QueryInterface(&vehicle)) {
                 IVehicleAI *vehicleai = vehicle->GetAIVehiclePtr();

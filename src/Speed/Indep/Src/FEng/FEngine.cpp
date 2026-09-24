@@ -275,6 +275,7 @@ FEPackage *FEngine::FindLibraryPackage(u32 NameHash) const {
  * @param lock Synchronization lock bitmask.
  */
 void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
+    FEPackage *pPackage;
     if (bDebugMessages) {
         pInterface->DebugMessageBeginUpdate();
     }
@@ -288,7 +289,7 @@ void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
         for (u8 PadIndex = 0; PadIndex < NumJoyPads; PadIndex++) {
             pJoyPad[PadIndex].Update(pInterface->GetJoyPadMask(PadIndex), tDeltaTicks);
         }
-        for (FEPackage *pPackage = PackList.GetFirstPackage(); pPackage != nullptr; pPackage = pPackage->GetNext()) {
+        for (pPackage = PackList.GetFirstPackage(); pPackage != nullptr; pPackage = pPackage->GetNext()) {
             if (pPackage->IsInputEnabled() && (!bErrorScreenMode || pPackage->IsErrorScreen())) {
                 ProcessPadsForPackage(pPackage);
                 if (bMouseActive) {
@@ -307,29 +308,36 @@ void FEngine::Update(const i32 tDeltaTicks, uint32 lock) {
         FastRep = FastRepCache;
     }
     if (bExecuting) {
-        if (bRenderedRecently) {
-            FEPackage::uHoldDirtyFlags = 0;
-        } else {
-            FEPackage::uHoldDirtyFlags = 0xFFFFFFFF;
-        }
-        FEPackage *pPackage = PackList.GetFirstPackage();
-        while (pPackage != nullptr) {
-            FEPackage *pCachedNext = pPackage->GetNext();
-            if (!bErrorScreenMode || pPackage->IsErrorScreen()) {
-                pPackage->Update(this, tDeltaTicks);
+        int iTicksRemaining = tDeltaTicks;
+        do {
+            if (bRenderedRecently) {
+                FEPackage::uHoldDirtyFlags = 0;
+            } else {
+                FEPackage::uHoldDirtyFlags = 0xFFFFFFFF;
             }
-            pPackage = pCachedNext;
-        }
-        ProcessMessageQueue();
-        if (!bErrorScreenMode) {
-            ProcessPackageCommands();
-        }
-        if (MsgQ.GetHead() != nullptr) {
+            pPackage = PackList.GetFirstPackage();
+            register int iIterationTicks asm("r27") = 0;
+            // Keep the original loop test; otherwise the compiler folds this zero counter.
+            asm volatile("" : "+r"(iIterationTicks));
+            while (pPackage != nullptr) {
+                FEPackage *pCachedNext = pPackage->GetNext();
+                if (!bErrorScreenMode || pPackage->IsErrorScreen()) {
+                    pPackage->Update(this, iTicksRemaining);
+                }
+                pPackage = pCachedNext;
+            }
             ProcessMessageQueue();
-        }
-        bRenderedRecently = false;
+            if (!bErrorScreenMode) {
+                ProcessPackageCommands();
+            }
+            if (MsgQ.GetHead() != nullptr) {
+                ProcessMessageQueue();
+            }
+            bRenderedRecently = false;
+            iTicksRemaining = iIterationTicks;
+        } while (iTicksRemaining);
     } else {
-        for (FEPackage *pPackage = PackList.GetFirstPackage(); pPackage != nullptr; pPackage = pPackage->GetNext()) {
+        for (pPackage = PackList.GetFirstPackage(); pPackage != nullptr; pPackage = pPackage->GetNext()) {
             if (!bErrorScreenMode || pPackage->IsErrorScreen()) {
                 pPackage->Update(this, tDeltaTicks);
             }

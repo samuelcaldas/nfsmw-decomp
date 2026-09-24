@@ -23,6 +23,15 @@ void GRaceStatus::SetRaceContext(GRace::Context context) {
 }
 
 /**
+ * @brief Sets whether the race status is currently loading.
+ * @param loading True if loading, false otherwise.
+ * @return void
+ */
+void GRaceStatus::SetIsLoading(bool loading) {
+    this->mIsLoading = loading;
+}
+
+/**
  * @brief Retrieves the count of racers participating in the current event.
  *
  * @return int Total number of racers.

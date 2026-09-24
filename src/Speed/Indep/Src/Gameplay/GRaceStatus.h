@@ -331,9 +331,7 @@ class GRaceStatus : public UTL::COM::Object, public IVehicleCache {
 
     void SetRaceContext(GRace::Context context);
 
-    void SetIsLoading(bool loading) {
-        mIsLoading = loading;
-    };
+    void SetIsLoading(bool loading);
 
     bool GetIsLoading() const {
         return mIsLoading;

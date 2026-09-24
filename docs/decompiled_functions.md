@@ -2714,3 +2714,87 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   Dynamics::Articulation::Constraint::Constraint(const UMath::Matrix4 &orient, float minTheta, float maxTheta, Lever &female, Lever &male, const UMath::Vector3 &post, eConstraint type);
   ```
 - **Description**: Constructs physics articulation constraints connecting rigid levers with orientation quaternion conversions and post-vector initialization.
+
+---
+
+### `GRaceDatabase::SimulateDDayComplete`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A9CBC`
+- **Size**: 4 bytes (1 instruction)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GRaceDatabase::SimulateDDayComplete();
+  ```
+- **Description**: Simulates D-Day completion in the race database with 100% binary parity (`blr`).
+
+---
+
+### `GRaceDatabase::GetBinCount`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A43D4`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GRaceDatabase::GetBinCount();
+  ```
+- **Description**: Retrieves the number of race bins (`mBinCount` at offset `0x20`) in the database with 100% assembly parity.
+
+---
+
+### `GRaceParameters::GetGameplayObj`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A6EB0`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const Attrib::Gen::gameplay *GRaceParameters::GetGameplayObj() const;
+  ```
+- **Description**: Retrieves the gameplay attribute object pointer (`mRaceRecord` at offset `0x4`) for the race parameter set with 100% assembly parity.
+
+---
+
+### `GRaceParameters::GetChildVault`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A6EDC`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GVault *GRaceParameters::GetChildVault() const;
+  ```
+- **Description**: Retrieves the child vault pointer (`mChildVault` at offset `0xc`) associated with the race parameters with 100% assembly parity.
+
+---
+
+### `GRaceParameters::GetParentVault`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A6EE4`
+- **Size**: 8 bytes (2 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GVault *GRaceParameters::GetParentVault() const;
+  ```
+- **Description**: Retrieves the parent vault pointer (`mParentVault` at offset `0x8`) associated with the race parameters with 100% assembly parity.
+
+---
+
+### `GRaceDatabase::GetRaceCount`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceDatabase.cpp`
+- **Virtual Address**: `0x801A4278`
+- **Size**: 16 bytes (4 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GRaceDatabase::GetRaceCount();
+  ```
+- **Description**: Computes and returns the total race count by summing `mRaceCountStatic` (offset `0x0`) and `mRaceCountDynamic` (offset `0x4`) with 100% assembly parity.

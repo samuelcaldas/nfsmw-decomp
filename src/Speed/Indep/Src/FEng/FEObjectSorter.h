@@ -49,27 +49,28 @@ template <int N> class FEObjectSorter {
     void SortObjects();
 };
 
-// UNSOLVED
 template <int N> void FEObjectSorter<N>::SortObjects() { // Decl: 81
     SFERadixKey *pstDestList = mastScratchList;
     SFERadixKey *pstSrcList = mastFinalList;
     i32 alElemCount[256];
     i32 alElemIndex[256];
     i32 lNumBytes = mulNumObjects << 3;
+    int i;
 
     for (int32 b = 3; b >= 0; b--) {
         FEngMemSet(alElemCount, 0, sizeof(alElemCount));
-        u8 *pucByte = reinterpret_cast<u8 *>(pstSrcList) + b + 4;
-        for (int i = 0; i < lNumBytes; i += 8) {
+        u8 *pucByte = reinterpret_cast<u8 *>(pstSrcList) + (b + 4);
+        for (i = 0; i < lNumBytes; i += 8) {
             alElemCount[pucByte[i]]++;
         }
         alElemIndex[0] = 0;
-        for (int i = 0; i < 255; i++) {
+        for (i = 0; i < 255; i++) {
             alElemIndex[i + 1] = alElemIndex[i] + alElemCount[i];
         }
-        for (int i = 0; i < static_cast<i32>(mulNumObjects); i++) {
+        for (i = 0; i < static_cast<i32>(mulNumObjects); i++) {
             u8 ucIndex = pucByte[i * 8];
-            SFERadixKey *pstTemp = pstDestList + alElemIndex[ucIndex];
+            SFERadixKey *pstTemp = reinterpret_cast<SFERadixKey *>(
+                (alElemIndex[ucIndex] * sizeof(SFERadixKey)) + reinterpret_cast<u32>(pstDestList));
             *pstTemp = pstSrcList[i];
             alElemIndex[ucIndex]++;
         }

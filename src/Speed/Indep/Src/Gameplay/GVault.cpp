@@ -64,8 +64,8 @@ void *BlockLoadingAttribAllocator::Allocate(unsigned int bytes, const char *name
     void *result = mAllocPtr;
     unsigned int aligned = (bytes + 15) & ~15;
     mAllocCount++;
-    mAllocPtr += aligned;
     mAllocBytes += aligned;
+    mAllocPtr += aligned;
     mAvailBytes -= aligned;
     return result;
 }

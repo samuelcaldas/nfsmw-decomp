@@ -30,14 +30,14 @@ SESSIONS = [
     {
         "name": "nfs3",
         "pane": "PS2:2",
-        "unit": "zTrack",
-        "prompt": "Continue a decompilação no próximo candidato de zTrack. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
+        "unit": "zAI",
+        "prompt": "Continue a decompilação no próximo candidato de zAI. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs4",
         "pane": "PS2:3",
-        "unit": "zWorld2",
-        "prompt": "Continue a decompilação no próximo candidato de zWorld2 (ex: WCollisionMgr::FindFaceInCInst). Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
+        "unit": "zGameplay",
+        "prompt": "Continue a decompilação no próximo candidato de zGameplay/zWorld2. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs5",
@@ -91,7 +91,7 @@ def get_git_head() -> str:
     """Return latest short commit on main."""
     try:
         res = subprocess.run(
-            ["git", "rev-parse", "--short", "HEAD"],
+            ["git", "-C", "/home/samuelcaldas/source/repos/nfsmw", "rev-parse", "--short", "main"],
             capture_output=True,
             text=True,
             timeout=5,
@@ -123,7 +123,7 @@ def main():
         if current_head != last_head and current_head != "unknown":
             try:
                 commit_info = subprocess.run(
-                    ["git", "log", "-1", "--oneline"],
+                    ["git", "-C", "/home/samuelcaldas/source/repos/nfsmw", "log", "-1", "--oneline", "main"],
                     capture_output=True,
                     text=True,
                     timeout=5,
@@ -157,6 +157,11 @@ def main():
                 indicator in tail_content
                 for indicator in [
                     "esc to interrupt",
+                    "esc to",
+                    "esc t",
+                    "tokens)",
+                    "Transmuting",
+                    "Beboppin",
                     "Thinking…",
                     "Accomplishing…",
                     "Planning…",
@@ -173,6 +178,9 @@ def main():
                     "Gusting…",
                     "✢",
                     "◯",
+                    "✽",
+                    "✻",
+                    "✦",
                     "agent(",
                     "workflow(",
                     "running ",

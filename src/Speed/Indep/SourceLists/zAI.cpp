@@ -79,6 +79,7 @@
 
 #include "Speed/Indep/Src/Gameplay/GReflected.h"
 #include "Speed/Indep/Src/EAXSound/SoundCollision.hpp"
+#include "Speed/Indep/Src/Interfaces/Simables/ISimpleBody.h"
 
 template const GCollectionKey &Attrib::TAttrib<GCollectionKey>::Get(unsigned int) const;
 template const UMath::Vector4 &Attrib::TAttrib<UMath::Vector4>::Get(unsigned int) const;
@@ -96,3 +97,7 @@ U *UTL::COM::Factory<T, U, V>::CreateInstance(V sig, T params) {
 
 template Sound::AudioEvent *UTL::COM::Factory<const Sound::AudioEventParams &, Sound::AudioEvent, unsigned int>::CreateInstance(
     unsigned int, const Sound::AudioEventParams &);
+
+namespace _STL {
+template ISimpleBody **find<ISimpleBody **, ISimpleBody *>(ISimpleBody **, ISimpleBody **, ISimpleBody * const &);
+}

@@ -642,8 +642,8 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     float n2x;                                                             // f31
     float n2y;                                                             // f0
     float n2z;                                                             // f24
-    float theta;                                                           // f30
     float phi;                                                             // f30
+    float theta;                                                           // f30
     unsigned short nlat = tess;                                            // r27
     unsigned short nlon = tess;                                            // r25
     unsigned long dl_sz = ((tess + 1) + (tess - 2) * (tess + 1) * 2) * 0x18; // r24

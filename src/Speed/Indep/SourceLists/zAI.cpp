@@ -78,3 +78,4 @@
 #include "Speed/Indep/Src/Gameplay/GReflected.h"
 
 template const GCollectionKey &Attrib::TAttrib<GCollectionKey>::Get(unsigned int) const;
+template const UMath::Vector4 &Attrib::TAttrib<UMath::Vector4>::Get(unsigned int) const;

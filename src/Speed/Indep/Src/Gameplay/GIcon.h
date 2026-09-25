@@ -108,9 +108,12 @@ class GIcon {
         mFlags &= ~mask;
     }
 
-    bool IsFlagSet(unsigned int mask) const { // Decl: 162
-        return (mFlags & mask) != 0;
-    }
+    /**
+     * @brief Checks whether the requested flag bits are set.
+     * @param mask Flag bits to test.
+     * @return True when any requested bit is set.
+     */
+    bool IsFlagSet(unsigned int mask) const; // Decl: 162
 
     bool IsFlagClear(unsigned int mask) const { // Decl: 163
         return (mFlags & mask) == 0;

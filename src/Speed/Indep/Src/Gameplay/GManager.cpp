@@ -245,7 +245,8 @@ int GManager::GatherVisibleIcons(GIcon **iconArray, IPlayer *player) {
     int visibleCount = 0;
     for (unsigned int i = 0; i < this->mNumVisibleIcons; ++i) {
         GIcon *icon = this->mIcons[i];
-        if (icon->IsFlagSet(1) && icon->IsFlagSet(2)) {
+        bool isIconVisible = icon->IsFlagSet(1) && icon->IsFlagSet(2);
+        if (isIconVisible) {
             sortedIcons[visibleCount].icon = icon;
             if (simable != NULL) {
                 sortedIcons[visibleCount].distance =

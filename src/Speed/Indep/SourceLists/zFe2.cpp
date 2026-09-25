@@ -152,3 +152,4 @@
 #include "Speed/Indep/Src/Frontend/MenuScreens/InGame/CustomTuning.cpp"
 
 #include "Speed/Indep/Src/Frontend/Careers/UnlockSystem.cpp"
+#include "Speed/Indep/Src/Gameplay/GIcon.cpp"

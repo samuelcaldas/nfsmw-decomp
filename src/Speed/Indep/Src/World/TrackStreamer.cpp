@@ -1074,15 +1074,22 @@ void TrackStreamer::UnJettisonSections() {
 
 // total size: 0x10
 struct HoleMovement {
-    intptr_t Address;    // offset 0x0, size 0x4
-    intptr_t NewAddress; // offset 0x4, size 0x4
+    int SourceAddress;   // offset 0x0, size 0x4
+    int DestAddress;     // offset 0x4, size 0x4
     int32 Size;          // offset 0x8, size 0x4
     uint32 Checksum;     // offset 0xC, size 0x4
 };
 
-    /**
-     * @brief Builds hole movements for track streamer memory pool.
-     */
+/**
+ * @brief Builds a candidate sequence of hole movements for the memory pool.
+ * @param hole_movements Output table for movement records.
+ * @param max_movements Maximum number of records the table can hold.
+ * @param filler_method Hole-filling strategy to evaluate.
+ * @param largest_free Minimum desired largest free block, or zero to probe allocation.
+ * @param pamount_moved Optional output for the total number of bytes moved.
+ * @param max_amount_to_move Maximum total number of bytes to move.
+ * @return Number of movements on success, or -1 if the strategy fails.
+ */
 int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_movements, int filler_method, int largest_free, int *pamount_moved,
                                       int max_amount_to_move) {
     ProfileNode profile_node("TODO", 0);
@@ -1123,7 +1130,7 @@ int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_move
         }
 
         HoleMovement *movement = &hole_movements[num_movements];
-        movement->Address = 0;
+        movement->SourceAddress = 0;
 
         if (filler_method == HOLE_FILLER_METHOD_LINEAR_BOTTOM || filler_method == HOLE_FILLER_METHOD_LINEAR_BOTTOM_ALL_THE_WAY ||
             filler_method == HOLE_FILLER_METHOD_LINEAR_TOP) {
@@ -1136,9 +1143,9 @@ int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_move
 
             if (node != nullptr) {
                 movement->Size = node->Size;
-                movement->Address = node->Address;
-                movement->NewAddress = free_node->GetAddress(start_from_top, movement->Size);
-                if (filler_method == HOLE_FILLER_METHOD_LINEAR_BOTTOM_ALL_THE_WAY && !this->FindSectionByAddress(movement->Address)) {
+                movement->SourceAddress = node->Address;
+                movement->DestAddress = free_node->GetAddress(start_from_top, movement->Size);
+                if (filler_method == HOLE_FILLER_METHOD_LINEAR_BOTTOM_ALL_THE_WAY && !this->FindSectionByAddress(movement->SourceAddress)) {
                     break;
                 }
             }
@@ -1168,8 +1175,8 @@ int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_move
                     if (hole_size > best_hole_size) {
                         best_hole_size = hole_size;
                         movement->Size = next_node->Size;
-                        movement->Address = next_node->Address;
-                        movement->NewAddress = free_node->GetAddress(start_from_top, movement->Size);
+                        movement->SourceAddress = next_node->Address;
+                        movement->DestAddress = free_node->GetAddress(start_from_top, movement->Size);
                     }
                 }
             }
@@ -1291,20 +1298,20 @@ int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_move
 
             if (found_one && evaluated_largest_allocated && this->FindSectionByAddress(evaluated_largest_allocated->Address)) {
                 movement->Size = evaluated_largest_allocated->Size;
-                movement->Address = evaluated_largest_allocated->Address;
-                movement->NewAddress = evaluated_largest_moves_here;
+                movement->SourceAddress = evaluated_largest_allocated->Address;
+                movement->DestAddress = evaluated_largest_moves_here;
             }
         }
 
-        if (movement->Address == 0) {
+        if (movement->SourceAddress == 0) {
             failed = true;
             break;
         }
 
         num_movements++;
         movement->Checksum = this->pMemoryPool->GetPoolChecksum();
-        this->pMemoryPool->Free(reinterpret_cast<void *>(movement->Address));
-        this->pMemoryPool->Malloc(movement->Size, "HoleMovement", false, false, movement->NewAddress);
+        this->pMemoryPool->Free(reinterpret_cast<void *>(movement->SourceAddress));
+        this->pMemoryPool->Malloc(movement->Size, "HoleMovement", false, false, movement->DestAddress);
         amount_moved += movement->Size;
         if (amount_moved > max_amount_to_move) {
             failed = true;
@@ -1314,13 +1321,13 @@ int TrackStreamer::BuildHoleMovements(HoleMovement *hole_movements, int max_move
 
     for (int n = num_movements - 1; n >= 0; n--) {
         HoleMovement *movement = &hole_movements[n];
-        this->pMemoryPool->Free(reinterpret_cast<void *>(movement->NewAddress));
+        this->pMemoryPool->Free(reinterpret_cast<void *>(movement->DestAddress));
         char *debug_name = "UndoHoleMovement";
-        TrackStreamingSection *section = this->FindSectionByAddress(movement->Address);
+        TrackStreamingSection *section = this->FindSectionByAddress(movement->SourceAddress);
         if (section != nullptr) {
             debug_name = section->SectionName;
         }
-        this->pMemoryPool->Malloc(movement->Size, debug_name, false, false, movement->Address);
+        this->pMemoryPool->Malloc(movement->Size, debug_name, false, false, movement->SourceAddress);
     }
 
     this->pMemoryPool->EnableTracing(true);
@@ -1372,7 +1379,7 @@ int TrackStreamer::DoHoleFilling(int largest_free) {
     for (int n = 0; n < num_hole_movements; n++) {
         ProfileNode profile_node("TODO", 0);
         HoleMovement *movement = &hole_movement_table[n];
-        TrackStreamingSection *section = this->FindSectionByAddress(movement->Address);
+        TrackStreamingSection *section = this->FindSectionByAddress(movement->SourceAddress);
         if (this->LastWaitUntilRenderingDoneFrameCount != eGetFrameCounter()) {
             int start_ticks = bGetTicker();
             DisableWaitForFrameBufferSwap();
@@ -1383,9 +1390,9 @@ int TrackStreamer::DoHoleFilling(int largest_free) {
         }
 
         int start_ticks = bGetTicker();
-        void *new_memory = reinterpret_cast<void *>(movement->NewAddress);
-        this->pMemoryPool->Free(reinterpret_cast<void *>(movement->Address));
-        this->pMemoryPool->Malloc(movement->Size, section->SectionName, false, false, movement->NewAddress);
+        void *new_memory = reinterpret_cast<void *>(movement->DestAddress);
+        this->pMemoryPool->Free(reinterpret_cast<void *>(movement->SourceAddress));
+        this->pMemoryPool->Malloc(movement->Size, section->SectionName, false, false, movement->DestAddress);
         if (section->Status == TrackStreamingSection::ACTIVATED) {
             eAllowDuplicateSolids(true);
             SetDuplicateTextureWarning(false);

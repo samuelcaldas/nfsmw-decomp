@@ -996,16 +996,16 @@ void eSetFogConstantZero() {
 void eSetFogConstantColour() {
     // Local variables
     int fog_colour; // r12
-    int fog_r = g_FogParams.FogColor.r;
-    int fog_g = g_FogParams.FogColor.g;
-    int fog_b = g_FogParams.FogColor.b;
+    unsigned char fog_r = g_FogParams.FogColor.r;
+    unsigned char fog_g = g_FogParams.FogColor.g;
+    unsigned char fog_b = g_FogParams.FogColor.b;
 
     fog_colour = int((fog_r + fog_g + fog_b) * FogCurrentBrightness);
     if (fog_colour != prevFogColour) {
         write_bp_cmd(((int(fog_r * FogCurrentBrightness) << 16) & 0xFF0000) | ((int(fog_g * FogCurrentBrightness) << 8) & 0x00FF00) |
                      ((int(fog_b * FogCurrentBrightness) << 0) & 0x0000FF) | (0xF2 << 24));
         prevFogColour = fog_colour;
-        gx->bpSentNot = 0;
+        __GXData->bpSentNot = 0;
     }
 }
 

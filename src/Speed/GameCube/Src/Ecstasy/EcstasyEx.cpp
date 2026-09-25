@@ -775,9 +775,9 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
     GXInitLightColor(&ClipLight, color);
     GXSetChanMatColor(GX_COLOR0A0, color);
 
-    color.g = 0;
     color.a = 0;
     color.b = 0;
+    color.g = 0;
     color.r = 0;
     GXSetChanAmbColor(GX_COLOR0A0, color);
     GXInitLightAttnA(&ClipLight, 0.0f, 2.0f, 0.0f);
@@ -794,6 +794,7 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
             GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_TEXC);
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_RASA, GX_CA_ZERO);
+            GXSetNumTevStages(1);
             break;
         case 1: {
             GXColor Kcolor0 = {0xFF, 0xFF, 0xFF, 0xFF};
@@ -835,7 +836,7 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
             break;
         case 5: {
             GXSetNumTevStages(1);
-            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD4, GX_TEXMAP0, GX_COLOR0);
+            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
             GXColor Kcolor0 = {0, 0, 0, 0xFF};
             GXSetTevKColor(GX_KCOLOR0, Kcolor0);
             GXSetTevKColorSel(GX_TEVSTAGE0, GX_TEV_KCSEL_K0);

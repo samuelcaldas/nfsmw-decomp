@@ -208,25 +208,6 @@ void GManager::FreeAllIcons() {
     }
 }
 
-struct IconSort {
-    GIcon *mIcon;
-    int mDist;
-
-    static int Compare(const void *a, const void *b);
-};
-
-/**
- * @brief Compares two icon sort records by squared distance.
- * @param a First icon sort record.
- * @param b Second icon sort record.
- * @return The difference between the distances.
- */
-int IconSort::Compare(const void *a, const void *b) {
-    const IconSort *left = static_cast<const IconSort *>(a);
-    const IconSort *right = static_cast<const IconSort *>(b);
-    return left->mDist - right->mDist;
-}
-
 /**
  * @brief Collects visible icons and orders them by distance from the player.
  * @param iconArray Destination array for the visible icon pointers.
@@ -234,6 +215,17 @@ int IconSort::Compare(const void *a, const void *b) {
  * @return Number of visible icons copied to the destination array.
  */
 int GManager::GatherVisibleIcons(GIcon **iconArray, IPlayer *player) {
+    struct IconSort {
+        GIcon *mIcon;
+        int mDist;
+
+        static int Compare(const void *a, const void *b) {
+            const IconSort *left = static_cast<const IconSort *>(a);
+            const IconSort *right = static_cast<const IconSort *>(b);
+            return left->mDist - right->mDist;
+        }
+    };
+
     UMath::Vector3 playerPos = UMath::Vector3::kZero;
     ISimable *simable = NULL;
     IconSort iconSort[200];

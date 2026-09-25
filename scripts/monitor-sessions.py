@@ -153,7 +153,7 @@ def main():
             tail_content = "\n".join(last_lines)
 
             # Check if active turn is currently running
-            is_actively_running = any(
+            has_spinner = any(
                 indicator in tail_content
                 for indicator in [
                     "esc to interrupt",
@@ -176,16 +176,15 @@ def main():
                     "Effecting…",
                     "Ruminating…",
                     "Gusting…",
-                    "✢",
-                    "◯",
-                    "✽",
-                    "✻",
-                    "✦",
                     "agent(",
                     "workflow(",
                     "running ",
                 ]
+            ) or (
+                any(s in tail_content for s in ["✢", "◯", "✽", "✻", "✦"])
+                and not any(done_word in tail_content for done_word in ["Baked for", "Brewed for", "done", "Finished"])
             )
+            is_actively_running = has_spinner
 
             non_banner_lines = [
                 line for line in content.splitlines()

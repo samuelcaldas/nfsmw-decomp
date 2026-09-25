@@ -14,11 +14,7 @@ class MPursuitBreaker : public Hermes::Message {
         return sizeof(MPursuitBreaker);
     }
 
-    static UCrc32 _GetKind() {
-        static UCrc32 k("MPursuitBreaker");
-
-        return k;
-    }
+    static UCrc32 _GetKind();
 
     MPursuitBreaker(bool _StartBreaker) : Hermes::Message(_GetKind(), _GetSize(), 0), fStartBreaker(_StartBreaker) {}
 

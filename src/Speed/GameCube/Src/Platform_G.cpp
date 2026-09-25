@@ -1,5 +1,7 @@
 #include "G.hpp"
+#include "Speed/Indep/Src/Frontend/Localization/Localize.hpp"
 #include "Speed/Indep/Src/Frontend/MemoryCard/MemoryCard.hpp"
+#include "Speed/Indep/Src/Misc/BuildRegion.hpp"
 #include "Speed/Indep/Src/Misc/Platform.h"
 #include <dolphin.h>
 
@@ -40,7 +42,18 @@ int DVDValidErrorState(int state) {
     }
 }
 
-eLanguages GC_GetOSLanguage() {}
+eLanguages GC_GetOSLanguage() {
+    if (BuildRegion::IsEuropeFr()) {
+        return eLANGUAGE_FRENCH;
+    }
+    if (BuildRegion::IsEuropeGer()) {
+        return eLANGUAGE_GERMAN;
+    }
+    if (BuildRegion::IsJapan()) {
+        return eLANGUAGE_JAPANESE;
+    }
+    return eLANGUAGE_ENGLISH;
+}
 
 void FinishedRenderingFEngLayer() {}
 

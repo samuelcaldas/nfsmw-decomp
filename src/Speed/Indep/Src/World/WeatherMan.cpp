@@ -127,14 +127,20 @@ int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InF
     bVector3 cPos(*view->GetCamera()->GetPosition());
 
     if (FogControlOverRide) {
-        this->FogFalloff = BaseFogFalloff;
-        this->FogFalloffX = BaseFogFalloffX;
-        this->FogFalloffY = BaseFogFalloffY;
-        this->DistFogStart = BaseWeatherFogStart;
-        this->DistFogPower = BaseWeatherFog;
-        this->DistFogColour = (((BaseWeatherFogColourB << 16) | (BaseWeatherFogColourG << 8) | BaseWeatherFogColourR) & 0xFFFFFF) | 0x80000000;
+        unsigned int retcol = (((BaseWeatherFogColourB << 16) | (BaseWeatherFogColourG << 8) | BaseWeatherFogColourR) & 0xFFFFFF) | 0x80000000;
+        float start = BaseWeatherFogStart;
+        float falloff = BaseFogFalloff;
+        float falloffX = BaseFogFalloffX;
+        float falloffY = BaseFogFalloffY;
+        float power = BaseWeatherFog;
+        this->FogFalloff = falloff;
+        this->FogFalloffX = falloffX;
+        this->FogFalloffY = falloffY;
+        this->DistFogStart = start;
+        this->DistFogPower = power;
+        this->DistFogColour = retcol;
 
-        if (oldDistFogColour == this->DistFogColour && oldDistFogPower == this->DistFogPower && oldDistFogStart == this->DistFogStart) {
+        if (oldDistFogColour == retcol && oldDistFogPower == this->DistFogPower && oldDistFogStart == this->DistFogStart) {
             return 0;
         }
 

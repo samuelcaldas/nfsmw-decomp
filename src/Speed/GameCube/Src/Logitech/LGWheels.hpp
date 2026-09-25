@@ -291,8 +291,8 @@ struct Force {
     void InitVars();
 
     // Members
-    bool Playing[8][4];           // offset 0x0, size 0x20
-    unsigned long EffectID[8][4]; // offset 0x80, size 0x80
+    bool Playing[4][8];           // offset 0x0, size 0x20
+    unsigned long EffectID[4][8]; // offset 0x80, size 0x80
 };
 
 // total size: 0x100

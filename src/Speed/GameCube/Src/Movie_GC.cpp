@@ -1,22 +1,24 @@
 #include "G.hpp"
 
-// void MoviePlayer::FillInTextureInfo(unsigned int *framer_address, TextureInfo *texture_info,
-//                                     Shape *yuv_shape) {
-// }
+class GCHW_VD {
+  public:
+    ~GCHW_VD();
+    void iDraw();
+};
 
-void GCDrawMovie() {}
+extern GCHW_VD *gGCVD;
 
-// void PlatSetFirstMovieFrame(TextureInfo *texture_info, Shape *yuv_shape, bool isVP6Movie) {
-// }
+void GCDrawMovie() {
+    if (gGCVD != 0) {
+        gGCVD->iDraw();
+    }
+}
 
 unsigned int RCMP_GetMaxFramesOutStanding() { return 2; }
 
-void PlatFinishMovie() {}
-
-// GCHW_VD::GCHW_VD(Shape *yuvshp, bool isVP6Movie) {
-// }
-
-// GCHW_VD::~GCHW_VD() {}
-
-// void GCHW_VD::iDraw() {
-// }
+void PlatFinishMovie() {
+    if (gGCVD != 0) {
+        delete gGCVD;
+        gGCVD = 0;
+    }
+}

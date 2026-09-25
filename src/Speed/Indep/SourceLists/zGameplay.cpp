@@ -21,3 +21,9 @@
 #include "Speed/Indep/Src/Gameplay/GTimer.cpp"
 #include "Speed/Indep/Src/Gameplay/GMilestone.cpp"
 #include "Speed/Indep/Src/Gameplay/GSpeedTrap.cpp"
+
+// Emit the STLPort comparison functors used by gameplay's unsigned-integer algorithms.
+namespace _STL {
+template less<unsigned int> __less<unsigned int>(unsigned int *);
+template equal_to<unsigned int> __equal_to<unsigned int>(unsigned int *);
+}

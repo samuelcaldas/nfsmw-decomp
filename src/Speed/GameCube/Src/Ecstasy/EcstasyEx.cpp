@@ -458,8 +458,13 @@ void GenerateHorizonFogDisplayList(void **display_list, unsigned long *size, GXV
     for (int j = 0; j < 7; j++) {
         GXBegin(GX_TRIANGLESTRIP, vertex_format, verts_per_strip);
         for (int i = 0; i < verts_per_strip; i++) {
-            grid_pointX = (((i >> 31) + i) >> 1) * vertex_spacingX;
-            grid_pointY = (((i >> 31) + i) >> 1) * vertex_spacingY + (i & 1) ? 68.571434f : 0.0f;
+            multiple = (((i >> 31) + i) >> 1);
+            grid_pointX = multiple * vertex_spacingX;
+            grid_pointY = (i & 1) ? 0.0f : vertex_spacingY;
+            tex_coordX = multiple * uv_spacingX;
+            tex_coordY = (i & 1) ? 0.0f : uv_spacingY;
+            grid_pointY = j * vertex_spacingY + grid_pointY;
+            tex_coordY = j * uv_spacingY + tex_coordY;
 
             float red = bSin(grid_pointX * 6.0f);
             float blue = bCos(grid_pointY * 6.0f);

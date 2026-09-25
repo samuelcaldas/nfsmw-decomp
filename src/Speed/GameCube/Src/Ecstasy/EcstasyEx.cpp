@@ -646,8 +646,6 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     float phi;                                                             // f30
     unsigned short nlat = tess;                                            // r27
     unsigned short nlon = tess;                                            // r25
-    int i;                                                                 // r30
-    int j;                                                                 // r31
     unsigned long dl_sz = ((tess - 2) * (tess + 1) * 2 + (tess + 1)) * 0x18; // r24
     dl_sz = (dl_sz + 0x1f) & ~0x1f;
 
@@ -671,7 +669,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     GXNormal3f32(0.0f, 0.0f, n1z);
 
     theta = 0.0f;
-    for (j = 0; j <= tess;) {
+    for (int j = 0; j <= tess;) {
         n2x = r2 * cosf(theta);
         n2y = r2 * sinf(theta);
 
@@ -684,7 +682,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
 
     // ...
 
-    for (i = 2; i < tess; i++) {
+    for (int i = 2; i < tess; i++) {
         theta = gsPI * float(i) / nlat;
         phi = gsPI * float(i - 1) / nlat;
         r1 = r * sinf(phi);
@@ -700,7 +698,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
 
         GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT7, (tess + 1) * 2);
         phi = 0.0f;
-        for (j = 0; j <= tess;) {
+        for (int j = 0; j <= tess;) {
             n2x = r2 * cosf(phi);
             n2y = r2 * sinf(phi);
 

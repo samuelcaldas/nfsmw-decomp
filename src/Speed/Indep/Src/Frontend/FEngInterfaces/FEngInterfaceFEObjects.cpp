@@ -733,8 +733,7 @@ bool FEngGet2DExtentsForMouse(FEObject *pObject, FERect &Rect, FEVector2 offset)
 
     switch (pObject->Type) {
         case FE_Group: {
-            FEGroup *pGroup = static_cast<FEGroup *>(pObject);
-            FEObject *pChild = pGroup->GetFirstChild();
+            FEObject *pChild = static_cast<FEGroup *>(pObject)->GetFirstChild();
             while (pChild != nullptr) {
                 FERect ChildRect(40000.0f, 40000.0f, -40000.0f, -40000.0f);
                 if (FEngGet2DExtentsForMouse(pChild, ChildRect, offset + FEVector2(FEngGetCenterX(pObject), FEngGetCenterY(pObject)))) {

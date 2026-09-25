@@ -60,11 +60,11 @@ void PauseMenu::NotificationMessage(u32 msg, FEObject *pobj, u32 param1, u32 par
                 FEngSetScript(GetPackageName(), 0x47FF4E7C, 0xDE6EFF34, true);
             }
             break;
+        case 0x30EB8F53:
+        case 0x30F32A49:
         case 0x43DA9FD0:
         case 0x451E768E:
         case 0xC9BFD1C3:
-        case 0x30EB8F53:
-        case 0x30F32A49:
         case 0xE1A57D51:
             FEngSetScript(GetPackageName(), 0x47FF4E7C, 0xDE6EFF34, true);
             break;

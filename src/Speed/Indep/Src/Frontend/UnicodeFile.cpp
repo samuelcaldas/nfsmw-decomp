@@ -65,13 +65,12 @@ i16 *UnicodeFile::Next() {
                     goto done;
                 }
             }
-            if (next_ != end_) {
-                return next_;
-            }
         }
     }
 done:
-    next_ = nullptr;
+    if (next_ == end_) {
+        next_ = nullptr;
+    }
     return next_;
 }
 

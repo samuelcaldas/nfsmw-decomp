@@ -276,8 +276,7 @@ void uiRepSheetMilestones::RefreshHeader() {
             }
             char buf[32];
             bSNPrintf(buf, 32, "%$0.0f", goal);
-            FEPrintf(GetPackageName(), 0x28049d6, "%s %s", GetLocalizedString(FEDatabase->GetMilestoneDescHash(pMilestone->GetLocalizationTag())),
-                     buf, buf);
+            FEPrintf(GetPackageName(), 0x28049d6, GetLocalizedString(FEDatabase->GetMilestoneDescHash(pMilestone->GetLocalizationTag())), buf, buf);
         } else {
             SpeedTrapDatum *p = static_cast<SpeedTrapDatum *>(d);
             GSpeedTrap *pSpeedTrap = p->my_speedtrap;
@@ -285,16 +284,16 @@ void uiRepSheetMilestones::RefreshHeader() {
             FEPrintf(GetPackageName(), 0xb21d69bd, "%$0.0f", pSpeedTrap->GetBounty());
             const char *distUnits;
             float value;
-            if (FEDatabase->GetGameplaySettings()->SpeedoUnits == 0) {
-                value = MPS2KPH(pSpeedTrap->GetTriggerSpeed());
-                distUnits = GetLocalizedString(0x8569ab44);
-            } else {
-                value = MPS2MPH(pSpeedTrap->GetTriggerSpeed());
+            if (FEDatabase->GetGameplaySettings()->SpeedoUnits == 1) {
+                value = static_cast<int>(MPS2MPH(pSpeedTrap->GetTriggerSpeed()));
                 distUnits = GetLocalizedString(0x8569a25f);
+            } else {
+                value = static_cast<int>(MPS2KPH(pSpeedTrap->GetTriggerSpeed()));
+                distUnits = GetLocalizedString(0x8569ab44);
             }
             char buf[32];
             bSNPrintf(buf, 32, "%$0.0f %s", value, distUnits);
-            FEPrintf(GetPackageName(), 0x28049d6, "%s %s", GetLocalizedString(0xb14018bd), buf);
+            FEPrintf(GetPackageName(), 0x28049d6, GetLocalizedString(0xb14018bd), buf);
         }
 
         for (int i = 0; i < GetNumSlots(); i++) {

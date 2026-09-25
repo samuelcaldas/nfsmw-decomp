@@ -965,7 +965,6 @@ void WorldMap::AddCops() {
         }
         IPursuitAI *ipursuitai = nullptr;
         (*iter)->QueryInterface(&ipursuitai);
-        MapItem *item;
         bVector2 target_pos;
         bVector2 target_dir;
         bVector2 world_pos;
@@ -976,6 +975,7 @@ void WorldMap::AddCops() {
         float rot = ConvertRot(target_dir);
 
         if (ipursuitai != nullptr && ipursuitai->WasWithinEngagementRadius()) {
+            MapItem *item;
             if ((*iter)->GetVehicleClass() == VehicleClass::CHOPPER) {
                 AddMapItemOption(0xead9bd85, WMIT_COP_HELI);
                 const uint32 FEObj_HELICOPTERICONGROUP = 0xe26be422;

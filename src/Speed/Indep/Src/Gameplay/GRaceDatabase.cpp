@@ -15,6 +15,14 @@ GVault *GRaceBin::GetChildVault() const {
 }
 
 /**
+ * @brief Returns the Attrib collection key for this race bin.
+ * @return Collection key of the bin's gameplay attribute record.
+ */
+unsigned int GRaceBin::GetCollectionKey() const {
+    return this->mBinRecord.GetCollection();
+}
+
+/**
  * @brief Retrieves the child vault associated with these race parameters.
  * @return Pointer to the child vault.
  */

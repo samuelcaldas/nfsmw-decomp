@@ -1,10 +1,19 @@
 #include "G.hpp"
 
+struct tBigYUVSwizzler;
+void DELETE_tBigYUVSwizzler(tBigYUVSwizzler *swizzler);
+
 class GCHW_VD {
   public:
+    tBigYUVSwizzler *fSwizzler;
+
     ~GCHW_VD();
     void iDraw();
 };
+
+GCHW_VD::~GCHW_VD() {
+    DELETE_tBigYUVSwizzler(this->fSwizzler);
+}
 
 extern GCHW_VD *gGCVD;
 

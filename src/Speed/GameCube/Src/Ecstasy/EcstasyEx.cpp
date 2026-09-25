@@ -458,8 +458,13 @@ void GenerateHorizonFogDisplayList(void **display_list, unsigned long *size, GXV
     for (int j = 0; j < 7; j++) {
         GXBegin(GX_TRIANGLESTRIP, vertex_format, verts_per_strip);
         for (int i = 0; i < verts_per_strip; i++) {
-            grid_pointX = (((i >> 31) + i) >> 1) * vertex_spacingX;
-            grid_pointY = (((i >> 31) + i) >> 1) * vertex_spacingY + (i & 1) ? 68.571434f : 0.0f;
+            multiple = (((i >> 31) + i) >> 1);
+            grid_pointX = multiple * vertex_spacingX;
+            grid_pointY = (i & 1) ? 0.0f : vertex_spacingY;
+            tex_coordX = multiple * uv_spacingX;
+            tex_coordY = (i & 1) ? 0.0f : uv_spacingY;
+            grid_pointY = j * vertex_spacingY + grid_pointY;
+            tex_coordY = j * uv_spacingY + tex_coordY;
 
             float red = bSin(grid_pointX * 6.0f);
             float blue = bCos(grid_pointY * 6.0f);
@@ -639,8 +644,8 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     float n2z;                                                             // f24
     float theta;                                                           // f30
     float phi;                                                             // f30
-    unsigned short nlon = tess;                                            // r25
     unsigned short nlat = tess;                                            // r27
+    unsigned short nlon = tess;                                            // r25
     int i;                                                                 // r30
     int j;                                                                 // r31
     unsigned long dl_sz = ((tess - 2) * (tess + 1) * 2 + (tess + 1)) * 0x18; // r24
@@ -954,6 +959,8 @@ void eFinish() {}
 
 #include "dolphin/gx/GXPriv.h"
 
+extern GXData* const __GXData;
+
 static inline void write_bp_cmd(unsigned long cmd) {
     GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(cmd);
@@ -989,16 +996,15 @@ void eSetFogConstantZero() {
 void eSetFogConstantColour() {
     // Local variables
     int fog_colour; // r12
-    unsigned char fog_r = g_FogParams.FogColor.r;
-    unsigned char fog_g = g_FogParams.FogColor.g;
-    unsigned char fog_b = g_FogParams.FogColor.b;
+    int fog_r = g_FogParams.FogColor.r;
+    int fog_g = g_FogParams.FogColor.g;
+    int fog_b = g_FogParams.FogColor.b;
 
     fog_colour = int((fog_r + fog_g + fog_b) * FogCurrentBrightness);
     if (fog_colour != prevFogColour) {
-        prevFogColour = fog_colour;
-
         write_bp_cmd(((int(fog_r * FogCurrentBrightness) << 16) & 0xFF0000) | ((int(fog_g * FogCurrentBrightness) << 8) & 0x00FF00) |
                      ((int(fog_b * FogCurrentBrightness) << 0) & 0x0000FF) | (0xF2 << 24));
+        prevFogColour = fog_colour;
         gx->bpSentNot = 0;
     }
 }

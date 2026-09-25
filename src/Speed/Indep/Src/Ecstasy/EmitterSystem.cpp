@@ -979,7 +979,7 @@ void EmitterSystem::UpdateParticles(float dt) {
     float ed_gravity;                                           // f27
     float ed_life;                                              // f24
     const bMatrix4 *ExtraBasis;                                 // r14
-    const bMatrix4 *ColourBasis;                                // 15
+    const bMatrix4 *ColourBasis;                                // r15
     bool texture_animation;                                     // r16
     EffectParticleAnimation anim_type;                          // r18
     float fAnimFPS;                                              // f23
@@ -989,8 +989,8 @@ void EmitterSystem::UpdateParticles(float dt) {
         return;
     }
     time_step = static_cast<int>(dt * 1024.0f);
-    ed_drag = 0.0f;
     ed_gravity = 0.0f;
+    ed_drag = 0.0f;
     ed_life = 0.0f;
     ExtraBasis = nullptr;
     ColourBasis = nullptr;
@@ -1033,28 +1033,30 @@ void EmitterSystem::UpdateParticles(float dt) {
                     last_emitter_data = this_emitter_data;
                 }
                 for (EmitterParticle *particle = particles.GetHead(); particle != particles.EndOfList();) {
-                    bVector3 pvel;
-                    bVector3 pacc;
-                    bVector3 ppos;
-                    float tlife;
-                    UMath::Vector4 t;
-                    UMath::Vector4 extra_params;
-                    uint16 pangle;
-                    uint16 adelta;
-                    UMath::Vector4 col;
-                    uint32 r;
-                    uint32 g;
-                    uint32 b;
-                    uint32 a;
-                    bool ignore_programmer_badness;
-                    uint32 alpha_value_to_kill_at;
                     if (particle->mLife > time_step) {
+                        bVector3 pvel;
+                        bVector3 pacc;
+                        bVector3 ppos;
+                        float tlife;
+                        UMath::Vector4 t;
+                        UMath::Vector4 extra_params;
+                        uint16 pangle;
+                        uint16 adelta;
+                        UMath::Vector4 col;
+                        uint32 r;
+                        uint32 g;
+                        uint32 b;
+                        uint32 a;
+                        bool ignore_programmer_badness;
+                        uint32 alpha_value_to_kill_at;
                         if (texture_animation) {
                             const uint32 i_num_frames = ((uint32)anim_type * (uint32)anim_type);
                             const float f_num_frames = dt * fAnimFPS;
                             const float f_max_frame_index = (float)i_num_frames - 1.0f;
-                            uint32 cur_frame = particle->mAnimFrame;
-                            uint32 delta_frames = (int32)((f_num_frames / (float)i_num_frames) * 65535.0f);
+                            uint32 delta_frames;
+                            uint32 cur_frame;
+                            cur_frame = particle->mAnimFrame;
+                            delta_frames = (int32)((f_num_frames / (float)i_num_frames) * 65535.0f);
                             cur_frame += delta_frames;
                             if (cur_frame + delta_frames > 65535) {
                                 cur_frame -= 65535;

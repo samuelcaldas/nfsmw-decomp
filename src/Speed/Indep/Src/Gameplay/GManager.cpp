@@ -1,6 +1,7 @@
 #include "Speed/Indep/Src/Gameplay/GManager.h"
 #include "Speed/Indep/Src/Gameplay/GUserIncludes.h"
 #include "Speed/Indep/Src/Generated/AttribSys/Classes/gameplay.h"
+#include "Speed/Indep/Src/Interfaces/SimEntities/IPlayer.h"
 #include "Speed/Indep/bWare/Inc/bMemory.hpp"
 
 /**
@@ -205,6 +206,64 @@ void GManager::FreeAllIcons() {
     while (this->mNumIcons != 0) {
         this->FreeIconAt(0);
     }
+}
+
+/**
+ * @brief Collects visible icons and orders them by distance from the player.
+ * @param iconArray Destination array for the visible icon pointers.
+ * @param player Player used to calculate icon distance, or NULL to preserve order.
+ * @return Number of visible icons copied to the destination array.
+ */
+int GManager::GatherVisibleIcons(GIcon **iconArray, IPlayer *player) {
+    struct IconSort {
+        GIcon *icon;
+        int distance;
+
+        static int Compare(const void *first, const void *second) {
+            const IconSort *left = static_cast<const IconSort *>(first);
+            const IconSort *right = static_cast<const IconSort *>(second);
+            return left->distance - right->distance;
+        }
+    };
+
+    UMath::Vector3 playerPosition = UMath::Vector3::kZero;
+    ISimable *simable = NULL;
+    IconSort sortedIcons[200];
+    if (player != NULL) {
+        simable = player->GetSimable();
+    }
+    if (simable != NULL) {
+        const UMath::Vector3 &position = simable->GetPosition();
+        float positionX = position.x;
+        float positionZ = position.z;
+        float positionY = position.y;
+        playerPosition.y = -positionX;
+        playerPosition.x = positionZ;
+        playerPosition.z = positionY;
+    }
+
+    int visibleCount = 0;
+    for (unsigned int i = 0; i < this->mNumVisibleIcons; ++i) {
+        GIcon *icon = this->mIcons[i];
+        if (icon->IsFlagSet(1) && icon->IsFlagSet(2)) {
+            sortedIcons[visibleCount].icon = icon;
+            if (simable != NULL) {
+                sortedIcons[visibleCount].distance =
+                    static_cast<int>(UMath::DistanceSquarexz(icon->GetPosition(), playerPosition));
+            } else {
+                sortedIcons[visibleCount].distance = 0;
+            }
+            ++visibleCount;
+        }
+    }
+
+    if (simable != NULL) {
+        qsort(sortedIcons, visibleCount, sizeof(IconSort), IconSort::Compare);
+    }
+    for (int i = 0; i < visibleCount; ++i) {
+        iconArray[i] = sortedIcons[i].icon;
+    }
+    return visibleCount;
 }
 
 /**

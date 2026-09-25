@@ -139,3 +139,11 @@ const Attrib::Gen::gameplay *GRaceParameters::GetGameplayObj() const {
 unsigned int GRaceDatabase::GetRaceCount() {
     return this->mRaceCountStatic + this->mRaceCountDynamic;
 }
+
+/**
+ * @brief Finds the GActivity associated with this race's collection key.
+ * @return Pointer to the associated activity, or nullptr if not found.
+ */
+GActivity *GRaceParameters::GetActivity() const {
+    return GRuntimeInstance::FindObject<GActivity>(this->GetCollectionKey());
+}

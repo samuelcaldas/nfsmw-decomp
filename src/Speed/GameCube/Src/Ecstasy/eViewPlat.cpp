@@ -96,6 +96,16 @@ void eViewPlatInterface::GetScreenPosition(bVector3 *screen_position, const bVec
                   1.0f);
 }
 
+/**
+ * @brief Returns the width of the view's render target.
+ * @return The render target's scissor width in pixels.
+ */
+int eViewPlatInterface::GetPixelWidth() {
+    eView *view = static_cast<eView *>(this);
+    eRenderTarget *render_target = view->RenderTargetTable[0];
+    return render_target->ScissorW;
+}
+
 void eSubmitMesh(eStripEntry *mesh, unsigned short entries, eView *view, eSolid *solid, uint32 flags, TextureInfo *texture_info,
                  bMatrix4 *local_world, eLightContext *light_context, eLightMaterial *light_material, bMatrix4 *blending_matrices,
                  eDataRenderDynamic *drd) {

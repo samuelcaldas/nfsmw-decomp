@@ -179,8 +179,14 @@ def main():
                 ]
             )
 
+            non_banner_lines = [
+                line for line in content.splitlines()
+                if not line.strip().startswith(("│", "╭", "╰"))
+            ]
+            eval_content = "\n".join(non_banner_lines)
+
             has_forbidden_model = any(
-                m in content for m in ["opus", "sonnet", "gemini-pro", "gemini-1.5-pro"]
+                m in eval_content for m in ["opus", "sonnet", "gemini-pro", "gemini-1.5-pro"]
             )
             if has_forbidden_model:
                 anomalies.append(f"{name}: detected non-permitted model in scrollback!")

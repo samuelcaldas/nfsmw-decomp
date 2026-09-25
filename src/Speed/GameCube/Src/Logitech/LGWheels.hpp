@@ -287,6 +287,9 @@ struct Wheels {
 
 // total size: 0x100
 struct Force {
+    Force();
+    void InitVars();
+
     // Members
     bool Playing[8][4];           // offset 0x0, size 0x20
     unsigned long EffectID[8][4]; // offset 0x80, size 0x80
@@ -337,7 +340,9 @@ struct Periodic : public Force {
 };
 
 // total size: 0x100
-struct Ramp : public Force {};
+struct Ramp : public Force {
+    Ramp();
+};
 
 // total size: 0x16E4
 struct LGWheels {

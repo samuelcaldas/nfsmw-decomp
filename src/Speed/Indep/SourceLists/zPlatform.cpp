@@ -11,5 +11,10 @@
 #include "Speed/GameCube/Src/Movie_GC.cpp"
 #include "Speed/GameCube/Src/Render/AcidFX_G.cpp"
 #include "Speed/GameCube/Src/Logitech/Wheels.cpp"
+#include "Speed/GameCube/Src/Logitech/Force.cpp"
+#include "Speed/GameCube/Src/Logitech/Condition.cpp"
+#include "Speed/GameCube/Src/Logitech/Constant.cpp"
+#include "Speed/GameCube/Src/Logitech/Periodic.cpp"
+#include "Speed/GameCube/Src/Logitech/Ramp.cpp"
 #include "Speed/GameCube/Src/Logitech/LGWheels.cpp"
 #endif

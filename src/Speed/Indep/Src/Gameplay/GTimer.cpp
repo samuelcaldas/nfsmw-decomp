@@ -24,8 +24,3 @@ void GEventTimer::Stop() {
     this->mElapsed = 0.0f;
 }
 
-void GEventTimer::SetInterval(float value) {
-    this->mInterval = value;
-    this->mElapsed = 0.0f;
-}
-

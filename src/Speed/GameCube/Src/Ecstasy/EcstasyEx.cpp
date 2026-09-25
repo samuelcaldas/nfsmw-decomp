@@ -441,10 +441,11 @@ void GenerateHorizonFogDisplayList(void **display_list, unsigned long *size, GXV
 
     current_index = 0;
     verts_per_strip = 0x20;
-    color_mul = 0xF5;
     color_base = 10;
+    color_mul = 0xF5;
 
-    GXBeginDisplayList(*display_list, 0xC00);
+    dl_sz = 0xC00;
+    GXBeginDisplayList(*display_list, dl_sz);
 
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
@@ -460,16 +461,19 @@ void GenerateHorizonFogDisplayList(void **display_list, unsigned long *size, GXV
         for (int i = 0; i < verts_per_strip; i++) {
             multiple = i / 2;
             grid_pointX = multiple * vertex_spacingX;
-            grid_pointY = (i & 1) ? 0.0f : vertex_spacingY;
+            grid_pointY = vertex_spacingY;
+            if (i & 1) {
+                grid_pointY = 0.0f;
+            }
             tex_coordX = multiple * uv_spacingX;
-            tex_coordY = (i & 1) ? 0.0f : uv_spacingY;
             grid_pointY = j * vertex_spacingY + grid_pointY;
+            tex_coordY = (i & 1) ? 0.0f : uv_spacingY;
             tex_coordY = j * uv_spacingY + tex_coordY;
 
             float red = bSin(grid_pointX * 6.0f);
             float blue = bCos(grid_pointY * 6.0f);
-            unsigned char b_red = (unsigned char)(red * color_mul + color_base);
-            unsigned char b_blue = (unsigned char)(blue * color_mul + color_base);
+            unsigned char b_red = (unsigned char)(color_base + red * color_mul);
+            unsigned char b_blue = (unsigned char)(color_base + blue * color_mul);
 
             grid_color = b_red << 24 | b_blue << 8 | 0xFF;
 
@@ -489,7 +493,7 @@ void GenerateHorizonFogDisplayList(void **display_list, unsigned long *size, GXV
     HorizonCurrentCLR--;
     HorizonCurrentUVS--;
 
-    if (*size > 0xC00) {
+    if (*size > dl_sz) {
         OSPanic("d:/mw/speed/gamecube/src/ecstasy/EcstasyEx.cpp", 806, "Exiting");
     }
 }

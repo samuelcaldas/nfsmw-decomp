@@ -1673,6 +1673,44 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `Attrib::TAttrib<UMath::Vector4>::Get` & `Attrib::TAttrib<bool>::Get`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source Files**: `src/Speed/Indep/Tools/AttribSys/Runtime/AttribSys.h`, `src/Speed/Indep/SourceLists/zAI.cpp`
+- **Virtual Addresses**: `0x8003A9E4` (`Vector4`), `0x8003ACA0` (`bool`)
+- **Size**: 80 bytes each
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  template const UMath::Vector4 &Attrib::TAttrib<UMath::Vector4>::Get(unsigned int) const;
+  template const bool &Attrib::TAttrib<bool>::Get(unsigned int) const;
+  ```
+- **Description**: Explicit template instantiations for `Attrib::TAttrib` specialization accessors in `zAI`.
+
+---
+
+### `_STL::_Rb_global<bool>` Tree Operations
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `src/Speed/Indep/SourceLists/zAI.cpp` (`#define _STLP_EXPOSE_GLOBALS_IMPLEMENTATION`)
+- **Virtual Addresses**:
+  - `_Rotate_left`: `0x8003D298` (96 bytes)
+  - `_Rotate_right`: `0x8003D2F8` (96 bytes)
+  - `_Rebalance`: `0x8003D358` (360 bytes)
+  - `_M_decrement`: `0x8003D5EC` (112 bytes)
+  - `_M_increment`: `0x8003D928` (88 bytes)
+- **Total Size**: 752 bytes (5 functions)
+- **Matching State**: 100.0% match
+- **Signatures**:
+  ```cpp
+  void _STL::_Rb_global<bool>::_Rotate_left(_STL::_Rb_tree_node_base *, _STL::_Rb_tree_node_base *&);
+  void _STL::_Rb_global<bool>::_Rotate_right(_STL::_Rb_tree_node_base *, _STL::_Rb_tree_node_base *&);
+  void _STL::_Rb_global<bool>::_Rebalance(_STL::_Rb_tree_node_base *, _STL::_Rb_tree_node_base *&);
+  _STL::_Rb_tree_node_base *_STL::_Rb_global<bool>::_M_decrement(_STL::_Rb_tree_node_base *);
+  _STL::_Rb_tree_node_base *_STL::_Rb_global<bool>::_M_increment(_STL::_Rb_tree_node_base *);
+  ```
+- **Description**: Red-black tree rebalancing, rotation, increment, and decrement implementations from STLport compiled into `zAI` unit via exposing global implementations macro.
+
+---
+
 ## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 
 ### `PhysicsObject::GetEntity`

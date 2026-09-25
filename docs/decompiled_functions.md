@@ -929,6 +929,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `SFXObj_PFEATrax::ProcessUpdate`
+- **Unit**: `main/Speed/Indep/SourceLists/zEAXSound2`
+- **Source File**: `src/Speed/Indep/Src/EAXSound/CARSFX/SFXObj_Pathfinder.cpp`
+- **Virtual Address**: `0x800E5BC8`
+- **Size**: 664 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void SFXObj_PFEATrax::ProcessUpdate();
+  ```
+- **Description**: Updates Pathfinder playback, music volume, and stream filtering based on game state (IG vs FE) and music type. Achieves 100.0% matching parity with exact control flow, goto cleanup sequencing, and mixer channel scaling.
+
+---
+
 ## 3. Gameplay Subsystem (`zGameplay`)
 
 ### `IAudible::_IHandle`

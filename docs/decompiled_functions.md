@@ -945,6 +945,34 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 3. Gameplay Subsystem (`zGameplay`)
 
+### `BlockLoadingAttribAllocator::Free`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801CD288`
+- **Size**: 48 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void BlockLoadingAttribAllocator::Free(void *ptr, unsigned int bytes, const char *name);
+  ```
+- **Description**: Returns aligned memory to the available pool and logs deallocation. Aligns size up to 16-byte boundary via `(bytes + 15) & ~15`, increments `mFreeCount`, and adds aligned size to `mFreeBytes` and `mAvailBytes`. Matching at 100.0% parity.
+
+---
+
+### `BlockLoadingAttribAllocator::Allocate`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
+- **Virtual Address**: `0x801CD248`
+- **Size**: 64 bytes
+- **Matching State**: 99.25% match
+- **Signature**:
+  ```cpp
+  void *BlockLoadingAttribAllocator::Allocate(unsigned int bytes, const char *name);
+  ```
+- **Description**: Allocates aligned memory from the linear block and advances the allocation pointer. Reaches 99.25% match with minor instruction scheduling differences.
+
+---
+
 ### `GTrigger::NotifyEmitterGroupDelete`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GTrigger.cpp`

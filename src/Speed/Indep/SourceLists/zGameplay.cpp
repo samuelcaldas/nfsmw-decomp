@@ -30,4 +30,6 @@ template less<unsigned int> __less<unsigned int>(unsigned int *);
 template less<ObjectStateBlockHeader *> __less<ObjectStateBlockHeader *>(ObjectStateBlockHeader **);
 template less<short> __less<short>(short *);
 template equal_to<unsigned int> __equal_to<unsigned int>(unsigned int *);
+template void __unguarded_linear_insert<ObjectStateBlockHeader **, ObjectStateBlockHeader *, less<ObjectStateBlockHeader *> >(ObjectStateBlockHeader **, ObjectStateBlockHeader *, less<ObjectStateBlockHeader *>);
+template void __unguarded_linear_insert<unsigned int *, unsigned int, less<unsigned int> >(unsigned int *, unsigned int, less<unsigned int>);
 }

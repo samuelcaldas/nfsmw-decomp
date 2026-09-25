@@ -87,13 +87,13 @@ class GTrigger : public GRuntimeInstance {
     struct UMath::Vector3 mDirection;       // offset 0x68, size 0xC, Decl: 80
     WGridNodeElemTag mTriggerEnabled;       // offset 0x74, size 0x4, Decl: 81
     SimObjList mSimObjInside;               // offset 0x78, size 0x10, Decl: 82
+    CARP::EventList mEventList;             // offset 0x88, size 0x10
+    CARP::EventStaticData mEventStaticData; // offset 0x98, size 0x10
     char mTriggerEventData[16];             // offset 0xA8, size 0x10, Decl: 84
     EmitterGroup *mParticleEffect[2];       // offset 0xB8, size 0x8, Decl: 85
     struct GIcon *mIcon;                    // offset 0xC0, size 0x4, Decl: 86
     bool mEnabled;                          // offset 0xC4, size 0x1, Decl: 88
     int mActivationReferences;              // offset 0xC8, size 0x4, Decl: 89
-    CARP::EventList mEventList;             // offset 0x88, size 0x10
-    CARP::EventStaticData mEventStaticData; // offset 0x98, size 0x10
 };
 
 #endif

@@ -175,16 +175,13 @@ template <typename T, typename U, typename V> class Factory {
 
     ~Factory() {}
 
+    /**
+     * @brief Creates a product using the prototype registered for a signature.
+     * @param sig Product signature to find.
+     * @param params Parameters forwarded to the matching constructor.
+     * @return The created product, or nullptr if no prototype matches.
+     */
     static _PRODUCT CreateInstance(_PRODUCT_SIGNATURE sig, _BUILD_PARAMETERS params);
-    // TODO
-    //  {
-    //     for (const Prototype *f = Prototype::GetHead(); f != nullptr; f = f->GetNext()) {
-    //         if (f->mSignature == sig) {
-    //             return f->mConstructor(params);
-    //         }
-    //     }
-    //     return nullptr;
-    // }
 };
 
 #define IMPLEMENT_FACTORY(_Factory_) template <> _Factory_::Prototype *_Factory_::Prototype::mHead = NULL;

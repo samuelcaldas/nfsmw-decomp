@@ -1688,6 +1688,21 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `UTL::COM::Factory::CreateInstance` for AudioEvent
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source Files**: `src/Speed/Indep/Libs/Support/Utility/UCOM.h` (declaration), `src/Speed/Indep/SourceLists/zAI.cpp` (template definition and explicit instantiation)
+- **Virtual Address**: `0x8003C5C4`
+- **Size**: 92 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  Sound::AudioEvent *UTL::COM::Factory<const Sound::AudioEventParams &, Sound::AudioEvent, unsigned int>::CreateInstance(
+      unsigned int sig, const Sound::AudioEventParams &params);
+  ```
+- **Description**: Searches registered AudioEvent prototypes by signature, invokes the matching constructor, and returns `nullptr` when none matches.
+
+---
+
 ### `_STL::_Rb_global<bool>` Tree Operations
 - **Unit**: `main/Speed/Indep/SourceLists/zAI`
 - **Source File**: `src/Speed/Indep/SourceLists/zAI.cpp` (`#define _STLP_EXPOSE_GLOBALS_IMPLEMENTATION`)

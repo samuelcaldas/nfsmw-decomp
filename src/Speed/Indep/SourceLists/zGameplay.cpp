@@ -21,6 +21,8 @@
 #include "Speed/Indep/Src/Gameplay/GTimer.cpp"
 #include "Speed/Indep/Src/Gameplay/GMilestone.cpp"
 #include "Speed/Indep/Src/Gameplay/GSpeedTrap.cpp"
+#include "Speed/Indep/Src/Gameplay/GIconEmitterGroup.cpp"
+#include "Speed/Indep/Src/Gameplay/GInfractionManager.cpp"
 
 // Emit the STLPort comparison functors used by gameplay's unsigned-integer algorithms.
 namespace _STL {

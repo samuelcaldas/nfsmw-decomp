@@ -379,11 +379,11 @@ struct LGWheels {
 
     void PlayAutoCalibAndSpringForce(long channel);
 
-    void PlaySpringForce(long channel, char offset, unsigned char saturation, short coefficient);
+    void PlaySpringForce(long channel, signed char offset, unsigned char saturation, short coefficient);
 
     void StopSpringForce(long channel);
 
-    bool SameSpringForceParams(long channel, char offset, unsigned char saturation, short coefficient);
+    bool SameSpringForceParams(long channel, signed char offset, unsigned char saturation, short coefficient);
 
     void PlayConstantForce(long channel, short magnitude, unsigned short direction);
 

@@ -16,6 +16,14 @@ void LGWheels::StopSpringForce(long channel) {
     this->StopForce(channel, 0);
 }
 
+bool LGWheels::SameSpringForceParams(long channel, signed char offset, unsigned char saturation, short coefficient) {
+    bool res = false;
+    if (this->SpringForceParams[channel].offset == offset && this->SpringForceParams[channel].saturation == saturation) {
+        res = this->SpringForceParams[channel].coefficient == coefficient;
+    }
+    return res;
+}
+
 void LGWheels::StopConstantForce(long channel) {
     this->StopForce(channel, 1);
 }

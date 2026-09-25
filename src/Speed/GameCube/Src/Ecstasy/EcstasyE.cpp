@@ -260,28 +260,28 @@ void epInitViews(void) {
         eView *view = eGetView(6, false);
         view->SetRenderTarget0(eGetRenderTarget(4));
         view->SetCamera(&Player1Camera);
-        view->SetActive(1);
         view->Precipitation = eGetView(1, false)->Precipitation;
         view->GetPlatInfo()->SetLightPerspectiveProjection(&Player1SpecularProjection);
+        view->SetActive(1);
     }
     {
         eView *view = eGetView(7, false);
         view->SetRenderTarget0(eGetRenderTarget(5));
         view->SetCamera(&Player2Camera);
-        view->SetActive(0);
         view->Precipitation = eGetView(2, false)->Precipitation;
         view->GetPlatInfo()->SetLightPerspectiveProjection(&Player2SpecularProjection);
+        view->SetActive(0);
     }
     {
         eView *view = eGetView(8, false);
-        view->SetCamera(&Player1Camera);
         view->SetRenderTarget(eGetRenderTarget(6), 0);
+        view->SetCamera(&Player1Camera);
         view->SetActive(0);
     }
     {
         eView *view = eGetView(9, false);
-        view->SetCamera(&Player1Camera);
         view->SetRenderTarget0(eGetRenderTarget(7));
+        view->SetCamera(&Player1Camera);
         view->SetActive(0);
     }
     {

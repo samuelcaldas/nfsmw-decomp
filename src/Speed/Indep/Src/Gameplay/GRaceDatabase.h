@@ -449,6 +449,7 @@ class GRaceDatabase {
     };
     void LoadBestScores(GRaceSaveInfo *entries, unsigned int count);
     void SimulateDDayComplete();
+    void ResetCareerCompleteFlag(unsigned int eventHash);
     void ClearRaceScores();
 
     unsigned int GetBinCount();

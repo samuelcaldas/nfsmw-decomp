@@ -157,3 +157,12 @@ unsigned int GRaceBin::Deserialize(unsigned char *src) {
     bMemCpy(&this->mStats, src, 4);
     return 4;
 }
+
+/**
+ * @brief Clears the career-complete flag for the given event.
+ * @param eventHash Hash of the race event to reset.
+ */
+void GRaceDatabase::ResetCareerCompleteFlag(unsigned int eventHash) {
+    GRaceSaveInfo *info = GetScoreInfo(eventHash);
+    info->mFlags &= ~kCompleted_ContextCareer;
+}

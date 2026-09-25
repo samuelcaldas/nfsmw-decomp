@@ -634,11 +634,11 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     float r = 1.0f;                                                        // f19
     float r1;                                                              // f26
     float r2;                                                              // f25
-    float z1;                                                              // f29
     float z2;                                                              // f28
+    float z1;                                                              // f29
+    float n1z;                                                             // f21
     float n1x;                                                             // f31
     float n1y;                                                             // f1
-    float n1z;                                                             // f21
     float n2x;                                                             // f31
     float n2y;                                                             // f0
     float n2z;                                                             // f24
@@ -646,7 +646,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     float phi;                                                             // f30
     unsigned short nlat = tess;                                            // r27
     unsigned short nlon = tess;                                            // r25
-    unsigned long dl_sz = ((tess - 2) * (tess + 1) * 2 + (tess + 1)) * 0x18; // r24
+    unsigned long dl_sz = ((tess + 1) + (tess - 2) * (tess + 1) * 2) * 0x18; // r24
     dl_sz = (dl_sz + 0x1f) & ~0x1f;
 
     GXBeginDisplayList(*display_list, dl_sz);
@@ -662,7 +662,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     r2 = sinf(theta);
     z2 = cosf(theta);
 
-    n1z = 1.0f;
+    n1z = r;
     n2z = (z2 * 2) * z2 - r;
 
     GXPosition3f32(0.0f, 0.0f, n1z);

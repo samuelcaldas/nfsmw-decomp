@@ -99,7 +99,10 @@ U *UTL::COM::Factory<T, U, V>::CreateInstance(V sig, T params) {
 template Sound::AudioEvent *UTL::COM::Factory<const Sound::AudioEventParams &, Sound::AudioEvent, unsigned int>::CreateInstance(
     unsigned int, const Sound::AudioEventParams &);
 
+struct IDebugWatchCar;
+
 namespace _STL {
 template ISimpleBody **find<ISimpleBody **, ISimpleBody *>(ISimpleBody **, ISimpleBody **, ISimpleBody * const &);
 template EAX_HeliState **find<EAX_HeliState **, EAX_HeliState *>(EAX_HeliState **, EAX_HeliState **, EAX_HeliState * const &);
+template IDebugWatchCar **find<IDebugWatchCar **, IDebugWatchCar *>(IDebugWatchCar **, IDebugWatchCar **, IDebugWatchCar * const &);
 }

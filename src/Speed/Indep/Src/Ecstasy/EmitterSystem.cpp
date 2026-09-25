@@ -989,8 +989,8 @@ void EmitterSystem::UpdateParticles(float dt) {
         return;
     }
     time_step = static_cast<int>(dt * 1024.0f);
-    ed_drag = 0.0f;
     ed_gravity = 0.0f;
+    ed_drag = 0.0f;
     ed_life = 0.0f;
     ExtraBasis = nullptr;
     ColourBasis = nullptr;

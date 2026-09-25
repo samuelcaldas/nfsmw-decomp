@@ -116,7 +116,7 @@ void CSTATEMGR_CarState::ResolveCarBanks() {
     EnginesThatCanUpgradeToV8.clear();
     EnginesThatAreV8.clear();
 
-    bool CopsCanBeInGame = !FEDatabase->IsSplitScreenMode(); // TODO this is actually !IsQuickRaceMode()
+    bool CopsCanBeInGame = !FEDatabase->IsQuickRaceMode();
     ForcePrintResolveInfo = false;
 
     if (DEBUG_CAR_BANK_TEST_CASE == -1) {

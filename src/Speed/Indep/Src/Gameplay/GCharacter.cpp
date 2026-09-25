@@ -56,7 +56,13 @@ GCharacter::~GCharacter() {
     delete this->mAttachments;
 }
 
-// Line 58
+bool GCharacter::SpawnPending() const {
+    return this->mState == 2 || this->mState == 3;
+}
+
+bool GCharacter::IsSpawned() const {
+    return this->mState == 4 || this->mState == 5;
+}
 void GCharacter::OnAttached(IAttachable *pOther) {
 
 

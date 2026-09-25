@@ -5,7 +5,17 @@
 
 class IAudible : public UTL::COM::IUnknown {
   public:
-    DECL_INTERFACE(IAudible);
+    static HINTERFACE _IHandle();
+
+  protected:
+    ~IAudible() override {}
+    IAudible(UTL::COM::Object *owner) : UTL::COM::IUnknown(owner, (HINTERFACE)_IHandle) {}
+
+  private:
+    IAudible(const IAudible &);
+    const IAudible &operator=(const IAudible &);
+
+  public:
 
     virtual bool IsAudible() const = 0;
 };

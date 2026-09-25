@@ -931,6 +931,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 3. Gameplay Subsystem (`zGameplay`)
 
+### `IAudible::_IHandle`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Interfaces/Simables/IAudible.cpp`
+- **Virtual Address**: `0x801BC4A4`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  HINTERFACE IAudible::_IHandle();
+  ```
+- **Description**: Returns the self-referential handle used to identify the `IAudible` COM interface.
+
+---
+
 ### `GetNumBountySpawnMarkers`, `GetBountySpawnMarker` & `GetBountySpawnMarkerTag`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GManager.cpp`

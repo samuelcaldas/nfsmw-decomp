@@ -5,6 +5,7 @@
 
 #include "Speed/Indep/Src/Gameplay/GManager.h"
 #include "Speed/Indep/Src/Lua/LuaPostOffice.h"
+#include "Speed/Indep/Src/Interfaces/Simables/IAudible.cpp"
 #include "Speed/Indep/Src/Gameplay/GRaceStatus.cpp"
 #include "Speed/Indep/Src/Gameplay/GVault.cpp"
 #include "Speed/Indep/Src/Gameplay/GRaceDatabase.cpp"

@@ -441,8 +441,8 @@ void GenerateHorizonFogDisplayList(void **display_list, unsigned long *size, GXV
 
     current_index = 0;
     verts_per_strip = 0x20;
-    color_base = 10;
     color_mul = 0xF5;
+    color_base = 10;
 
     GXBeginDisplayList(*display_list, 0xC00);
 

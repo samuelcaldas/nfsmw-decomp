@@ -1532,6 +1532,24 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 6. AI Subsystem (`zAI`)
 
+### `ListableSet::Count` and `ListableSet::First`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `src/Speed/Indep/Libs/Support/Utility/UListable.h`
+- **Virtual Addresses / Sizes**:
+  - `IVehicle::Count`: `0x8003BDC8` / 24 bytes
+  - `IPlayer::First`: `0x8003CB4C` / 48 bytes
+  - `IVehicle::First`: `0x8003E850` / 48 bytes
+- **Matching State**: 100.0% match for all listed instantiations
+- **Signatures**:
+  ```cpp
+  int UTL::Collections::ListableSet<IVehicle, 10, eVehicleList, 10>::Count(eVehicleList idx);
+  IPlayer *UTL::Collections::ListableSet<IPlayer, 8, ePlayerList, 3>::First(ePlayerList idx);
+  IVehicle *UTL::Collections::ListableSet<IVehicle, 10, eVehicleList, 10>::First(eVehicleList idx);
+  ```
+- **Description**: Count reports the selected bucket's size. First returns its first element or `nullptr` when the bucket is empty.
+
+---
+
 ### `AICopManager::UpdatePursuits`
 - **Unit**: `main/Speed/Indep/SourceLists/zAI`
 - **Source**: `/home/samuelcaldas/repos/nfsmw/.claude/worktrees/wf_db765815-f10-1/src/Speed/Indep/Src/AI/Activities/AICopManager.cpp`

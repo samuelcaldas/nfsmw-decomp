@@ -144,7 +144,17 @@ template <typename T, int ListSize, typename Enum, std::size_t EnumMax> class Li
     };
 
   public:
+    /**
+     * @brief Returns the number of elements in the selected list.
+     * @param idx The list to inspect.
+     * @return The number of elements in the list.
+     */
     static int Count(Enum idx);
+    /**
+     * @brief Returns the first element in the selected list.
+     * @param idx The list to inspect.
+     * @return The first element, or nullptr when the list is empty.
+     */
     static iterator First(Enum idx);
     static iterator Last(Enum idx);
 
@@ -190,6 +200,20 @@ template <typename T, int ListSize, typename Enum, std::size_t EnumMax> class Li
   private:
     static _ListSet _mLists;
 };
+
+template <typename T, int ListSize, typename Enum, std::size_t EnumMax>
+int ListableSet<T, ListSize, Enum, EnumMax>::Count(Enum idx) {
+    return _mLists._buckets[idx].size();
+}
+
+template <typename T, int ListSize, typename Enum, std::size_t EnumMax>
+typename ListableSet<T, ListSize, Enum, EnumMax>::iterator ListableSet<T, ListSize, Enum, EnumMax>::First(Enum idx) {
+    const List &list = _mLists._buckets[idx];
+    if (list.size() != 0) {
+        return list[0];
+    }
+    return nullptr;
+}
 
 template <typename T> class Countable {
     static int _mCount;

@@ -964,12 +964,12 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GVault.cpp`
 - **Virtual Address**: `0x801CD248`
 - **Size**: 64 bytes
-- **Matching State**: 99.25% match
+- **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
   void *BlockLoadingAttribAllocator::Allocate(unsigned int bytes, const char *name);
   ```
-- **Description**: Allocates aligned memory from the linear block and advances the allocation pointer. Reaches 99.25% match with minor instruction scheduling differences.
+- **Description**: Allocates aligned memory from the linear block and advances the allocation pointer. Rounds size up to 16-byte alignment via `(bytes + 15) & ~15`, increments `mAllocCount`, advances `mAllocBytes`, `mAllocPtr`, and decrements `mAvailBytes`. Achieves 100.0% binary assembly parity (16/16 instructions).
 
 ---
 

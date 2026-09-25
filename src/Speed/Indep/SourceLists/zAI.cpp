@@ -74,3 +74,7 @@
 #include "Speed/Indep/Src/AI/Common/AIMath.cpp"
 
 #include "Speed/Indep/Src/AI/Gps.cpp"
+
+#include "Speed/Indep/Src/Gameplay/GReflected.h"
+
+template const GCollectionKey &Attrib::TAttrib<GCollectionKey>::Get(unsigned int) const;

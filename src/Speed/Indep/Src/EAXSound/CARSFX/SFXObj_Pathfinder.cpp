@@ -3,6 +3,7 @@
 #include "Speed/Indep/Src/EAXSound/EAXSOund.hpp"
 #include "Speed/Indep/Src/EAXSound/Stream/EAXS_StreamChannel.h"
 #include "Speed/Indep/Src/Generated/Messages/MNotifyMusicFlow.h"
+#include "Speed/Indep/Src/Frontend/FEManager.hpp"
 #include "Speed/Indep/Src/Misc/Config.h"
 #include "Speed/Indep/Src/Speech/SoundAI.h"
 #include "Speed/Indep/Src/World/ParameterMaps.hpp"
@@ -856,4 +857,54 @@ eMUSIC_TYPE SFXObj_PFEATrax::GenMusicType() {
         return (eMUSIC_TYPE)((this->m_Flags & 0x800) == 0);
     }
     return eMUSIC_TYPE_AMBIENCE;
+}
+
+/**
+ * @brief Updates the ambience zone from the player position or front-end location.
+ * @param t Elapsed update time.
+ */
+void SFXObj_PFEATrax::UpdateAmbience(float t) {
+    if (this->m_EATraxState == EATRAX_IG) {
+        int newzone = 0;
+        EAXCar *peaxcar_0 = g_pEAXSound->GetPlayerTunerCar(0);
+        if (peaxcar_0 != nullptr) {
+            EAX_CarState *pcar = peaxcar_0->GetPhysCar();
+            if (pcar != nullptr && AmbientAccessor.IsValid()) {
+                const bVector2 *ppos = pcar->GetPosition2D();
+                AmbientAccessor.CaptureData(ppos->x, ppos->y);
+                newzone = AmbientAccessor.GetDataInt(0);
+            }
+        }
+
+        if (this->m_nAmbientZone == newzone &&
+            SFXCTL_Pathfinder::m_pPFParms[this->m_ActiveProject]->track_status != 1) {
+            return;
+        }
+        if (static_cast<unsigned int>(newzone) <= 13) {
+            this->m_nAmbientZone = newzone;
+        }
+        return;
+    }
+
+    int oldzone;
+    if (FEDatabase->IsRapSheetMode()) {
+        oldzone = 13;
+    } else {
+        switch (FEManager::Get()->GetGarageType()) {
+            case GARAGETYPE_CAREER_SAFEHOUSE:
+                oldzone = 9;
+                break;
+            case GARAGETYPE_CUSTOMIZATION_SHOP:
+            case GARAGETYPE_CUSTOMIZATION_SHOP_BACKROOM:
+                oldzone = 10;
+                break;
+            case GARAGETYPE_CAR_LOT:
+                oldzone = 12;
+                break;
+            default:
+                oldzone = 11;
+                break;
+        }
+    }
+    this->m_nAmbientZone = oldzone;
 }

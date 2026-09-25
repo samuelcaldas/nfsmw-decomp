@@ -147,3 +147,13 @@ unsigned int GRaceDatabase::GetRaceCount() {
 GActivity *GRaceParameters::GetActivity() const {
     return GRuntimeInstance::FindObject<GActivity>(this->GetCollectionKey());
 }
+
+/**
+ * @brief Deserializes the race bin stats from a save buffer.
+ * @param src Source byte buffer to read from.
+ * @return Number of bytes consumed (always 4).
+ */
+unsigned int GRaceBin::Deserialize(unsigned char *src) {
+    bMemCpy(&this->mStats, src, 4);
+    return 4;
+}

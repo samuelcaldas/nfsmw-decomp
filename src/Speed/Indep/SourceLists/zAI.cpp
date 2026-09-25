@@ -3,6 +3,8 @@
 #pragma warning(disable : 4716)
 #endif
 
+#define _STLP_EXPOSE_GLOBALS_IMPLEMENTATION
+
 #include "Speed/Indep/Src/AI/Activities/AITrafficManager.cpp"
 
 #include "Speed/Indep/Src/AI/Activities/AICopManager.cpp"

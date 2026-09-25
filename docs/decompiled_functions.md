@@ -1759,6 +1759,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `_STL::find<IDebugWatchCar **, IDebugWatchCar *>`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `src/Speed/Indep/SourceLists/zAI.cpp`
+- **Virtual Address**: `0x80041480`
+- **Size**: 176 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  template IDebugWatchCar **_STL::find<IDebugWatchCar **, IDebugWatchCar *>(IDebugWatchCar **, IDebugWatchCar **, IDebugWatchCar * const &);
+  ```
+- **Description**: Linear search algorithm from STLport instantiated for `IDebugWatchCar *` pointer sequences in `zAI`. Achieves 100.0% binary assembly parity (176 bytes).
+
+---
+
 ## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 
 ### `PhysicsObject::GetEntity`

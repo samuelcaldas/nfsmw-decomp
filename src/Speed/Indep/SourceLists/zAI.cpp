@@ -78,7 +78,21 @@
 #include "Speed/Indep/Src/AI/Gps.cpp"
 
 #include "Speed/Indep/Src/Gameplay/GReflected.h"
+#include "Speed/Indep/Src/EAXSound/SoundCollision.hpp"
 
 template const GCollectionKey &Attrib::TAttrib<GCollectionKey>::Get(unsigned int) const;
 template const UMath::Vector4 &Attrib::TAttrib<UMath::Vector4>::Get(unsigned int) const;
 template const bool &Attrib::TAttrib<bool>::Get(unsigned int) const;
+
+template <typename T, typename U, typename V>
+U *UTL::COM::Factory<T, U, V>::CreateInstance(V sig, T params) {
+    for (const Prototype *f = Prototype::GetHead(); f != nullptr; f = f->GetNext()) {
+        if (f->mSignature == sig) {
+            return f->mConstructor(params);
+        }
+    }
+    return nullptr;
+}
+
+template Sound::AudioEvent *UTL::COM::Factory<const Sound::AudioEventParams &, Sound::AudioEvent, unsigned int>::CreateInstance(
+    unsigned int, const Sound::AudioEventParams &);

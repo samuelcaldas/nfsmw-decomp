@@ -143,7 +143,11 @@ class RCMP_SYSTEM {
     int m_DefaultMemDir;                                     // offset 0x8, size 0x4
 };
 
+#ifdef MOVIEPLAYER_NO_LOCAL_RCMP_SYSTEM
+extern RCMP_SYSTEM rcmp_sys;
+#else
 static RCMP_SYSTEM rcmp_sys;
+#endif
 
 enum FRAME_TYPE_ENUM {
     FRAME_MPC = 0,

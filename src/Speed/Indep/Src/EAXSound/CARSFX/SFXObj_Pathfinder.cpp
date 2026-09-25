@@ -4,6 +4,9 @@
 #include "Speed/Indep/Src/EAXSound/Stream/EAXS_StreamChannel.h"
 #include "Speed/Indep/Src/Generated/Messages/MNotifyMusicFlow.h"
 #include "Speed/Indep/Src/Frontend/FEManager.hpp"
+#define MOVIEPLAYER_NO_LOCAL_RCMP_SYSTEM
+#include "Speed/Indep/Src/Frontend/MoviePlayer/MoviePlayer.hpp"
+#undef MOVIEPLAYER_NO_LOCAL_RCMP_SYSTEM
 #include "Speed/Indep/Src/Misc/Config.h"
 #include "Speed/Indep/Src/Speech/SoundAI.h"
 #include "Speed/Indep/Src/World/ParameterMaps.hpp"
@@ -591,6 +594,101 @@ void SFXObj_PFEATrax::UpdateParams(float t) {
         }
 
         this->UpdatePursuitBreaker(t);
+    }
+}
+
+/**
+ * @brief Updates Pathfinder playback, music volume, and stream filtering.
+ */
+void SFXObj_PFEATrax::ProcessUpdate() {
+    bool path_playing;
+
+    if (IsAudioStreamingEnabled == 0) {
+        return;
+    }
+    if (this->m_bClearSkipUpdate) {
+        this->m_bClearSkipUpdate = false;
+        this->m_bSkipUpdate = false;
+    }
+    if ((this->m_Flags & 0x800) == 0) {
+        if ((this->m_Flags & 0x404) != 4) {
+            return;
+        }
+        if (this->m_PFParms[this->m_ActiveProject].queue_next == 1 && (this->m_Flags & 4) != 0) {
+            this->SendPathEvent();
+            SNDSYS_service();
+            goto CHECK_SKIP_UPDATE;
+        }
+        if (this->m_MusicType == eMUSIC_TYPE_LICENCED && (this->m_Flags & 0x40) == 0) {
+            if (this->m_bSkipUpdate) {
+                goto CHECK_SKIP_UPDATE;
+            }
+            if (this->m_CurPathEvent != 0x01C53FC7 && this->m_CurPathEvent != 0x01C3FA91) {
+                if (gMoviePlayer == nullptr || !gMoviePlayer->IsMoviePlaying()) {
+                    this->NotifyChyron();
+                }
+            }
+        }
+    }
+    if (this->m_bSkipUpdate) {
+CHECK_SKIP_UPDATE:
+        EAXS_StreamChannel *pch = g_pEAXSound->GetStreamManager()->GetStreamChannel(1);
+        if (pch != nullptr) {
+            pch->SetVol(0, false);
+        }
+        return;
+    }
+    if ((this->m_Flags & 0x800) == 0) {
+        path_playing = false;
+        if (this->m_PFParms[this->m_ActiveProject].track_status == 5 || this->m_PFParms[this->m_ActiveProject].track_status == 2) {
+            path_playing = true;
+        }
+    } else {
+        path_playing = false;
+    }
+    if (!path_playing) {
+        return;
+    }
+    {
+        int nvol = 0;
+        if (this->m_EATraxState == EATRAX_IG) {
+            switch (this->m_MusicType) {
+                case eMUSIC_TYPE_LICENCED:
+                case eMUSIC_TYPE_SPLASH:
+                    nvol = this->GetDMixOutput(1, DMX_VOL) * 100 >> 0xF;
+                    break;
+                case eMUSIC_TYPE_INTERACTIVE:
+                    nvol = this->GetDMixOutput(3, DMX_VOL) * 100 >> 0xF;
+                    break;
+                case eMUSIC_TYPE_AMBIENCE:
+                    nvol = this->GetDMixOutput(5, DMX_VOL) * 100 >> 0xF;
+                    break;
+                default:
+                    nvol = 0;
+                    break;
+            }
+        } else if (this->m_EATraxState == EATRAX_FE) {
+            switch (this->m_MusicType) {
+                case eMUSIC_TYPE_LICENCED:
+                case eMUSIC_TYPE_SPLASH:
+                    nvol = this->GetDMixOutput(0, DMX_VOL) * 100 >> 0xF;
+                    break;
+                case eMUSIC_TYPE_AMBIENCE:
+                    nvol = this->GetDMixOutput(4, DMX_VOL) * 100 >> 0xF;
+                    break;
+                default:
+                    nvol = 0;
+                    break;
+            }
+        }
+        this->m_Volume = nvol;
+        if ((this->m_Flags & 0x800) != 0) {
+            return;
+        }
+        PATH_volume(this->m_PFParms[this->m_ActiveProject].PATH_TRACK, static_cast<signed char>(nvol));
+        SNDSYS_entercritical();
+        SNDSTRM_lowpass(this->m_pSFXCTL_Pathfinder->GetHandle(this->m_ActiveProject), this->GetDMixOutput(9, DMX_FREQ));
+        SNDSYS_leavecritical();
     }
 }
 

@@ -614,7 +614,14 @@ TextureInfo *cSphereMap::BuildSphereMap() {
 
 char ENV_MAP_DISPLAY_LIST[20480];
 
-// TODO / EQUIVALENT
+/**
+ * @brief Builds the tessellated sphere display list used by sphere mapping.
+ * @param display_list Receives the display-list buffer.
+ * @param size Receives the generated display-list size.
+ * @param tess Sphere tessellation level.
+ * @param fmt GX vertex format.
+ * @return None.
+ */
 void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned short tess, GXVtxFmt fmt) {
     *display_list = ENV_MAP_DISPLAY_LIST;
 
@@ -636,9 +643,10 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     unsigned short nlat = tess;                                            // r27
     int i;                                                                 // r30
     int j;                                                                 // r31
-    unsigned long dl_sz = ((tess - 2) * (tess + 1) * 2 + tess + 1) * 0x18; // r24
+    unsigned long dl_sz = ((tess - 2) * (tess + 1) * 2 + (tess + 1)) * 0x18; // r24
+    dl_sz = (dl_sz + 0x1f) & ~0x1f;
 
-    GXBeginDisplayList(*display_list, *size);
+    GXBeginDisplayList(*display_list, dl_sz);
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetVtxDesc(GX_VA_NRM, GX_DIRECT);
@@ -652,7 +660,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     z2 = cosf(theta);
 
     n1z = 1.0f;
-    n2z = z2 * 4 - r;
+    n2z = (z2 * 2) * z2 - r;
 
     GXPosition3f32(0.0f, 0.0f, n1z);
     GXNormal3f32(0.0f, 0.0f, n1z);
@@ -671,7 +679,7 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
 
     // ...
 
-    for (i = 0; i < tess; i++) {
+    for (i = 2; i < tess; i++) {
         theta = gsPI * float(i) / nlat;
         phi = gsPI * float(i - 1) / nlat;
         r1 = r * sinf(phi);

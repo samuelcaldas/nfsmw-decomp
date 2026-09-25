@@ -1201,6 +1201,7 @@ void DrawXenonEmitters(eView *view);
  * @param view View to render particles into.
  */
 void EmitterSystem::Render(eView *view) {
+    ProfileNode profile_node;
     // Render particles
     if (!EnableParticleSystem) {
         return;
@@ -1229,42 +1230,43 @@ void EmitterSystem::Render(eView *view) {
                 UMath::Vector3 fwdVec;
                 UMath::Vector3 newUpVec;
                 UMath::Vector3 newRightVec;
+                unsigned int sprite_hack_flags = 0;
                 PlatGetViewVectors(view, rightVec, upVec, fwdVec);
                 bool submitParticles = PlatStartParticleRender(view, this->mCurrentTexture, em->GetNumParticles());
                 if (submitParticles) {
                     const EmitterDataAttribWrapper *last_emitter_data = nullptr;
-                    const Attrib::Gen::emitterdata *last_emitter_data_atr = nullptr;
-                    for (EmitterParticle *particle = plist->GetHead(); particle != plist->EndOfList(); particle = particle->GetNext()) {
-                        unsigned int sprite_hack_flags = 0;
+                    const Attrib::Gen::emitterdata *last_emitter_data_atr;
+                    for (EmitterParticle *part = plist->GetHead(); part != plist->EndOfList(); part = part->GetNext()) {
                         const EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
+                        const Attrib::Gen::emitterdata *this_emitter_data_atr = &this_emitter_data->GetAttributes();
                         bool emitter_data_switch = this_emitter_data != last_emitter_data;
                         if (emitter_data_switch) {
                             last_emitter_data = this_emitter_data;
-                            last_emitter_data_atr = &this_emitter_data->GetAttributes();
+                            last_emitter_data_atr = this_emitter_data_atr;
                         }
                         const EffectParticleConstraint &constraint = last_emitter_data_atr->AxisConstraint();
                         bool axis_constrained = constraint != CONSTRAIN_PARTICLE_NONE;
                         bVector4 xbasis;
                         bVector4 ybasis;
                         if (axis_constrained) {
-                            GetConstraintBasis(constraint, xbasis, ybasis, particle->mAngle, &world_view);
-                            bVector4 vposition(particle->mPosX, particle->mPosY, particle->mPosZ, 1.0f);
+                            GetConstraintBasis(constraint, xbasis, ybasis, part->mAngle, &world_view);
+                            bVector4 vposition(part->mPosX, part->mPosY, part->mPosZ, 1.0f);
                             eMulVector(&vposition, &world_view, &vposition);
-                            float world_size = particle->mSize;
+                            float world_size = part->mSize;
                             sprite_hack_flags = 2;
                             xbasis *= world_size;
                             ybasis *= world_size;
                         }
-                        PlatRotateScaleParticle(particle, rightVec, upVec, fwdVec, newUpVec, newRightVec);
-                        PlatAddParticle(*particle, newRightVec, newUpVec, sprite_hack_flags, axis_constrained ? &xbasis : nullptr,
+                        PlatRotateScaleParticle(part, rightVec, upVec, fwdVec, newUpVec, newRightVec);
+                        PlatAddParticle(*part, newRightVec, newUpVec, sprite_hack_flags, axis_constrained ? &xbasis : nullptr,
                                         axis_constrained ? &ybasis : nullptr);
                     }
                 }
                 PlatEndParticleRender();
             }
         }
-        total_num_textures = num_textures;
-        SetParticleSystemStats(this->mTotalNumParticles, 0x400, total_num_textures, GetNumParticleTextures(), gEmitterSystem.GetNumEmitters(), 500,
+        total_num_textures = GetNumParticleTextures();
+        SetParticleSystemStats(this->mTotalNumParticles, 0x400, num_textures, total_num_textures, gEmitterSystem.GetNumEmitters(), 500,
                                gEmitterSystem.GetNumEmitterGroups(), 200);
     }
     DrawXenonEmitters(view);

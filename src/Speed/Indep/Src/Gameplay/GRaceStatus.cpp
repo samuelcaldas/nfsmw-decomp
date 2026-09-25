@@ -172,3 +172,36 @@ void GRacerInfo::ChallengeComplete() {
     this->mChallengeComplete = true;
 }
 
+/**
+ * @brief Sets the simable handle for this racer from a live ISimable pointer.
+ * @param simable Pointer to the simable to assign; nullptr clears the handle.
+ */
+void GRacerInfo::SetSimable(ISimable *simable) {
+    if (simable != nullptr) {
+        this->mhSimable = static_cast<UTL::Collections::Instanceable<HSIMABLE, ISimable, 160> *>(simable)->GetInstanceHandle();
+    } else {
+        this->mhSimable = nullptr;
+    }
+}
+
+/**
+ * @brief Records the lap time for a given lap and racer slot.
+ * @param lapIndex   Lap index (0-based).
+ * @param racerIndex Racer slot index (0-based).
+ * @param time       Elapsed time for the lap.
+ */
+void GRaceStatus::SetLapTime(int lapIndex, int racerIndex, float time) {
+    this->mLapTimes[lapIndex][racerIndex] = time;
+}
+
+/**
+ * @brief Returns the adaptive catch-up bonus for Career races; zero otherwise.
+ * @return Adaptive difficulty bonus, or 0.0f when not in a Career race.
+ */
+float GRaceStatus::GetAdaptiveDifficutly() const {
+    if (this->mRaceContext == GRace::kRaceContext_Career) {
+        return this->fCatchUpAdaptiveBonus;
+    }
+    return 0.0f;
+}
+

@@ -1,5 +1,14 @@
 #include "G.hpp"
 #include "Speed/Indep/Src/Misc/Platform.h"
+#include <dolphin.h>
+
+void FlushCaches() {
+    PPCSync();
+}
+
+void EnableInterrupts() {
+    OSEnableInterrupts();
+}
 
 eLanguages GC_GetOSLanguage() {}
 

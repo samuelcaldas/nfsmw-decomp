@@ -10,4 +10,6 @@
 #include "Speed/GameCube/Src/DemoDisc_G.cpp"
 #include "Speed/GameCube/Src/Movie_GC.cpp"
 #include "Speed/GameCube/Src/Render/AcidFX_G.cpp"
+#include "Speed/GameCube/Src/Logitech/Wheels.cpp"
+#include "Speed/GameCube/Src/Logitech/LGWheels.cpp"
 #endif

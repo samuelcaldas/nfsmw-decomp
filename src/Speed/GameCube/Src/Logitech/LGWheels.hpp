@@ -260,19 +260,19 @@ struct Wheels {
 
     int FirstConnectedPort();
 
-    bool ButtonIsPressed(int channel, unsigned long buttonMask);
+    bool ButtonIsPressed(long channel, unsigned long buttonMask);
 
-    bool ButtonTriggered(int channel, unsigned long buttonMask);
+    bool ButtonTriggered(long channel, unsigned long buttonMask);
 
-    bool ButtonReleased(int channel, unsigned long buttonMask);
+    bool ButtonReleased(long channel, unsigned long buttonMask);
 
-    bool IsConnected(int channel);
+    bool IsConnected(long channel);
 
-    bool PedalsConnected(int channel);
+    bool PedalsConnected(long channel);
 
-    bool PowerConnected(int channel);
+    bool PowerConnected(long channel);
 
-    void GenerateNonLinValues(int channel, unsigned char nonLinCoeff);
+    void GenerateNonLinValues(long channel, unsigned char nonLinCoeff);
 
     float CalculateNonLinValue(int inputValue, unsigned char nonLinearCoeff, short nonLinMinOutput, short nonLinMaxOutput);
 
@@ -299,10 +299,10 @@ struct Condition : public Force {
 
     ~Condition();
 
-    int DownloadForce(int channel, int forceNumber, unsigned long &handle, unsigned char type, unsigned long duration, unsigned long startDelay,
+    int DownloadForce(long channel, int forceNumber, unsigned long &handle, unsigned char type, unsigned long duration, unsigned long startDelay,
                       char offset, unsigned char deadband, unsigned char satNeg, unsigned char satPos, short coeffNeg, short coeffPos);
 
-    int UpdateForce(int channel, int forceNumber, unsigned char type, unsigned long duration, unsigned long startDelay, char offset,
+    int UpdateForce(long channel, int forceNumber, unsigned char type, unsigned long duration, unsigned long startDelay, char offset,
                     unsigned char deadband, unsigned char satNeg, unsigned char satPos, short coeffNeg, short coeffPos);
 };
 
@@ -313,10 +313,10 @@ struct Constant : public Force {
 
     ~Constant();
 
-    int DownloadForce(int channel, int forceNumber, unsigned long &handle, unsigned long duration, unsigned long startDelay, short magnitude,
+    int DownloadForce(long channel, int forceNumber, unsigned long &handle, unsigned long duration, unsigned long startDelay, short magnitude,
                       unsigned short direction, unsigned long attackTime, unsigned long fadeTime, unsigned char attackLevel, unsigned char fadeLevel);
 
-    int UpdateForce(int channel, int forceNumber, unsigned long duration, unsigned long startDelay, short magnitude, unsigned short direction,
+    int UpdateForce(long channel, int forceNumber, unsigned long duration, unsigned long startDelay, short magnitude, unsigned short direction,
                     unsigned long attackTime, unsigned long fadeTime, unsigned char attackLevel, unsigned char fadeLevel);
 };
 
@@ -327,11 +327,11 @@ struct Periodic : public Force {
 
     ~Periodic();
 
-    int DownloadForce(int channel, int forceNumber, unsigned long &handle, unsigned char type, unsigned long duration, unsigned long startDelay,
+    int DownloadForce(long channel, int forceNumber, unsigned long &handle, unsigned char type, unsigned long duration, unsigned long startDelay,
                       unsigned char magnitude, unsigned short direction, unsigned short period, unsigned short phase, short offset,
                       unsigned long attackTime, unsigned long fadeTime, unsigned char attackLevel, unsigned char fadeLevel);
 
-    int UpdateForce(int channel, int forceNumber, unsigned char type, unsigned long duration, unsigned long startDelay, unsigned char magnitude,
+    int UpdateForce(long channel, int forceNumber, unsigned char type, unsigned long duration, unsigned long startDelay, unsigned char magnitude,
                     unsigned short direction, unsigned short period, unsigned short phase, short offset, unsigned long attackTime,
                     unsigned long fadeTime, unsigned char attackLevel, unsigned char fadeLevel);
 };
@@ -346,87 +346,87 @@ struct LGWheels {
 
     ~LGWheels();
 
-    void InitVars(int channel);
+    void InitVars(long channel);
 
     void ReadAll();
 
-    void StopForce(int channel, int forceType);
+    void StopForce(long channel, long forceType);
 
-    bool IsConnected(int channel);
+    bool IsConnected(long channel);
 
-    bool IsPlaying(int channel, int forceType);
+    bool IsPlaying(long channel, long forceType);
 
-    bool ButtonTriggered(int channel, unsigned long buttonMask);
+    bool ButtonTriggered(long channel, unsigned long buttonMask);
 
-    bool ButtonReleased(int channel, unsigned long buttonMask);
+    bool ButtonReleased(long channel, unsigned long buttonMask);
 
-    bool ButtonIsPressed(int channel, unsigned long buttonMask);
+    bool ButtonIsPressed(long channel, unsigned long buttonMask);
 
-    bool PedalsConnected(int channel);
+    bool PedalsConnected(long channel);
 
-    bool PowerConnected(int channel);
+    bool PowerConnected(long channel);
 
-    void SetOverallForceGain(int channel, int value);
+    void SetOverallForceGain(long channel, int value);
 
-    int GetOverallForceGain(int channel);
+    int GetOverallForceGain(long channel);
 
-    void GenerateNonLinValues(int channel, unsigned char nonLinCoeff);
+    void GenerateNonLinValues(long channel, unsigned char nonLinCoeff);
 
-    void PlayAutoCalibAndSpringForce(int channel);
+    void PlayAutoCalibAndSpringForce(long channel);
 
-    void PlaySpringForce(int channel, char offset, unsigned char saturation, short coefficient);
+    void PlaySpringForce(long channel, char offset, unsigned char saturation, short coefficient);
 
-    void StopSpringForce(int channel);
+    void StopSpringForce(long channel);
 
-    bool SameSpringForceParams(int channel, char offset, unsigned char saturation, short coefficient);
+    bool SameSpringForceParams(long channel, char offset, unsigned char saturation, short coefficient);
 
-    void PlayConstantForce(int channel, short magnitude, unsigned short direction);
+    void PlayConstantForce(long channel, short magnitude, unsigned short direction);
 
-    void StopConstantForce(int channel);
+    void StopConstantForce(long channel);
 
-    bool SameConstantForceParams(int channel, short magnitude, unsigned short direction);
+    bool SameConstantForceParams(long channel, short magnitude, unsigned short direction);
 
-    void PlayDamperForce(int channel, short coefficient);
+    void PlayDamperForce(long channel, short coefficient);
 
-    void StopDamperForce(int channel);
+    void StopDamperForce(long channel);
 
-    bool SameDamperForceParams(int channel, short coefficient);
+    bool SameDamperForceParams(long channel, short coefficient);
 
-    void PlaySideCollisionForce(int channel, short magnitude, unsigned short direction);
+    void PlaySideCollisionForce(long channel, short magnitude, unsigned short direction);
 
-    bool SameSideCollisionForceParams(int channel, short magnitude, unsigned short direction);
+    bool SameSideCollisionForceParams(long channel, short magnitude, unsigned short direction);
 
-    void PlayFrontalCollisionForce(int channel, unsigned char magnitude);
+    void PlayFrontalCollisionForce(long channel, unsigned char magnitude);
 
-    bool SameFrontalCollisionForceParams(int channel, short magnitude);
+    bool SameFrontalCollisionForceParams(long channel, short magnitude);
 
-    void PlayDirtRoadEffect(int channel, unsigned char magnitude);
+    void PlayDirtRoadEffect(long channel, unsigned char magnitude);
 
-    void StopDirtRoadEffect(int channel);
+    void StopDirtRoadEffect(long channel);
 
-    bool SameDirtRoadEffectParams(int channel, short magnitude);
+    bool SameDirtRoadEffectParams(long channel, short magnitude);
 
-    void PlayBumpyRoadEffect(int channel, unsigned char magnitude);
+    void PlayBumpyRoadEffect(long channel, unsigned char magnitude);
 
-    void StopBumpyRoadEffect(int channel);
+    void StopBumpyRoadEffect(long channel);
 
-    bool SameBumpyRoadEffectParams(int channel, short magnitude);
+    bool SameBumpyRoadEffectParams(long channel, short magnitude);
 
-    void PlaySlipperyRoadEffect(int channel, short magnitude);
+    void PlaySlipperyRoadEffect(long channel, short magnitude);
 
-    void StopSlipperyRoadEffect(int channel);
+    void StopSlipperyRoadEffect(long channel);
 
-    bool SameSlipperyRoadEffectParams(int channel, short magnitude);
+    bool SameSlipperyRoadEffectParams(long channel, short magnitude);
 
-    void PlaySurfaceEffect(int channel, unsigned char type, unsigned char magnitude, unsigned short period);
+    void PlaySurfaceEffect(long channel, unsigned char type, unsigned char magnitude, unsigned short period);
 
-    void StopSurfaceEffect(int channel);
+    void StopSurfaceEffect(long channel);
 
-    bool SameSurfaceEffectParams(int channel, unsigned char type, unsigned char magnitude, unsigned short period);
+    bool SameSurfaceEffectParams(long channel, unsigned char type, unsigned char magnitude, unsigned short period);
 
-    void PlayCarAirborne(int channel);
+    void PlayCarAirborne(long channel);
 
-    void StopCarAirborne(int channel);
+    void StopCarAirborne(long channel);
 
     // Members
     LGPosition Position[4];               // offset 0x0, size 0x28

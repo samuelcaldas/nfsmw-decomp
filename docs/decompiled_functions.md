@@ -945,6 +945,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 3. Gameplay Subsystem (`zGameplay`)
 
+### `GTrigger::NotifyEmitterGroupDelete`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GTrigger.cpp`
+- **Virtual Address**: `0x801AC090`
+- **Size**: 48 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GTrigger::NotifyEmitterGroupDelete(void *obj, EmitterGroup *group);
+  ```
+- **Description**: Clears the particle effect slot matching the deleted emitter group using an unsigned do-while loop over `mParticleEffect[2]`. Reordering members in `GTrigger.h` (`mEventList` and `mEventStaticData` at offsets 0x88 and 0x98) achieves exact binary layout and struct offset matching at 100.0% parity.
+
+---
+
 ### `IAudible::_IHandle`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Interfaces/Simables/IAudible.cpp`

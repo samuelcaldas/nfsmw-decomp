@@ -55,6 +55,22 @@ void BlockLoadingAttribAllocator::Free(void *ptr, unsigned int bytes, const char
 }
 
 /**
+ * @brief Allocates aligned memory from the linear block, advancing the allocation pointer.
+ * @param bytes Size of the allocation in bytes; rounded up to 16-byte alignment.
+ * @param name  Allocation name tag (unused).
+ * @return Pointer to the allocated block.
+ */
+void *BlockLoadingAttribAllocator::Allocate(unsigned int bytes, const char *name) {
+    void *result = mAllocPtr;
+    unsigned int aligned = (bytes + 15) & ~15;
+    mAllocCount++;
+    mAllocPtr += aligned;
+    mAllocBytes += aligned;
+    mAvailBytes -= aligned;
+    return result;
+}
+
+/**
  * @brief Gets the name of the vault.
  */
 const char *GVault::GetName() const {

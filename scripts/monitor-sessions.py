@@ -36,8 +36,8 @@ SESSIONS = [
     {
         "name": "nfs4",
         "pane": "PS2:3",
-        "unit": "zGameplay",
-        "prompt": "Continue a decompilação no próximo candidato de zGameplay. Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
+        "unit": "zWorld2",
+        "prompt": "Continue a decompilação no próximo candidato de zWorld2 (ex: WCollisionMgr::FindFaceInCInst). Invoque o agente decomp-worker ou workflow com gemini-3.5-flash-lite, respeite os anti-slop guardrails e valide com ninja changes.",
     },
     {
         "name": "nfs5",

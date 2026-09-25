@@ -1745,6 +1745,20 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `_STL::find<EAX_HeliState **, EAX_HeliState *>`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source File**: `src/Speed/Indep/SourceLists/zAI.cpp`
+- **Virtual Address**: `0x8003C6D0`
+- **Size**: 176 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  template EAX_HeliState **_STL::find<EAX_HeliState **, EAX_HeliState *>(EAX_HeliState **, EAX_HeliState **, EAX_HeliState * const &);
+  ```
+- **Description**: Linear search algorithm from STLport instantiated for `EAX_HeliState *` pointer sequences in `zAI`. Achieves 100.0% binary assembly parity (176 bytes).
+
+---
+
 ## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)
 
 ### `PhysicsObject::GetEntity`

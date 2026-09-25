@@ -3300,9 +3300,11 @@ float WRoadNav::CookieTrailCurvature(const UMath::Vector3 &car_position, const U
                     if (this->nAvoidableOcclusion != 0) {
                         float my_trailingspeed = UMath::Dot(car_velocity, current_to_apex);
                         float closing_speed = (my_trailingspeed - this->fOccludingTrailSpeed);
-                        float ratio = 0.0f;
+                        float ratio;
                         if (my_trailingspeed > 1e-6f) {
                             ratio = UMath::Ramp(closing_speed / my_trailingspeed, 0.0f, 1.0f);
+                        } else {
+                            ratio = 0.0f;
                         }
                         apex *= ratio * ratio;
                     }
@@ -3332,7 +3334,7 @@ float WRoadNav::CookieTrailCurvature(const UMath::Vector3 &car_position, const U
             road_curvature = bAbs(total_curvature / distance);
         }
 
-        return UMath::Max(apex, road_curvature);
+        return UMath::Max(road_curvature, apex);
     }
     return 0.0f;
 }

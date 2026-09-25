@@ -199,10 +199,10 @@ extern ClassHandle gFX_UVESHandle; // size: 0x10, Decl: 272
 typedef struct {
     int iD;           // offset 0x0, size 0x4
     int volume;       // offset 0x4, size 0x4
-    int width;        // offset 0x8, size 0x4
+    int stop;         // offset 0x8, size 0x4
     int pitch_Offset; // offset 0xC, size 0x4
     int intensity;    // offset 0x10, size 0x4
-    int stop;         // offset 0x14, size 0x4
+    int width;        // offset 0x14, size 0x4
 } FX_UVESStruct;
 
 extern InterfaceId FX_RadarId;      // size: 0x8, Decl: 291

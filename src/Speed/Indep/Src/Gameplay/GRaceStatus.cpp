@@ -195,6 +195,17 @@ void GRaceStatus::SetLapTime(int lapIndex, int racerIndex, float time) {
 }
 
 /**
+ * @brief Records a checkpoint split time for a given lap, racer, and checkpoint.
+ * @param lapIndex        Lap index (0-based).
+ * @param racerIndex      Racer slot index (0-based).
+ * @param checkpointIndex Checkpoint index (0-based).
+ * @param time            Elapsed time at the checkpoint.
+ */
+void GRaceStatus::SetCheckpointTime(int lapIndex, int racerIndex, int checkpointIndex, float time) {
+    this->mCheckTimes[lapIndex][racerIndex][checkpointIndex] = time;
+}
+
+/**
  * @brief Returns the adaptive catch-up bonus for Career races; zero otherwise.
  * @return Adaptive difficulty bonus, or 0.0f when not in a Career race.
  */

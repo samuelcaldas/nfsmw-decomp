@@ -25,5 +25,7 @@
 // Emit the STLPort comparison functors used by gameplay's unsigned-integer algorithms.
 namespace _STL {
 template less<unsigned int> __less<unsigned int>(unsigned int *);
+template less<ObjectStateBlockHeader *> __less<ObjectStateBlockHeader *>(ObjectStateBlockHeader **);
+template less<short> __less<short>(short *);
 template equal_to<unsigned int> __equal_to<unsigned int>(unsigned int *);
 }

@@ -298,8 +298,6 @@ bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath
 
     UMath::Vector3 tp0;
     UMath::Vector3 tp1;
-    float invDen;
-    UMath::Vector3 npVec;
 
     UMath::RotateTranslate(startPt, invMat, tp0);
 
@@ -307,6 +305,8 @@ bool WCollisionMgr::FindFaceInCInst(const UMath::Matrix4 &vectorMat, const UMath
     const WCollisionStripSphere *sp = cArt->GetStripSphere(0);
     bool foundFace = false;
 
+    float invDen;
+    UMath::Vector3 npVec;
     NearPtLinePerSeg(tp0, tp1, invDen, npVec);
 
     for (int i = 0; i < cArt->fNumStrips; ++i, ++sp) {

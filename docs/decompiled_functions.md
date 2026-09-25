@@ -1993,6 +1993,34 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ## 9. Ecstasy / Particle Subsystem (`zEcstasy`)
 
+### `eGetEnvMap`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/GameCube/Src/Ecstasy/eEnvMapE.cpp`
+- **Virtual Address**: `0x8010AA84`
+- **Size**: 12 bytes (3 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  eEnvMap *eGetEnvMap();
+  ```
+- **Description**: Returns pointer to the singleton global `TheOnlyEnvMap` environment map object. Achieves 100.0% binary assembly parity (3/3 instructions).
+
+---
+
+### `eDisplayEnvRenderTargets`
+- **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
+- **Source File**: `src/Speed/GameCube/Src/Ecstasy/eEnvMapE.cpp`
+- **Virtual Address**: `0x8010AA90`
+- **Size**: 36 bytes (9 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void eDisplayEnvRenderTargets(eView *view);
+  ```
+- **Description**: Display subroutine for environment render targets. Allocates stack frame and local poly variables with 100.0% binary assembly parity.
+
+---
+
 ### `EmitterSystem::UpdateParticles`
 - **Unit**: `main/Speed/Indep/SourceLists/zEcstasy`
 - **Source File**: `src/Speed/Indep/Src/Ecstasy/EmitterSystem.cpp`

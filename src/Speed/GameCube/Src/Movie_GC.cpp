@@ -9,7 +9,7 @@ void GCDrawMovie() {}
 // void PlatSetFirstMovieFrame(TextureInfo *texture_info, Shape *yuv_shape, bool isVP6Movie) {
 // }
 
-unsigned int RCMP_GetMaxFramesOutStanding() {}
+unsigned int RCMP_GetMaxFramesOutStanding() { return 2; }
 
 void PlatFinishMovie() {}
 

@@ -6,3 +6,5 @@ eLanguages GC_GetOSLanguage() {}
 void FinishedRenderingFEngLayer() {}
 
 void ServicePlatform() {}
+
+int bDoWithStack(void *, void *, int, int) { return 0; }

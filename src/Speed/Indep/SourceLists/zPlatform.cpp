@@ -8,4 +8,6 @@
 #include "Speed/GameCube/Src/xSparks.cpp"
 #include "Speed/GameCube/Src/Platform_G.cpp"
 #include "Speed/GameCube/Src/DemoDisc_G.cpp"
+#include "Speed/GameCube/Src/Movie_GC.cpp"
+#include "Speed/GameCube/Src/Render/AcidFX_G.cpp"
 #endif

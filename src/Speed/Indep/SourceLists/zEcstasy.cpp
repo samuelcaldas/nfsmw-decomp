@@ -26,6 +26,8 @@
 
 #include "Speed/GameCube/Src/Ecstasy/EcstasyEx.cpp"
 
+#include "Speed/GameCube/Src/Ecstasy/eEnvMapE.cpp"
+
 #include "Speed/GameCube/Src/Ecstasy/eMathE.cpp"
 
 #include "Speed/GameCube/Src/Ecstasy/eStrip.cpp"

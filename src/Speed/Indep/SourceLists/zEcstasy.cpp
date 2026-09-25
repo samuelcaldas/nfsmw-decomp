@@ -33,6 +33,8 @@
 #include "Speed/GameCube/Src/Ecstasy/eSolidPlat.cpp"
 
 #include "Speed/GameCube/Src/Ecstasy/eViewPlat.cpp"
+
+#include "Speed/GameCube/Src/Ecstasy/eVisualTreatment.cpp"
 #endif
 
 #include "Speed/Indep/Src/Ecstasy/EmitterSystem.cpp"

@@ -53,3 +53,12 @@ int eUnloadSolidListPlatChunks(bChunk *chunk) {
     }
     return 1;
 }
+
+/**
+ * @brief Keeps the smooth-vertex setter as an empty platform stub.
+ * @param vertex_offset Offset of the vertex to update.
+ * @param nx X component of the vertex normal.
+ * @param ny Y component of the vertex normal.
+ * @param nz Z component of the vertex normal.
+ */
+void eSolidPlatInterface::SetSmoothVertex(uint32 vertex_offset, float nx, float ny, float nz) {}

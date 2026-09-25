@@ -216,3 +216,17 @@ float GRaceStatus::GetAdaptiveDifficutly() const {
     return 0.0f;
 }
 
+/**
+ * @brief Returns the length of a race segment, with a lap-dependent adjustment for segment 0.
+ * @param segment Segment index (0-based).
+ * @param lap     Current lap number; 0 or negative returns the base segment length.
+ * @return Segment length in world units.
+ */
+float GRaceStatus::GetSegmentLength(int segment, int lap) {
+    float length = mSegmentLengths[segment];
+    if (lap > 0 && segment == 0) {
+        length += (fSubsequentLapLength - fFirstLapLength);
+    }
+    return length;
+}
+

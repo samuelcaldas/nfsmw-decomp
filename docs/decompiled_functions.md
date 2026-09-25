@@ -1003,6 +1003,48 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GInfractionManager::GInfractionManager`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GInfractionManager.cpp`
+- **Virtual Address**: `0x801B4554`
+- **Size**: 32 bytes (8 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  GInfractionManager::GInfractionManager();
+  ```
+- **Description**: Initializes the infraction mask, pursuit count, and pursuit state flags.
+
+---
+
+### `GInfractionManager::PursuitStarted`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GInfractionManager.cpp`
+- **Virtual Address**: `0x801B45AC`
+- **Size**: 28 bytes (7 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  void GInfractionManager::PursuitStarted();
+  ```
+- **Description**: Clears the infraction mask, pursuit count, and related state flags at pursuit start.
+
+---
+
+### `GInfractionManager::GetNumInfractions`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GInfractionManager.cpp`
+- **Virtual Address**: `0x801B46C4`
+- **Size**: 40 bytes (10 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  unsigned int GInfractionManager::GetNumInfractions();
+  ```
+- **Description**: Counts set bits in the current infraction mask.
+
+---
+
 ### `GRaceStatus::OnRemovedVehicleCache`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`

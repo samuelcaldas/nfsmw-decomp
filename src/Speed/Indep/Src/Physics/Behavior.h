@@ -51,24 +51,19 @@ class Behavior : public Sim::Object, public UTL::COM::Factory<const BehaviorPara
 
     virtual void OnOwnerAttached(IAttachable *pOther) {}
 
-    virtual void OnOwnerDetached(IAttachable *pOther) {
-        // TODO right place?
-    }
+    virtual void OnOwnerDetached(IAttachable *pOther) {}
 
   protected:
-    virtual void OnTaskSimulate(float dT);
+    virtual void OnTaskSimulate(float dT) {}
 
     virtual void OnBehaviorChange(const UCrc32 &mechanic) {}
 
-    virtual void OnPause();
-    virtual void OnUnPause();
+    virtual void OnPause() {}
+    virtual void OnUnPause() {}
 
     Behavior(const BehaviorParams &params, unsigned int num_interfaces);
 
-    ~Behavior() override {
-        // TODO
-        Sim::Profile::Release(nullptr);
-    }
+    ~Behavior() override {}
 
   private:
     bool mPaused;                 // offset 0x30, size 0x1

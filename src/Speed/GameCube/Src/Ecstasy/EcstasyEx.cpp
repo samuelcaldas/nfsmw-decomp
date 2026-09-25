@@ -717,6 +717,14 @@ void cSphereMap::clrSphere(void **display_list, unsigned long *size) {}
 
 static GXColor TweakSphereMapClr = {0xC4, 0xC4, 0xC4, 0xFF};
 
+/**
+ * @brief Generates a sphere map from the selected cube-map faces.
+ * @param cubemap Cube-map texture objects.
+ * @param spheremap Destination sphere-map texture object.
+ * @param dl Sphere display list.
+ * @param dlsz Sphere display-list size.
+ * @return None.
+ */
 void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl, unsigned long dlsz) {
     int i;         // r27
     GXColor color; // r1+0x184
@@ -730,18 +738,19 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
     Mtx tm;                // r1+0xC0
     Mtx tc;                // r1+0xF0
     Mtx tmp;               // r1+0x120
+
+    if (!this->bInitialized)
+        return;
+
     float camLoc_x = 0.0f; // f30
     float camLoc_y = 0.0f;
     float camLoc_z = 6.0f; // f31
     float up_x = 0.0f;
     float up_y = 1.0f; // f29
     float up_z = 0.0f;
-    Point3d camLoc = {camLoc_x, camLoc_y, camLoc_z}; // r1+0x150
-    Vec up = {up_x, up_y, up_z};                     // r1+0x160
-    Point3d objPt;                                   // r1+0x170
-
-    if (!this->bInitialized)
-        return;
+    Vec camLoc = {camLoc_x, camLoc_y, camLoc_z}; // r1+0x150
+    Vec up = {up_x, up_y, up_z};                 // r1+0x160
+    Vec objPt = {0.0f, 0.0f, 0.0f};             // r1+0x170
 
     width = GXGetTexObjWidth(spheremap);
     height = GXGetTexObjHeight(spheremap);
@@ -759,11 +768,18 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
     GXSetTexCopyDst(width, height, fmt, GX_FALSE);
     GXSetChanCtrl(GX_COLOR0A0, GX_TRUE, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_NONE, GX_AF_SPEC);
 
-    color = TweakSphereMapClr;
+    color.r = TweakSphereMapClr.r;
+    color.g = TweakSphereMapClr.g;
+    color.b = TweakSphereMapClr.b;
+    color.a = TweakSphereMapClr.a;
     GXInitLightColor(&ClipLight, color);
     GXSetChanMatColor(GX_COLOR0A0, color);
 
-    GXSetChanAmbColor(GX_COLOR0A0, (GXColor){0, 0, 0, 0xFF});
+    color.g = 0;
+    color.a = 0;
+    color.b = 0;
+    color.r = 0;
+    GXSetChanAmbColor(GX_COLOR0A0, color);
     GXInitLightAttnA(&ClipLight, 0.0f, 2.0f, 0.0f);
     GXInitLightAttnK(&ClipLight, 0.0f, 1.0f, 0.0f);
     GXInitLightPos(&ClipLight, 0.0f, 0.0f, -1.0f);
@@ -780,7 +796,7 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_RASA, GX_CA_ZERO);
             break;
         case 1: {
-            GXColor Kcolor0 = {0x00, 0x00, 0x00, 0xFF};
+            GXColor Kcolor0 = {0xFF, 0xFF, 0xFF, 0xFF};
             GXSetTevKColor(GX_KCOLOR0, Kcolor0);
             GXSetTevKColorSel(GX_TEVSTAGE0, GX_TEV_KCSEL_K0);
             GXSetTevKAlphaSel(GX_TEVSTAGE0, GX_TEV_KASEL_K0_A);
@@ -817,10 +833,11 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
             GXSetNumTevStages(1);
             break;
-        case 5:
+        case 5: {
             GXSetNumTevStages(1);
             GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD4, GX_TEXMAP0, GX_COLOR0);
-            GXSetTevKColor(GX_KCOLOR0, (GXColor){0, 0, 0, 0xFF});
+            GXColor Kcolor0 = {0, 0, 0, 0xFF};
+            GXSetTevKColor(GX_KCOLOR0, Kcolor0);
             GXSetTevKColorSel(GX_TEVSTAGE0, GX_TEV_KCSEL_K0);
             GXSetTevKAlphaSel(GX_TEVSTAGE0, GX_TEV_KASEL_K0_A);
             GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_COMP_R8_GT, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
@@ -828,6 +845,7 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_COMP_R8_GT, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_KONST, GX_CA_RASA, GX_CA_KONST, GX_CA_ZERO);
             break;
+        }
     }
 
     GXSetNumTexGens(1);
@@ -846,7 +864,7 @@ void cSphereMap::genSphereMap(GXTexObj **cubemap, GXTexObj *spheremap, void *dl,
             PSMTXConcat(tm, tmp, tm);
         }
 
-        PSMTXRotRad(tmp, this->axis1[i], MTXDegToRad(this->angle2[i]));
+        PSMTXRotRad(tmp, this->axis1[i], MTXDegToRad(this->angle1[i]));
         PSMTXConcat(tm, tmp, tm);
         PSMTXConcat(tc, tm, tm);
         GXLoadTexMtxImm(tm, 30, GX_MTX3x4);

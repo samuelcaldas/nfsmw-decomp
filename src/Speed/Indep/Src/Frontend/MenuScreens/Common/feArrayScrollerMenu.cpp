@@ -118,8 +118,8 @@ void ArrayScroller::SetSelection(ArrayDatum *newDatum, int newStartDatum) {
 }
 
 int ArrayScroller::ForceSelectionOnScreen(int new_datum, int start) {
-    int h = GetHeight();
     int w = GetWidth();
+    int h = GetHeight();
     if (new_datum < start) {
         start = new_datum / w;
         start *= w;

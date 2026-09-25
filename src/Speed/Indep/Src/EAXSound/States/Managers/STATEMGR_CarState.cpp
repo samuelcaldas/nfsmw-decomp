@@ -327,10 +327,10 @@ LoadRemainingEngines:
         for (const EngineMappingPair *iter = FinalMapping.begin(); iter != FinalMapping.end() && !found; ++iter) {
             EngineMappingPair mapping = *iter;
             if (eax_car->GetEngineInfo()->GetCollection() == mapping.Start) {
-                EngToCarStruct carmapping;
                 eax_car->GetEngineInfo()->ChangeWithDefault(mapping.Finish);
                 found = true;
 
+                EngToCarStruct carmapping;
                 carmapping.EngineKey = mapping.Finish;
                 carmapping.pCar = eax_car;
                 EngineToCarMapping.push_back(carmapping);

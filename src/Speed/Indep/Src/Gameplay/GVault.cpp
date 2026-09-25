@@ -94,3 +94,10 @@ bool GVault::IsRaceBin() const {
 void GVault::SetRaceBin() {
     this->mFlags |= 2;
 }
+
+/**
+ * @brief Synchronously loads this vault through the game manager.
+ */
+void GVault::LoadSyncTransient() {
+    GManager::Get().LoadVaultSync(this);
+}

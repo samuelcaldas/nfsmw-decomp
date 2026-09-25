@@ -662,8 +662,8 @@ void cSphereMap::genSphere(void **display_list, unsigned long *size, unsigned sh
     r2 = sinf(theta);
     z2 = cosf(theta);
 
-    n1z = r;
     n2z = (z2 * 2) * z2 - r;
+    n1z = r;
 
     GXPosition3f32(0.0f, 0.0f, n1z);
     GXNormal3f32(0.0f, 0.0f, n1z);

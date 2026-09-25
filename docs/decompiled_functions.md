@@ -1590,6 +1590,18 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
   ```
 - **Description**: Successfully matched UTL::FastVector<unsigned int, 16>::AllocVectorSpace to 100.0% by passing FastVector string literal to FastMem allocations.
 
+### `Attrib::TAttrib<GCollectionKey>::Get`
+- **Unit**: `main/Speed/Indep/SourceLists/zAI`
+- **Source Files**: `src/Speed/Indep/Tools/AttribSys/Runtime/AttribSys.h` (template implementation), `src/Speed/Indep/SourceLists/zAI.cpp` (explicit instantiation)
+- **Virtual Address**: `0x8003BA04`
+- **Size**: 80 bytes
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  const GCollectionKey &Attrib::TAttrib<GCollectionKey>::Get(unsigned int index) const;
+  ```
+- **Description**: Returns the indexed attribute value, falling back to the default data area when the attribute has no element at that index.
+
 ---
 
 ## 7. Physics Subsystem (`zPhysics`, `zPhysicsBehaviors`)

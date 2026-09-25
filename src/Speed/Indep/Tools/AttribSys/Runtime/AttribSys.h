@@ -646,6 +646,16 @@ template <typename T> class TAttrib : public Attribute {
     bool Set(unsigned int index, const TypeOf &input) {}
 };
 
+/**
+ * @brief Returns the indexed value or its default data.
+ * @param index Attribute element index.
+ * @return A reference to the indexed value or its default data.
+ */
+template <typename T> const typename TAttrib<T>::TypeOf &TAttrib<T>::Get(unsigned int index) const {
+    const TypeOf *resultptr = reinterpret_cast<const TypeOf *>(GetElementPointer(index));
+    return (resultptr != NULL) ? *resultptr : *static_cast<const TypeOf *>(Attrib::DefaultDataArea(sizeof(TypeOf)));
+}
+
 // total size: 0xC
 class AttributeIterator {
   public:

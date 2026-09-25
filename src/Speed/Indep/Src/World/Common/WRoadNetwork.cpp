@@ -1865,8 +1865,6 @@ void WRoadNav::HolePunchAvoidables(NavCookie *cookies, int num_cookies, float cu
             float offset_change = avoidable_delta_offset * approach_time;
             cut_to_position.x += offset_change * 0.8f * cookie.Forward.y;
             cut_to_position.z -= offset_change * 0.8f * cookie.Forward.x;
-            float extra_width = offset_change * 0.2f;
-
             bVector2 cookie_to_avoidable(cut_to_position.x - cookie.Centre.x, cut_to_position.z - cookie.Centre.z);
             bVector2 cookie_to_me(my_position.x - cookie.Centre.x, my_position.z - cookie.Centre.z);
             // float TODO = offset_change * 0.19999999f; // this constant is used somewhere, but where?
@@ -1879,6 +1877,7 @@ void WRoadNav::HolePunchAvoidables(NavCookie *cookies, int num_cookies, float cu
             float left_projection = bCross(&left_diagonal, reinterpret_cast<const bVector2 *>(&cookie.Forward));
             float avoidable_half_width = bAbs(right_projection);
             avoidable_half_width = bMax(avoidable_half_width, bAbs(left_projection));
+            float extra_width = offset_change * 0.2f;
             avoidable_half_width = extra_width * close_factor + avoidable_half_width;
 
             float new_current_offset = approach_time * close_factor * (delta_offset * 0.2f) + current_offset;

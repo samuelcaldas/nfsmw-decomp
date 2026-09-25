@@ -33,7 +33,16 @@ class GInfractionManager {
 
     static bool Exists() {}
 
-    void ClearInfractions() {}
+    /**
+     * @brief Clears all infraction and pursuit state.
+     */
+    void ClearInfractions() {
+        mInfractions = 0;
+        mNumThisPursuit = 0;
+        mSpeeding = false;
+        mDrivingRecklessly = false;
+        mRacing = false;
+    }
 
     void PursuitStarted();
 

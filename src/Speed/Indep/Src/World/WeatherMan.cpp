@@ -127,16 +127,17 @@ int RegionQuery::CalculateRegionInfo(eView *view, RegionType regionKind, int InF
     bVector3 cPos(*view->GetCamera()->GetPosition());
 
     if (FogControlOverRide) {
-        unsigned int retcol = (((BaseWeatherFogColourB << 16) | (BaseWeatherFogColourG << 8) | BaseWeatherFogColourR) & 0xFFFFFF) | 0x80000000;
-        float start = BaseWeatherFogStart;
-        float falloff = BaseFogFalloff;
-        float falloffX = BaseFogFalloffX;
-        float falloffY = BaseFogFalloffY;
-        float power = BaseWeatherFog;
+        register unsigned int retcol asm("r11");
+        retcol = (((BaseWeatherFogColourB << 16) | (BaseWeatherFogColourG << 8) | BaseWeatherFogColourR) & 0xFFFFFF) | 0x80000000;
+        register float start asm("fr11") = BaseWeatherFogStart;
+        register float falloff asm("fr12") = BaseFogFalloff;
+        register float falloffX asm("fr13") = BaseFogFalloffX;
+        register float falloffY asm("fr0") = BaseFogFalloffY;
+        register float power asm("fr10") = BaseWeatherFog;
+        this->DistFogStart = start;
         this->FogFalloff = falloff;
         this->FogFalloffX = falloffX;
         this->FogFalloffY = falloffY;
-        this->DistFogStart = start;
         this->DistFogPower = power;
         this->DistFogColour = retcol;
 

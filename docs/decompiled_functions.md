@@ -1017,6 +1017,19 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
+### `GRaceStatus::GetSegmentLength`
+- **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
+- **Source File**: `src/Speed/Indep/Src/Gameplay/GRaceStatus.cpp`
+- **Virtual Address**: `0x801B3730` (`2149199632`)
+- **Size**: 48 bytes (12 instructions)
+- **Matching State**: 100.0% match
+- **Signature**:
+  ```cpp
+  float GRaceStatus::GetSegmentLength(int segment, int lap);
+  ```
+- **Description**: Returns the length of a race segment, incorporating lap-dependent adjustment for segment 0 (`fSubsequentLapLength - fFirstLapLength`) when `lap > 0`. Achieved 100.0% binary parity under SN Systems ProDG 3.9.3 by evaluating segment length directly into `f1` and utilizing branch-to-link-register (`blelr`/`bnelr`) early returns.
+
+
 ### `GManager::GetInGameplay`
 - **Unit**: `main/Speed/Indep/SourceLists/zGameplay`
 - **Source File**: `src/Speed/Indep/SourceLists/zGameplay.cpp`

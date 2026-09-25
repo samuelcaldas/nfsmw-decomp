@@ -1,10 +1,17 @@
 #include "Speed/Indep/Src/EAXSound/sfxctl/SFXCTL_Physics.hpp"
+#include "Speed/Indep/Src/Generated/Messages/MPursuitBreaker.h"
 #include "Speed/Indep/Src/EAXSound/EAXCar.hpp"
 #include "Speed/Indep/Src/EAXSound/EAXSOund.hpp"
 #include "Speed/Indep/Src/EAXSound/OldSoundTemplates.hpp"
 #include "Speed/Indep/Src/Interfaces/SimActivities/INIS.h"
 #include "Speed/Indep/Src/World/RaceParameters.hpp"
 #include "Speed/Indep/Src/World/VisualTreatment.h"
+
+UCrc32 MPursuitBreaker::_GetKind() {
+    static UCrc32 k("MPursuitBreaker");
+
+    return k;
+}
 
 static const int DEBUG_PRINT_GOINGTOHITWALL = 0; // size: 0x4, Decl: 10
 

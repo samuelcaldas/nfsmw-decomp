@@ -974,20 +974,31 @@ void EmitterSystem::UpdateInterestPoints() {
  */
 void EmitterSystem::UpdateParticles(float dt) {
     ProfileNode profile_node("TODO", 0);
-    if (!EnableParticleSystem || this->mTotalNumParticles == 0) {
+    int32 time_step;                                            // r19
+    float ed_drag;                                              // f26
+    float ed_gravity;                                           // f27
+    float ed_life;                                              // f24
+    const bMatrix4 *ExtraBasis;                                 // r14
+    const bMatrix4 *ColourBasis;                                // 15
+    bool texture_animation;                                     // r16
+    EffectParticleAnimation anim_type;                          // r18
+    float fAnimFPS;                                              // f23
+    const EmitterDataAttribWrapper *last_emitter_data;          // sp68
+    const Attrib::Gen::emitterdata *last_emitter_data_atr;
+    if (!EnableParticleSystem || this->GetNumParticles() == 0) {
         return;
     }
-    int32 time_step = static_cast<int>(dt * 1024.0f);            // r19
-    float ed_gravity = 0.0f;                                     // f27
-    float ed_drag = 0.0f;                                        // f26
-    float ed_life = 0.0f;                                        // f24
-    const bMatrix4 *ExtraBasis = nullptr;                        // r14
-    const bMatrix4 *ColourBasis = nullptr;                       // 15
-    bool texture_animation = false;                              // r16
-    EffectParticleAnimation anim_type = ANIMATE_PARTICLE_NONE;   // r18
-    float fAnimFPS = 0.0f;                                       // f23
-    const EmitterDataAttribWrapper *last_emitter_data = nullptr; // sp68
-    const Attrib::Gen::emitterdata *last_emitter_data_atr = nullptr;
+    time_step = static_cast<int>(dt * 1024.0f);
+    ed_drag = 0.0f;
+    ed_gravity = 0.0f;
+    ed_life = 0.0f;
+    ExtraBasis = nullptr;
+    ColourBasis = nullptr;
+    texture_animation = false;
+    anim_type = ANIMATE_PARTICLE_NONE;
+    fAnimFPS = 0.0f;
+    last_emitter_data = nullptr;
+    last_emitter_data_atr = nullptr;
 
     for (EmitterGroup *grp = this->mEmitterGroups.GetHead(); grp != this->mEmitterGroups.EndOfList(); grp = grp->GetNext()) {
         if (!this->IsCloseEnough(grp, 0, 0.7f)) {
@@ -1084,8 +1095,8 @@ void EmitterSystem::UpdateParticles(float dt) {
                         t.x = t.z * t.y;
                         RotateTranslate(t, *reinterpret_cast<const UMath::Matrix4 *>(ExtraBasis), extra_params);
                         particle->mSize = extra_params.x;
-                        float factor = extra_params.y * (1.0f / 255.0f);
                         pangle = static_cast<uint32>(particle->mInitialAngle) * 257.0f;
+                        float factor = extra_params.y * (1.0f / 255.0f);
                         adelta = factor * static_cast<float>(particle->mRotOffset) + extra_params.y;
                         if (pangle % 2 == 0) {
                             pangle += adelta;

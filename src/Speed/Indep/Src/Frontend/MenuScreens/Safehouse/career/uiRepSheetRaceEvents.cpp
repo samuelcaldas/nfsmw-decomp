@@ -87,11 +87,11 @@ void UISafehouseRaceSheet::NotificationMessage(u32 msg, FEObject *obj, u32 param
             if (theRace == nullptr) {
                 break;
             }
-            const char *dialog = "";
             if (!bIsInGame) {
                 int joyPort = FEngMapJoyParamToJoyport(param1);
                 FEDatabase->SetPlayersJoystickPort(0, joyPort);
             }
+            const char *dialog = "";
             if (bIsInGame) {
                 dialog = "InGameDialog.fng";
             }

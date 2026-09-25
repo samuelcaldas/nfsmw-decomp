@@ -1688,18 +1688,23 @@ This document tracks matched functions in Need for Speed: Most Wanted (GameCube 
 
 ---
 
-### `UTL::COM::Factory::CreateInstance` for AudioEvent
+### `UTL::COM::Factory::CreateInstance` Specializations
 - **Unit**: `main/Speed/Indep/SourceLists/zAI`
-- **Source Files**: `src/Speed/Indep/Libs/Support/Utility/UCOM.h` (declaration), `src/Speed/Indep/SourceLists/zAI.cpp` (template definition and explicit instantiation)
-- **Virtual Address**: `0x8003C5C4`
-- **Size**: 92 bytes
+- **Source Files**: `src/Speed/Indep/Libs/Support/Utility/UCOM.h` (template implementation), `src/Speed/Indep/SourceLists/zAI.cpp`
+- **Virtual Addresses**:
+  - `Factory<Sound::AudioEventParams const &, Sound::AudioEvent, unsigned int>`: `0x8003C5C4` (92 bytes)
+  - `Factory<Sim::Param, ISimable, UCrc32>`: `0x8003BDD0` (124 bytes)
+  - `Factory<Sim::Param, Sim::IActivity, UCrc32>`: `0x8003C9E0` (124 bytes)
+  - `Factory<ISimable *, AIGoal, UCrc32>`: `0x8003D1A0` (96 bytes)
+  - `Factory<AIActionParams *, AIAction, UCrc32>`: `0x8003EAC8` (96 bytes)
+- **Total Size**: 532 bytes (5 functions)
 - **Matching State**: 100.0% match
 - **Signature**:
   ```cpp
-  Sound::AudioEvent *UTL::COM::Factory<const Sound::AudioEventParams &, Sound::AudioEvent, unsigned int>::CreateInstance(
-      unsigned int sig, const Sound::AudioEventParams &params);
+  template <typename T, typename U, typename V>
+  U *UTL::COM::Factory<T, U, V>::CreateInstance(V sig, T params);
   ```
-- **Description**: Searches registered AudioEvent prototypes by signature, invokes the matching constructor, and returns `nullptr` when none matches.
+- **Description**: Searches registered COM prototypes by signature, invokes the matching factory constructor, and returns `nullptr` when none matches. Matched across all 5 prototype specializations in `zAI`.
 
 ---
 

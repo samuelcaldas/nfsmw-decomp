@@ -1204,12 +1204,12 @@ void DrawXenonEmitters(eView *view);
  */
 void EmitterSystem::Render(eView *view) {
     ProfileNode profile_node;
+    int num_textures;
+    int total_num_textures;
     // Render particles
     if (!EnableParticleSystem) {
         return;
     }
-    int32 num_textures;
-    int32 total_num_textures;
     if (this->mTotalNumParticles > 0) {
         bMatrix4 world_view;
         num_textures = 0;
@@ -1240,10 +1240,11 @@ void EmitterSystem::Render(eView *view) {
                     const Attrib::Gen::emitterdata *last_emitter_data_atr;
                     for (EmitterParticle *part = plist->GetHead(); part != plist->EndOfList(); part = part->GetNext()) {
                         const EmitterDataAttribWrapper *this_emitter_data = em->GetEmitterData();
-                        const Attrib::Gen::emitterdata *this_emitter_data_atr = &this_emitter_data->GetAttributes();
+                        const Attrib::Gen::emitterdata *this_emitter_data_atr;
                         bool emitter_data_switch = this_emitter_data != last_emitter_data;
                         if (emitter_data_switch) {
                             last_emitter_data = this_emitter_data;
+                            this_emitter_data_atr = &this_emitter_data->GetAttributes();
                             last_emitter_data_atr = this_emitter_data_atr;
                         }
                         const EffectParticleConstraint &constraint = last_emitter_data_atr->AxisConstraint();
@@ -1255,9 +1256,10 @@ void EmitterSystem::Render(eView *view) {
                             bVector4 vposition(part->mPosX, part->mPosY, part->mPosZ, 1.0f);
                             eMulVector(&vposition, &world_view, &vposition);
                             float world_size = part->mSize;
+                            float pixel_size = world_size;
                             sprite_hack_flags = 2;
                             xbasis *= world_size;
-                            ybasis *= world_size;
+                            ybasis *= pixel_size;
                         }
                         PlatRotateScaleParticle(part, rightVec, upVec, fwdVec, newUpVec, newRightVec);
                         PlatAddParticle(*part, newRightVec, newUpVec, sprite_hack_flags, axis_constrained ? &xbasis : nullptr,

@@ -18,3 +18,7 @@ void *TextureInfoPlatInterface::LockImage(TextureLockType) {
 }
 
 void TextureInfoPlatInterface::UnlockImage(void *) {}
+
+bool TextureInfoPlatInfo::HasClut() {
+    return (this->Format & 0x7FFFFFFF) - 8 <= 2;
+}

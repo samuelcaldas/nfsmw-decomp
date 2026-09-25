@@ -26,6 +26,8 @@ class TextureInfoPlatInfo : public bTNode<TextureInfoPlatInfo> {
     TextureInfoPlatInfoOBJ ImageInfos; // offset 0x8, size 0x2C
     eTextureBucket *pActiveBucket;     // offset 0x34, size 0x4
     unsigned int Format;               // offset 0x38, size 0x4
+
+    bool HasClut();
 };
 
 void eUnSwizzle8bitPalette(unsigned int *palette);

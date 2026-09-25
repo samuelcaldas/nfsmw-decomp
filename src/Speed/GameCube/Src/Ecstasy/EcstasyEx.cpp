@@ -1000,8 +1000,9 @@ void eSetFogConstantColour() {
 
     fog_colour = int((fog_r + fog_g + fog_b) * FogCurrentBrightness);
     if (fog_colour != prevFogColour) {
-        write_bp_cmd(((int(fog_r * FogCurrentBrightness) << 16) & 0xFF0000) | ((int(fog_g * FogCurrentBrightness) << 8) & 0x00FF00) |
-                     ((int(fog_b * FogCurrentBrightness) << 0) & 0x0000FF) | (0xF2 << 24));
+        write_bp_cmd(((int(fog_r * FogCurrentBrightness) << 16) & 0xFF0000) |
+                     (((int(fog_g * FogCurrentBrightness) << 8) & 0x00FF00) | ((int(fog_b * FogCurrentBrightness) << 0) & 0x0000FF)) |
+                     (0xF2 << 24));
         prevFogColour = fog_colour;
         __GXData->bpSentNot = 0;
     }

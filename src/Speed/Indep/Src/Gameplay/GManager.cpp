@@ -208,6 +208,25 @@ void GManager::FreeAllIcons() {
     }
 }
 
+struct IconSort {
+    GIcon *mIcon;
+    int mDist;
+
+    static int Compare(const void *a, const void *b);
+};
+
+/**
+ * @brief Compares two icon sort records by squared distance.
+ * @param a First icon sort record.
+ * @param b Second icon sort record.
+ * @return The difference between the distances.
+ */
+int IconSort::Compare(const void *a, const void *b) {
+    const IconSort *left = static_cast<const IconSort *>(a);
+    const IconSort *right = static_cast<const IconSort *>(b);
+    return left->mDist - right->mDist;
+}
+
 /**
  * @brief Collects visible icons and orders them by distance from the player.
  * @param iconArray Destination array for the visible icon pointers.
@@ -215,56 +234,46 @@ void GManager::FreeAllIcons() {
  * @return Number of visible icons copied to the destination array.
  */
 int GManager::GatherVisibleIcons(GIcon **iconArray, IPlayer *player) {
-    struct IconSort {
-        GIcon *icon;
-        int distance;
-
-        static int Compare(const void *first, const void *second) {
-            const IconSort *left = static_cast<const IconSort *>(first);
-            const IconSort *right = static_cast<const IconSort *>(second);
-            return left->distance - right->distance;
-        }
-    };
-
-    UMath::Vector3 playerPosition = UMath::Vector3::kZero;
+    UMath::Vector3 playerPos = UMath::Vector3::kZero;
     ISimable *simable = NULL;
-    IconSort sortedIcons[200];
+    IconSort iconSort[200];
+    int numOnMap;
     if (player != NULL) {
         simable = player->GetSimable();
     }
     if (simable != NULL) {
         const UMath::Vector3 &position = simable->GetPosition();
         float positionX = position.x;
-        float positionZ = position.z;
         float positionY = position.y;
-        playerPosition.y = -positionX;
-        playerPosition.x = positionZ;
-        playerPosition.z = positionY;
+        float positionZ = position.z;
+        playerPos.y = -positionX;
+        playerPos.x = positionZ;
+        playerPos.z = positionY;
     }
 
-    int visibleCount = 0;
-    for (unsigned int i = 0; i < this->mNumVisibleIcons; ++i) {
-        GIcon *icon = this->mIcons[i];
+    numOnMap = 0;
+    for (unsigned int onIcon = 0; onIcon < this->mNumVisibleIcons; ++onIcon) {
+        GIcon *icon = this->mIcons[onIcon];
         bool isIconVisible = icon->IsFlagSet(1) && icon->IsFlagSet(2);
         if (isIconVisible) {
-            sortedIcons[visibleCount].icon = icon;
+            iconSort[numOnMap].mIcon = icon;
             if (simable != NULL) {
-                sortedIcons[visibleCount].distance =
-                    static_cast<int>(UMath::DistanceSquarexz(icon->GetPosition(), playerPosition));
+                iconSort[numOnMap].mDist =
+                    static_cast<int>(UMath::DistanceSquarexz(icon->GetPosition(), playerPos));
             } else {
-                sortedIcons[visibleCount].distance = 0;
+                iconSort[numOnMap].mDist = 0;
             }
-            ++visibleCount;
+            ++numOnMap;
         }
     }
 
     if (simable != NULL) {
-        qsort(sortedIcons, visibleCount, sizeof(IconSort), IconSort::Compare);
+        qsort(iconSort, numOnMap, sizeof(IconSort), IconSort::Compare);
     }
-    for (int i = 0; i < visibleCount; ++i) {
-        iconArray[i] = sortedIcons[i].icon;
+    for (int onCopy = 0; onCopy < numOnMap; ++onCopy) {
+        iconArray[onCopy] = iconSort[onCopy].mIcon;
     }
-    return visibleCount;
+    return numOnMap;
 }
 
 /**

@@ -209,13 +209,14 @@ template <class T>
 T *GRuntimeInstance::FindObject(unsigned int key) {
     GameplayObjType type = T::GetTypeStatic();
     GRuntimeInstance *curr = sRingListHead[type];
-    if (curr != nullptr) {
-        do {
-            if (curr->GetCollection() == key) {
-                return static_cast<T *>(curr);
-            }
-            curr = curr->mNext;
-        } while (curr != sRingListHead[type]);
+    while (curr != nullptr) {
+        if (curr->GetCollection() == key) {
+            return static_cast<T *>(curr);
+        }
+        curr = curr->mNext;
+        if (curr == sRingListHead[type]) {
+            break;
+        }
     }
     return nullptr;
 }
@@ -271,3 +272,8 @@ GCollectionKey::GCollectionKey(GRuntimeInstance *instance) {
 GCollectionKey::operator GRuntimeInstance *() const {
     return GManager::Get().FindInstance(this->mCollectionKey);
 }
+
+template GActivity *GRuntimeInstance::FindObject<GActivity>(unsigned int);
+template GCharacter *GRuntimeInstance::FindObject<GCharacter>(unsigned int);
+template GMarker *GRuntimeInstance::FindObject<GMarker>(unsigned int);
+
